@@ -1,0 +1,241 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    /* ── Typography ── */
+    --font-sans: 'Inter', 'Hind Siliguri', ui-sans-serif, system-ui, sans-serif;
+    --font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+
+    /* ── Color Palette ── */
+    /* Primary Background */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F8F9FA;
+    --color-bg-tertiary: #F1F3F5;
+
+    /* Text Colors */
+    --color-text-primary: #1A1A2E;
+    --color-text-secondary: #6B7280;
+    --color-text-muted: #9CA3AF;
+
+    /* Action Colors */
+    --color-sea-green: #2ECC71;
+    --color-sea-green-hover: #27AE60;
+    --color-trust-blue: #3498DB;
+    --color-trust-blue-hover: #2980B9;
+    --color-soft-coral: #E74C3C;
+    --color-soft-coral-hover: #C0392B;
+    --color-warm-orange: #F39C12;
+    --color-warm-orange-hover: #E67E22;
+    --color-soft-purple: #9B59B6;
+
+    /* ── Spacing ── */
+    --spacing-section: 3rem;
+
+    /* ── Shadows ── */
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+    --shadow-dropdown: 0 10px 40px rgba(0, 0, 0, 0.1);
+
+    /* ── Transitions ── */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-smooth: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ── Border Radius ── */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+}
+
+/* ── Base Styles ── */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        color: var(--color-text-primary);
+        background-color: var(--color-bg-primary);
+    }
+
+    /* Bangla text styling */
+    .font-bangla {
+        font-family: var(--font-bangla);
+    }
+}
+
+/* ── Component Styles ── */
+@layer components {
+    /* Buttons */
+    .btn {
+        @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg
+               transition-all duration-200 ease-in-out cursor-pointer select-none
+               focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg
+               transition-all duration-200 ease-in-out cursor-pointer select-none
+               focus:outline-none focus:ring-2 focus:ring-offset-2 text-white;
+        background-color: var(--color-sea-green);
+    }
+    .btn-primary:hover {
+        background-color: var(--color-sea-green-hover);
+        transform: translateY(-1px);
+    }
+    .btn-primary:focus {
+        --tw-ring-color: var(--color-sea-green);
+    }
+
+    .btn-confirm {
+        @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg
+               transition-all duration-200 ease-in-out cursor-pointer select-none
+               focus:outline-none focus:ring-2 focus:ring-offset-2 text-white;
+        background-color: var(--color-trust-blue);
+    }
+    .btn-confirm:hover {
+        background-color: var(--color-trust-blue-hover);
+        transform: translateY(-1px);
+    }
+    .btn-confirm:focus {
+        --tw-ring-color: var(--color-trust-blue);
+    }
+
+    .btn-danger {
+        @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg
+               transition-all duration-200 ease-in-out cursor-pointer select-none
+               focus:outline-none focus:ring-2 focus:ring-offset-2 text-white;
+        background-color: var(--color-soft-coral);
+    }
+    .btn-danger:hover {
+        background-color: var(--color-soft-coral-hover);
+    }
+
+    .btn-neutral {
+        @apply inline-flex items-center justify-center px-5 py-2.5 font-medium rounded-lg
+               transition-all duration-200 ease-in-out cursor-pointer select-none
+               focus:outline-none focus:ring-2 focus:ring-offset-2 border border-gray-200 text-gray-700 bg-white;
+    }
+    .btn-neutral:hover {
+        @apply bg-gray-50;
+    }
+
+    /* Product Card */
+    .product-card {
+        @apply bg-white rounded-xl overflow-hidden transition-all duration-300;
+        box-shadow: var(--shadow-card);
+    }
+    .product-card:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-4px);
+    }
+    .product-card .product-image {
+        @apply overflow-hidden;
+    }
+    .product-card:hover .product-image img {
+        transform: scale(1.08);
+    }
+    .product-card .product-image img {
+        @apply w-full h-full object-cover transition-transform duration-500 ease-out;
+    }
+
+    /* Badge */
+    .badge {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+    }
+    .badge-sale {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold text-white;
+        background-color: var(--color-soft-coral);
+    }
+    .badge-new {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold text-white;
+        background-color: var(--color-trust-blue);
+    }
+    .badge-flash {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold text-white;
+        background-color: var(--color-warm-orange);
+    }
+    .badge-stock {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold text-white;
+        background-color: var(--color-sea-green);
+    }
+    .badge-out {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold text-white bg-gray-400;
+    }
+
+    /* Search Dropdown */
+    .search-dropdown {
+        @apply absolute top-full left-0 right-0 bg-white border border-gray-100 rounded-xl mt-1 overflow-hidden z-50;
+        box-shadow: var(--shadow-dropdown);
+    }
+    .search-dropdown-item {
+        @apply flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer;
+    }
+
+    /* Input Fields */
+    .form-input {
+        @apply w-full px-4 py-3 border border-gray-200 rounded-lg bg-white
+               text-gray-800 placeholder-gray-400
+               focus:outline-none focus:ring-2 focus:border-transparent
+               transition-all duration-200;
+        --tw-ring-color: var(--color-trust-blue);
+    }
+
+    /* Free Delivery Banner */
+    .free-delivery-banner {
+        @apply bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200
+               rounded-lg px-4 py-3 text-sm text-green-700 flex items-center gap-2;
+    }
+}
+
+/* ── Utility Classes ── */
+@layer utilities {
+    .text-price {
+        @apply font-bold;
+        color: var(--color-soft-coral);
+    }
+
+    .text-price-old {
+        @apply text-sm text-gray-400 line-through;
+    }
+
+    /* Sticky Bottom Nav for Mobile */
+    .mobile-nav {
+        @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100
+               flex items-center justify-around py-2 z-40;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .mobile-nav-item {
+        @apply flex flex-col items-center gap-0.5 text-xs text-gray-500
+               transition-colors duration-200;
+    }
+    .mobile-nav-item.active,
+    .mobile-nav-item:hover {
+        color: var(--color-trust-blue);
+    }
+
+    /* Mega Menu */
+    .mega-menu {
+        @apply absolute top-full left-0 w-full bg-white border-t border-gray-100 z-50
+               opacity-0 invisible transition-all duration-200;
+        box-shadow: var(--shadow-dropdown);
+    }
+    .mega-menu.open {
+        @apply opacity-100 visible;
+    }
+
+    /* Scrollbar */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}

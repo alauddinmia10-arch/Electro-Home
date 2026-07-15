@@ -1,0 +1,6 @@
+\Illuminate\Database\Eloquent\Collection::__set_state(array(
+   'items' => 
+  array (
+  ),
+   'escapeWhenCastingToString' => false,
+))

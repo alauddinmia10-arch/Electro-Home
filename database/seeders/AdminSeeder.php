@@ -1,0 +1,22 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Seeder;
+
+class AdminSeeder extends Seeder
+{
+    public function run(): void
+    {
+        User::updateOrCreate(
+            ['email' => 'admin@electro.bd'],
+            [
+                'name' => 'Super Admin',
+                'phone' => '01700000000',
+                'password' => bcrypt('password'),
+                'role' => 'admin',
+            ]
+        );
+    }
+}

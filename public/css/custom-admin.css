@@ -1,0 +1,39 @@
+/* Horizontal scroll for FilePond */
+.custom-gallery-upload .filepond--list-scroller {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding-bottom: 10px; /* Space for scrollbar */
+}
+.custom-gallery-upload .filepond--list {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 15px;
+    transform: none !important; /* Reset FilePond absolute position container */
+}
+.custom-gallery-upload .filepond--item {
+    position: relative !important;
+    transform: none !important; /* Disable absolute positioning per item */
+    flex: 0 0 auto !important;
+    width: 150px !important;
+    margin: 0 !important;
+}
+
+/* Make backgrounds transparent so there is no green border/box */
+.custom-gallery-upload .filepond--panel-root,
+.custom-gallery-upload .filepond--item-panel {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.custom-gallery-upload [data-filepond-item-state="processing-complete"] .filepond--panel-root {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Hide the filename text and size (green bar info) but keep it in DOM for sizing */
+.custom-gallery-upload .filepond--file-info, 
+.custom-gallery-upload .filepond--file-status {
+    opacity: 0 !important;
+    pointer-events: none;
+}
