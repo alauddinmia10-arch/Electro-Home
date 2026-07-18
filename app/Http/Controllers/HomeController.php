@@ -14,7 +14,6 @@ class HomeController extends Controller
         $banners = Cache::remember('home.banners', 3600, function () {
             return Banner::active()->get();
         });
-        file_put_contents('banners_dump.txt', var_export($banners, true));
 
         $categories = Cache::remember('home.categories', 3600, function () {
             return Category::parents()

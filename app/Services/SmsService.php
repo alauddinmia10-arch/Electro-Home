@@ -45,13 +45,13 @@ class SmsService
 
     public function sendOrderConfirmation($order)
     {
-        $message = "আপনার অর্ডার গ্রহণ করা হয়েছে। Invoice: {$order->invoice_number}. ধন্যবাদ, Electro.bd";
+        $message = "আপনার অর্ডার গ্রহণ করা হয়েছে। Invoice: {$order->invoice_number}. ধন্যবাদ, Electrohome.bd";
         return $this->sendSms($order->customer_phone, $message);
     }
 
     public function sendOrderShipped($order)
     {
-        $message = "আপনার পার্সেল (Invoice: {$order->invoice_number}) কুরিয়ারে হস্তান্তর করা হয়েছে। ধন্যবাদ, Electro.bd";
+        $message = "আপনার পার্সেল (Invoice: {$order->invoice_number}) কুরিয়ারে হস্তান্তর করা হয়েছে। ধন্যবাদ, Electrohome.bd";
         return $this->sendSms($order->customer_phone, $message);
     }
 }

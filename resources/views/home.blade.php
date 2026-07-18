@@ -1,6 +1,6 @@
 <x-layouts.app>
     {{-- Hero Banners --}}
-    <section class="max-w-7xl mx-auto px-4 mt-6">
+    <section class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-96">
             {{-- Main Slider --}}
             <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm h-64 md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
@@ -12,7 +12,7 @@
                 @empty
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-500 flex flex-col items-center justify-center text-white p-8">
                         <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla text-center">আপনার স্বপ্নের প্রজেক্ট<br>শুরু করুন আজই!</h1>
-                        <p class="text-lg opacity-90 mb-6">Electro.bd-এ পাচ্ছেন সেরা মানের ইলেকট্রনিক্স কম্পোনেন্ট</p>
+                        <p class="text-lg opacity-90 mb-6">Electrohome.bd-এ পাচ্ছেন সেরা মানের ইলেকট্রনিক্স কম্পোনেন্ট</p>
                         <a href="{{ route('shop') }}" class="bg-white text-blue-600 px-6 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
                             Shop Now
                         </a>
@@ -50,7 +50,7 @@
     </section>
 
     {{-- Features / Trust Badges --}}
-    <section class="max-w-7xl mx-auto px-4 mt-8">
+    <section class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-8">
         <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 flex flex-wrap gap-4 md:gap-0 justify-between items-center text-sm">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
@@ -98,7 +98,7 @@
 
     {{-- Flash Sale --}}
     @if($flashSaleProducts->count() > 0)
-    <section id="flash-sales" class="max-w-7xl mx-auto px-4 mt-12">
+    <section id="flash-sales" class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-12">
         <div class="bg-white rounded-lg p-6 shadow-sm border border-red-100 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10"></div>
             
@@ -125,7 +125,7 @@
 
     {{-- Top Selling --}}
     @if($bestSellers->count() > 0)
-    <section class="max-w-7xl mx-auto px-4 mt-12">
+    <section class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-12">
         <x-product-slider 
             title="Top Selling" 
             icon="🏆" 
@@ -137,7 +137,7 @@
 
     {{-- New Arrivals --}}
     @if($newArrivals->count() > 0)
-    <section class="max-w-7xl mx-auto px-4 mt-12">
+    <section class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-12">
         <x-product-slider 
             title="New Arrivals" 
             icon="🆕" 
@@ -149,7 +149,7 @@
 
     {{-- Trending Now --}}
     @if($featuredProducts->count() > 0)
-    <section class="max-w-7xl mx-auto px-4 mt-12 mb-12">
+    <section class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-12 mb-12">
         <x-product-slider 
             title="Trending Now" 
             icon="📈" 
@@ -160,7 +160,7 @@
     @endif
 
     {{-- Browse Categories --}}
-    <section class="max-w-7xl mx-auto px-4 mt-12 mb-12">
+    <section class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-12 mb-12">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold">Top Categories</h2>
             <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] hover:underline text-sm font-semibold">View All</a>

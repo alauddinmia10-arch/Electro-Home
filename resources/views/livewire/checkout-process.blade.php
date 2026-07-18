@@ -22,6 +22,7 @@ new class extends Component {
     public float $subtotal = 0;
     public float $deliveryCharge = 0;
     public float $total = 0;
+    public float $freeDeliveryRemaining = 0;
 
     public function mount(CartService $cart)
     {
@@ -58,6 +59,7 @@ new class extends Component {
     {
         $this->deliveryCharge = $cart->calculateDeliveryCharge($this->district);
         $this->total = $this->subtotal + $this->deliveryCharge;
+        $this->freeDeliveryRemaining = $cart->getFreeDeliveryRemaining();
     }
 
     public function submit()
@@ -236,6 +238,17 @@ new class extends Component {
                     </span>
                 </div>
             </div>
+
+            @if($freeDeliveryRemaining > 0)
+                <div class="free-delivery-banner mb-6">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>আর মাত্র <strong>৳{{ number_format($freeDeliveryRemaining, 0) }}</strong> টাকার বাজার করলেই পাচ্ছেন <strong>ফ্রি ডেলিভারি</strong>!</span>
+                </div>
+            @else
+                <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2 mb-6 font-bold">
+                    🎉 অভিনন্দন! আপনি ফ্রি ডেলিভারি পাচ্ছেন।
+                </div>
+            @endif
 
             <div class="border-t border-gray-100 pt-4 mb-6 flex justify-between items-end">
                 <span class="font-bold text-gray-800">Total</span>

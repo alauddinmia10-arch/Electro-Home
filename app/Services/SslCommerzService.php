@@ -39,7 +39,7 @@ class SslCommerzService
             
             // Customer Information
             'cus_name' => $order->customer_name,
-            'cus_email' => $order->user ? $order->user->email : 'customer@electro.bd',
+            'cus_email' => $order->user ? $order->user->email : 'customer@electrohome.bd',
             'cus_phone' => $order->customer_phone,
             'cus_add1' => $order->full_address,
             'cus_city' => $order->district,

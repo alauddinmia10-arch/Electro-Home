@@ -38,30 +38,36 @@ class ShopController extends Controller
             $query->where('regular_price', '<=', $request->max_price);
         }
 
-        // Stock filter
-        if ($request->boolean('in_stock')) {
-            $query->inStock();
+        // Brand filter
+        if ($request->filled('brand')) {
+            $brandId = $request->brand;
+            if (is_numeric($brandId)) {
+                $query->where('brand_id', $brandId);
+            } else {
+                $brand = \App\Models\Brand::where('slug', $brandId)->first();
+                if ($brand) {
+                    $query->where('brand_id', $brand->id);
+                }
+            }
         }
 
-        // Flash sale filter
-        if ($request->boolean('flash_sale')) {
-            $query->flashSale();
-        }
-
-        // Featured filter
-        if ($request->boolean('featured')) {
-            $query->featured();
+        // On sale filter
+        if ($request->boolean('on_sale')) {
+            $query->whereNotNull('discount_price')->where('discount_price', '>', 0);
         }
 
         // Sort
-        $sort = $request->get('sort', 'newest');
-        $query = match ($sort) {
-            'price_low' => $query->orderBy('regular_price', 'asc'),
-            'price_high' => $query->orderBy('regular_price', 'desc'),
-            'best_selling' => $query->orderBy('total_sold', 'desc'),
-            'name_asc' => $query->orderBy('name', 'asc'),
-            default => $query->latest(),
-        };
+        $sortBy = $request->get('sort_by', 'newest');
+        $sortOrder = $request->get('sort_order', 'desc');
+        
+        if ($sortBy === 'price') {
+            $query->orderBy('regular_price', $sortOrder);
+        } elseif ($sortBy === 'name') {
+            $query->orderBy('name', $sortOrder);
+        } else {
+            // Newest
+            $query->orderBy('created_at', $sortOrder);
+        }
 
         $products = $query->paginate(24)->withQueryString();
 
@@ -78,6 +84,8 @@ class ShopController extends Controller
             ? Category::where('slug', $request->category)->first()
             : null;
 
-        return view('shop', compact('products', 'categories', 'currentCategory'));
+        $brands = \App\Models\Brand::where('is_active', true)->orderBy('name')->get();
+
+        return view('shop', compact('products', 'categories', 'brands', 'currentCategory'));
     }
 }

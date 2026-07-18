@@ -22,7 +22,7 @@
     <livewire:wishlist-button :product-id="$product->id" wire:key="wishlist-btn-{{ $product->id }}" />
 
     {{-- Image --}}
-    <a href="{{ route('product.show', $product->slug) }}" class="product-image block aspect-square bg-gray-50 relative p-4">
+    <a href="{{ route('product.show', $product->slug) }}" class="product-image block aspect-square bg-white relative">
         @if($product->cover_image)
             <img src="{{ Storage::url($product->cover_image) }}" alt="{{ $product->name }}" loading="lazy">
         @else
@@ -33,26 +33,34 @@
     </a>
 
     {{-- Content --}}
-    <div class="p-4 flex flex-col flex-1">
-        <a href="{{ route('shop', ['category' => $product->category->slug]) }}" class="text-xs text-gray-500 mb-1 hover:text-[var(--color-trust-blue)] transition-colors">
-            {{ $product->category->name }}
-        </a>
+    <div class="px-4 pb-4 pt-3 flex flex-col flex-1 border-t border-gray-100">
         <a href="{{ route('product.show', $product->slug) }}" class="text-sm font-semibold text-gray-800 line-clamp-2 mb-2 hover:text-[var(--color-trust-blue)] transition-colors flex-1" title="{{ $product->name }}">
             {{ $product->name }}
         </a>
-        
-        <div class="flex items-end justify-between mt-auto pt-2 border-t border-gray-50">
-            <div>
-                @if($product->discount_price && $product->discount_price < $product->regular_price)
-                    <div class="text-price-old">৳{{ number_format($product->regular_price, 0) }}</div>
-                    <div class="text-price text-lg">৳{{ number_format($product->discount_price, 0) }}</div>
-                @else
-                    <div class="text-price text-lg">৳{{ number_format($product->regular_price, 0) }}</div>
-                @endif
-            </div>
+        <div class="mt-auto pt-3 flex flex-col gap-3 border-t border-gray-50">
+            @if($product->discount_price && $product->discount_price < $product->regular_price)
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col leading-tight">
+                        <span class="text-[17px] font-bold text-[var(--color-trust-blue)]">৳{{ number_format($product->discount_price, 0) }}</span>
+                        <span class="text-xs text-gray-400 line-through mt-0.5">৳{{ number_format($product->regular_price, 0) }}</span>
+                    </div>
+                    <div class="flex flex-col items-end leading-tight">
+                        <span class="text-xs font-medium text-[#00a651]">Save</span>
+                        <span class="text-xs font-bold text-[#00a651] mt-0.5">৳{{ number_format($product->regular_price - $product->discount_price, 0) }}</span>
+                    </div>
+                </div>
+            @else
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col leading-tight">
+                        <span class="text-[17px] font-bold text-[var(--color-trust-blue)]">৳{{ number_format($product->regular_price, 0) }}</span>
+                        <span class="text-xs text-transparent mt-0.5">-</span>
+                    </div>
+                </div>
+            @endif
             
-            <a href="{{ route('product.show', $product->slug) }}" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-[var(--color-sea-green)] hover:text-white transition-colors border border-gray-200 hover:border-transparent">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+            <a href="{{ route('product.show', $product->slug) }}" class="w-full flex items-center justify-center gap-2 bg-[#0b5c9a] hover:bg-[#094d82] text-white text-[15px] font-semibold leading-none px-4 py-2 rounded-md transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Add to Order
             </a>
         </div>
     </div>

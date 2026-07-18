@@ -5,7 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app')] #[Title('My Dashboard - Electro.bd')] class extends Component {
+new #[Layout('layouts.app')] #[Title('My Dashboard - Electrohome.bd')] class extends Component {
     public function logout()
     {
         Auth::logout();
@@ -17,7 +17,7 @@ new #[Layout('layouts.app')] #[Title('My Dashboard - Electro.bd')] class extends
 } ?>
 
 <div class="bg-gray-50 py-10 min-h-[calc(100vh-200px)]">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
         <div class="flex flex-col md:flex-row gap-6">
             
             {{-- Sidebar --}}

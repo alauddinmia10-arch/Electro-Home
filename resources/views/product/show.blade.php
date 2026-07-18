@@ -1,26 +1,32 @@
 <x-layouts.app>
     {{-- Breadcrumbs --}}
-    <div class="bg-white border-b border-gray-100 py-2 sticky top-0 z-40 shadow-sm">
-        <div class="max-w-[1340px] mx-auto px-4 xl:px-4 text-[13px] sm:text-sm text-gray-500 flex items-center gap-2 overflow-hidden whitespace-nowrap">
-            <a href="{{ route('home') }}" class="text-blue-700 hover:text-blue-900 transition-colors shrink-0 flex items-center" title="Home">
-                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-4">
+        <div class="bg-[#f0f5fa] rounded-lg px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
+            <a href="{{ route('home') }}" onclick="event.stopPropagation(); window.location.href = this.href; return false;" class="text-gray-700 hover:text-blue-600 transition-colors shrink-0 flex items-center" title="Home">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
             </a>
-            <span class="text-gray-400 shrink-0">/</span>
-            <a href="{{ route('shop') }}" class="text-blue-800 font-bold text-[15px] hover:text-blue-950 transition-colors shrink-0">Shop</a>
-            <span class="text-gray-400 shrink-0">/</span>
-            <a href="{{ route('shop', ['category' => $product->category->slug]) }}" class="text-blue-800 font-bold text-[15px] hover:text-blue-950 transition-colors shrink-0">{{ $product->category->name }}</a>
-            <span class="text-gray-400 shrink-0">/</span>
-            <span class="text-gray-500 truncate min-w-0" title="{{ $product->name }}">{{ \Illuminate\Support\Str::limit($product->name, 80) }}</span>
+            <svg class="w-3 h-3 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            
+            <a href="{{ route('shop') }}" class="hover:text-blue-600 transition-colors shrink-0">Products</a>
+            <svg class="w-3 h-3 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            
+            <a href="{{ route('shop', ['category' => $product->category->slug]) }}" class="hover:text-blue-600 transition-colors shrink-0">{{ $product->category->name }}</a>
+            <svg class="w-3 h-3 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            
+            <span class="text-[#0b5c9a] font-medium truncate min-w-0 flex items-center gap-1.5" title="{{ $product->name }}">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                {{ \Illuminate\Support\Str::limit($product->name, 80) }}
+            </span>
         </div>
     </div>
 
-    <div class="max-w-[1340px] mx-auto px-4 xl:px-4 mt-3 mb-6" x-data="{ wholesaleModalOpen: false }">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-3 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-6 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
-            <div x-data="{ mainImage: '{{ $product->cover_image ? Storage::url($product->cover_image) : '' }}' }" class="lg:col-span-4 flex flex-col">
-                <div class="bg-white border border-gray-100 relative flex justify-center items-center p-2 rounded" style="height: 360px;">
+            <div x-data="{ mainImage: '{{ $product->cover_image ? Storage::url($product->cover_image) : '' }}' }" class="lg:col-span-5 flex flex-col">
+                <div class="bg-white border border-gray-100 relative flex justify-center items-center p-2 rounded" style="height: 440px;">
                     @if($product->is_flash_sale)
                         <div class="absolute top-3 left-3 z-10">
                             <span class="badge-flash text-xs px-2 py-1 shadow-sm">⚡ Flash Deal</span>
@@ -74,7 +80,7 @@
             </div>
 
             {{-- Product Info & Key Features Group --}}
-            <div class="lg:col-span-8 flex flex-col">
+            <div class="lg:col-span-7 flex flex-col">
                 <div class="grid grid-cols-1 lg:grid-cols-10 gap-5 lg:gap-6 flex-grow">
                     {{-- Middle: Product Info --}}
                     <div class="lg:col-span-7">
@@ -103,13 +109,14 @@
                             
                             <div class="mb-3">
                                 @if($product->discount_price && $product->discount_price < $product->regular_price)
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="text-[28px] font-bold text-blue-600">৳ {{ number_format($product->discount_price, 0) }}</span>
-                                        <span class="text-base text-gray-500 line-through ml-2">৳ {{ number_format($product->regular_price, 0) }}</span>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <span class="text-[32px] font-bold text-[#1971c2]">৳{{ number_format($product->discount_price, 0) }}</span>
+                                        <span class="text-[22px] text-gray-500 line-through">৳{{ number_format($product->regular_price, 0) }}</span>
+                                        <span class="bg-[#ffe3e3] text-[#7d1919] text-[16px] px-2.5 py-0.5 rounded ml-1">Save ৳{{ number_format($product->regular_price - $product->discount_price, 0) }}</span>
                                     </div>
                                 @else
-                                    <div class="text-[28px] font-bold text-blue-600 mb-1">
-                                        ৳ {{ number_format($product->regular_price, 0) }}
+                                    <div class="text-[32px] font-bold text-[#1971c2] mb-1">
+                                        ৳{{ number_format($product->regular_price, 0) }}
                                     </div>
                                 @endif
                             </div>
@@ -154,27 +161,10 @@
                     </div>
 
                     {{-- Right: Additional Information --}}
-                    <div class="lg:col-span-3 flex flex-col">
-                        <div class="bg-gray-50/50 border border-gray-200 rounded overflow-hidden flex flex-col" style="min-height: 330px;">
-                            <div class="bg-gray-100/80 px-3 py-2 border-b border-gray-200 text-center font-semibold text-gray-800 text-[14px]">
-                                Key Features
-                            </div>
-                            <div class="p-3 text-sm text-gray-600 flex-grow">
-                                @if($product->description)
-                                    <div class="prose prose-sm text-gray-600 text-[13px] leading-relaxed">
-                                        {!! Str::words(strip_tags($product->description), 20, '...') !!}
-                                    </div>
-                                    <div class="mt-2 text-right">
-                                        <button @click="activeTab = 'description'; document.getElementById('tabs-section').scrollIntoView({behavior: 'smooth'})" class="text-blue-600 hover:underline text-xs font-semibold cursor-pointer">Read More &rarr;</button>
-                                    </div>
-                                @else
-                                    <div class="text-gray-500 italic text-center text-xs py-2">No key features available.</div>
-                                @endif
-                            </div>
-                        </div>
-                        
+                    <div class="lg:col-span-3 flex flex-col justify-end pb-[10px]">
+
                         {{-- Wholesale Button --}}
-                        <div class="mt-4">
+                        <div>
                             <button @click="wholesaleModalOpen = true" class="block w-full text-center border border-blue-200 rounded py-2.5 px-3 text-[14px] font-bold text-[#1a5b82] hover:bg-blue-50 transition-colors bg-[#ebf8ff] shadow-sm">
                                 Get Wholesale Deals Now!
                             </button>

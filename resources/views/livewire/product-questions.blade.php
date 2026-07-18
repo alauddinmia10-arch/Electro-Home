@@ -24,7 +24,7 @@
         </div>
         
         <div>
-            <h3 class="text-sm font-medium text-gray-700 border-b border-gray-200 pb-3 mb-6">Questions answered by Electro.bd ({{ $totalQuestions }})</h3>
+            <h3 class="text-sm font-medium text-gray-700 border-b border-gray-200 pb-3 mb-6">Questions answered by Electrohome.bd ({{ $totalQuestions }})</h3>
             
             <div class="space-y-6">
                 @forelse($questions as $question)
@@ -46,7 +46,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-700 mb-1 whitespace-pre-line">{{ $question->answer }}</p>
-                                <p class="text-xs text-gray-500">By <span class="font-medium text-gray-700">Electro.bd</span> on {{ $question->updated_at->format('d M Y') }}</p>
+                                <p class="text-xs text-gray-500">By <span class="font-medium text-gray-700">Electrohome.bd</span> on {{ $question->updated_at->format('d M Y') }}</p>
                             </div>
                         </div>
                         @endif

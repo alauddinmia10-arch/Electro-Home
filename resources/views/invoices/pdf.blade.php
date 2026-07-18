@@ -90,7 +90,7 @@
 <body>
 
     <div class="header">
-        <h1>Electro.bd</h1>
+        <h1>Electrohome.bd</h1>
         <p>Premium Electronics in Bangladesh</p>
         <div class="barcode">
             {!! $barcode !!}
@@ -165,8 +165,8 @@
     </table>
 
     <div class="footer">
-        <p>Thank you for shopping with Electro.bd!</p>
-        <p>If you have any questions, please contact our support at support@electro.bd</p>
+        <p>Thank you for shopping with Electrohome.bd!</p>
+        <p>If you have any questions, please contact our support at support@electrohome.bd</p>
     </div>
 
 </body>

@@ -1,137 +1,166 @@
 <x-layouts.app>
-    {{-- Breadcrumbs & Header --}}
-    <div class="bg-white border-b border-gray-100 py-4">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-                <h1 class="text-2xl font-bold font-bangla text-gray-800">
-                    {{ $currentCategory ? $currentCategory->name : 'All Products' }}
-                </h1>
-                <div class="text-sm text-gray-500 mt-1 flex items-center gap-2">
-                    <a href="{{ route('home') }}" class="hover:text-[var(--color-trust-blue)]">Home</a>
-                    <span>/</span>
-                    <span class="text-gray-800">{{ $currentCategory ? $currentCategory->name : 'Shop' }}</span>
-                </div>
-            </div>
-            
-            <div class="text-sm text-gray-500">
-                Showing {{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }} of {{ $products->total() }} products
-            </div>
-        </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-4 py-8">
         <div class="flex flex-col md:flex-row gap-8">
             {{-- Left Sidebar: Filters --}}
-            <aside class="w-full md:w-64 shrink-0 space-y-6">
+            <aside class="w-full md:w-64 shrink-0">
                 <form action="{{ route('shop') }}" method="GET" id="filter-form" class="space-y-6 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-                    {{-- Keep search query if exists --}}
-                    @if(request('search'))
-                        <input type="hidden" name="search" value="{{ request('search') }}">
-                    @endif
-                    
-                    {{-- Categories --}}
-                    <div>
-                        <h3 class="font-bold text-gray-800 mb-3 flex items-center justify-between">
-                            Categories
-                        </h3>
-                        <div class="space-y-2 max-h-64 overflow-y-auto pr-2 scrollbar-hide text-sm">
-                            <a href="{{ route('shop') }}" class="flex items-center justify-between group">
-                                <span class="{{ !$currentCategory ? 'text-[var(--color-trust-blue)] font-semibold' : 'text-gray-600 group-hover:text-[var(--color-trust-blue)]' }}">All Products</span>
-                            </a>
-                            @foreach($categories as $category)
-                                <div>
-                                    <a href="{{ route('shop', array_merge(request()->query(), ['category' => $category->slug])) }}" 
-                                       class="flex items-center justify-between group py-1">
-                                        <span class="{{ $currentCategory && ($currentCategory->id === $category->id || $currentCategory->parent_id === $category->id) ? 'text-[var(--color-trust-blue)] font-semibold' : 'text-gray-600 group-hover:text-[var(--color-trust-blue)]' }}">
-                                            {{ $category->name }}
-                                        </span>
-                                        <span class="text-xs text-gray-400 bg-gray-50 px-1.5 py-0.5 rounded">{{ $category->products_count }}</span>
-                                    </a>
-                                    
-                                    @if($currentCategory && ($currentCategory->id === $category->id || $currentCategory->parent_id === $category->id))
-                                        <div class="ml-4 space-y-1 mt-1 border-l-2 border-gray-100 pl-3">
-                                            @foreach($category->children as $child)
-                                                <a href="{{ route('shop', array_merge(request()->query(), ['category' => $child->slug])) }}" 
-                                                   class="block py-1 {{ $currentCategory->id === $child->id ? 'text-[var(--color-trust-blue)] font-semibold' : 'text-gray-500 hover:text-[var(--color-trust-blue)]' }}">
-                                                    {{ $child->name }}
-                                                </a>
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
+                    <h2 class="text-lg font-bold text-gray-800">Filters</h2>
 
-                    <hr class="border-gray-100">
+                    {{-- Search --}}
+                    <div>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Search</label>
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." class="w-full px-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-[#0b5c9a]">
+                    </div>
+                    
+                    {{-- Category --}}
+                    <div>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Category</label>
+                        <select name="category" class="w-full px-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $cat)
+                                <option value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'selected' : '' }}>{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     {{-- Price Range --}}
                     <div>
-                        <h3 class="font-bold text-gray-800 mb-3">Price Range</h3>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Price Range</label>
                         <div class="flex items-center gap-2">
-                            <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min" class="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[var(--color-trust-blue)]">
-                            <span class="text-gray-400">-</span>
-                            <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max" class="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[var(--color-trust-blue)]">
+                            <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min ৳" class="w-full px-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-[#0b5c9a]">
+                            <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max ৳" class="w-full px-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-[#0b5c9a]">
                         </div>
                     </div>
 
-                    <hr class="border-gray-100">
-
-                    {{-- Availability --}}
+                    {{-- Brand --}}
                     <div>
-                        <h3 class="font-bold text-gray-800 mb-3">Availability</h3>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Brand</label>
+                        <select name="brand" class="w-full px-3 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
+                            <option value="">All Brands</option>
+                            @isset($brands)
+                                @foreach($brands as $brand)
+                                    <option value="{{ $brand->slug ?? $brand->id }}" {{ request('brand') == ($brand->slug ?? $brand->id) ? 'selected' : '' }}>{{ $brand->name }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                    </div>
+
+                    {{-- On Sale Only --}}
+                    <div>
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" name="in_stock" value="1" {{ request('in_stock') ? 'checked' : '' }} class="rounded border-gray-300 text-[var(--color-trust-blue)] focus:ring-[var(--color-trust-blue)]">
-                            <span class="text-sm text-gray-600">In Stock Only</span>
+                            <input type="checkbox" name="on_sale" value="1" {{ request('on_sale') ? 'checked' : '' }} class="rounded border-gray-300 text-[#1877f2] focus:ring-[#1877f2]">
+                            <span class="text-sm text-gray-600">On Sale Only</span>
                         </label>
                     </div>
 
-                    {{-- Quick Filters --}}
                     <div>
-                        <h3 class="font-bold text-gray-800 mb-3">Special</h3>
-                        <div class="space-y-2">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="flash_sale" value="1" {{ request('flash_sale') ? 'checked' : '' }} class="rounded border-gray-300 text-[var(--color-trust-blue)] focus:ring-[var(--color-trust-blue)]">
-                                <span class="text-sm text-[var(--color-soft-coral)] font-semibold">Flash Sale Deals</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="featured" value="1" {{ request('featured') ? 'checked' : '' }} class="rounded border-gray-300 text-[var(--color-trust-blue)] focus:ring-[var(--color-trust-blue)]">
-                                <span class="text-sm text-gray-600">Featured Products</span>
-                            </label>
-                        </div>
+                        <button type="submit" class="w-full bg-[#0b5c9a] hover:bg-[#094d82] text-white text-[15px] font-semibold leading-none py-2 px-4 rounded-md transition-colors">Apply Filters</button>
+                        <a href="{{ route('shop') }}" class="block text-center text-sm text-gray-500 hover:text-gray-800 mt-3">Clear Filters</a>
                     </div>
-
-                    <button type="submit" class="btn btn-neutral w-full">Apply Filters</button>
-                    @if(request()->except('page'))
-                        <a href="{{ route('shop') }}" class="block text-center text-sm text-gray-500 hover:text-red-500 mt-2">Clear All Filters</a>
-                    @endif
                 </form>
             </aside>
 
             {{-- Right Content: Products Grid --}}
             <div class="flex-1">
-                {{-- Toolbar --}}
-                <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-gray-100 shadow-sm mb-6">
-                    <div class="text-sm text-gray-500 hidden sm:block">
-                        Sort by:
+                {{-- Top Header (Title, Breadcrumbs, Sort) --}}
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                    <div>
+                        <h1 class="text-[28px] font-bold text-gray-800 mb-1 leading-tight">
+                            {{ $currentCategory ? $currentCategory->name : 'All Products' }}
+                        </h1>
+                        <div class="flex items-center gap-1.5 text-[13px] text-gray-500">
+                            <a href="{{ route('home') }}" class="text-blue-500 hover:underline">Home</a>
+                            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <span class="text-gray-600">{{ $currentCategory ? $currentCategory->name : 'All Products' }}</span>
+                        </div>
                     </div>
-                    <form id="sort-form" class="flex-1 sm:flex-none flex justify-end">
-                        @foreach(request()->except(['sort', 'page']) as $key => $value)
+
+                    {{-- Sort Dropdowns --}}
+                    <form id="sort-form" class="flex items-center gap-2">
+                        @foreach(request()->except(['sort_by', 'sort_order', 'page']) as $key => $value)
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                        @endform
-                        <select name="sort" onchange="document.getElementById('sort-form').submit()" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:bg-white w-full sm:w-48">
-                            <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Newest Arrivals</option>
-                            <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
-                            <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
-                            <option value="best_selling" {{ request('sort') === 'best_selling' ? 'selected' : '' }}>Best Selling</option>
-                            <option value="name_asc" {{ request('sort') === 'name_asc' ? 'selected' : '' }}>Name: A-Z</option>
+                        @endforeach
+                        
+                        <select name="sort_by" onchange="document.getElementById('sort-form').submit()" class="text-sm bg-white border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
+                            <option value="name" {{ request('sort_by') === 'name' ? 'selected' : '' }}>Name</option>
+                            <option value="price" {{ request('sort_by') === 'price' ? 'selected' : '' }}>Price</option>
+                            <option value="newest" {{ request('sort_by', 'newest') === 'newest' ? 'selected' : '' }}>Newest</option>
+                        </select>
+                        <select name="sort_order" onchange="document.getElementById('sort-form').submit()" class="text-sm bg-white border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
+                            <option value="asc" {{ request('sort_order') === 'asc' ? 'selected' : '' }}>A to Z</option>
+                            <option value="desc" {{ request('sort_order') === 'desc' ? 'selected' : '' }}>Z to A</option>
                         </select>
                     </form>
                 </div>
 
+                {{-- Toolbar (View, Columns) --}}
+                <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-100 shadow-sm mb-6">
+                    {{-- View Toggle --}}
+                    <div class="flex items-center gap-2">
+                        <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">View:</span>
+                        <div class="flex items-center border border-gray-200 rounded-md overflow-hidden bg-gray-50">
+                            <a href="{{ request()->fullUrlWithQuery(['view' => 'grid']) }}" class="p-2 {{ request('view', 'grid') === 'grid' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100' }}" title="Grid View">
+                                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            </a>
+                            <a href="{{ request()->fullUrlWithQuery(['view' => 'list']) }}" class="p-2 {{ request('view') === 'list' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100' }}" title="List View">
+                                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    {{-- Columns Toggle --}}
+                    <div class="flex items-center gap-2">
+                        <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">Columns:</span>
+                        <div class="flex items-center gap-1 border border-gray-200 rounded-md px-1 py-1 bg-white shadow-sm">
+                            <a href="{{ request()->fullUrlWithQuery(['cols' => 4]) }}" class="px-2.5 py-1.5 rounded text-sm font-medium {{ request('cols', 4) == 4 ? 'bg-[#0b5c9a] text-white' : 'text-gray-600 hover:bg-gray-100' }} flex items-center gap-1.5 transition-colors">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                  <rect x="5" y="5" width="6" height="6" rx="1" />
+                                  <rect x="13" y="5" width="6" height="6" rx="1" />
+                                  <rect x="5" y="13" width="6" height="6" rx="1" />
+                                  <rect x="13" y="13" width="6" height="6" rx="1" />
+                                </svg>
+                                4
+                            </a>
+                            <a href="{{ request()->fullUrlWithQuery(['cols' => 5]) }}" class="px-2.5 py-1.5 rounded text-sm font-medium {{ request('cols') == 5 ? 'bg-[#0b5c9a] text-white' : 'text-gray-600 hover:bg-gray-100' }} flex items-center gap-1.5 transition-colors">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                  <rect x="3" y="5" width="4" height="6" rx="0.5" />
+                                  <rect x="10" y="5" width="4" height="6" rx="0.5" />
+                                  <rect x="17" y="5" width="4" height="6" rx="0.5" />
+                                  <rect x="3" y="13" width="4" height="6" rx="0.5" />
+                                  <rect x="10" y="13" width="4" height="6" rx="0.5" />
+                                  <rect x="17" y="13" width="4" height="6" rx="0.5" />
+                                </svg>
+                                5
+                            </a>
+                            <a href="{{ request()->fullUrlWithQuery(['cols' => 6]) }}" class="px-2.5 py-1.5 rounded text-sm font-medium {{ request('cols') == 6 ? 'bg-[#0b5c9a] text-white' : 'text-gray-600 hover:bg-gray-100' }} flex items-center gap-1.5 transition-colors">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                  <rect x="3" y="3" width="4" height="4" rx="0.5" />
+                                  <rect x="10" y="3" width="4" height="4" rx="0.5" />
+                                  <rect x="17" y="3" width="4" height="4" rx="0.5" />
+                                  <rect x="3" y="10" width="4" height="4" rx="0.5" />
+                                  <rect x="10" y="10" width="4" height="4" rx="0.5" />
+                                  <rect x="17" y="10" width="4" height="4" rx="0.5" />
+                                  <rect x="3" y="17" width="4" height="4" rx="0.5" />
+                                  <rect x="10" y="17" width="4" height="4" rx="0.5" />
+                                  <rect x="17" y="17" width="4" height="4" rx="0.5" />
+                                </svg>
+                                6
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Products Grid --}}
                 @if($products->count() > 0)
-                    <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
+                    @php
+                        // Determine grid layout based on cols parameter
+                        $cols = request('cols', 4);
+                        $gridClass = 'grid-cols-2 lg:grid-cols-3';
+                        if ($cols == 4) $gridClass .= ' xl:grid-cols-4';
+                        if ($cols == 5) $gridClass .= ' xl:grid-cols-5';
+                        if ($cols == 6) $gridClass .= ' xl:grid-cols-6';
+                    @endphp
+                    <div class="grid {{ $gridClass }} gap-3 md:gap-4">
                         @foreach($products as $product)
                             @include('partials.product-card', ['product' => $product])
                         @endforeach

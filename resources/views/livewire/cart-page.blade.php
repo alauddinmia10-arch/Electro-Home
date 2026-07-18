@@ -4,6 +4,31 @@ use App\Services\CartService;
 use Livewire\Volt\Component;
 
 new class extends Component {
+    public $quantities = [];
+
+    public function mount()
+    {
+        foreach (app(CartService::class)->getItems() as $item) {
+            $this->quantities[$item->product_id] = $item->quantity;
+        }
+    }
+
+    public function updatedQuantities($value, $key)
+    {
+        $productId = (int) $key;
+        $quantity = (int) $value;
+        
+        $item = app(CartService::class)->getItems()->firstWhere('product_id', $productId);
+        if ($item) {
+            $stock = $item->product->stock_quantity ?? 999;
+            if ($quantity > $stock) $quantity = $stock;
+            if ($quantity < 1) $quantity = 1;
+            
+            $this->quantities[$productId] = $quantity;
+            $this->updateQuantity($productId, $quantity);
+        }
+    }
+
     public function updateQuantity(int $productId, int $quantity)
     {
         $cart = app(CartService::class);
@@ -15,6 +40,7 @@ new class extends Component {
     {
         $cart = app(CartService::class);
         $cart->remove($productId);
+        unset($this->quantities[$productId]);
         $this->dispatch('cart-updated');
     }
 
@@ -30,7 +56,7 @@ new class extends Component {
 };
 ?>
 <div class="bg-gray-100 py-6">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
         <h1 class="text-2xl font-bold text-gray-800 font-bangla mb-6">আপনার শপিং কার্ট</h1>
 
         <div class="flex flex-col lg:flex-row gap-8">
@@ -76,10 +102,10 @@ new class extends Component {
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center justify-center">
-                                                    <div class="flex items-center border border-gray-200 rounded bg-gray-50">
-                                                        <button wire:click="updateQuantity({{ $item->product_id }}, {{ $item->quantity - 1 }})" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" @if($item->quantity <= 1) disabled @endif>-</button>
-                                                        <input type="text" value="{{ $item->quantity }}" class="w-10 text-center text-sm font-semibold bg-transparent border-x border-gray-200 py-1" readonly>
-                                                        <button wire:click="updateQuantity({{ $item->product_id }}, {{ $item->quantity + 1 }})" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors">+</button>
+                                                    <div class="flex items-center border border-gray-200 rounded bg-gray-50" x-data="{ stock: {{ $item->product->stock_quantity ?? 999 }} }">
+                                                        <button type="button" @click="if($wire.quantities[{{ $item->product_id }}] > 1) $wire.quantities[{{ $item->product_id }}]--" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" :disabled="$wire.quantities[{{ $item->product_id }}] <= 1">-</button>
+                                                        <input type="text" wire:model.live.debounce.300ms="quantities.{{ $item->product_id }}" class="w-10 text-center text-sm font-semibold bg-transparent border-x border-gray-200 py-1" readonly>
+                                                        <button type="button" @click="if($wire.quantities[{{ $item->product_id }}] < stock) $wire.quantities[{{ $item->product_id }}]++" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" :disabled="$wire.quantities[{{ $item->product_id }}] >= stock">+</button>
                                                     </div>
                                                 </div>
                                             </td>

@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->brandName('Electro.bd')
+            ->brandName('Electrohome.bd')
             ->login()
             ->colors([
                 'primary' => Color::Amber,

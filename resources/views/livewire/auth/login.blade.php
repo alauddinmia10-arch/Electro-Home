@@ -5,7 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app')] #[Title('Login - Electro.bd')] class extends Component {
+new #[Layout('layouts.app')] #[Title('Login - Electrohome.bd')] class extends Component {
     public string $login = '';
     public string $password = '';
     public bool $remember = false;
@@ -36,7 +36,7 @@ new #[Layout('layouts.app')] #[Title('Login - Electro.bd')] class extends Compon
             <form wire:submit="authenticate" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email or Phone Number</label>
-                    <input type="text" wire:model="login" class="form-input" placeholder="admin@electro.bd or 01XXXXXXXXX" required>
+                    <input type="text" wire:model="login" class="form-input" placeholder="admin@electrohome.bd or 01XXXXXXXXX" required>
                     @error('login') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                 </div>
                 
