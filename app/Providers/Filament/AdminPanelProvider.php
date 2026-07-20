@@ -28,9 +28,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandName('Electrohome.bd')
+            ->maxContentWidth(\Filament\Support\Enums\Width::SixExtraLarge)
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Blue,
+                'stat_green' => Color::Green,
+                'stat_purple' => Color::hex('#290045'),
+                'stat_orange' => Color::Orange,
+                'stat_pink' => Color::hex('#004161'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
@@ -39,11 +44,20 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                // Removed AccountWidget and FilamentInfoWidget as requested
             ])
+            ->navigationGroups([
+                'MASTER DATA',
+                'Management',
+            ])
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('3s')
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::USER_MENU_BEFORE,
+                fn (): \Illuminate\Contracts\View\View => view('filament.hooks.user-menu'),
+            )
             ->assets([
-                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css')),
+                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=35')),
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    use \App\Traits\NotifiesAdmins;
+
     protected $fillable = [
         'product_id',
         'user_id',

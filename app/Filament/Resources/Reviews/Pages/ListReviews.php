@@ -8,6 +8,14 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListReviews extends ListRecords
 {
+    public function mount(): void
+    {
+        parent::mount();
+        if (auth()->check()) {
+            auth()->user()->unreadNotifications()->where('data', 'like', '%"title":"New Review"%')->update(['read_at' => now()]);
+        }
+    }
+
     protected static string $resource = ReviewResource::class;
 
     protected function getHeaderActions(): array

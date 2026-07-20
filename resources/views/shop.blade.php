@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-4 py-8">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] py-8">
         <div class="flex flex-col md:flex-row gap-8">
             {{-- Left Sidebar: Filters --}}
             <aside class="w-full md:w-64 shrink-0">
@@ -66,12 +66,12 @@
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                     <div>
                         <h1 class="text-[28px] font-bold text-gray-800 mb-1 leading-tight">
-                            {{ $currentCategory ? $currentCategory->name : 'All Products' }}
+                            {{ $pageTitle }}
                         </h1>
                         <div class="flex items-center gap-1.5 text-[13px] text-gray-500">
-                            <a href="{{ route('home') }}" class="text-blue-500 hover:underline">Home</a>
+                            <a href="{{ route('home') }}" class="text-[#0b5c9a] font-bold hover:underline">Home</a>
                             <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            <span class="text-gray-600">{{ $currentCategory ? $currentCategory->name : 'All Products' }}</span>
+                            <span class="text-gray-600">{{ $pageTitle }}</span>
                         </div>
                     </div>
 

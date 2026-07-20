@@ -10,7 +10,14 @@ use Filament\Tables\Columns\TextColumn;
 class LowStockProductsWidget extends BaseWidget
 {
     protected static ?int $sort = 3;
-    protected int | string | array $columnSpan = ['default' => 'full', 'lg' => 1];
+    protected static bool $isLazy = false;
+    protected int | string | array $columnSpan = [
+        'default' => 1,
+        'md' => 1,
+        'lg' => 1,
+        'xl' => 1,
+        '2xl' => 1,
+    ];
     protected static ?string $heading = 'Low Stock Products';
 
     public function table(Table $table): Table
@@ -19,10 +26,16 @@ class LowStockProductsWidget extends BaseWidget
             ->query(
                 Product::query()->where('stock_quantity', '<=', 10)->orderBy('stock_quantity', 'asc')->limit(5)
             )
+            ->extraAttributes([
+                'class' => 'h-full flex flex-col',
+                'style' => 'height: 100% !important;',
+            ])
             ->columns([
                 TextColumn::make('name')
                     ->label('Product')
-                    ->description(fn (Product $record): string => 'SKU: ' . $record->sku),
+                    ->description(fn (Product $record): string => 'SKU: ' . $record->sku)
+                    ->limit(70)
+                    ->wrap(),
                 TextColumn::make('stock_quantity')
                     ->label('Stock')
                     ->formatStateUsing(fn ($state) => $state . ' Left')

@@ -21,11 +21,11 @@
 
     @livewireStyles
 </head>
-<body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col">
+<body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col overflow-x-hidden">
 
     {{-- Top Bar --}}
-    <div class="bg-[var(--color-text-primary)] text-white text-xs py-1.5 hidden md:block">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 flex items-center justify-between">
+    <div class="bg-[var(--color-text-primary)] text-white text-[13px] py-1.5 hidden md:block">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 shrink-0" style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -44,16 +44,16 @@
 
     {{-- Main Header --}}
     <header class="bg-white border-b border-gray-100" x-data="{ mobileMenu: false }">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
             <div class="flex items-center justify-between h-14 md:h-16">
 
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
-                        E
+                <a href="{{ route('home') }}" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-sm group-hover:shadow-md transition-shadow bg-gradient-to-br from-[#0b5c9a] to-[#00a651]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
-                    <span class="text-xl font-bold text-[var(--color-text-primary)] hidden sm:inline">
-                        Electrohome<span class="text-[var(--color-trust-blue)]">.bd</span>
+                    <span class="text-[22px] font-black tracking-tight text-gray-800 hidden sm:flex items-center">
+                        Electro<span class="font-normal text-[#00a651] ml-1.5">Home</span>
                     </span>
                 </a>
 
@@ -114,46 +114,90 @@
         </div>
 
         {{-- Category Navigation (Desktop) --}}
-        <nav class="hidden md:block border-t border-gray-50 bg-white">
-            <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
-                <div class="flex items-center gap-6 h-11 text-sm">
-                    <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" class="flex items-center gap-2 font-bold text-base text-[var(--color-text-primary)] hover:text-[var(--color-trust-blue)] transition-colors">
+        <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
+            <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
+                <div class="flex items-center gap-6 h-9 text-sm">
+                    <div x-data="{ open: false, activeCat: null, activeSubcat: null }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-center">
+                        <button class="flex items-center gap-2 font-bold text-base text-gray-700 hover:text-[#094d82] transition-colors h-full">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
                             Product Categories
                             <svg class="w-4 h-4 transition-transform" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </button>
 
-                        {{-- Mega Menu Dropdown --}}
-                        <div x-show="open" @click.outside="open = false" x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                             class="absolute left-0 top-full mt-2 w-[700px] bg-white rounded-xl border border-gray-100 p-6 z-50"
-                             style="box-shadow: var(--shadow-dropdown)">
-                            <div class="grid grid-cols-3 gap-6">
-                                @foreach(\App\Models\Category::parents()->active()->ordered()->with('children')->get() as $cat)
-                                    <div>
-                                        <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-trust-blue)] flex items-center gap-2 mb-2">
-                                            <span>{{ $cat->icon }}</span> {{ $cat->name }}
-                                        </a>
-                                        @foreach($cat->children->take(5) as $child)
-                                            <a href="{{ route('shop', ['category' => $child->slug]) }}" class="block text-sm text-gray-500 hover:text-[var(--color-trust-blue)] py-0.5 pl-6">
-                                                {{ $child->name }}
+                        {{-- Main Dropdown Wrapper --}}
+                        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                             class="absolute left-0 top-full z-50 flex items-start">
+                            
+                            {{-- Scrolling List (Scrollbar on left using rtl) --}}
+                            <div class="w-[280px] bg-white rounded-xl border border-gray-100 py-2 max-h-[70vh] overflow-y-auto custom-scrollbar shadow-lg shrink-0" dir="rtl">
+                                <div dir="ltr">
+                                    @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
+                                        <div @mouseenter="activeCat = {{ $cat->id }}; activeSubcat = null">
+                                            <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group flex items-center justify-between px-6 py-2.5 font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeCat === {{ $cat->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
+                                                <div class="flex items-center gap-3">
+                                                    @if($cat->icon)
+                                                        @if(str_starts_with($cat->icon, 'heroicon-'))
+                                                            @svg($cat->icon, 'w-5 h-5 shrink-0 text-gray-500 group-hover:text-[#094d82]')
+                                                        @else
+                                                            <span class="shrink-0 text-xl">{{ $cat->icon }}</span>
+                                                        @endif
+                                                    @endif
+                                                    <span class="truncate">{{ $cat->name }}</span>
+                                                </div>
+                                                @if($cat->children->count() > 0)
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                                @endif
                                             </a>
-                                        @endforeach
-                                    </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            {{-- Flyouts (Rendered outside to prevent clipping) --}}
+                            <div class="relative ml-1">
+                                @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
+                                    @if($cat->children->count() > 0)
+                                        <div x-show="activeCat === {{ $cat->id }}" class="absolute left-0 top-0 w-[260px] bg-white rounded-xl border border-gray-100 shadow-lg py-2 z-50">
+                                            @foreach($cat->children as $child)
+                                                <div @mouseenter="activeSubcat = {{ $child->id }}">
+                                                    <a href="{{ route('shop', ['category' => $child->slug]) }}" class="flex items-center justify-between px-6 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeSubcat === {{ $child->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
+                                                        <span>{{ $child->name }}</span>
+                                                        @if($child->children->count() > 0)
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                                        @endif
+                                                    </a>
+                                                    
+                                                    {{-- Level 3 Flyout --}}
+                                                    @if($child->children->count() > 0)
+                                                        <div x-show="activeSubcat === {{ $child->id }}" class="absolute left-full top-0 w-[240px] bg-white rounded-xl border border-gray-100 shadow-lg py-2 ml-1 z-50">
+                                                            @foreach($child->children as $subchild)
+                                                                <a href="{{ route('shop', ['category' => $subchild->slug]) }}" class="block px-6 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#094d82]">
+                                                                    {{ $subchild->name }}
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
                     </div>
 
-                    <a href="{{ route('shop', ['flash_sale' => true]) }}" class="text-[var(--color-warm-orange)] font-semibold hover:text-[var(--color-warm-orange-hover)] transition-colors flex items-center gap-1">
-                        ⚡ Flash Sale
+                    <a href="{{ route('shop') }}" class="text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
+                        Shop
                     </a>
-                    <a href="{{ route('shop', ['featured' => true]) }}" class="text-gray-600 hover:text-[var(--color-trust-blue)] transition-colors">
+                    <a href="{{ route('shop', ['featured' => true]) }}" class="text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
                         Featured
                     </a>
-                    <a href="{{ route('shop') }}" class="text-gray-600 hover:text-[var(--color-trust-blue)] transition-colors">
+                    <a href="{{ route('shop', ['new_arrivals' => 1]) }}" class="text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
                         New Arrivals
+                    </a>
+                    <a href="{{ route('shop', ['flash_sale' => true]) }}" class="text-[var(--color-warm-orange)] font-semibold hover:text-[var(--color-warm-orange-hover)] transition-colors flex items-center gap-1">
+                        ⚡ Flash Sale
                     </a>
                 </div>
             </div>
@@ -175,7 +219,7 @@
 
     {{-- Flash Messages --}}
     @if(session('success'))
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-4">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
             <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
                 ✅ {{ session('success') }}
             </div>
@@ -183,7 +227,7 @@
     @endif
 
     @if(session('error'))
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-4">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
             <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
                 ❌ {{ session('error') }}
             </div>
@@ -197,7 +241,7 @@
 
     {{-- Footer --}}
     <footer class="bg-[var(--color-text-primary)] text-white mt-auto">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 py-12">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {{-- Brand --}}
                 <div>
@@ -292,16 +336,16 @@
 
         {{-- Scroll to Top Button --}}
         <button x-data @click="window.scrollTo({top: 0, behavior: 'smooth'})"
-                class="w-12 h-12 bg-[var(--color-trust-blue)] rounded-full flex items-center justify-center shadow-lg text-white hover:bg-blue-700 hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+                class="w-12 h-12 bg-[#0b5c9a]/50 backdrop-blur-md border border-white/30 hover:bg-[#0b5c9a]/70 rounded-full flex items-center justify-center shadow-[0_4px_30px_rgba(0,0,0,0.1)] text-white transition-all duration-300"
                 title="Scroll to Top">
-            <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="animation-duration: 2s;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+            <svg class="w-6 h-6 animate-float-up drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
         </button>
 
         {{-- Scroll Down Button --}}
         <button x-data @click="window.scrollBy({top: 600, behavior: 'smooth'})"
-                class="w-12 h-12 bg-[var(--color-trust-blue)] rounded-full flex items-center justify-center shadow-lg text-white hover:bg-blue-700 hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+                class="w-12 h-12 bg-[#0b5c9a]/50 backdrop-blur-md border border-white/30 hover:bg-[#0b5c9a]/70 rounded-full flex items-center justify-center shadow-[0_4px_30px_rgba(0,0,0,0.1)] text-white transition-all duration-300"
                 title="Scroll Down">
-            <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="animation-duration: 2s;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            <svg class="w-6 h-6 animate-float-down drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
         </button>
 
     </div>

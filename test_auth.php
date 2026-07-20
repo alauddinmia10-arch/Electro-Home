@@ -1,0 +1,1 @@
+<?php require "vendor/autoload.php"; $app = require_once "bootstrap/app.php"; $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class); $user = App\Models\User::first(); auth()->login($user); $response = $kernel->handle(Illuminate\Http\Request::create("/admin/categories/10/edit", "GET")); echo $response->getStatusCode();

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
+    use \App\Traits\NotifiesAdmins;
+
     protected $fillable = [
         'user_id',
         'invoice_number',

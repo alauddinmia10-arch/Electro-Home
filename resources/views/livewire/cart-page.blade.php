@@ -15,9 +15,10 @@ new class extends Component {
 
     public function updatedQuantities($value, $key)
     {
+        \Illuminate\Support\Facades\Log::info("updatedQuantities hook fired for key: " . $key . " with value: " . $value);
         $productId = (int) $key;
         $quantity = (int) $value;
-        
+
         $item = app(CartService::class)->getItems()->firstWhere('product_id', $productId);
         if ($item) {
             $stock = $item->product->stock_quantity ?? 999;
@@ -29,11 +30,57 @@ new class extends Component {
         }
     }
 
+    public function updated($property, $value)
+    {
+        \Illuminate\Support\Facades\Log::info("Updated hook fired for property: " . $property . " with value: " . $value);
+        if (str_starts_with($property, 'quantities.')) {
+            $productId = (int) str_replace('quantities.', '', $property);
+            $quantity = (int) $value;
+
+            $item = app(CartService::class)->getItems()->firstWhere('product_id', $productId);
+            if ($item) {
+                $stock = $item->product->stock_quantity ?? 999;
+                if ($quantity > $stock) $quantity = $stock;
+                if ($quantity < 1) $quantity = 1;
+                
+                $this->quantities[$productId] = $quantity;
+                $this->updateQuantity($productId, $quantity);
+            }
+        }
+    }
+
+    public function incrementQuantity(int $productId)
+    {
+        $item = app(CartService::class)->getItems()->firstWhere('product_id', $productId);
+        if ($item) {
+            $stock = $item->product->stock_quantity ?? 999;
+            $current = $item->quantity;
+            if ($current < $stock) {
+                $this->quantities[$productId] = $current + 1;
+                $this->updateQuantity($productId, $current + 1);
+            }
+        }
+    }
+
+    public function decrementQuantity(int $productId)
+    {
+        $item = app(CartService::class)->getItems()->firstWhere('product_id', $productId);
+        if ($item) {
+            $current = $item->quantity;
+            if ($current > 1) {
+                $this->quantities[$productId] = $current - 1;
+                $this->updateQuantity($productId, $current - 1);
+            }
+        }
+    }
+
+
     public function updateQuantity(int $productId, int $quantity)
     {
+        \Illuminate\Support\Facades\Log::info("updateQuantity called for product: " . $productId . " with qty: " . $quantity);
         $cart = app(CartService::class);
         $cart->updateQuantity($productId, $quantity);
-        $this->dispatch('cart-updated');
+        $this->dispatch('cart-updated', count: $cart->getCount(), subtotal: $cart->getSubtotal());
     }
 
     public function removeItem(int $productId)
@@ -41,7 +88,7 @@ new class extends Component {
         $cart = app(CartService::class);
         $cart->remove($productId);
         unset($this->quantities[$productId]);
-        $this->dispatch('cart-updated');
+        $this->dispatch('cart-updated', count: $cart->getCount(), subtotal: $cart->getSubtotal());
     }
 
     public function with(): array
@@ -56,7 +103,7 @@ new class extends Component {
 };
 ?>
 <div class="bg-gray-100 py-6">
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
         <h1 class="text-2xl font-bold text-gray-800 font-bangla mb-6">আপনার শপিং কার্ট</h1>
 
         <div class="flex flex-col lg:flex-row gap-8">
@@ -77,7 +124,20 @@ new class extends Component {
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
                                     @foreach($items as $item)
-                                        <tr wire:key="cart-item-{{ $item->product_id }}">
+                                        <tr wire:key="cart-item-{{ $item->product_id }}" x-data="{ 
+                                            qty: {{ $quantities[$item->product_id] ?? 1 }}, 
+                                            stock: {{ $item->product->stock_quantity ?? 999 }},
+                                            timeout: null,
+                                            updateQty(change, price) {
+                                                if (this.qty + change < 1 || this.qty + change > this.stock) return;
+                                                this.qty += change;
+                                                window.dispatchEvent(new CustomEvent('cart-updated-optimistic', { detail: { amount: price * change, qty_change: change } }));
+                                                clearTimeout(this.timeout);
+                                                this.timeout = setTimeout(() => {
+                                                    $wire.updateQuantity({{ $item->product_id }}, this.qty);
+                                                }, 500);
+                                            }
+                                        }">
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center gap-4">
                                                     <a href="{{ route('product.show', $item->product->slug) }}" class="w-16 h-16 shrink-0 bg-gray-50 rounded-lg border border-gray-100 overflow-hidden block">
@@ -102,15 +162,15 @@ new class extends Component {
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center justify-center">
-                                                    <div class="flex items-center border border-gray-200 rounded bg-gray-50" x-data="{ stock: {{ $item->product->stock_quantity ?? 999 }} }">
-                                                        <button type="button" @click="if($wire.quantities[{{ $item->product_id }}] > 1) $wire.quantities[{{ $item->product_id }}]--" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" :disabled="$wire.quantities[{{ $item->product_id }}] <= 1">-</button>
-                                                        <input type="text" wire:model.live.debounce.300ms="quantities.{{ $item->product_id }}" class="w-10 text-center text-sm font-semibold bg-transparent border-x border-gray-200 py-1" readonly>
-                                                        <button type="button" @click="if($wire.quantities[{{ $item->product_id }}] < stock) $wire.quantities[{{ $item->product_id }}]++" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" :disabled="$wire.quantities[{{ $item->product_id }}] >= stock">+</button>
+                                                    <div class="flex items-center border border-gray-200 rounded bg-gray-50">
+                                                        <button type="button" @click="updateQty(-1, {{ $item->product->effective_price }})" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" :disabled="qty <= 1">-</button>
+                                                        <input type="text" x-model="qty" class="w-10 text-center text-sm font-semibold bg-transparent border-x border-gray-200 py-1" readonly>
+                                                        <button type="button" @click="updateQty(1, {{ $item->product->effective_price }})" class="px-2 py-1 text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" :disabled="qty >= stock">+</button>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 text-right">
-                                                <span class="font-bold text-[var(--color-trust-blue)] text-lg">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
+                                                <span wire:ignore class="font-bold text-[var(--color-trust-blue)] text-lg" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
                                             </td>
                                             <td class="px-6 py-4 text-right">
                                                 <button wire:click="removeItem({{ $item->product_id }})" class="p-2 text-red-400 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors" title="Remove Item">
@@ -138,13 +198,13 @@ new class extends Component {
             {{-- Right: Order Summary --}}
             @if($items->count() > 0)
                 <div class="w-full lg:w-96 shrink-0">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-24">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-24" x-data="{ orderSubtotal: {{ $subtotal }}, orderQty: {{ $items->sum('quantity') }} }" @cart-updated-optimistic.window="orderSubtotal += $event.detail.amount; orderQty += $event.detail.qty_change" @cart-updated.window="if($event.detail.subtotal !== undefined) { orderSubtotal = $event.detail.subtotal; orderQty = $event.detail.count; }">
                         <h3 class="text-lg font-bold text-gray-800 mb-6 font-bangla border-b border-gray-100 pb-4">অর্ডার সামারি</h3>
                         
                         <div class="space-y-4 text-sm text-gray-600 mb-6">
                             <div class="flex justify-between">
-                                <span>Subtotal ({{ $items->sum('quantity') }} items)</span>
-                                <span class="font-semibold text-gray-800">৳{{ number_format($subtotal, 0) }}</span>
+                                <span>Subtotal (<span wire:ignore x-text="orderQty">{{ $items->sum('quantity') }}</span> items)</span>
+                                <span class="font-semibold text-gray-800" wire:ignore x-text="'৳' + new Intl.NumberFormat('en-US').format(orderSubtotal)">৳{{ number_format($subtotal, 0) }}</span>
                             </div>
                             <div class="flex justify-between text-gray-400">
                                 <span>Delivery Charge</span>
@@ -165,7 +225,7 @@ new class extends Component {
 
                         <div class="border-t border-gray-100 pt-4 mb-6 flex justify-between items-end">
                             <span class="font-bold text-gray-800">Estimated Total</span>
-                            <span class="text-2xl font-bold text-price">৳{{ number_format($subtotal, 0) }}</span>
+                            <span class="text-2xl font-bold text-price" wire:ignore x-text="'৳' + new Intl.NumberFormat('en-US').format(orderSubtotal)">৳{{ number_format($subtotal, 0) }}</span>
                         </div>
 
                         <a href="{{ route('checkout') }}" class="btn btn-primary w-full py-3 text-lg flex justify-center items-center gap-2">

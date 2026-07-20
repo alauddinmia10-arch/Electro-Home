@@ -22,7 +22,16 @@ class OrderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static string | \UnitEnum | null $navigationGroup = 'MANAGEMENT';
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $recordTitleAttribute = 'invoice_number';
+
+    public static function getNavigationBadge(): ?string
+    {
+        $count = auth()->user()->unreadNotifications()->where('data', 'like', '%"title":"New Order"%')->count();
+        return $count > 0 ? (string) $count : null;
+    }
 
     public static function form(Schema $schema): Schema
     {

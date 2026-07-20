@@ -56,6 +56,16 @@ class ShopController extends Controller
             $query->whereNotNull('discount_price')->where('discount_price', '>', 0);
         }
 
+        // Flash sale filter
+        if ($request->boolean('flash_sale')) {
+            $query->flashSale();
+        }
+
+        // Featured filter
+        if ($request->boolean('featured')) {
+            $query->featured();
+        }
+
         // Sort
         $sortBy = $request->get('sort_by', 'newest');
         $sortOrder = $request->get('sort_order', 'desc');
@@ -84,8 +94,19 @@ class ShopController extends Controller
             ? Category::where('slug', $request->category)->first()
             : null;
 
+        $pageTitle = 'All Products';
+        if ($request->boolean('flash_sale')) {
+            $pageTitle = 'Flash Sale';
+        } elseif ($request->boolean('featured')) {
+            $pageTitle = 'Featured';
+        } elseif ($request->boolean('new_arrivals')) {
+            $pageTitle = 'New Arrivals';
+        } elseif ($currentCategory) {
+            $pageTitle = $currentCategory->name;
+        }
+
         $brands = \App\Models\Brand::where('is_active', true)->orderBy('name')->get();
 
-        return view('shop', compact('products', 'categories', 'brands', 'currentCategory'));
+        return view('shop', compact('products', 'categories', 'brands', 'currentCategory', 'pageTitle'));
     }
 }

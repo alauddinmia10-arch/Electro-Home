@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class WholesaleRequest extends Model
 {
+    use \App\Traits\NotifiesAdmins;
+
     protected $fillable = [
         'product_id',
         'quantity',

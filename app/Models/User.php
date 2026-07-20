@@ -23,6 +23,7 @@ class User extends Authenticatable implements FilamentUser
         'phone',
         'password',
         'role',
+        'avatar',
     ];
 
     protected $hidden = [
@@ -69,7 +70,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function scopeAdmins($query)
     {
-        return $query->where('role', 'admin');
+        return $query->whereIn('role', ['super_admin', 'admin', 'manager']);
     }
 
     public function scopeStaff($query)
@@ -81,12 +82,12 @@ class User extends Authenticatable implements FilamentUser
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return in_array($this->role, ['super_admin', 'admin', 'manager']);
     }
 
     public function isStaff(): bool
     {
-        return in_array($this->role, ['admin', 'staff']);
+        return in_array($this->role, ['super_admin', 'admin', 'manager', 'staff']);
     }
 
     /**

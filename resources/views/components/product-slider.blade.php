@@ -1,6 +1,6 @@
 @props(['title', 'icon', 'products', 'viewAllUrl' => '#'])
 
-<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 relative" x-data="{
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 px-3 py-2 relative" x-data="{
     scrollLeft() {
         $refs.slider.scrollBy({ left: -300, behavior: 'smooth' });
     },
@@ -8,7 +8,7 @@
         $refs.slider.scrollBy({ left: 300, behavior: 'smooth' });
     }
 }">
-    <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center justify-between mb-3">
         <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
             {{ $title }} <span>{{ $icon }}</span>
         </h2>
@@ -24,10 +24,10 @@
         </button>
 
         {{-- Slider Container --}}
-        <div x-ref="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+        <div x-ref="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
             @foreach($products as $product)
-                <div class="shrink-0 snap-start w-36 md:w-44 lg:w-48">
-                    @include('partials.product-card-minimal', ['product' => $product])
+                <div class="shrink-0 snap-start w-40 md:w-48 lg:w-56 h-full">
+                    @include('partials.product-card', ['product' => $product])
                 </div>
             @endforeach
         </div>

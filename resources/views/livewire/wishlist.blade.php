@@ -41,7 +41,7 @@ new #[Layout('layouts.app')] #[Title('My Wishlist - Electrohome.bd')] class exte
 } ?>
 
 <div class="bg-gray-50 py-10 min-h-[calc(100vh-200px)]">
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
         <h2 class="text-2xl font-bold text-gray-800 font-bangla mb-6">আমার উইশলিস্ট</h2>
         
         @if(session('success'))

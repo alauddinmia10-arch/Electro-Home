@@ -62,7 +62,10 @@ use App\Http\Controllers\InvoiceController;
 
 // Admin Invoice Route (protected by auth and maybe a gate later, for now just auth)
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/orders/bulk-print', [InvoiceController::class, 'printBulk'])->name('invoice.print_bulk');
+    Route::get('/admin/orders/print-all', [InvoiceController::class, 'printAll'])->name('invoice.print_all');
     Route::get('/admin/orders/{order}/invoice', [InvoiceController::class, 'download'])->name('invoice.download');
+    Route::get('/admin/orders/{order}/print', [InvoiceController::class, 'print'])->name('invoice.print');
 });
 
 // SSLCommerz Payment Routes

@@ -53,6 +53,7 @@ new class extends Component {
         }
         
         $this->updateTotals(app(CartService::class));
+        $this->saveIncompleteOrder();
     }
 
     public function updateTotals(CartService $cart)
@@ -60,6 +61,78 @@ new class extends Component {
         $this->deliveryCharge = $cart->calculateDeliveryCharge($this->district);
         $this->total = $this->subtotal + $this->deliveryCharge;
         $this->freeDeliveryRemaining = $cart->getFreeDeliveryRemaining();
+    }
+
+    public function updatedName($value)
+    {
+        $this->saveIncompleteOrder();
+    }
+
+    public function updatedPhone($value)
+    {
+        $this->saveIncompleteOrder();
+    }
+
+    public function updatedAddress($value)
+    {
+        $this->saveIncompleteOrder();
+    }
+
+    public function updatedThana($value)
+    {
+        $this->saveIncompleteOrder();
+    }
+
+    public function updatedAltPhone($value)
+    {
+        $this->saveIncompleteOrder();
+    }
+
+    protected function saveIncompleteOrder()
+    {
+        \Log::info('saveIncompleteOrder called', ['phone' => $this->phone, 'session_id' => session()->getId()]);
+        
+        $filledCount = 0;
+        if (!empty(trim($this->name))) $filledCount++;
+        if (!empty(trim($this->phone))) $filledCount++;
+        if (!empty(trim($this->district))) $filledCount++;
+        if (!empty(trim($this->thana))) $filledCount++;
+        if (!empty(trim($this->address))) $filledCount++;
+        if (!empty(trim($this->altPhone))) $filledCount++;
+
+        if ($filledCount < 3) {
+            return;
+        }
+
+        $cartService = app(CartService::class);
+        
+        $cartData = [
+            'items' => $cartService->getItems()->map(function($item) {
+                return [
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'name' => $item->product->name ?? 'Unknown',
+                    'price' => $item->product->discount_price ?? $item->product->regular_price,
+                ];
+            })->toArray(),
+            'subtotal' => $this->subtotal,
+            'total' => $this->total
+        ];
+
+        \App\Models\IncompleteOrder::updateOrCreate(
+            ['session_id' => session()->getId()],
+            [
+                'customer_name' => $this->name,
+                'customer_phone' => $this->phone,
+                'customer_alt_phone' => $this->altPhone,
+                'district' => $this->district,
+                'thana' => $this->thana,
+                'full_address' => $this->address,
+                'cart_data' => $cartData,
+                'ip_address' => request()->ip(),
+                'last_active_step' => 'checkout_form',
+            ]
+        );
     }
 
     public function submit()
@@ -114,6 +187,8 @@ new class extends Component {
 
         $cartService->clear();
         
+        \App\Models\IncompleteOrder::where('session_id', session()->getId())->delete();
+        
         // Send SMS Notification
         app(\App\Services\SmsService::class)->sendOrderConfirmation($order);
         
@@ -141,12 +216,12 @@ new class extends Component {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                        <input type="text" wire:model="name" class="form-input" placeholder="Enter your full name" required>
+                        <input type="text" wire:model.blur="name" class="form-input" placeholder="Enter your full name" required>
                         @error('name') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                        <input type="tel" wire:model="phone" class="form-input" placeholder="01XXXXXXXXX" required>
+                        <input type="tel" wire:model.blur="phone" class="form-input" placeholder="01XXXXXXXXX" required>
                         @error('phone') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>
                 </div>
@@ -164,7 +239,7 @@ new class extends Component {
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Thana / থানা *</label>
-                        <select wire:model="thana" class="form-input" required @if($thanas->isEmpty()) disabled @endif>
+                        <select wire:model.live="thana" class="form-input" required @if($thanas->isEmpty()) disabled @endif>
                             <option value="">Select Thana</option>
                             @foreach($thanas as $t)
                                 <option value="{{ $t->name }}">{{ $t->name }} - {{ $t->bn_name }}</option>
@@ -176,14 +251,14 @@ new class extends Component {
 
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Full Address *</label>
-                    <textarea wire:model="address" class="form-input resize-none" rows="3" placeholder="House/Flat number, Road number, Area" required></textarea>
+                    <textarea wire:model.blur="address" class="form-input resize-none" rows="3" placeholder="House/Flat number, Road number, Area" required></textarea>
                     @error('address') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Alternative Phone (Optional)</label>
-                        <input type="tel" wire:model="altPhone" class="form-input" placeholder="01XXXXXXXXX">
+                        <input type="tel" wire:model.blur="altPhone" class="form-input" placeholder="01XXXXXXXXX">
                     </div>
                 </div>
 

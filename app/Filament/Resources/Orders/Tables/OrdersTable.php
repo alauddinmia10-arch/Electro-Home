@@ -19,7 +19,10 @@ class OrdersTable
                 TextColumn::make('user.name')
                     ->searchable(),
                 TextColumn::make('invoice_number')
-                    ->searchable(),
+                    ->searchable()
+                    ->color('primary')
+                    ->url(fn (\App\Models\Order $record): string => route('invoice.print', $record))
+                    ->openUrlInNewTab(),
                 TextColumn::make('subtotal')
                     ->numeric()
                     ->sortable(),
@@ -73,10 +76,11 @@ class OrdersTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                \Filament\Tables\Actions\Action::make('download_invoice')
+                \Filament\Actions\Action::make('download_invoice')
                     ->label('Invoice')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
+                    ->button()
                     ->url(fn (Order $record): string => route('invoice.download', $record))
                     ->openUrlInNewTab(),
             ])

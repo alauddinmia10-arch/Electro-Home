@@ -1,6 +1,6 @@
 <x-layouts.app>
     {{-- Breadcrumbs --}}
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-4">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
         <div class="bg-[#f0f5fa] rounded-lg px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
             <a href="{{ route('home') }}" onclick="event.stopPropagation(); window.location.href = this.href; return false;" class="text-gray-700 hover:text-blue-600 transition-colors shrink-0 flex items-center" title="Home">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-3 mb-6" x-data="{ wholesaleModalOpen: false }">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-3 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-6 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             

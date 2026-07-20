@@ -19,10 +19,10 @@ class SettingsSeeder extends Seeder
             // Contact info
             'whatsapp_number' => '+8801XXXXXXXXX',
             'support_phone' => '+8801XXXXXXXXX',
-            'support_email' => 'support@electro.bd',
+            'support_email' => 'support@electrohome.bd',
 
             // Site settings
-            'site_name' => 'Electro.bd',
+            'site_name' => 'Electrohome.bd',
             'site_tagline' => 'Premium Electronics Components Store',
             'currency' => 'BDT',
             'currency_symbol' => '৳',
@@ -33,7 +33,7 @@ class SettingsSeeder extends Seeder
 
             // SMS settings
             'sms_api_key' => '',
-            'sms_sender_id' => 'Electro.bd',
+            'sms_sender_id' => 'Electrohome.bd',
 
             // Invoice settings
             'invoice_prefix' => 'EL-',

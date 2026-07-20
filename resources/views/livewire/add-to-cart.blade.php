@@ -8,12 +8,18 @@ new class extends Component {
     public int $quantity = 1;
     public int $stockQuantity = 0;
     public bool $outOfStock = false;
+    public float $price = 0;
 
     public function mount(int $productId, int $stockQuantity)
     {
         $this->productId = $productId;
         $this->stockQuantity = $stockQuantity;
         $this->outOfStock = $stockQuantity <= 0;
+        
+        $product = \App\Models\Product::find($productId);
+        if ($product) {
+            $this->price = $product->discount_price ?? $product->regular_price;
+        }
     }
 
     public function increment()
@@ -35,7 +41,7 @@ new class extends Component {
         if ($this->outOfStock) return;
 
         $cart->add($this->productId, $this->quantity);
-        $this->dispatch('cart-updated');
+        $this->dispatch('cart-updated', subtotal: $cart->getSubtotal(), count: $cart->getCount());
         
         session()->flash('success', 'Product added to cart successfully!');
     }
@@ -45,7 +51,7 @@ new class extends Component {
         if ($this->outOfStock) return;
 
         $cart->add($this->productId, $this->quantity);
-        $this->dispatch('cart-updated');
+        $this->dispatch('cart-updated', subtotal: $cart->getSubtotal(), count: $cart->getCount());
         
         return redirect()->route('checkout');
     }
@@ -88,26 +94,34 @@ new class extends Component {
             </div>
 
             <!-- Right Column: Buy Now & Add to Cart -->
-            <div class="premium-actions-wrapper">
+            <div class="premium-actions-wrapper" x-data="{ price: {{ $price }}, qty: @entangle('quantity'), adding: false, buying: false }">
                 <!-- Premium Buy Now Button -->
-                <button wire:click="buyNow" class="premium-btn btn-emerald">
+                <button type="button" @click="$dispatch('cart-updated-optimistic', { amount: price * qty, qty_change: qty }); $wire.buyNow(); buying = true; setTimeout(() => buying = false, 800)" x-bind:disabled="buying" class="premium-btn btn-emerald">
                     <span class="premium-shine"></span>
                     <span class="premium-icon-circle">
-                        <svg class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        <svg x-show="!buying" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        <svg x-show="buying" style="display: none;" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                     </span>
-                    <span class="premium-btn-text text-buy-now">
+                    <span x-show="!buying" class="premium-btn-text text-buy-now">
                         BUY NOW
+                    </span>
+                    <span x-show="buying" style="display: none;" class="premium-btn-text text-buy-now">
+                        PROCESSING...
                     </span>
                 </button>
 
                 <!-- Premium Add to Cart Button -->
-                <button wire:click="addToCart" class="premium-btn btn-blue">
+                <button type="button" @click="$dispatch('cart-updated-optimistic', { amount: price * qty, qty_change: qty }); $wire.addToCart(); adding = true; setTimeout(() => adding = false, 800)" x-bind:disabled="adding" class="premium-btn btn-blue">
                     <span class="premium-shine"></span>
                     <span class="premium-icon-circle">
-                        <svg class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        <svg x-show="!adding" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        <svg x-show="adding" style="display: none;" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                     </span>
-                    <span class="premium-btn-text text-add-cart">
+                    <span x-show="!adding" class="premium-btn-text text-add-cart">
                         ADD TO CART
+                    </span>
+                    <span x-show="adding" style="display: none;" class="premium-btn-text text-add-cart">
+                        ADDED!
                     </span>
                 </button>
             </div>

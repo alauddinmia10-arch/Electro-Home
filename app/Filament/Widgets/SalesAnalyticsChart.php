@@ -6,7 +6,18 @@ use Filament\Widgets\ChartWidget;
 
 class SalesAnalyticsChart extends ChartWidget
 {
-    protected int | string | array $columnSpan = 'full';
+    protected static ?int $sort = 2;
+    protected static bool $isLazy = false;
+    
+    protected int | string | array $columnSpan = [
+        'default' => 1,
+        'md' => 1,
+        'lg' => 2,
+        'xl' => 2,
+        '2xl' => 2,
+    ];
+    
+    protected ?string $maxHeight = '250px';
     
     protected ?string $heading = 'Sales Analytics';
 

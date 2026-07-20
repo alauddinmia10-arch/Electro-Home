@@ -28,7 +28,7 @@
 
     {{-- Top Bar --}}
     <div class="bg-[var(--color-text-primary)] text-white text-xs py-1.5 hidden md:block">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 flex items-center justify-between">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -47,7 +47,7 @@
 
     {{-- Main Header --}}
     <header class="bg-white sticky top-0 z-40 border-b border-gray-100" x-data="{ mobileMenu: false }">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
             <div class="flex items-center justify-between h-16 md:h-18">
 
                 {{-- Logo --}}
@@ -114,7 +114,7 @@
 
         {{-- Category Navigation (Desktop) --}}
         <nav class="hidden md:block border-t border-gray-50 bg-white">
-            <div class="max-w-[1440px] mx-auto px-4 xl:px-4">
+            <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
                 <div class="flex items-center gap-6 h-11 text-sm">
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" class="flex items-center gap-1.5 font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-trust-blue)] transition-colors">
@@ -131,8 +131,15 @@
                             <div class="grid grid-cols-3 gap-6">
                                 @foreach(\App\Models\Category::parents()->active()->ordered()->with('children')->get() as $cat)
                                     <div>
-                                        <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-trust-blue)] flex items-center gap-2 mb-2">
-                                            <span>{{ $cat->icon }}</span> {{ $cat->name }}
+                                        <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-trust-blue)] flex items-center gap-2 mb-2">
+                                            @if($cat->icon)
+                                                @if(str_starts_with($cat->icon, 'heroicon-'))
+                                                    @svg($cat->icon, 'w-5 h-5 shrink-0 text-gray-500 group-hover:text-[var(--color-trust-blue)]')
+                                                @else
+                                                    <span class="shrink-0">{{ $cat->icon }}</span>
+                                                @endif
+                                            @endif
+                                            <span class="truncate">{{ $cat->name }}</span>
                                         </a>
                                         @foreach($cat->children->take(5) as $child)
                                             <a href="{{ route('shop', ['category' => $child->slug]) }}" class="block text-sm text-gray-500 hover:text-[var(--color-trust-blue)] py-0.5 pl-6">
@@ -174,7 +181,7 @@
 
     {{-- Flash Messages --}}
     @if(session('success'))
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-4">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
             <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
                 ✅ {{ session('success') }}
             </div>
@@ -182,7 +189,7 @@
     @endif
 
     @if(session('error'))
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 mt-4">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
             <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
                 ❌ {{ session('error') }}
             </div>
@@ -196,7 +203,7 @@
 
     {{-- Footer --}}
     <footer class="bg-[var(--color-text-primary)] text-white mt-auto">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-4 py-12">
+        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {{-- Brand --}}
                 <div>

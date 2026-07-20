@@ -11,6 +11,11 @@ class SalesAnalytics extends Page
         return 'heroicon-o-chart-bar';
     }
 
+    protected static string|\UnitEnum|null $navigationGroup = 'MANAGEMENT';
+    protected static ?int $navigationSort = 1;
+
+    
+
     protected string $view = 'filament.pages.sales-analytics';
 
     protected function getHeaderWidgets(): array

@@ -9,9 +9,10 @@ use Filament\Tables\Columns\TextColumn;
 
 class RecentOrdersWidget extends BaseWidget
 {
-    protected static ?int $sort = 2;
-    protected int | string | array $columnSpan = ['default' => 'full', 'lg' => 1];
+    protected static ?int $sort = 4;
+    protected int | string | array $columnSpan = 'full';
     protected static ?string $heading = 'Recent Orders';
+    protected static bool $isLazy = false;
 
     public function table(Table $table): Table
     {
@@ -20,17 +21,20 @@ class RecentOrdersWidget extends BaseWidget
                 Order::query()->latest()->limit(5)
             )
             ->columns([
-                TextColumn::make('invoice_number')->label('Invoice'),
-                TextColumn::make('customer_name')->label('Customer'),
-                TextColumn::make('total_amount')->money('bdt', true)->label('Amount'),
+                TextColumn::make('invoice_number')
+                    ->color('primary')
+                    ->url(fn (\App\Models\Order $record): string => route('invoice.print', $record))
+                    ->openUrlInNewTab(),
+                TextColumn::make('customer_name'),
+                TextColumn::make('total_amount')->money('bdt', true),
                 TextColumn::make('payment_status')
-                    ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'paid' => 'success',
                         'unpaid' => 'warning',
                         default => 'gray',
                     }),
+                TextColumn::make('created_at')->dateTime()->sortable(),
             ])->paginated(false);
     }
 }

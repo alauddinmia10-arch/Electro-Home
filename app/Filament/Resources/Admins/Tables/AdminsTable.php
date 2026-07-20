@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Filament\Resources\Admins\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Table;
+
+use Filament\Tables\Columns\TextColumn;
+
+class AdminsTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('email')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('phone')
+                    ->searchable(),
+                TextColumn::make('role')
+                    ->label('Designation')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'super_admin' => 'Administrator',
+                        'admin' => 'Admin',
+                        'manager' => 'Manager',
+                        default => ucfirst($state),
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'super_admin' => 'danger',
+                        'admin' => 'success',
+                        'manager' => 'warning',
+                        default => 'gray',
+                    }),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}

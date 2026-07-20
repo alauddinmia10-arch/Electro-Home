@@ -16,11 +16,13 @@ class CategoriesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (\Illuminate\Database\Eloquent\Builder $query) => $query->whereNull('parent_id'))
             ->columns([
                 ImageColumn::make('image'),
                 ImageColumn::make('icon'),
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->description(fn (\App\Models\Category $record): string => $record->children->count() ? 'Subcategories: ' . $record->children->pluck('name')->join(', ') : ''),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
@@ -32,6 +34,8 @@ class CategoriesTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->filters([
                 //
             ])
