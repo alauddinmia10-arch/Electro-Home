@@ -105,6 +105,30 @@ class Order extends Model
         return $query->where('payment_status', 'unpaid');
     }
 
+    protected static function booted()
+    {
+        static::updated(function ($order) {
+            if ($order->isDirty('delivery_status') && $order->delivery_status === 'cancelled') {
+                $admins = User::admins()->get();
+                $notification = \Filament\Notifications\Notification::make()
+                    ->title('Order Cancelled')
+                    ->body("Order {$order->invoice_number} has been cancelled.")
+                    ->danger();
+
+                $url = \App\Filament\Resources\Orders\OrderResource::getUrl('index');
+                $notification->actions([
+                    \Filament\Actions\Action::make('view')
+                        ->label('View Order')
+                        ->url($url)
+                        ->button()
+                        ->markAsRead(),
+                ]);
+
+                $notification->sendToDatabase($admins);
+            }
+        });
+    }
+
     // ──── Helpers ────
 
     /**

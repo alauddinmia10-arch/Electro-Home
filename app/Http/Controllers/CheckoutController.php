@@ -14,4 +14,9 @@ class CheckoutController extends Controller
         // Handled by Livewire checkout component
         return redirect()->route('checkout');
     }
+
+    public function success(\App\Models\Order $order)
+    {
+        return view('checkout-success', compact('order'));
+    }
 }

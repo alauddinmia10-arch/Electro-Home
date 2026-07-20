@@ -464,3 +464,14 @@ a[href*="print_all"] {
     background-color: #166534 !important; /* Deeper green */
     border-color: #14532d !important;
 }
+
+/* Notification Badge Fixes */
+.fi-topbar .fi-badge,
+.fi-icon-btn-badge,
+button[wire\:click="openDatabaseNotifications"] .fi-badge {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: red !important;
+    border: none !important;
+    box-shadow: none !important;
+}

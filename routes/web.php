@@ -22,6 +22,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 // Checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 
 // API endpoints for districts/thanas
 Route::get('/api/districts', function () {

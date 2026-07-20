@@ -202,7 +202,7 @@ new class extends Component {
             session()->flash('error', 'Payment gateway error. Please try again.');
         }
         
-        return redirect()->route('dashboard');
+        return redirect()->route('checkout.success', $order->id);
     }
 };
 ?>
