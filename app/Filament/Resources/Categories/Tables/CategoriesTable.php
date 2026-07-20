@@ -21,9 +21,9 @@ class CategoriesTable
                 ImageColumn::make('image'),
                 ImageColumn::make('icon'),
                 TextColumn::make('name')
-                    ->searchable()
-                    ->description(fn (\App\Models\Category $record): string => $record->children->count() ? 'Subcategories: ' . $record->children->pluck('name')->join(', ') : ''),
-                IconColumn::make('is_active')
+                    ->searchable(),
+                IconColumn::make('status')
+                    ->label('Is active')
                     ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -40,6 +40,13 @@ class CategoriesTable
                 //
             ])
             ->recordActions([
+                \Filament\Actions\Action::make('top')
+                    ->label('Top')
+                    ->icon('heroicon-o-arrow-up')
+                    ->action(function (\App\Models\Category $record) {
+                        $minSort = \App\Models\Category::whereNull('parent_id')->min('sort_order');
+                        $record->update(['sort_order' => $minSort ? $minSort - 1 : 0]);
+                    }),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

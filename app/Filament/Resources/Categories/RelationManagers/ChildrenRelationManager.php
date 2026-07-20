@@ -24,7 +24,57 @@ class ChildrenRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return \App\Filament\Resources\Categories\Schemas\CategoryForm::configure($schema);
+        return $schema
+            ->columns(2)
+            ->components([
+                TextInput::make('name')
+                    ->required()
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn ($state, $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
+                
+                \Filament\Forms\Components\Repeater::make('children')
+                    ->label('Third Level Categories')
+                    ->hiddenLabel()
+                    ->relationship('children')
+                    ->addActionLabel('New Third Category')
+                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                    ->defaultItems(0)
+                    ->collapsible()
+                    ->collapsed()
+                    ->schema([
+                        TextInput::make('name')
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, $set) => $set('slug', \Illuminate\Support\Str::slug($state)))
+                            ->columnSpan('full'),
+                        \Filament\Forms\Components\Hidden::make('slug')
+                            ->required()
+                            ->unique('categories', 'slug', ignoreRecord: true),
+                        TextInput::make('sort_order')
+                            ->required()
+                            ->numeric()
+                            ->default(0)
+                            ->columnSpan(1),
+                        Toggle::make('status')
+                            ->default(true)
+                            ->required()
+                            ->columnSpan(1),
+                    ])
+                    ->columns(2),
+                    
+                TextInput::make('sort_order')
+                    ->required()
+                    ->numeric()
+                    ->default(0),
+                    
+                Toggle::make('status')
+                    ->default(true)
+                    ->required(),
+                    
+                \Filament\Forms\Components\Hidden::make('slug')
+                    ->required()
+                    ->unique('categories', 'slug', ignoreRecord: true),
+            ]);
     }
 
     public function table(Table $table): Table
@@ -32,39 +82,46 @@ class ChildrenRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                \Filament\Tables\Columns\ImageColumn::make('image'),
-                \Filament\Tables\Columns\ImageColumn::make('icon'),
-                \Filament\Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable(),
-                \Filament\Tables\Columns\IconColumn::make('status')
-                    ->label('Is active')
+                TextColumn::make('slug')
+                    ->searchable(),
+                TextColumn::make('icon')
+                    ->searchable(),
+                TextColumn::make('sort_order')
+                    ->numeric()
+                    ->sortable(),
+                IconColumn::make('status')
                     ->boolean(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->filters([
                 //
             ])
             ->headerActions([
-                \Filament\Actions\CreateAction::make(),
+                CreateAction::make()
+                    ->label('New Sub Category'),
+                AssociateAction::make(),
             ])
             ->recordActions([
-                \Filament\Actions\Action::make('moveToTop')
-                    ->label('Move to Top')
-                    ->icon('heroicon-o-arrow-up-circle')
-                    ->color('success')
-                    ->action(function ($record) {
-                        $minSortOrder = \App\Models\Category::where('parent_id', $this->getOwnerRecord()->id)->min('sort_order') ?? 0;
-                        $record->update(['sort_order' => $minSortOrder - 1]);
-                    })
-                    ->tooltip('Bring to front'),
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DissociateAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
-                \Filament\Actions\BulkActionGroup::make([
-                    \Filament\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DissociateBulkAction::make(),
+                    DeleteBulkAction::make(),
                 ]),
-            ])
-            ->reorderable('sort_order')
-            ->defaultSort('sort_order');
+            ]);
     }
 }

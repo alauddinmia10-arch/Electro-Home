@@ -117,7 +117,7 @@
         <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
             <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
                 <div class="flex items-center gap-6 h-9 text-sm">
-                    <div x-data="{ open: false, activeCat: null, activeSubcat: null }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-center">
+                    <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-center">
                         <button class="flex items-center gap-2 font-bold text-base text-gray-700 hover:text-[#094d82] transition-colors h-full">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
                             Product Categories
@@ -125,15 +125,15 @@
                         </button>
 
                         {{-- Main Dropdown Wrapper --}}
-                        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                        <div x-ref="menuWrapper" x-show="open" x-transition:enter="transition ease-out duration-200"
                              x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
                              class="absolute left-0 top-full z-50 flex items-start">
                             
                             {{-- Scrolling List (Scrollbar on left using rtl) --}}
-                            <div class="w-[280px] bg-white rounded-xl border border-gray-100 py-2 max-h-[70vh] overflow-y-auto custom-scrollbar shadow-lg shrink-0" dir="rtl">
+                            <div class="w-[280px] bg-white rounded-xl py-2 overflow-y-auto custom-scrollbar shrink-0" style="height: 550px; max-height: 80vh; border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);" dir="rtl">
                                 <div dir="ltr">
                                     @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
-                                        <div @mouseenter="activeCat = {{ $cat->id }}; activeSubcat = null">
+                                        <div @mouseenter="activeCat = {{ $cat->id }}; activeSubcat = null; flyoutTop = $el.getBoundingClientRect().top - $refs.menuWrapper.getBoundingClientRect().top">
                                             <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group flex items-center justify-between px-6 py-2.5 font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeCat === {{ $cat->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
                                                 <div class="flex items-center gap-3">
                                                     @if($cat->icon)
@@ -158,9 +158,9 @@
                             <div class="relative ml-1">
                                 @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
                                     @if($cat->children->count() > 0)
-                                        <div x-show="activeCat === {{ $cat->id }}" class="absolute left-0 top-0 w-[260px] bg-white rounded-xl border border-gray-100 shadow-lg py-2 z-50">
+                                        <div x-show="activeCat === {{ $cat->id }}" :style="{ top: flyoutTop + 'px' }" class="absolute left-0 w-[260px] bg-white rounded-xl py-2 z-50 transition-all duration-150" style="border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);">
                                             @foreach($cat->children as $child)
-                                                <div @mouseenter="activeSubcat = {{ $child->id }}">
+                                                <div @mouseenter="activeSubcat = {{ $child->id }}" class="relative">
                                                     <a href="{{ route('shop', ['category' => $child->slug]) }}" class="flex items-center justify-between px-6 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeSubcat === {{ $child->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
                                                         <span>{{ $child->name }}</span>
                                                         @if($child->children->count() > 0)
@@ -170,7 +170,7 @@
                                                     
                                                     {{-- Level 3 Flyout --}}
                                                     @if($child->children->count() > 0)
-                                                        <div x-show="activeSubcat === {{ $child->id }}" class="absolute left-full top-0 w-[240px] bg-white rounded-xl border border-gray-100 shadow-lg py-2 ml-1 z-50">
+                                                        <div x-show="activeSubcat === {{ $child->id }}" class="absolute left-full top-0 w-[240px] bg-white rounded-xl py-2 ml-1 z-50 transition-all duration-150" style="border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);">
                                                             @foreach($child->children as $subchild)
                                                                 <a href="{{ route('shop', ['category' => $subchild->slug]) }}" class="block px-6 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#094d82]">
                                                                     {{ $subchild->name }}

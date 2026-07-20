@@ -30,8 +30,10 @@ class CategoryForm
                             ->directory('categories/icons'),
                         FileUpload::make('image')
                             ->image()
-                            ->directory('categories/images'),
-                        Toggle::make('is_active')
+                            ->directory('categories/images')
+                            ->columnSpan('full'),
+                        Toggle::make('status')
+                            ->label('Is active')
                             ->default(true),
                     ])
                     ->columns(2)
