@@ -24,4 +24,12 @@ class SalesAnalytics extends Page
             \App\Filament\Widgets\SalesAnalyticsChart::class,
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            static::getUrl() => 'Sales Analytics',
+            '' => 'List',
+        ];
+    }
 }

@@ -24,4 +24,12 @@ class ManageIncompleteOrders extends ManageRecords
             CreateAction::make(),
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            IncompleteOrderResource::getUrl() => 'Incomplete Orders',
+            '' => 'List',
+        ];
+    }
 }

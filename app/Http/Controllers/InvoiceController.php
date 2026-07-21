@@ -80,4 +80,19 @@ class InvoiceController extends Controller
 
         return $pdf->stream("all-invoices.pdf");
     }
+
+    public function incompleteDownload(\App\Models\IncompleteOrder $order)
+    {
+        $generator = new BarcodeGeneratorHTML();
+        $invoiceNumber = 'INC-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
+        $barcode = $generator->getBarcode($invoiceNumber, $generator::TYPE_CODE_128);
+
+        $pdf = Pdf::loadView('invoices.incomplete-pdf', [
+            'order' => $order,
+            'barcode' => $barcode,
+            'invoiceNumber' => $invoiceNumber,
+        ]);
+
+        return $pdf->stream("incomplete-invoice-{$invoiceNumber}.pdf");
+    }
 }

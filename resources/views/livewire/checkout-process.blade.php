@@ -15,6 +15,7 @@ new class extends Component {
     public string $address = '';
     public string $note = '';
     public string $paymentMethod = 'cod';
+    public ?int $incompleteOrderId = null;
     
     public Collection $districts;
     public Collection $thanas;
@@ -31,7 +32,25 @@ new class extends Component {
         
         $this->subtotal = $cart->getSubtotal();
         
-        if (auth()->check()) {
+        $incompleteOrderId = request()->query('incomplete_order');
+        if ($incompleteOrderId) {
+            $this->incompleteOrderId = $incompleteOrderId;
+            $incompleteOrder = \App\Models\IncompleteOrder::find($incompleteOrderId);
+            if ($incompleteOrder) {
+                $this->name = $incompleteOrder->customer_name ?? '';
+                $this->phone = $incompleteOrder->customer_phone ?? '';
+                $this->altPhone = $incompleteOrder->customer_alt_phone ?? '';
+                $this->district = $incompleteOrder->district ?? '';
+                if ($this->district) {
+                    $districtModel = District::where('name', $this->district)->first();
+                    if ($districtModel) {
+                        $this->thanas = $districtModel->thanas()->orderBy('name')->get();
+                    }
+                }
+                $this->thana = $incompleteOrder->thana ?? '';
+                $this->address = $incompleteOrder->full_address ?? '';
+            }
+        } elseif (auth()->check()) {
             $user = auth()->user();
             $this->name = $user->name;
             $this->phone = $user->phone;
@@ -181,6 +200,9 @@ new class extends Component {
 
         $cartService->clear();
         
+        if ($this->incompleteOrderId) {
+            \App\Models\IncompleteOrder::where('id', $this->incompleteOrderId)->delete();
+        }
         \App\Models\IncompleteOrder::where('session_id', session()->getId())->delete();
         
         // Send SMS Notification

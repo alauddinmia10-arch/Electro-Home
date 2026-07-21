@@ -64,6 +64,31 @@ Route::post('/api/checkout/abandon', function (\Illuminate\Http\Request $request
         }
     }
 
+    $cartData = $data['cart_data'] ?? [];
+    $sessionCart = session()->get('cart', []);
+    if (empty($sessionCart) && auth()->check()) {
+        $sessionCart = auth()->user()->cartItems->map(function ($item) {
+            return ['product_id' => $item->product_id, 'quantity' => $item->quantity];
+        })->toArray();
+    }
+    if (!empty($sessionCart)) {
+        $productIds = collect($sessionCart)->pluck('product_id')->filter()->unique();
+        $products = \App\Models\Product::whereIn('id', $productIds)->get()->keyBy('id');
+        $enrichedItems = [];
+        foreach ($sessionCart as $item) {
+            if (isset($item['product_id']) && $product = $products->get($item['product_id'])) {
+                $price = $product->discount_price ?? $product->regular_price;
+                $enrichedItems[] = [
+                    'product_id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $price,
+                    'quantity' => $item['quantity'],
+                ];
+            }
+        }
+        $cartData['items'] = $enrichedItems;
+    }
+
     $order = \App\Models\IncompleteOrder::updateOrCreate(
         ['session_id' => $data['session_id']],
         [
@@ -73,7 +98,7 @@ Route::post('/api/checkout/abandon', function (\Illuminate\Http\Request $request
             'thana' => $data['thana'] ?? '',
             'full_address' => $data['address'] ?? '',
             'customer_alt_phone' => $data['altPhone'] ?? '',
-            'cart_data' => $data['cart_data'] ?? [],
+            'cart_data' => $cartData,
             'ip_address' => $request->ip(),
             'last_active_step' => 'checkout_form',
         ]
@@ -118,6 +143,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/orders/print-all', [InvoiceController::class, 'printAll'])->name('invoice.print_all');
     Route::get('/admin/orders/{order}/invoice', [InvoiceController::class, 'download'])->name('invoice.download');
     Route::get('/admin/orders/{order}/print', [InvoiceController::class, 'print'])->name('invoice.print');
+    
+    // Incomplete Order PDF
+    Route::get('/admin/incomplete-orders/{order}/invoice', [InvoiceController::class, 'incompleteDownload'])->name('admin.incomplete-orders.invoice');
 });
 
 // SSLCommerz Payment Routes

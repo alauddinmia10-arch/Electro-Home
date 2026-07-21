@@ -16,4 +16,12 @@ class ManageBrands extends ManageRecords
             CreateAction::make(),
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            BrandResource::getUrl() => 'Brands',
+            '' => 'List',
+        ];
+    }
 }
