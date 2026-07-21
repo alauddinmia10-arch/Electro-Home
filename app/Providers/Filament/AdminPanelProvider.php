@@ -57,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 fn (): \Illuminate\Contracts\View\View => view('filament.hooks.user-menu'),
             )
             ->assets([
-                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=36')),
+                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=37')),
             ])
             ->middleware([
                 EncryptCookies::class,

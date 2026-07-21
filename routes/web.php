@@ -33,6 +33,57 @@ Route::get('/api/thanas/{district}', function (\App\Models\District $district) {
     return $district->thanas()->orderBy('name')->get(['id', 'name', 'bn_name']);
 })->name('api.thanas');
 
+Route::post('/api/checkout/abandon', function (\Illuminate\Http\Request $request) {
+    \Log::info('Abandoned cart API hit', $request->all());
+    
+    $data = json_decode($request->getContent(), true);
+    if (!$data) $data = $request->all(); // Fallback if parsed as form/JSON
+    
+    if (empty($data['session_id'])) {
+        return response()->json(['status' => 'invalid']);
+    }
+
+    $filledCount = 0;
+    foreach(['name', 'phone', 'district', 'thana', 'address', 'altPhone'] as $field) {
+        if (!empty(trim($data[$field] ?? ''))) $filledCount++;
+    }
+    
+    if ($filledCount < 3) {
+        \Log::info('Abandoned cart ignored: less than 3 fields');
+        return response()->json(['status' => 'ignored']);
+    }
+
+    if (!empty($data['phone'])) {
+        $recentOrder = \App\Models\Order::where('customer_phone', $data['phone'])
+            ->where('created_at', '>=', now()->subMinutes(10))
+            ->first();
+            
+        if ($recentOrder) {
+            \Log::info('Abandoned cart ignored: Real order recently placed', ['phone' => $data['phone']]);
+            return response()->json(['status' => 'ignored_recent_order']);
+        }
+    }
+
+    $order = \App\Models\IncompleteOrder::updateOrCreate(
+        ['session_id' => $data['session_id']],
+        [
+            'customer_name' => $data['name'] ?? '',
+            'customer_phone' => $data['phone'] ?? '',
+            'district' => $data['district'] ?? '',
+            'thana' => $data['thana'] ?? '',
+            'full_address' => $data['address'] ?? '',
+            'customer_alt_phone' => $data['altPhone'] ?? '',
+            'cart_data' => $data['cart_data'] ?? [],
+            'ip_address' => $request->ip(),
+            'last_active_step' => 'checkout_form',
+        ]
+    );
+
+    \Log::info('Abandoned cart saved', ['id' => $order->id, 'was_recently_created' => $order->wasRecentlyCreated]);
+
+    return response()->json(['status' => 'saved']);
+})->withoutMiddleware([\App\Foundation\Http\Middleware\VerifyCsrfToken::class, \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
+
 // ──── Auth Routes ────
 
 use Livewire\Volt\Volt;

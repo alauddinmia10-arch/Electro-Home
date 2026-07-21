@@ -468,10 +468,14 @@ a[href*="print_all"] {
 /* Notification Badge Fixes */
 .fi-topbar .fi-badge,
 .fi-icon-btn-badge,
-button[wire\:click="openDatabaseNotifications"] .fi-badge {
+button[wire\:click="openDatabaseNotifications"] .fi-badge,
+.fi-topbar .fi-badge * {
     background: transparent !important;
     background-color: transparent !important;
-    color: red !important;
+    color: #ef4444 !important; /* Red text */
     border: none !important;
     box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
 }
+

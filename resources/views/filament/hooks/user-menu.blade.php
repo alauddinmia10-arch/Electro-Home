@@ -95,7 +95,19 @@
         color: #3b82f6 !important;
         stroke-width: 2 !important;
     }
+    .fi-topbar-database-notifications-btn .fi-badge,
+    .fi-topbar-database-notifications-btn .fi-badge *,
+    .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn {
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        --tw-ring-shadow: 0 0 #0000 !important;
+        --tw-ring-color: transparent !important;
+    }
     .fi-topbar-database-notifications-btn .fi-badge {
-        background-color: #ef4444 !important;
+        color: #ef4444 !important;
+        font-weight: 600 !important;
+        font-size: 0.85rem !important;
     }
 </style>

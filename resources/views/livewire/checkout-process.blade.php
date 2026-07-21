@@ -53,7 +53,6 @@ new class extends Component {
         }
         
         $this->updateTotals(app(CartService::class));
-        $this->saveIncompleteOrder();
     }
 
     public function updateTotals(CartService $cart)
@@ -65,30 +64,25 @@ new class extends Component {
 
     public function updatedName($value)
     {
-        $this->saveIncompleteOrder();
     }
 
     public function updatedPhone($value)
     {
-        $this->saveIncompleteOrder();
     }
 
     public function updatedAddress($value)
     {
-        $this->saveIncompleteOrder();
     }
 
     public function updatedThana($value)
     {
-        $this->saveIncompleteOrder();
     }
 
     public function updatedAltPhone($value)
     {
-        $this->saveIncompleteOrder();
     }
 
-    protected function saveIncompleteOrder()
+    public function saveIncompleteOrder()
     {
         \Log::info('saveIncompleteOrder called', ['phone' => $this->phone, 'session_id' => session()->getId()]);
         
@@ -207,7 +201,7 @@ new class extends Component {
 <div class="flex flex-col lg:flex-row gap-8">
     {{-- Left: Checkout Form --}}
     <div class="flex-1">
-        <form wire:submit="submit" class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+        <form wire:submit="submit" x-data x-on:submit="window.isOrderSubmitting = true" class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-6 md:p-8 border-b border-gray-100">
                 <h2 class="text-xl font-bold text-gray-800 mb-6 font-bangla">শিপিং ইনফরমেশন</h2>
                 
@@ -341,3 +335,51 @@ new class extends Component {
         </div>
     </div>
 </div>
+
+@script
+<script>
+    window.isOrderSubmitting = false;
+
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.hook('commit', ({ component, succeed, fail }) => {
+            succeed(() => {
+                setTimeout(() => { window.isOrderSubmitting = false; }, 100);
+            });
+            fail(() => {
+                window.isOrderSubmitting = false;
+            });
+        });
+    });
+
+    const saveIncomplete = () => {
+        if (!window.isOrderSubmitting) {
+            let data = {
+                session_id: '{{ session()->getId() }}',
+                name: $wire.name,
+                phone: $wire.phone,
+                district: $wire.district,
+                thana: $wire.thana,
+                address: $wire.address,
+                altPhone: $wire.altPhone,
+                _token: '{{ csrf_token() }}',
+                cart_data: {
+                    subtotal: $wire.subtotal,
+                    total: $wire.total
+                }
+            };
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            navigator.sendBeacon('/api/checkout/abandon', blob);
+        }
+    };
+
+    document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState === 'hidden') {
+            saveIncomplete();
+        }
+    });
+
+    window.addEventListener("beforeunload", function() {
+        saveIncomplete();
+    });
+</script>
+@endscript
