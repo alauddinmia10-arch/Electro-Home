@@ -84,7 +84,7 @@
             @click="isOpen = !isOpen"
             @class([
                 'flex items-center justify-between w-full py-2 text-sm focus:ring-2 focus:ring-primary-600 dark:text-white',
-                'px-3 bg-white rounded-lg shadow-sm border border-gray-300 dark:bg-gray-800 dark:border-gray-600' => ! $field->isBorderless(),
+                'px-3 bg-white rounded shadow-sm border border-gray-300 dark:bg-gray-800 dark:border-gray-600' => ! $field->isBorderless(),
                 'bg-transparent border-none focus:ring-0' => $field->isBorderless(),
             ])
             @if(! $field->isBorderless())

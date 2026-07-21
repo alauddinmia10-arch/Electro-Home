@@ -1,7 +1,7 @@
 <x-layouts.app>
     {{-- Breadcrumbs --}}
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
-        <div class="bg-[#f0f5fa] rounded-lg px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-1">
+        <div class="bg-[#f0f5fa] rounded px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
             <a href="{{ route('home') }}" onclick="event.stopPropagation(); window.location.href = this.href; return false;" class="text-gray-700 hover:text-blue-600 transition-colors shrink-0 flex items-center" title="Home">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
             </a>
@@ -20,8 +20,8 @@
         </div>
     </div>
 
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-3 mb-6" x-data="{ wholesaleModalOpen: false }">
-        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-6 lg:pt-4">
+    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+        <div class="bg-white rounded shadow-sm border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-6 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
@@ -49,7 +49,7 @@
                         scrollNext() { $refs.thumbSlider.scrollBy({ left: 100, behavior: 'smooth' }) },
                         scrollPrev() { $refs.thumbSlider.scrollBy({ left: -100, behavior: 'smooth' }) }
                     }">
-                        <div class="relative bg-white border border-gray-100 rounded-lg p-2 shadow-sm">
+                        <div class="relative bg-white border border-gray-100 rounded p-2 shadow-sm">
                             <!-- Left Arrow -->
                             <button @click="scrollPrev" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 z-10 w-8 h-8 bg-white shadow-md rounded-full text-gray-700 hover:text-blue-600 hover:bg-gray-50 border border-gray-200 transition-colors flex items-center justify-center">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
@@ -127,7 +127,7 @@
                             @endif
 
                             @if($product->is_flash_sale && $product->flash_sale_ends_at)
-                                <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4 flex items-center justify-between">
+                                <div class="bg-orange-50 border border-orange-200 rounded p-3 mb-4 flex items-center justify-between">
                                     <div class="text-orange-800 font-semibold text-sm">Hurry up! Flash sale ends in:</div>
                                     <livewire:flash-sale-timer :endTime="$product->flash_sale_ends_at->toIso8601String()" />
                                 </div>
@@ -173,7 +173,7 @@
         </div> {{-- Close Product details bg-white container --}}
 
         {{-- Related Products / Suggested Posts --}}
-        <div class="mt-6 bg-white rounded-lg shadow-sm border border-gray-100 p-4 lg:p-6 relative" x-data="{
+        <div class="mt-6 bg-white rounded shadow-sm border border-gray-100 p-4 lg:p-6 relative" x-data="{
             scrollNext() { this.$refs.slider.scrollBy({ left: 300, behavior: 'smooth' }) },
             scrollPrev() { this.$refs.slider.scrollBy({ left: -300, behavior: 'smooth' }) },
             startAutoScroll() {
@@ -212,7 +212,7 @@
                     {{-- Placeholder items for design testing --}}
                     @for($i = 0; $i < 10; $i++)
                         <div class="shrink-0 w-56 snap-start">
-                            <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 h-64 flex flex-col items-center justify-center text-gray-400">
+                            <div class="bg-gray-50 border border-gray-100 rounded p-4 h-64 flex flex-col items-center justify-center text-gray-400">
                                 <svg class="w-12 h-12 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 <span class="text-sm font-medium">Related Product {{ $i + 1 }}</span>
                                 <span class="text-xs mt-1 text-gray-400">৳0.00</span>
@@ -224,7 +224,7 @@
         </div>
         
         {{-- Tabs Section --}}
-        <div id="tabs-section" x-data="{ activeTab: 'description' }" class="mt-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mb-6">
+        <div id="tabs-section" x-data="{ activeTab: 'description' }" class="mt-6 bg-white rounded shadow-sm border border-gray-100 overflow-hidden mb-6">
             <div class="flex border-b border-gray-200 bg-gray-50 px-4 lg:px-6 overflow-x-auto scrollbar-hide">
                 <button @click="activeTab = 'description'" :class="{ 'border-blue-600 text-blue-600 bg-white': activeTab === 'description', 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100': activeTab !== 'description' }" class="px-6 py-4 text-sm font-medium border-t-2 border-l border-r -mb-px transition-colors whitespace-nowrap">Description</button>
                 
@@ -246,7 +246,7 @@
                 {{-- Specifications Tab --}}
                 <div x-show="activeTab === 'specifications'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                     @if(is_array($product->specifications) && count($product->specifications) > 0)
-                        <div class="rounded-lg border border-gray-200 overflow-hidden">
+                        <div class="rounded border border-gray-200 overflow-hidden">
                             <table class="w-full text-sm text-left">
                                 <tbody>
                                     @foreach($product->specifications as $key => $value)
@@ -284,7 +284,7 @@
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
     
                 <!-- Modal panel -->
-                <div x-show="wholesaleModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle max-w-2xl w-full relative z-[101]">
+                <div x-show="wholesaleModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block align-bottom bg-white rounded text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle max-w-2xl w-full relative z-[101]">
                     <button @click="wholesaleModalOpen = false" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 rounded-full p-1">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

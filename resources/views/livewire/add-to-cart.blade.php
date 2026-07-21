@@ -59,7 +59,7 @@ new class extends Component {
 ?>
 <div class="space-y-4">
     @if($outOfStock)
-        <div class="p-4 bg-red-50 text-red-700 rounded-lg text-sm font-semibold text-center border border-red-200">
+        <div class="p-4 bg-red-50 text-red-700 rounded text-sm font-semibold text-center border border-red-200">
             Out of Stock
         </div>
         <button class="btn btn-neutral w-full">Request Restock</button>
@@ -68,7 +68,7 @@ new class extends Component {
             <!-- Left Column: Quantity & Wishlist -->
             <div class="flex flex-col gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="flex items-center border border-gray-200 rounded-lg bg-white overflow-hidden w-32 h-11 shrink-0" x-data="{ 
+                    <div class="flex items-center border border-gray-200 rounded bg-white overflow-hidden w-32 h-11 shrink-0" x-data="{ 
                         qty: @entangle('quantity'), 
                         stock: {{ $stockQuantity }}
                     }">
@@ -145,7 +145,7 @@ new class extends Component {
         width: 170px;
         max-width: 100%;
         height: 48px;
-        border-radius: 999px;
+        border-radius: 4px;
         border: 1px solid rgba(255, 255, 255, 0.22);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         display: flex;
@@ -193,7 +193,7 @@ new class extends Component {
         transform: translateY(-50%);
         width: 44px;
         height: 44px;
-        border-radius: 50%;
+        border-radius: 4px;
         border: 1px solid rgba(255, 255, 255, 0.30);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.2);
         display: flex;

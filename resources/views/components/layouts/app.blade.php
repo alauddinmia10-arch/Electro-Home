@@ -49,7 +49,7 @@
 
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5 shrink-0 group">
-                    <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-sm group-hover:shadow-md transition-shadow bg-gradient-to-br from-[#0b5c9a] to-[#00a651]">
+                    <div class="w-9 h-9 rounded flex items-center justify-center text-white shadow-sm group-hover:shadow-md transition-shadow bg-gradient-to-br from-[#0b5c9a] to-[#00a651]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
                     <span class="text-[22px] font-black tracking-tight text-gray-800 hidden sm:flex items-center">
@@ -84,7 +84,7 @@
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                 <span class="text-sm font-medium">{{ Auth::user()->name }}</span>
                             </button>
-                            <div x-show="open" @click.outside="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50">
+                            <div x-show="open" @click.outside="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg border border-gray-100 py-1 z-50">
                                 @if(Auth::user()->isStaff())
                                     <a href="{{ url('/admin') }}" class="block px-4 py-2 text-sm text-trust-blue font-semibold hover:bg-gray-50">⚙️ Admin Panel</a>
                                     <hr class="my-1">
@@ -130,7 +130,7 @@
                              class="absolute left-0 top-full z-50 flex items-start">
                             
                             {{-- Scrolling List (Scrollbar on left using rtl) --}}
-                            <div class="w-[280px] bg-white rounded-xl py-2 overflow-y-auto custom-scrollbar shrink-0" style="height: 550px; max-height: 80vh; border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);" dir="rtl">
+                            <div class="w-[280px] bg-white rounded py-2 overflow-y-auto custom-scrollbar shrink-0" style="height: 550px; max-height: 80vh; border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);" dir="rtl">
                                 <div dir="ltr">
                                     @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
                                         <div @mouseenter="activeCat = {{ $cat->id }}; activeSubcat = null; flyoutTop = $el.getBoundingClientRect().top - $refs.menuWrapper.getBoundingClientRect().top">
@@ -158,7 +158,7 @@
                             <div class="relative ml-1">
                                 @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
                                     @if($cat->children->count() > 0)
-                                        <div x-show="activeCat === {{ $cat->id }}" :style="{ top: flyoutTop + 'px' }" class="absolute left-0 w-[260px] bg-white rounded-xl py-2 z-50 transition-all duration-150" style="border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);">
+                                        <div x-show="activeCat === {{ $cat->id }}" :style="{ top: flyoutTop + 'px' }" class="absolute left-0 w-[260px] bg-white rounded py-2 z-50 transition-all duration-150" style="border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);">
                                             @foreach($cat->children as $child)
                                                 <div @mouseenter="activeSubcat = {{ $child->id }}" class="relative">
                                                     <a href="{{ route('shop', ['category' => $child->slug]) }}" class="flex items-center justify-between px-6 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeSubcat === {{ $child->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
@@ -170,7 +170,7 @@
                                                     
                                                     {{-- Level 3 Flyout --}}
                                                     @if($child->children->count() > 0)
-                                                        <div x-show="activeSubcat === {{ $child->id }}" class="absolute left-full top-0 w-[240px] bg-white rounded-xl py-2 ml-1 z-50 transition-all duration-150" style="border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);">
+                                                        <div x-show="activeSubcat === {{ $child->id }}" class="absolute left-full top-0 w-[240px] bg-white rounded py-2 ml-1 z-50 transition-all duration-150" style="border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);">
                                                             @foreach($child->children as $subchild)
                                                                 <a href="{{ route('shop', ['category' => $subchild->slug]) }}" class="block px-6 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#094d82]">
                                                                     {{ $subchild->name }}
@@ -220,7 +220,7 @@
     {{-- Flash Messages --}}
     @if(session('success'))
         <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
-            <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+            <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ✅ {{ session('success') }}
             </div>
         </div>
@@ -228,7 +228,7 @@
 
     @if(session('error'))
         <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
-            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ❌ {{ session('error') }}
             </div>
         </div>
@@ -246,7 +246,7 @@
                 {{-- Brand --}}
                 <div>
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
+                        <div class="w-8 h-8 rounded flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
                             E
                         </div>
                         <span class="text-xl font-bold">Electrohome<span class="text-[var(--color-trust-blue)]">.bd</span></span>

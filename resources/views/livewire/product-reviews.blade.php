@@ -1,6 +1,6 @@
 <div>
     {{-- Ratings Summary --}}
-    <div class="mt-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-10 shadow-sm" id="reviews">
+    <div class="mt-8 bg-white border border-gray-100 rounded p-6 md:p-10 shadow-sm" id="reviews">
         <h2 class="text-xl font-bold font-bangla mb-6">Ratings & Reviews of {{ $product->name }}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -49,7 +49,7 @@
                 @endif
 
                 <form wire:submit.prevent="submitReview">
-                    <textarea wire:model="comment" rows="4" placeholder="Write Your Review Here" class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4 resize-none"></textarea>
+                    <textarea wire:model="comment" rows="4" placeholder="Write Your Review Here" class="w-full border border-gray-300 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4 resize-none"></textarea>
                     @error('comment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     
                     <div class="flex items-center justify-between mt-2">

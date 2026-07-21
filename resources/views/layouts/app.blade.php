@@ -52,7 +52,7 @@
 
                 {{-- Logo --}}
                 <a href="{{ route('home', ['ref' => 'logo']) }}" class="flex items-center gap-2 shrink-0">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
+                    <div class="w-8 h-8 rounded flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
                         E
                     </div>
                     <span class="text-xl font-bold text-[var(--color-text-primary)] hidden sm:inline">
@@ -87,7 +87,7 @@
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                 <span class="text-sm font-medium">{{ Auth::user()->name }}</span>
                             </button>
-                            <div x-show="open" @click.outside="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50">
+                            <div x-show="open" @click.outside="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg border border-gray-100 py-1 z-50">
                                 <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🏠 Dashboard</a>
                                 <a href="{{ route('orders.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">📦 My Orders</a>
                                 <a href="{{ route('wishlist') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">❤️ Wishlist</a>
@@ -126,7 +126,7 @@
                         {{-- Mega Menu Dropdown --}}
                         <div x-show="open" @click.outside="open = false" x-transition:enter="transition ease-out duration-200"
                              x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                             class="absolute left-0 top-full mt-2 w-[700px] bg-white rounded-xl border border-gray-100 p-6 z-50"
+                             class="absolute left-0 top-full mt-2 w-[700px] bg-white rounded border border-gray-100 p-6 z-50"
                              style="box-shadow: var(--shadow-dropdown)">
                             <div class="grid grid-cols-3 gap-6">
                                 @foreach(\App\Models\Category::parents()->active()->ordered()->with('children')->get() as $cat)
@@ -182,7 +182,7 @@
     {{-- Flash Messages --}}
     @if(session('success'))
         <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
-            <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+            <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ✅ {{ session('success') }}
             </div>
         </div>
@@ -190,7 +190,7 @@
 
     @if(session('error'))
         <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
-            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ❌ {{ session('error') }}
             </div>
         </div>
@@ -208,7 +208,7 @@
                 {{-- Brand --}}
                 <div>
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
+                        <div class="w-8 h-8 rounded flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
                             E
                         </div>
                         <span class="text-xl font-bold">Electrohome<span class="text-[var(--color-trust-blue)]">.bd</span></span>

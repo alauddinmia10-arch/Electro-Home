@@ -45,13 +45,13 @@ new #[Layout('layouts.app')] #[Title('My Wishlist - Electrohome.bd')] class exte
         <h2 class="text-2xl font-bold text-gray-800 font-bangla mb-6">আমার উইশলিস্ট</h2>
         
         @if(session('success'))
-            <div class="bg-green-50 text-green-700 p-4 rounded-lg mb-6 border border-green-200">
+            <div class="bg-green-50 text-green-700 p-4 rounded mb-6 border border-green-200">
                 {{ session('success') }}
             </div>
         @endif
 
         @if($wishlistItems->isEmpty())
-            <div class="bg-white p-12 rounded-xl shadow-sm border border-gray-100 text-center">
+            <div class="bg-white p-12 rounded shadow-sm border border-gray-100 text-center">
                 <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                 </div>
@@ -63,7 +63,7 @@ new #[Layout('layouts.app')] #[Title('My Wishlist - Electrohome.bd')] class exte
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach($wishlistItems as $item)
                     @if($item->product)
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden group">
                             <div class="relative h-48 bg-gray-100 p-4 flex items-center justify-center">
                                 @if($item->product->cover_image)
                                     <img src="{{ Storage::url($item->product->cover_image) }}" alt="{{ $item->product->name }}" class="max-h-full object-contain">

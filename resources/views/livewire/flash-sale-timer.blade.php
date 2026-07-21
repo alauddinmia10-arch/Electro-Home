@@ -42,19 +42,19 @@ new class extends Component {
     x-init="start()"
     class="flex items-center gap-2"
 >
-    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded-lg">
+    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded">
         <span x-text="days"></span>
     </div>
     <span class="text-red-600 font-bold">:</span>
-    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded-lg">
+    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded">
         <span x-text="hours"></span>
     </div>
     <span class="text-red-600 font-bold">:</span>
-    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded-lg">
+    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded">
         <span x-text="minutes"></span>
     </div>
     <span class="text-red-600 font-bold">:</span>
-    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded-lg">
+    <div class="flex items-center justify-center bg-red-100 text-red-600 font-bold w-10 h-10 rounded">
         <span x-text="seconds"></span>
     </div>
 </div>

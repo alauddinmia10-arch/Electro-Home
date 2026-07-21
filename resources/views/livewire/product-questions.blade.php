@@ -1,8 +1,8 @@
 <div>
-    <div class="mt-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-10 shadow-sm" id="qa">
+    <div class="mt-8 bg-white border border-gray-100 rounded p-6 md:p-10 shadow-sm" id="qa">
         <h2 class="text-xl font-bold font-bangla mb-4">Questions & Answers about {{ $product->name }}</h2>
         
-        <div class="mb-8 bg-gray-50 p-4 rounded-xl border border-gray-100">
+        <div class="mb-8 bg-gray-50 p-4 rounded border border-gray-100">
             @if (session()->has('q_message'))
                 <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-4">
                     {{ session('q_message') }}
@@ -10,7 +10,7 @@
             @endif
             
             <form wire:submit.prevent="submitQuestion">
-                <textarea wire:model="question_text" rows="3" placeholder="Write Your Question Here..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3 resize-none"></textarea>
+                <textarea wire:model="question_text" rows="3" placeholder="Write Your Question Here..." class="w-full border border-gray-300 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3 resize-none"></textarea>
                 @error('question_text') <span class="text-red-500 text-xs block mb-2">{{ $message }}</span> @enderror
                 
                 <div class="flex justify-end">

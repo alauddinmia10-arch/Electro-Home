@@ -109,7 +109,7 @@ new class extends Component {
         <div class="flex flex-col lg:flex-row gap-8">
             {{-- Left: Cart Items --}}
             <div class="flex-1">
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-white rounded shadow-sm border border-gray-200 overflow-hidden">
                     @if($items->count() > 0)
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">
@@ -140,7 +140,7 @@ new class extends Component {
                                         }">
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center gap-4">
-                                                    <a href="{{ route('product.show', $item->product->slug) }}" class="w-16 h-16 shrink-0 bg-gray-50 rounded-lg border border-gray-100 overflow-hidden block">
+                                                    <a href="{{ route('product.show', $item->product->slug) }}" class="w-16 h-16 shrink-0 bg-gray-50 rounded border border-gray-100 overflow-hidden block">
                                                         @if($item->product->cover_image)
                                                             <img src="{{ Storage::url($item->product->cover_image) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
                                                         @else
@@ -173,7 +173,7 @@ new class extends Component {
                                                 <span wire:ignore class="font-bold text-[var(--color-trust-blue)] text-lg" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
                                             </td>
                                             <td class="px-6 py-4 text-right">
-                                                <button wire:click="removeItem({{ $item->product_id }})" class="p-2 text-red-400 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors" title="Remove Item">
+                                                <button wire:click="removeItem({{ $item->product_id }})" class="p-2 text-red-400 hover:bg-red-50 hover:text-red-600 rounded transition-colors" title="Remove Item">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                                 </button>
                                             </td>
@@ -198,7 +198,7 @@ new class extends Component {
             {{-- Right: Order Summary --}}
             @if($items->count() > 0)
                 <div class="w-full lg:w-96 shrink-0">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-24" x-data="{ orderSubtotal: {{ $subtotal }}, orderQty: {{ $items->sum('quantity') }} }" @cart-updated-optimistic.window="orderSubtotal += $event.detail.amount; orderQty += $event.detail.qty_change" @cart-updated.window="if($event.detail.subtotal !== undefined) { orderSubtotal = $event.detail.subtotal; orderQty = $event.detail.count; }">
+                    <div class="bg-white rounded shadow-sm border border-gray-200 p-6 sticky top-24" x-data="{ orderSubtotal: {{ $subtotal }}, orderQty: {{ $items->sum('quantity') }} }" @cart-updated-optimistic.window="orderSubtotal += $event.detail.amount; orderQty += $event.detail.qty_change" @cart-updated.window="if($event.detail.subtotal !== undefined) { orderSubtotal = $event.detail.subtotal; orderQty = $event.detail.count; }">
                         <h3 class="text-lg font-bold text-gray-800 mb-6 font-bangla border-b border-gray-100 pb-4">অর্ডার সামারি</h3>
                         
                         <div class="space-y-4 text-sm text-gray-600 mb-6">
@@ -218,7 +218,7 @@ new class extends Component {
                                 <span>আর মাত্র <strong>৳{{ number_format($freeDeliveryRemaining, 0) }}</strong> টাকার বাজার করলেই পাচ্ছেন <strong>ফ্রি ডেলিভারি</strong>!</span>
                             </div>
                         @else
-                            <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2 mb-6 font-bold">
+                            <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm flex items-center gap-2 mb-6 font-bold">
                                 🎉 অভিনন্দন! আপনি ফ্রি ডেলিভারি পাচ্ছেন।
                             </div>
                         @endif

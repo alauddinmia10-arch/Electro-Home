@@ -223,7 +223,7 @@ new class extends Component {
 <div class="flex flex-col lg:flex-row gap-8">
     {{-- Left: Checkout Form --}}
     <div class="flex-1">
-        <form wire:submit="submit" x-data x-on:submit="window.isOrderSubmitting = true" class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+        <form wire:submit="submit" x-data x-on:submit="window.isOrderSubmitting = true" class="bg-white rounded shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-6 md:p-8 border-b border-gray-100">
                 <h2 class="text-xl font-bold text-gray-800 mb-6 font-bangla">শিপিং ইনফরমেশন</h2>
                 
@@ -285,7 +285,7 @@ new class extends Component {
             <div class="p-6 md:p-8 bg-gray-50">
                 <h2 class="text-xl font-bold text-gray-800 mb-6 font-bangla">পেমেন্ট মেথড</h2>
                 <div class="space-y-3">
-                    <label class="flex items-center p-4 border rounded-xl cursor-pointer transition-colors hover:bg-white bg-white border-[var(--color-trust-blue)]">
+                    <label class="flex items-center p-4 border rounded cursor-pointer transition-colors hover:bg-white bg-white border-[var(--color-trust-blue)]">
                         <input type="radio" wire:model="paymentMethod" value="cod" class="w-5 h-5 text-[var(--color-trust-blue)] focus:ring-[var(--color-trust-blue)] border-gray-300">
                         <div class="ml-4 flex-1">
                             <span class="block font-bold text-gray-800 text-base">Cash on Delivery (COD)</span>
@@ -293,7 +293,7 @@ new class extends Component {
                         </div>
                         <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                     </label>
-                    <label class="flex items-center p-4 border rounded-xl cursor-pointer transition-colors hover:bg-white {{ $paymentMethod === 'online' ? 'bg-white border-[var(--color-trust-blue)]' : 'border-gray-200' }}">
+                    <label class="flex items-center p-4 border rounded cursor-pointer transition-colors hover:bg-white {{ $paymentMethod === 'online' ? 'bg-white border-[var(--color-trust-blue)]' : 'border-gray-200' }}">
                         <input type="radio" wire:model="paymentMethod" value="online" class="w-5 h-5 text-[var(--color-trust-blue)] focus:ring-[var(--color-trust-blue)] border-gray-300">
                         <div class="ml-4 flex-1">
                             <span class="block font-bold text-gray-800 text-base">Online Payment (SSLCommerz)</span>
@@ -308,7 +308,7 @@ new class extends Component {
 
     {{-- Right: Order Summary --}}
     <div class="w-full lg:w-96 shrink-0">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-24">
+        <div class="bg-white rounded shadow-sm border border-gray-200 p-6 sticky top-24">
             <h3 class="text-lg font-bold text-gray-800 mb-6 font-bangla border-b border-gray-100 pb-4">অর্ডার সামারি</h3>
             
             <div class="space-y-4 text-sm text-gray-600 mb-6">
@@ -334,7 +334,7 @@ new class extends Component {
                     <span>আর মাত্র <strong>৳{{ number_format($freeDeliveryRemaining, 0) }}</strong> টাকার বাজার করলেই পাচ্ছেন <strong>ফ্রি ডেলিভারি</strong>!</span>
                 </div>
             @else
-                <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2 mb-6 font-bold">
+                <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm flex items-center gap-2 mb-6 font-bold">
                     🎉 অভিনন্দন! আপনি ফ্রি ডেলিভারি পাচ্ছেন।
                 </div>
             @endif
