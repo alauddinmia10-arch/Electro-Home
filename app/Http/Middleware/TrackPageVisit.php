@@ -15,17 +15,23 @@ class TrackPageVisit
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Skip tracking for admin panel, livewire internal requests, and API
         if (!$request->is('admin*') && !$request->is('livewire*') && !$request->is('api*') && !$request->is('_debugbar*') && $request->method() === 'GET') {
-            $today = now()->format('Y-m-d');
+            $lastCountedTime = $request->session()->get('last_counted_view_at');
             
-            // Log every page visit
-            \App\Models\PageVisit::create([
-                'url' => $request->url(),
-                'ip_address' => $request->ip(),
-                'visited_date' => $today,
-                'user_agent' => $request->userAgent(),
-            ]);
+            // Check if 1 hour (3600 seconds) has passed since the last counted view in this browser session
+            if (!$lastCountedTime || (now()->timestamp - $lastCountedTime) >= 3600) {
+                $today = now()->format('Y-m-d');
+                
+                \App\Models\PageVisit::create([
+                    'url' => $request->url(),
+                    'ip_address' => $request->ip(),
+                    'visited_date' => $today,
+                    'user_agent' => $request->userAgent(),
+                ]);
+                
+                // Save the current timestamp to the session
+                $request->session()->put('last_counted_view_at', now()->timestamp);
+            }
         }
 
         return $next($request);
