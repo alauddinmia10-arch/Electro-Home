@@ -19,12 +19,11 @@ class TrackPageVisit
         if (!$request->is('admin*') && !$request->is('livewire*') && !$request->is('api*') && !$request->is('_debugbar*') && $request->method() === 'GET') {
             $today = now()->format('Y-m-d');
             
-            // Log unique visit per IP per URL per day
-            \App\Models\PageVisit::firstOrCreate([
+            // Log every page visit
+            \App\Models\PageVisit::create([
                 'url' => $request->url(),
                 'ip_address' => $request->ip(),
                 'visited_date' => $today,
-            ], [
                 'user_agent' => $request->userAgent(),
             ]);
         }
