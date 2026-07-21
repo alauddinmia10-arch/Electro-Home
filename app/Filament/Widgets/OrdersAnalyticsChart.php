@@ -4,7 +4,7 @@ namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
 
-class SalesAnalyticsChart extends ChartWidget
+class OrdersAnalyticsChart extends ChartWidget
 {
     protected static bool $isDiscovered = false;
     protected static ?int $sort = 2;
@@ -22,14 +22,14 @@ class SalesAnalyticsChart extends ChartWidget
     
     protected ?string $maxHeight = '300px';
     
-    protected ?string $heading = 'Sales Analytics';
+    protected ?string $heading = 'Orders Analytics';
 
     protected function getData(): array
     {
         $startDate = !empty($this->filters['startDate']) ? \Carbon\Carbon::parse($this->filters['startDate']) : null;
         $endDate = !empty($this->filters['endDate']) ? \Carbon\Carbon::parse($this->filters['endDate']) : null;
 
-        $query = \App\Models\Order::query()->where('delivery_status', '!=', 'cancelled');
+        $query = \App\Models\Order::query();
 
         if ($startDate) {
             $query->whereDate('created_at', '>=', $startDate);
@@ -49,20 +49,20 @@ class SalesAnalyticsChart extends ChartWidget
             $trend = \Flowframe\Trend\Trend::query($query)
                 ->between(start: $start, end: $end)
                 ->perDay()
-                ->sum('total_amount');
+                ->count();
         } else {
             $trend = \Flowframe\Trend\Trend::query($query)
                 ->between(start: $start, end: $end)
                 ->perMonth()
-                ->sum('total_amount');
+                ->count();
         }
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Total Sales (৳)',
+                    'label' => 'Total Orders',
                     'data' => $trend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->toArray(),
-                    'borderColor' => '#10b981', // green
+                    'borderColor' => '#3b82f6', // blue
                     'fill' => true,
                 ],
             ],

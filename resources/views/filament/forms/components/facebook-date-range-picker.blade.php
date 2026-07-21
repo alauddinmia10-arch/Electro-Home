@@ -119,7 +119,7 @@
                 </div>
                 
                 <!-- Calendars & Actions -->
-                <div style="display: flex; flex-direction: column; padding: 0.25rem 0.5rem; background-color: #ffffff;">
+                <div style="display: flex; flex-direction: column; padding: 0.5rem 0.5rem 0.75rem 0.25rem; background-color: #ffffff;">
                     <!-- Calendar Container -->
                     <style>
                         .custom-flatpickr .flatpickr-calendar.inline {
@@ -128,8 +128,8 @@
                             background: transparent !important;
                         }
                     </style>
-                    <div class="custom-flatpickr" wire:ignore style="width: 486px; height: 250px; overflow: visible;">
-                        <div style="transform: scale(0.79); transform-origin: top left;">
+                    <div class="custom-flatpickr" wire:ignore style="width: 512px; height: 250px; overflow: visible;">
+                        <div style="transform: scale(0.83); transform-origin: top left;">
                             <div 
                                 x-init="
                                     let isInitialized = false;
@@ -181,8 +181,8 @@
                     </div>
                     
                     <!-- Bottom Bar -->
-                    <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid #e5e7eb;">
-                        <div style="font-size: 0.8125rem; font-weight: 500; color: #374151;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.5rem; border-top: 1px solid #e5e7eb;">
+                        <div style="font-size: 0.8125rem; font-weight: 500; color: #374151; padding-left: 0.5rem;">
                             <span x-show="selectedPreset === 'Custom'" x-text="customStart && customEnd ? formatDate(customStart) + ' - ' + formatDate(customEnd) : 'Select custom range'"></span>
                         </div>
                         <div style="display: flex; gap: 0.5rem;">

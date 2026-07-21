@@ -23,6 +23,7 @@ new #[Layout('layouts.app')] #[Title('Register - Electrohome.bd')] class extends
 
         $user = User::create([
             'name' => $this->name,
+            'email' => $this->phone . '@electrohome.bd',
             'phone' => $this->phone,
             'password' => Hash::make($this->password),
             'role' => 'customer',
@@ -34,7 +35,7 @@ new #[Layout('layouts.app')] #[Title('Register - Electrohome.bd')] class extends
     }
 } ?>
 
-<div class="bg-gray-50 py-12">
+<div class="bg-gray-50 py-6">
     <div class="max-w-md mx-auto bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div class="p-8">
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-6 font-bangla">নতুন একাউন্ট তৈরি করুন</h2>

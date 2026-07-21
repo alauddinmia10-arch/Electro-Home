@@ -142,16 +142,16 @@ new class extends Component {
 
     .premium-btn {
         position: relative;
-        width: 200px;
+        width: 170px;
         max-width: 100%;
-        height: 54px;
+        height: 48px;
         border-radius: 999px;
         border: 1px solid rgba(255, 255, 255, 0.22);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-left: 56px;
+        padding-left: 50px;
         padding-right: 12px;
         cursor: pointer;
         overflow: hidden;
@@ -173,17 +173,17 @@ new class extends Component {
     }
 
     .premium-btn:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.24);
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         background-position: right center;
     }
 
     .btn-emerald:hover {
-        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.24), 0 0 20px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(59, 130, 246, 0.25);
     }
 
     .btn-blue:hover {
-        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.24), 0 0 20px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(59, 130, 246, 0.3);
     }
 
     .premium-icon-circle {
@@ -191,11 +191,11 @@ new class extends Component {
         left: -2px;
         top: 50%;
         transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
         border: 1px solid rgba(255, 255, 255, 0.30);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), inset 0 2px 10px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -211,8 +211,8 @@ new class extends Component {
     }
 
     .premium-icon {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         color: #ffffff;
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;

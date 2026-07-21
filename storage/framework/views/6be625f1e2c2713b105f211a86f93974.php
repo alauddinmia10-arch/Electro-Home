@@ -14,14 +14,14 @@
 
 <?php if (isset($component)) { $__componentOriginalb525200bfa976483b4eaa0b7685c6e24 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalb525200bfa976483b4eaa0b7685c6e24 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament-widgets::components.widget','data' => ['class' => 'fi-wi-chart']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament-widgets::components.widget','data' => ['class' => 'fi-wi-chart relative']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('filament-widgets::widget'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['class' => 'fi-wi-chart']); ?>
+<?php $component->withAttributes(['class' => 'fi-wi-chart relative']); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
     <?php if (isset($component)) { $__componentOriginalee08b1367eba38734199cf7829b1d1e9 = $component; } ?>
@@ -36,9 +36,16 @@
 <?php $component->withAttributes(['description' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($description),'heading' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($heading),'collapsible' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($isCollapsible)]); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
-        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters || method_exists($this, 'getFiltersSchema')): ?>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters === null || method_exists($this, 'getFiltersSchema')): ?>
              <?php $__env->slot('afterHeader', null, []); ?> 
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters): ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters === null): ?>
+                    <div class="absolute right-6 top-4 z-10 w-[350px]">
+                        <?php echo e($this->form); ?>
+
+                    </div>
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters !== null): ?>
                     <?php if (isset($component)) { $__componentOriginal505efd9768415fdb4543e8c564dad437 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal505efd9768415fdb4543e8c564dad437 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.input.wrapper','data' => ['inlinePrefix' => true,'wire:target' => 'filter','class' => 'fi-wi-chart-filter']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -114,11 +121,8 @@
 
 
                             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(method_exists($this, 'hasDeferredFilters') && $this->hasDeferredFilters()): ?>
-                                <div
-                                    class="fi-wi-chart-filter-content-actions-ctn"
-                                >
+                                <div class="fi-wi-chart-filter-content-actions-ctn">
                                     <?php echo e($this->getFiltersApplyAction()); ?>
-
 
                                     <?php echo e($this->getFiltersResetAction()); ?>
 
@@ -161,6 +165,9 @@
                             'fi-wi-chart-canvas-ctn-no-aspect-ratio' => $hasMaxHeight,
                         ])); ?>
 
+                <?php if($hasMaxHeight): ?>
+                    style="height: <?php echo e($maxHeight); ?>; max-height: <?php echo e($maxHeight); ?>; aspect-ratio: auto !important; padding-bottom: 0 !important;"
+                <?php endif; ?>
             >
                 <canvas
                     x-ref="canvas"
@@ -171,27 +178,24 @@
                     ]) ?>"
                 ></canvas>
 
-                <span
-                    x-ref="backgroundColorElement"
-                    class="fi-wi-chart-bg-color"
-                ></span>
-
-                <span
-                    x-ref="borderColorElement"
-                    class="fi-wi-chart-border-color"
-                ></span>
-
-                <span
-                    x-ref="gridColorElement"
-                    class="fi-wi-chart-grid-color"
-                ></span>
-
-                <span
-                    x-ref="textColorElement"
-                    class="fi-wi-chart-text-color"
-                ></span>
+                <span x-ref="backgroundColorElement" class="fi-wi-chart-bg-color"></span>
+                <span x-ref="borderColorElement" class="fi-wi-chart-border-color"></span>
+                <span x-ref="gridColorElement" class="fi-wi-chart-grid-color"></span>
+                <span x-ref="textColorElement" class="fi-wi-chart-text-color"></span>
             </div>
         </div>
+        <style>
+            .fi-wi-chart,
+            .fi-wi-chart .fi-widget,
+            .fi-wi-chart .fi-section,
+            .fi-wi-chart .fi-section-content-ctn,
+            .fi-wi-chart .fi-section-content {
+                height: auto !important;
+                min-height: 0 !important;
+                padding-bottom: 0 !important;
+                flex-grow: 0 !important;
+            }
+        </style>
      <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalee08b1367eba38734199cf7829b1d1e9)): ?>
@@ -212,4 +216,4 @@
 <?php $component = $__componentOriginalb525200bfa976483b4eaa0b7685c6e24; ?>
 <?php unset($__componentOriginalb525200bfa976483b4eaa0b7685c6e24); ?>
 <?php endif; ?>
-<?php /**PATH C:\Users\Hafeez Hameed\.gemini\antigravity-ide\scratch\ElectroHome.BD\vendor\filament\widgets\resources\views/chart-widget.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\Hafeez Hameed\.gemini\antigravity-ide\scratch\ElectroHome.BD\resources\views/filament/widgets/all-analytics-chart.blade.php ENDPATH**/ ?>

@@ -368,22 +368,19 @@ header.fi-header, .fi-page-header { margin-top: 0 !important; margin-bottom: 0 !
 .fi-layout > main { padding-top: 0 !important; }
 
 /* Shrink Sidebar Width to remove the large white gap */
-:root { --sidebar-width: 14.5rem !important; }
+:root { --sidebar-width: 17rem !important; }
 
 /* Active Sidebar Item Styling */
 .fi-sidebar-item-active > a.fi-sidebar-item-btn { background-color: #f0fdf4 !important; }
 .fi-sidebar-item-active .fi-sidebar-item-label { color: #000000 !important; font-weight: 700 !important; }
 
-/* Dashboard Emoji Icon (SVG itself has the class) */
-a.fi-sidebar-item-btn[href$="/admin"] > svg.fi-sidebar-item-icon,
-a.fi-sidebar-item-btn[href$="/admin/"] > svg.fi-sidebar-item-icon { 
+/* Hide all default SVG icons in the sidebar to replace them with Emojis */
+a.fi-sidebar-item-btn > svg.fi-sidebar-item-icon { 
     display: none !important; 
 }
 
-/* Insert emoji before the label */
-a.fi-sidebar-item-btn[href$="/admin"]::before,
-a.fi-sidebar-item-btn[href$="/admin/"]::before { 
-    content: "🏠"; 
+/* Base styling for Emoji icons */
+a.fi-sidebar-item-btn::before { 
     font-size: 1.5rem; 
     display: flex; 
     align-items: center; 
@@ -391,6 +388,22 @@ a.fi-sidebar-item-btn[href$="/admin/"]::before {
     width: 2rem; 
     height: 2rem; 
 }
+
+/* Emoji mappings */
+a.fi-sidebar-item-btn[href$="/admin"]::before, a.fi-sidebar-item-btn[href$="/admin/"]::before { content: "🏠"; }
+a.fi-sidebar-item-btn[href*="/brands"]::before { content: "🏷️"; }
+a.fi-sidebar-item-btn[href*="/categories"]::before { content: "🗂️"; }
+a.fi-sidebar-item-btn[href*="/products"]::before { content: "📦"; }
+a.fi-sidebar-item-btn[href*="/users"]::before { content: "👥"; }
+a.fi-sidebar-item-btn[href*="/sales-analytics"]::before { content: "📊"; }
+a.fi-sidebar-item-btn[href*="/banners"]::before { content: "🖼️"; }
+a.fi-sidebar-item-btn[href*="/coupons"]::before { content: "🎟️"; }
+a.fi-sidebar-item-btn[href$="/orders"]::before { content: "🛍️"; }
+a.fi-sidebar-item-btn[href*="/questions"]::before { content: "💬"; }
+a.fi-sidebar-item-btn[href*="/reviews"]::before { content: "⭐"; }
+a.fi-sidebar-item-btn[href*="/wholesale-requests"]::before { content: "💼"; }
+a.fi-sidebar-item-btn[href*="/incomplete-orders"]::before { content: "🛒"; }
+a.fi-sidebar-item-btn[href*="/settings"]::before { content: "⚙️"; }
 
 /* Dashboard Text Color and Size */
 a.fi-sidebar-item-btn[href$="/admin"] .fi-sidebar-item-label,

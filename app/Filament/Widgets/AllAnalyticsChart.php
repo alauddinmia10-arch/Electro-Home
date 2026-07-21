@@ -122,6 +122,7 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
     protected function getOptions(): array
     {
         return [
+            'maintainAspectRatio' => false,
             'scales' => [
                 'y' => [
                     'type' => 'linear',
@@ -143,5 +144,17 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
     protected function getType(): string
     {
         return 'line';
+    }
+
+    public function logHeights($canvasHeight, $containerHeight, $sectionHeight, $headerHeight, $contentCtnHeight, $pollDivHeight)
+    {
+        \Log::info('Chart DOM Heights Detailed:', [
+            'canvas' => $canvasHeight,
+            'container' => $containerHeight,
+            'section' => $sectionHeight,
+            'header' => $headerHeight,
+            'contentCtn' => $contentCtnHeight,
+            'pollDiv' => $pollDivHeight,
+        ]);
     }
 }

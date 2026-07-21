@@ -21,8 +21,11 @@ class SalesOverviewStats extends StatsOverviewWidget
     protected function getStats(): array
     {
         $todayOrders = \App\Models\Order::whereDate('created_at', today())->count();
-        $todaySales = \App\Models\Order::paid()->whereDate('created_at', today())->sum('total_amount');
-        $totalSales = \App\Models\Order::paid()->sum('total_amount');
+        $todaySales = \App\Models\Order::where('delivery_status', '!=', 'cancelled')
+            ->whereDate('created_at', today())
+            ->sum('total_amount');
+        $totalSales = \App\Models\Order::where('delivery_status', '!=', 'cancelled')
+            ->sum('total_amount');
         $customers = \App\Models\User::customers()->count();
         $products = \App\Models\Product::count();
 
@@ -33,12 +36,12 @@ class SalesOverviewStats extends StatsOverviewWidget
                 ->color('primary'),
                 
             Stat::make('Today\'s Sales', '৳' . number_format($todaySales))
-                ->description('Revenue from today\'s paid orders')
+                ->description('Revenue from today\'s orders')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('stat_orange'),
                 
             Stat::make('Total Sales', '৳' . number_format($totalSales))
-                ->description('Total revenue from paid orders')
+                ->description('Total revenue from orders')
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color('stat_green'),
                 
