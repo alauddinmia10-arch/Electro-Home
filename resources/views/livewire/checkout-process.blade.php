@@ -192,8 +192,6 @@ new class extends Component {
         // Send SMS Notification
         app(\App\Services\SmsService::class)->sendOrderConfirmation($order);
         
-        session()->flash('success', 'আপনার অর্ডার সফলভাবে সম্পন্ন হয়েছে! ইনভয়েস: ' . $order->invoice_number);
-        
         if ($this->paymentMethod === 'online') {
             $paymentUrl = app(\App\Services\SslCommerzService::class)->initiatePayment($order);
             if ($paymentUrl) {
