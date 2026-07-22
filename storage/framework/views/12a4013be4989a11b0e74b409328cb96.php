@@ -15,7 +15,7 @@
     <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-96">
             
-            <div class="md:col-span-3 rounded overflow-hidden relative shadow-sm h-64 md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
+            <div class="md:col-span-3 rounded-xl overflow-hidden relative shadow-sm h-64 md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                     <div x-show="activeSlide === <?php echo e($index); ?>" x-transition.opacity.duration.500ms class="absolute inset-0">
                         <img src="<?php echo e(Storage::url($banner->image_path)); ?>" alt="<?php echo e($banner->title); ?>" class="w-full h-full object-cover">
@@ -41,7 +41,7 @@
 
             
             <div class="hidden md:flex flex-col gap-4 h-full">
-                <div class="flex-1 bg-gradient-to-br from-orange-400 to-red-500 rounded p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group">
+                <div class="flex-1 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group">
                     <div class="relative z-10">
                         <h3 class="text-xl font-bold mb-1">Flash Sale</h3>
                         <p class="text-sm opacity-90 mb-4">Up to 50% Off</p>
@@ -49,7 +49,7 @@
                     </div>
                     <svg class="absolute -right-4 -bottom-4 w-32 h-32 opacity-20 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
-                <div class="flex-1 bg-gradient-to-br from-gray-800 to-gray-900 rounded p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group">
+                <div class="flex-1 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group">
                     <div class="relative z-10">
                         <h3 class="text-xl font-bold mb-1">New Sensors</h3>
                         <p class="text-sm opacity-90 mb-4">IoT & Robotics</p>
@@ -63,7 +63,7 @@
 
     
     <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="bg-white rounded p-6 shadow-sm border border-gray-100 flex flex-wrap gap-4 md:gap-0 justify-between items-center text-sm">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-wrap gap-4 md:gap-0 justify-between items-center text-sm">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -111,7 +111,7 @@
     
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($flashSaleProducts->count() > 0): ?>
     <section id="flash-sales" class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="bg-white rounded p-6 shadow-sm border border-red-100 relative overflow-hidden">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-red-100 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10"></div>
             
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b border-red-100 pb-4">
@@ -253,7 +253,7 @@ unset($__split);
         
         <div class="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                <a href="<?php echo e(route('shop', ['category' => $category->slug])); ?>" class="bg-white rounded p-4 text-center hover:shadow-md transition-shadow border border-gray-100 group">
+                <a href="<?php echo e(route('shop', ['category' => $category->slug])); ?>" class="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow border border-gray-100 group">
                     <div class="text-3xl mb-2 transform group-hover:scale-110 transition-transform"><?php echo e($category->icon); ?></div>
                     <h3 class="text-xs md:text-sm font-semibold text-gray-800"><?php echo e($category->name); ?></h3>
                 </a>

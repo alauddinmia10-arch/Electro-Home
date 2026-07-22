@@ -28,7 +28,7 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars, $__key, $__value); ?>
 
-<div class="product-card group relative flex flex-col h-full bg-white border border-gray-100">
+<div class="product-card group relative flex flex-col h-full bg-white border border-gray-100 rounded-xl overflow-hidden">
     
     <div class="absolute top-2 left-2 z-10 flex flex-col gap-1">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($product->status !== 'in_stock' || $product->stock_quantity <= 0): ?>

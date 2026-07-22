@@ -9,7 +9,8 @@
     <meta name="description" content="<?php echo e($metaDescription ?? 'বাংলাদেশের অন্যতম প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সার্কিট, সেন্সর, ব্যাটারি, চার্জার এবং আরও হাজারো প্রোডাক্ট।'); ?>">
 
     
-    <link rel="icon" type="image/png" href="<?php echo e(asset('favicon.png')); ?>">
+    <link rel="icon" type="image/png" href="<?php echo e(asset('favicon-light.png')); ?>" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="<?php echo e(asset('favicon-dark.png')); ?>" media="(prefers-color-scheme: dark)">
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('images/icon.webp')); ?>">
     <link rel="mask-icon" href="<?php echo e(asset('images/monochrome.webp')); ?>" color="#16A34A">
 

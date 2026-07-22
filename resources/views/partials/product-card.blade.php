@@ -1,6 +1,6 @@
 @props(['product', 'showBadge' => null])
 
-<div class="product-card group relative flex flex-col h-full bg-white border border-gray-100">
+<div class="product-card group relative flex flex-col h-full bg-white border border-gray-100 rounded-xl overflow-hidden">
     {{-- Badges --}}
     <div class="absolute top-2 left-2 z-10 flex flex-col gap-1">
         @if($product->status !== 'in_stock' || $product->stock_quantity <= 0)
