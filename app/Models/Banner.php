@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
 {
+    protected static function booted()
+    {
+        $clearCache = function () {
+            \Illuminate\Support\Facades\Cache::forget('home.banners');
+        };
+
+        static::saved($clearCache);
+        static::deleted($clearCache);
+    }
     protected $fillable = [
         'title',
         'image_path',

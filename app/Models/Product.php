@@ -11,6 +11,19 @@ class Product extends Model
 {
     use Searchable;
 
+    protected static function booted()
+    {
+        $clearCache = function () {
+            \Illuminate\Support\Facades\Cache::forget('home.new_arrivals');
+            \Illuminate\Support\Facades\Cache::forget('home.best_sellers');
+            \Illuminate\Support\Facades\Cache::forget('home.featured');
+            \Illuminate\Support\Facades\Cache::forget('home.flash_sale');
+        };
+
+        static::saved($clearCache);
+        static::deleted($clearCache);
+    }
+
     protected $fillable = [
         'category_id',
         'brand_id',

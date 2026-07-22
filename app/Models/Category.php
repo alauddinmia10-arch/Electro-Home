@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
+    protected static function booted()
+    {
+        $clearCache = function () {
+            \Illuminate\Support\Facades\Cache::forget('home.categories');
+        };
+
+        static::saved($clearCache);
+        static::deleted($clearCache);
+    }
     protected $fillable = [
         'parent_id',
         'name',
