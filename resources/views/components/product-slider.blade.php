@@ -1,6 +1,6 @@
 @props(['title', 'icon', 'products', 'viewAllUrl' => '#'])
 
-<div class="bg-white rounded-xl shadow-sm border border-gray-100 px-3 py-2 relative" x-data="{
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 px-3 py-2 relative" x-data="{
     scrollLeft() {
         $refs.slider.scrollBy({ left: -300, behavior: 'smooth' });
     },
