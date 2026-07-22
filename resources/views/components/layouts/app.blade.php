@@ -8,6 +8,11 @@
     <title>{{ $title ?? 'Electrohome.bd — Premium Electronics Components Store' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'বাংলাদেশের অন্যতম প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সার্কিট, সেন্সর, ব্যাটারি, চার্জার এবং আরও হাজারো প্রোডাক্ট।' }}">
 
+    {{-- Favicon --}}
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/icon.svg') }}">
+    <link rel="mask-icon" href="{{ asset('images/monochrome.svg') }}" color="#16A34A">
+
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,13 +53,12 @@
             <div class="flex items-center justify-between h-14 md:h-16">
 
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-2.5 shrink-0 group">
-                    <div class="w-9 h-9 rounded flex items-center justify-center text-white shadow-sm group-hover:shadow-md transition-shadow bg-gradient-to-br from-[#0b5c9a] to-[#00a651]">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <span class="text-[22px] font-black tracking-tight text-gray-800 hidden sm:flex items-center">
-                        Electro<span class="font-normal text-[#00a651] ml-1.5">Home</span>
-                    </span>
+                <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
+                    <img src="{{ asset('images/logo.svg') }}" 
+                         alt="ElectroHome Logo" 
+                         class="h-9 md:h-12 w-auto object-contain transition-transform hover:scale-105"
+                         width="220" 
+                         height="48">
                 </a>
 
                 {{-- Search Bar (Desktop) --}}
@@ -245,11 +249,14 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {{-- Brand --}}
                 <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, var(--color-trust-blue), var(--color-sea-green))">
-                            E
-                        </div>
-                        <span class="text-xl font-bold">Electrohome<span class="text-[var(--color-trust-blue)]">.bd</span></span>
+                    <div class="mb-4">
+                        <a href="{{ route('home') }}" class="inline-block">
+                            <img src="{{ asset('images/logo-dark.svg') }}" 
+                                 alt="ElectroHome Logo" 
+                                 class="h-10 w-auto object-contain"
+                                 width="220" 
+                                 height="48">
+                        </a>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         বাংলাদেশের প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সেরা মানের প্রোডাক্ট, দ্রুত ডেলিভারি।
