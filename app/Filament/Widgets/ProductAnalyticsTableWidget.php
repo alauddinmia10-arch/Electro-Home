@@ -14,6 +14,7 @@ class ProductAnalyticsTableWidget extends BaseWidget
 {
     protected static ?int $sort = 10;
     protected int | string | array $columnSpan = 'full';
+    protected static bool $isLazy = false;
     
     public ?array $filters = null;
 
@@ -52,12 +53,6 @@ class ProductAnalyticsTableWidget extends BaseWidget
                                 if ($endDate) $q->where('created_at', '<=', $endDate);
                             })
                     ])
-                    ->addSelect([
-                        'total_views' => \App\Models\PageVisit::selectRaw('COUNT(*)')
-                            ->whereRaw("url LIKE '%/product/' || products.slug || '%'")
-                            ->when($startDate, fn($q) => $q->where('visited_date', '>=', $startDate->format('Y-m-d')))
-                            ->when($endDate, fn($q) => $q->where('visited_date', '<=', $endDate->format('Y-m-d')))
-                    ])
             )
             ->columns([
                 Tables\Columns\ImageColumn::make('cover_image')
@@ -70,7 +65,21 @@ class ProductAnalyticsTableWidget extends BaseWidget
                     ->limit(50),
                 Tables\Columns\TextColumn::make('total_views')
                     ->label('Total Views')
-                    ->sortable()
+                    ->state(function (Product $record) use ($startDate, $endDate) {
+                        return \App\Models\PageVisit::where('url', 'LIKE', '%/product/' . $record->slug . '%')
+                            ->when($startDate, fn($q) => $q->where('visited_date', '>=', $startDate->format('Y-m-d')))
+                            ->when($endDate, fn($q) => $q->where('visited_date', '<=', $endDate->format('Y-m-d')))
+                            ->count();
+                    })
+                    ->sortable(query: function (Builder $query, string $direction) use ($startDate, $endDate) {
+                        return $query->orderBy(
+                            \App\Models\PageVisit::selectRaw('COUNT(*)')
+                                ->whereRaw("url LIKE '%/product/' || products.slug || '%'")
+                                ->when($startDate, fn($q) => $q->where('visited_date', '>=', $startDate->format('Y-m-d')))
+                                ->when($endDate, fn($q) => $q->where('visited_date', '<=', $endDate->format('Y-m-d'))),
+                            $direction
+                        );
+                    })
                     ->numeric(),
                 Tables\Columns\TextColumn::make('total_orders')
                     ->label('Total Orders')
