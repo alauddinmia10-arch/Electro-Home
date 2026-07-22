@@ -9,9 +9,9 @@
     <meta name="description" content="{{ $metaDescription ?? 'বাংলাদেশের অন্যতম প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সার্কিট, সেন্সর, ব্যাটারি, চার্জার এবং আরও হাজারো প্রোডাক্ট।' }}">
 
     {{-- Favicon --}}
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/icon.svg') }}">
-    <link rel="mask-icon" href="{{ asset('images/monochrome.svg') }}" color="#16A34A">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/icon.webp') }}">
+    <link rel="mask-icon" href="{{ asset('images/monochrome.webp') }}" color="#16A34A">
 
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
