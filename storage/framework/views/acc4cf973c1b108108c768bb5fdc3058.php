@@ -56,13 +56,28 @@
             <div class="flex items-center justify-between h-14 md:h-16">
 
                 
-                <a href="<?php echo e(route('home')); ?>" class="flex items-center gap-2 shrink-0">
-                    <img src="<?php echo e(asset('images/logo.svg')); ?>" 
-                         alt="ElectroHome Logo" 
-                         class="h-9 md:h-12 w-auto object-contain transition-transform hover:scale-105"
-                         width="220" 
-                         height="48">
-                </a>
+                <?php if (isset($component)) { $__componentOriginal987d96ec78ed1cf75b349e2e5981978f = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal987d96ec78ed1cf75b349e2e5981978f = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.logo','data' => ['theme' => 'light']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('logo'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['theme' => 'light']); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal987d96ec78ed1cf75b349e2e5981978f)): ?>
+<?php $attributes = $__attributesOriginal987d96ec78ed1cf75b349e2e5981978f; ?>
+<?php unset($__attributesOriginal987d96ec78ed1cf75b349e2e5981978f); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal987d96ec78ed1cf75b349e2e5981978f)): ?>
+<?php $component = $__componentOriginal987d96ec78ed1cf75b349e2e5981978f; ?>
+<?php unset($__componentOriginal987d96ec78ed1cf75b349e2e5981978f); ?>
+<?php endif; ?>
 
                 
                 <div class="hidden md:flex flex-1 max-w-xl mx-8">
@@ -332,13 +347,28 @@ unset($__split);
                 
                 <div>
                     <div class="mb-4">
-                        <a href="<?php echo e(route('home')); ?>" class="inline-block">
-                            <img src="<?php echo e(asset('images/logo-dark.svg')); ?>" 
-                                 alt="ElectroHome Logo" 
-                                 class="h-10 w-auto object-contain"
-                                 width="220" 
-                                 height="48">
-                        </a>
+                        <?php if (isset($component)) { $__componentOriginal987d96ec78ed1cf75b349e2e5981978f = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal987d96ec78ed1cf75b349e2e5981978f = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.logo','data' => ['theme' => 'dark']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('logo'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['theme' => 'dark']); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal987d96ec78ed1cf75b349e2e5981978f)): ?>
+<?php $attributes = $__attributesOriginal987d96ec78ed1cf75b349e2e5981978f; ?>
+<?php unset($__attributesOriginal987d96ec78ed1cf75b349e2e5981978f); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal987d96ec78ed1cf75b349e2e5981978f)): ?>
+<?php $component = $__componentOriginal987d96ec78ed1cf75b349e2e5981978f; ?>
+<?php unset($__componentOriginal987d96ec78ed1cf75b349e2e5981978f); ?>
+<?php endif; ?>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         বাংলাদেশের প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সেরা মানের প্রোডাক্ট, দ্রুত ডেলিভারি।

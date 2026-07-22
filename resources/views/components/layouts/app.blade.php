@@ -53,13 +53,7 @@
             <div class="flex items-center justify-between h-14 md:h-16">
 
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
-                    <img src="{{ asset('images/logo.svg') }}" 
-                         alt="ElectroHome Logo" 
-                         class="h-9 md:h-12 w-auto object-contain transition-transform hover:scale-105"
-                         width="220" 
-                         height="48">
-                </a>
+                <x-logo theme="light" />
 
                 {{-- Search Bar (Desktop) --}}
                 <div class="hidden md:flex flex-1 max-w-xl mx-8">
@@ -250,13 +244,7 @@
                 {{-- Brand --}}
                 <div>
                     <div class="mb-4">
-                        <a href="{{ route('home') }}" class="inline-block">
-                            <img src="{{ asset('images/logo-dark.svg') }}" 
-                                 alt="ElectroHome Logo" 
-                                 class="h-10 w-auto object-contain"
-                                 width="220" 
-                                 height="48">
-                        </a>
+                        <x-logo theme="dark" />
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         বাংলাদেশের প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সেরা মানের প্রোডাক্ট, দ্রুত ডেলিভারি।
