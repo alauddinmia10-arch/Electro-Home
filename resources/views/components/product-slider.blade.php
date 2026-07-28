@@ -1,6 +1,6 @@
 @props(['title', 'icon', 'products', 'viewAllUrl' => '#'])
 
-<div class="bg-white rounded-lg shadow-sm border border-gray-100 px-3 py-2 relative" x-data="{
+<div class="md:bg-white md:rounded-lg md:shadow-sm md:border md:border-gray-100 md:px-3 py-2 relative" x-data="{
     scrollLeft() {
         $refs.slider.scrollBy({ left: -300, behavior: 'smooth' });
     },
@@ -24,9 +24,9 @@
         </button>
 
         {{-- Slider Container --}}
-        <div x-ref="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+        <div x-ref="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
             @foreach($products as $product)
-                <div class="shrink-0 snap-start w-40 md:w-48 lg:w-56 h-full">
+                <div class="shrink-0 snap-start w-[calc(50%-4px)] md:w-48 lg:w-56 h-full">
                     @include('partials.product-card', ['product' => $product])
                 </div>
             @endforeach

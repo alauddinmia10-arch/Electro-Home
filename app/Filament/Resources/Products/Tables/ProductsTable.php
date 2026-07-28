@@ -33,7 +33,7 @@ class ProductsTable
                 TextColumn::make('stock_quantity')
                     ->numeric()
                     ->sortable(),
-                ImageColumn::make('cover_image'),
+                ImageColumn::make('cover_image')->disk('public'),
                 TextColumn::make('status')
                     ->searchable(),
                 IconColumn::make('is_featured')

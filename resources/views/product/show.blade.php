@@ -1,7 +1,7 @@
 <x-layouts.app>
     {{-- Breadcrumbs --}}
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-1">
-        <div class="bg-[#f0f5fa] rounded px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
+    <div class="max-w-[1440px] mx-auto px-0 md:px-4 xl:px-[70px] mt-1">
+        <div class="bg-[#f0f5fa] md:rounded px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
             <a href="{{ route('home') }}" onclick="event.stopPropagation(); window.location.href = this.href; return false;" class="text-gray-700 hover:text-blue-600 transition-colors shrink-0 flex items-center" title="Home">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
             </a>
@@ -20,13 +20,51 @@
         </div>
     </div>
 
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
-        <div class="bg-white rounded shadow-sm border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-6 lg:pt-4">
+    <div class="max-w-[1440px] mx-auto px-0 md:px-4 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+        <div class="bg-white md:rounded shadow-sm border-y md:border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-3 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
-            <div x-data="{ mainImage: '{{ $product->cover_image ? Storage::url($product->cover_image) : '' }}' }" class="lg:col-span-5 flex flex-col">
-                <div class="bg-white border border-gray-100 relative flex justify-center items-center p-2 rounded w-full lg:w-[85%] mx-auto aspect-square">
+            <div x-data="{ mainImage: '{{ $product->cover_image ? Storage::url($product->cover_image) : '' }}' }" class="lg:col-span-5 flex flex-col md:flex-row gap-3 md:gap-0 -ml-2 lg:-ml-6">
+                
+                {{-- Thumbnails (Vertical on left for Desktop, Horizontal below for Mobile) --}}
+                @if($product->images && $product->images->count() > 0)
+                    <div class="order-2 md:order-1 w-full md:w-[80px] shrink-0" x-data="{
+                        scrollNext() { $refs.thumbSlider.scrollBy({ top: 100, left: 100, behavior: 'smooth' }) },
+                        scrollPrev() { $refs.thumbSlider.scrollBy({ top: -100, left: -100, behavior: 'smooth' }) }
+                    }">
+                        <div class="relative bg-white md:bg-transparent rounded p-0 shadow-sm md:shadow-none border border-gray-100 md:border-none flex flex-col justify-start">
+                            <!-- Prev Arrow (Up) -->
+                            <button @click="scrollPrev" class="hidden md:flex mx-auto mb-1 w-full h-5 items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+                            </button>
+                            
+                            <!-- Thumbnails Container -->
+                            <div x-ref="thumbSlider" class="flex md:flex-col gap-2 overflow-auto scrollbar-hide md:max-h-[432px] snap-x md:snap-y w-full">
+                                <button @click="mainImage = '{{ Storage::url($product->cover_image) }}'" 
+                                        class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded border-2 overflow-hidden snap-start transition-all"
+                                        :class="mainImage === '{{ Storage::url($product->cover_image) }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
+                                    <img src="{{ Storage::url($product->cover_image) }}" class="w-full h-full object-cover mix-blend-multiply">
+                                </button>
+                                @foreach($product->images as $image)
+                                    <button @click="mainImage = '{{ Storage::url($image->image_path) }}'" 
+                                            class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded border-2 overflow-hidden snap-start transition-all"
+                                            :class="mainImage === '{{ Storage::url($image->image_path) }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
+                                        <img src="{{ Storage::url($image->image_path) }}" class="w-full h-full object-cover mix-blend-multiply">
+                                    </button>
+                                @endforeach
+                            </div>
+
+                            <!-- Next Arrow (Down) -->
+                            <button @click="scrollNext" class="hidden md:flex mx-auto mt-1 w-full h-5 items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                @endif
+
+                {{-- Main Image --}}
+                <div class="order-1 md:order-2 bg-white border border-gray-100 relative flex justify-center items-center p-0 rounded flex-grow aspect-square md:aspect-auto md:h-[480px]">
                     @if($product->is_flash_sale)
                         <div class="absolute top-3 left-3 z-10">
                             <span class="badge-flash text-xs px-2 py-1 shadow-sm">⚡ Flash Deal</span>
@@ -42,50 +80,15 @@
                         </div>
                     </template>
                 </div>
-                
-                {{-- Thumbnails --}}
-                @if($product->images && $product->images->count() > 0)
-                    <div class="relative mt-2 w-full lg:w-[85%] mx-auto" x-data="{
-                        scrollNext() { $refs.thumbSlider.scrollBy({ left: 100, behavior: 'smooth' }) },
-                        scrollPrev() { $refs.thumbSlider.scrollBy({ left: -100, behavior: 'smooth' }) }
-                    }">
-                        <div class="relative bg-white border border-gray-100 rounded p-2 shadow-sm">
-                            <!-- Left Arrow -->
-                            <button @click="scrollPrev" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 z-10 w-8 h-8 bg-white shadow-md rounded-full text-gray-700 hover:text-blue-600 hover:bg-gray-50 border border-gray-200 transition-colors flex items-center justify-center">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            
-                            <div x-ref="thumbSlider" class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide px-3 snap-x">
-                                <button @click="mainImage = '{{ Storage::url($product->cover_image) }}'" 
-                                        class="w-14 h-14 shrink-0 bg-gray-50 rounded border-2 overflow-hidden snap-start"
-                                        :class="mainImage === '{{ Storage::url($product->cover_image) }}' ? 'border-[var(--color-trust-blue)]' : 'border-transparent hover:border-gray-200'">
-                                    <img src="{{ Storage::url($product->cover_image) }}" class="w-full h-full object-cover mix-blend-multiply">
-                                </button>
-                                @foreach($product->images as $image)
-                                    <button @click="mainImage = '{{ Storage::url($image->image_path) }}'" 
-                                            class="w-14 h-14 shrink-0 bg-gray-50 rounded border-2 overflow-hidden snap-start"
-                                            :class="mainImage === '{{ Storage::url($image->image_path) }}' ? 'border-[var(--color-trust-blue)]' : 'border-transparent hover:border-gray-200'">
-                                        <img src="{{ Storage::url($image->image_path) }}" class="w-full h-full object-cover mix-blend-multiply">
-                                    </button>
-                                @endforeach
-                            </div>
-
-                            <!-- Right Arrow -->
-                            <button @click="scrollNext" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-3 z-10 w-8 h-8 bg-white shadow-md rounded-full text-gray-700 hover:text-blue-600 hover:bg-gray-50 border border-gray-200 transition-colors flex items-center justify-center">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                @endif
             </div>
 
             {{-- Product Info --}}
-            <div class="lg:col-span-6 lg:-ml-8 flex flex-col">
+            <div class="lg:col-span-7 flex flex-col lg:-ml-3">
                 <div class="flex-grow flex flex-col">
                     <div>
                         <div class="mb-5">
                             <div class="border-b border-gray-200 pb-3 mb-3">
-                                <h1 class="text-[20px] font-normal text-gray-900 leading-tight mb-2">
+                                <h1 class="text-[20px] lg:text-[26px] font-semibold text-gray-800 leading-tight mb-2">
                                     {{ $product->name }}
                                 </h1>
                                 
@@ -174,22 +177,28 @@
 
         {{-- Related Products / Suggested Posts --}}
         <div class="mt-6 bg-white rounded shadow-sm border border-gray-100 p-4 lg:p-6 relative" x-data="{
-            scrollNext() { this.$refs.slider.scrollBy({ left: 300, behavior: 'smooth' }) },
-            scrollPrev() { this.$refs.slider.scrollBy({ left: -300, behavior: 'smooth' }) },
+            scrollNext() { 
+                const itemWidth = this.$refs.slider.firstElementChild ? this.$refs.slider.firstElementChild.offsetWidth + 16 : 300;
+                this.$refs.slider.scrollBy({ left: itemWidth, behavior: 'smooth' }) 
+            },
+            scrollPrev() { 
+                const itemWidth = this.$refs.slider.firstElementChild ? this.$refs.slider.firstElementChild.offsetWidth + 16 : 300;
+                this.$refs.slider.scrollBy({ left: -itemWidth, behavior: 'smooth' }) 
+            },
             startAutoScroll() {
                 this.autoScrollInterval = setInterval(() => {
                     const slider = this.$refs.slider;
                     if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
                         slider.scrollTo({ left: 0, behavior: 'smooth' });
                     } else {
-                        slider.scrollBy({ left: 300, behavior: 'smooth' });
+                        this.scrollNext();
                     }
                 }, 3000);
             },
             stopAutoScroll() {
                 clearInterval(this.autoScrollInterval);
             }
-        }" x-init="startAutoScroll()" @mouseenter="stopAutoScroll()" @mouseleave="startAutoScroll()">
+        }" x-init="startAutoScroll()" @mouseenter="stopAutoScroll()" @mouseleave="startAutoScroll()" @touchstart="stopAutoScroll()" @touchend="startAutoScroll()">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold font-bangla">Suggested Products</h2>
                 <div class="flex gap-2">
@@ -201,17 +210,17 @@
                     </button>
                 </div>
             </div>
-            <div x-ref="slider" class="flex overflow-x-auto gap-4 pb-4 scrollbar-hide snap-x" style="scroll-behavior: smooth;">
+            <div x-ref="slider" class="flex overflow-x-auto gap-2 md:gap-4 pb-4 scrollbar-hide snap-x snap-mandatory" style="scroll-behavior: smooth;">
                 @if($relatedProducts->count() > 0)
-                    @foreach($relatedProducts->take(10) as $relatedProduct)
-                        <div class="shrink-0 w-56 snap-start">
+                    @foreach($relatedProducts->take(5) as $relatedProduct)
+                        <div class="shrink-0 w-[calc(50%-4px)] md:w-48 lg:w-56 snap-start h-full">
                             @include('partials.product-card', ['product' => $relatedProduct])
                         </div>
                     @endforeach
                 @else
                     {{-- Placeholder items for design testing --}}
-                    @for($i = 0; $i < 10; $i++)
-                        <div class="shrink-0 w-56 snap-start">
+                    @for($i = 0; $i < 5; $i++)
+                        <div class="shrink-0 w-[calc(50%-4px)] md:w-48 lg:w-56 snap-start h-full">
                             <div class="bg-gray-50 border border-gray-100 rounded p-4 h-64 flex flex-col items-center justify-center text-gray-400">
                                 <svg class="w-12 h-12 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 <span class="text-sm font-medium">Related Product {{ $i + 1 }}</span>
@@ -246,17 +255,43 @@
                 {{-- Specifications Tab --}}
                 <div x-show="activeTab === 'specifications'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                     @if(is_array($product->specifications) && count($product->specifications) > 0)
-                        <div class="rounded border border-gray-200 overflow-hidden">
-                            <table class="w-full text-sm text-left">
-                                <tbody>
-                                    @foreach($product->specifications as $key => $value)
-                                        <tr class="border-b border-gray-100 last:border-b-0">
-                                            <th class="w-1/3 px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100">{{ $key }}</th>
-                                            <td class="px-6 py-4 text-gray-600">{{ $value }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        @php
+                            $specs = $product->specifications;
+                            $half = ceil(count($specs) / 2);
+                            $leftSpecs = array_slice($specs, 0, $half, true);
+                            $rightSpecs = array_slice($specs, $half, null, true);
+                        @endphp
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-6">
+                            <!-- Left Column -->
+                            <div class="mb-4 lg:mb-0">
+                                <table class="w-full text-sm text-left h-full">
+                                    <tbody>
+                                        @foreach($leftSpecs as $key => $value)
+                                            <tr class="border-b border-gray-100 last:border-b-0">
+                                                <th class="w-2/5 px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100 align-top">{{ $key }}</th>
+                                                <td class="px-6 py-4 text-gray-600 align-top">{{ $value }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Right Column -->
+                            <div>
+                                @if(count($rightSpecs) > 0)
+                                <table class="w-full text-sm text-left h-full">
+                                    <tbody>
+                                        @foreach($rightSpecs as $key => $value)
+                                            <tr class="border-b border-gray-100 last:border-b-0">
+                                                <th class="w-2/5 px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100 align-top">{{ $key }}</th>
+                                                <td class="px-6 py-4 text-gray-600 align-top">{{ $value }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @endif
+                            </div>
                         </div>
                     @else
                         <div class="text-gray-500 italic">No specifications available for this product.</div>

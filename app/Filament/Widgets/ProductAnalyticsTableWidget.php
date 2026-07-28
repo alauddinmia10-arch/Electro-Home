@@ -56,6 +56,7 @@ class ProductAnalyticsTableWidget extends BaseWidget
             )
             ->columns([
                 Tables\Columns\ImageColumn::make('cover_image')
+                    ->disk('public')
                     ->label('Image')
                     ->square(),
                 Tables\Columns\TextColumn::make('name')

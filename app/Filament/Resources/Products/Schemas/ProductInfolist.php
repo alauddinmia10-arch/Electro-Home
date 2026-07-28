@@ -34,6 +34,7 @@ class ProductInfolist
                 TextEntry::make('alert_stock')
                     ->numeric(),
                 ImageEntry::make('cover_image')
+                    ->disk('public')
                     ->placeholder('-'),
                 TextEntry::make('description')
                     ->placeholder('-')

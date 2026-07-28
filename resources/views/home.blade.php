@@ -1,10 +1,10 @@
 <x-layouts.app>
-    <div class="flex flex-col gap-4 pt-4 pb-8">
+    <div class="flex flex-col gap-2 md:gap-4 pt-2 md:pt-4 pb-8">
     {{-- Hero Banners --}}
     <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-96">
             {{-- Main Slider --}}
-            <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm h-64 md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
+            <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm aspect-video md:aspect-auto md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
                 @forelse($banners as $index => $banner)
                     <div x-show="activeSlide === {{ $index }}" x-transition.opacity.duration.500ms class="absolute inset-0">
                         <img src="{{ Storage::url($banner->image_path) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover">
@@ -51,45 +51,45 @@
     </section>
 
     {{-- Features / Trust Badges --}}
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 flex flex-wrap gap-4 md:gap-0 justify-between items-center text-sm">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
+        <div class="md:bg-white md:rounded-lg py-0 md:p-6 md:shadow-sm md:border md:border-gray-100 grid grid-cols-2 md:flex md:flex-wrap gap-y-1 gap-x-1 md:gap-0 justify-between md:items-center text-sm">
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-gray-800">Fast Delivery</h4>
-                    <p class="text-gray-500 text-xs">All over Bangladesh</p>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Fast Delivery</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">All over Bangladesh</p>
                 </div>
             </div>
             <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-green-50 text-[var(--color-sea-green)] flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-green-50 text-[var(--color-sea-green)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-gray-800">Quality Products</h4>
-                    <p class="text-gray-500 text-xs">Verified by experts</p>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Quality Products</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Verified by experts</p>
                 </div>
             </div>
             <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-orange-50 text-[var(--color-warm-orange)] flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-orange-50 text-[var(--color-warm-orange)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-gray-800">Secure Checkout</h4>
-                    <p class="text-gray-500 text-xs">SSLCommerz & COD</p>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Secure Checkout</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">SSLCommerz & COD</p>
                 </div>
             </div>
             <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-purple-50 text-[var(--color-soft-purple)] flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-purple-50 text-[var(--color-soft-purple)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-gray-800">Support 24/7</h4>
-                    <p class="text-gray-500 text-xs">Always here for you</p>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Support 24/7</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Always here for you</p>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
 
     {{-- Flash Sale --}}
     @if($flashSaleProducts->count() > 0)
-    <section id="flash-sales" class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
+    <section id="flash-sales" class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
         <div class="bg-white rounded-lg p-6 shadow-sm border border-red-100 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10"></div>
             
@@ -115,7 +115,7 @@
                 <a href="{{ route('shop', ['flash_sale' => 1]) }}" class="text-red-600 hover:underline text-sm font-semibold">See All Deals &rarr;</a>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4">
                 @foreach($flashSaleProducts as $product)
                     @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
                 @endforeach
@@ -126,7 +126,7 @@
 
     {{-- Top Selling --}}
     @if($bestSellers->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
+    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
         <x-product-slider 
             title="Top Selling" 
             icon="🏆" 
@@ -138,7 +138,7 @@
 
     {{-- New Arrivals --}}
     @if($newArrivals->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
+    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
         <x-product-slider 
             title="New Arrivals" 
             icon="🆕" 

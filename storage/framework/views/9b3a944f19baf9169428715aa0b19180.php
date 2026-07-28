@@ -28,7 +28,7 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars, $__key, $__value); ?>
 
-<div class="bg-white rounded-lg shadow-sm border border-gray-100 px-3 py-2 relative" x-data="{
+<div class="md:bg-white md:rounded-lg md:shadow-sm md:border md:border-gray-100 md:px-3 py-2 relative" x-data="{
     scrollLeft() {
         $refs.slider.scrollBy({ left: -300, behavior: 'smooth' });
     },
@@ -52,9 +52,9 @@ unset($__defined_vars, $__key, $__value); ?>
         </button>
 
         
-        <div x-ref="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+        <div x-ref="slider" class="flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                <div class="shrink-0 snap-start w-40 md:w-48 lg:w-56 h-full">
+                <div class="shrink-0 snap-start w-[calc(50%-4px)] md:w-48 lg:w-56 h-full">
                     <?php echo $__env->make('partials.product-card', ['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                 </div>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
