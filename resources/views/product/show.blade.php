@@ -176,7 +176,7 @@
         </div> {{-- Close Product details bg-white container --}}
 
         {{-- Related Products / Suggested Posts --}}
-        <div class="mt-6 bg-white rounded shadow-sm border border-gray-100 p-4 lg:p-6 relative" x-data="{
+        <div class="mt-6 bg-white rounded shadow-sm border border-gray-100 p-2.5 md:p-3 relative" x-data="{
             scrollNext() { 
                 const itemWidth = this.$refs.slider.firstElementChild ? this.$refs.slider.firstElementChild.offsetWidth + 16 : 300;
                 this.$refs.slider.scrollBy({ left: itemWidth, behavior: 'smooth' }) 
@@ -199,18 +199,18 @@
                 clearInterval(this.autoScrollInterval);
             }
         }" x-init="startAutoScroll()" @mouseenter="stopAutoScroll()" @mouseleave="startAutoScroll()" @touchstart="stopAutoScroll()" @touchend="startAutoScroll()">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-bold font-bangla">Suggested Products</h2>
+            <div class="flex items-center justify-between mb-2.5 px-1">
+                <h2 class="text-lg md:text-xl font-bold font-bangla">Suggested Products</h2>
                 <div class="flex gap-2">
-                    <button @click="scrollPrev" class="p-2 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <button @click="scrollPrev" class="p-1.5 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
-                    <button @click="scrollNext" class="p-2 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <button @click="scrollNext" class="p-1.5 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
             </div>
-            <div x-ref="slider" class="flex overflow-x-auto gap-2 md:gap-4 pb-4 scrollbar-hide snap-x snap-mandatory" style="scroll-behavior: smooth;">
+            <div x-ref="slider" class="flex overflow-x-auto gap-2 md:gap-3 pb-1 scrollbar-hide snap-x snap-mandatory" style="scroll-behavior: smooth;">
                 @if($relatedProducts->count() > 0)
                     @foreach($relatedProducts->take(5) as $relatedProduct)
                         <div class="shrink-0 w-[calc(50%-4px)] md:w-48 lg:w-56 snap-start h-full">

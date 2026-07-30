@@ -1,7 +1,7 @@
 <x-layouts.app>
-    <div class="bg-gray-100 py-6 min-h-[calc(100vh-200px)]">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
-            <div class="flex items-center gap-2 mb-6">
+    <div class="bg-gray-100 py-2 md:py-6 min-h-[calc(100vh-200px)]">
+        <div class="max-w-[1440px] mx-auto px-2 md:px-4 xl:px-[70px]">
+            <div class="flex items-center gap-2 mb-2 md:mb-6">
                 <a href="{{ route('cart') }}" class="text-gray-500 hover:text-[var(--color-trust-blue)]">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 </a>

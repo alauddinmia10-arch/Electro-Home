@@ -1,46 +1,135 @@
-/* Horizontal scroll for FilePond */
-.custom-gallery-upload .filepond--list-scroller {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding-bottom: 10px; /* Space for scrollbar */
+    flex-direction: column !important;
+    height: 100% !important;
 }
-.custom-gallery-upload .filepond--list {
+
+/* Stretch the Chart Card */
+.fi-wi-chart > .fi-section {
+    flex-grow: 1 !important;
     display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 15px;
-    transform: none !important; /* Reset FilePond absolute position container */
+    flex-direction: column !important;
 }
-.custom-gallery-upload .filepond--item {
-    position: relative !important;
-    transform: none !important; /* Disable absolute positioning per item */
-    flex: 0 0 auto !important;
-    width: 150px !important;
+.fi-wi-chart .fi-section-content-ctn {
+    flex-grow: 1 !important;
+}
+
+/* Stretch the Table Card */
+.fi-wi-table > .fi-ta {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+.fi-wi-table > .fi-ta > .fi-ta-ctn {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+/* Ensure the inner main content also takes up remaining space if needed */
+.fi-wi-table .fi-ta-main {
+    flex-grow: 1 !important;
+}
+/* Make Stats Overview cards thinner / less padding */
+.fi-wi-stats-overview-stat {
+    padding: 0.75rem !important;
+}
+
+/* Boxed header */
+.fi-header {
+    background-color: white;
+    padding: 1.5rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.dark .fi-header {
+    background-color: rgb(24, 24, 27);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom sleek scrollbar for sidebar to remove visual gaps */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* Aggressively reduce gaps and padding in the admin panel */
+.fi-main {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+}
+.fi-page-header-main-ctn,
+.fi-page-content,
+.fi-page-main,
+.grid {
+    gap: 0.75rem !important;
+    row-gap: 0.75rem !important;
+    column-gap: 0.75rem !important;
+}
+.fi-page-header-main-ctn > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+.fi-wi {
     margin: 0 !important;
 }
 
-/* Make backgrounds transparent so there is no green border/box */
-.custom-gallery-upload .filepond--panel-root,
-.custom-gallery-upload .filepond--item-panel {
-    background-color: transparent !important;
-    border: none !important;
+
+/* Force all large layout gaps to 0.75rem */
+.fi-main .gap-4,
+.fi-main .gap-6,
+.fi-main .gap-8,
+.fi-main .gap-x-4,
+.fi-main .gap-x-6,
+.fi-main .gap-x-8,
+.fi-main .gap-y-4,
+.fi-main .gap-y-6,
+.fi-main .gap-y-8,
+.fi-main .md\:gap-4,
+.fi-main .md\:gap-6,
+.fi-main .md\:gap-8,
+.fi-main .lg\:gap-4,
+.fi-main .lg\:gap-6,
+.fi-main .lg\:gap-8,
+.fi-main .xl\:gap-4,
+.fi-main .xl\:gap-6,
+.fi-main .xl\:gap-8 {
+    gap: 0.75rem !important;
+    row-gap: 0.75rem !important;
+    column-gap: 0.75rem !important;
 }
 
-.custom-gallery-upload [data-filepond-item-state="processing-complete"] .filepond--panel-root {
-    background-color: transparent !important;
-    border: none !important;
+
+/* Force the specific gap for the stats overview grid */
+.fi-wi-stats-overview > section > div > div,
+.fi-wi-stats-overview-stat-content {
+    gap: 0.75rem !important;
+}
+.fi-wi-stats-overview [class*="grid"] {
+    gap: 0.75rem !important;
+}
+.fi-wi-stats-overview .gap-x-6,
+.fi-wi-stats-overview .gap-y-6,
+.fi-wi-stats-overview .gap-6 {
+    gap: 0.75rem !important;
 }
 
-/* Hide the filename text and size (green bar info) but keep it in DOM for sizing */
-.custom-gallery-upload .filepond--file-info, 
-.custom-gallery-upload .filepond--file-status {
-    opacity: 0 !important;
-    pointer-events: none;
-}
 
-/* Enable CSS flex stretching for Chart and Table widgets */
-.fi-wi-chart, .fi-wi-table {
-    display: flex !important;
+/* Aggressive dashboard gap override */
+.fi-page-content > .grid { gap: 0.75rem !important; }
+.fi-page-content .fi-wi-widgets { gap: 0.75rem !important; }
+.fi-page-content > div > .grid { gap: 0.75rem !important; }
     flex-direction: column !important;
     height: 100% !important;
 }
@@ -179,44 +268,45 @@
 .fi-page-content > div > .grid { gap: 0.75rem !important; }
 .fi-wi-widgets { gap: 0.75rem !important; }
 
-/* Horizontal scroll for FilePond */
-.custom-gallery-upload .filepond--list-scroller {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding-bottom: 10px; /* Space for scrollbar */
-}
-.custom-gallery-upload .filepond--list {
+/* Grid Side-by-Side Layout for FilePond Uploads */
+.filepond--root[data-style-panel-layout~="grid"] .filepond--list {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 15px;
-    transform: none !important; /* Reset FilePond absolute position container */
+    flex-wrap: wrap !important;
+    gap: 14px !important;
 }
-.custom-gallery-upload .filepond--item {
-    position: relative !important;
-    transform: none !important; /* Disable absolute positioning per item */
+
+.filepond--root[data-style-panel-layout~="grid"] .filepond--item {
     flex: 0 0 auto !important;
-    width: 150px !important;
+    width: calc(25% - 11px) !important;
+    min-width: 150px !important;
     margin: 0 !important;
 }
 
-/* Make backgrounds transparent so there is no green border/box */
-.custom-gallery-upload .filepond--panel-root,
-.custom-gallery-upload .filepond--item-panel {
-    background-color: transparent !important;
-    border: none !important;
+/* Remove dark background overlays from FilePond items so image fills cleanly */
+.filepond--root .filepond--panel-root,
+.filepond--root .filepond--item-panel,
+.filepond--root [data-filepond-item-state] .filepond--item-panel,
+.filepond--root [data-filepond-item-state="processing-complete"] .filepond--panel-root,
+.filepond--root [data-filepond-item-state="processing-complete"] .filepond--item-panel {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
 }
 
-.custom-gallery-upload [data-filepond-item-state="processing-complete"] .filepond--panel-root {
-    background-color: transparent !important;
-    border: none !important;
+/* Make image preview expand to fill the thumbnail box */
+.filepond--root .filepond--image-preview-wrapper,
+.filepond--root .filepond--image-preview,
+.filepond--root .filepond--image-clip {
+    background-color: #ffffff !important;
+    border-radius: 6px !important;
 }
 
-/* Hide the filename text and size (green bar info) but keep it in DOM for sizing */
-.custom-gallery-upload .filepond--file-info, 
-.custom-gallery-upload .filepond--file-status {
-    opacity: 0 !important;
-    pointer-events: none;
+.filepond--root img,
+.filepond--root canvas {
+    object-fit: cover !important;
 }
 
 /* Enable CSS flex stretching for Chart and Table widgets */

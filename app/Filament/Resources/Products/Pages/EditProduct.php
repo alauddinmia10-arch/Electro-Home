@@ -19,24 +19,19 @@ class EditProduct extends EditRecord
         ];
     }
 
-    protected function mutateFormDataBeforeSave(array $data): array
+    protected function mutateFormDataBeforeFill(array $data): array
     {
-        $allImages = $this->data['all_images'] ?? [];
-        if (!empty($allImages)) {
-            $images = array_values($allImages);
-            $data['cover_image'] = $images[0];
-        } else {
-            $data['cover_image'] = null;
-        }
+        $data['gallery_images'] = $this->record->images->pluck('image_path')->toArray();
         return $data;
     }
 
     protected function afterSave(): void
     {
-        $allImages = $this->data['all_images'] ?? [];
-        $galleryImages = [];
-        if (is_array($allImages) && count($allImages) > 1) {
-            $galleryImages = array_slice(array_values($allImages), 1);
+        $galleryImages = $this->data['gallery_images'] ?? [];
+        if (is_array($galleryImages)) {
+            $galleryImages = array_values($galleryImages);
+        } else {
+            $galleryImages = [];
         }
         
         $existingImages = $this->record->images->pluck('image_path')->toArray();

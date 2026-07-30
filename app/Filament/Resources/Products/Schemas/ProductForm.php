@@ -49,30 +49,25 @@ class ProductForm
                 TextInput::make('alert_stock')
                     ->numeric()
                     ->default(0),
-                FileUpload::make('all_images')
+                FileUpload::make('cover_image')
+                    ->label('Primary Cover Image (প্রধান কভার ছবি — ওয়েবসাইট ও প্রোডাক্ট কার্ডে সবার আগে এটি দেখাবে)')
+                    ->image()
+                    ->disk('public')
+                    ->directory('products')
+                    ->required()
+                    ->imagePreviewHeight('180')
+                    ->columnSpanFull(),
+
+                FileUpload::make('gallery_images')
+                    ->label('Additional Gallery Images (অতিরিক্ত অন্যান্য ছবিসমূহ — একাধিক ছবি ড্র্যাগ অ্যান্ড ড্রপ করে সাজাতে পারবেন)')
                     ->multiple()
                     ->image()
                     ->disk('public')
                     ->directory('products')
                     ->reorderable()
-                    ->imagePreviewHeight('150')
-                    ->extraAttributes(['class' => 'custom-gallery-upload'])
-                    ->label('Product Images (Drag the primary/cover image to the first position)')
-                    ->columnSpanFull()
-                    ->dehydrated(false)
-                    ->afterStateHydrated(function (\Filament\Forms\Components\FileUpload $component, ?\App\Models\Product $record) {
-                        if ($record) {
-                            $images = $record->images->pluck('image_path')->toArray();
-                            if ($record->cover_image && !in_array($record->cover_image, $images)) {
-                                array_unshift($images, $record->cover_image);
-                            } elseif ($record->cover_image) {
-                                // ensure cover image is first
-                                $images = array_diff($images, [$record->cover_image]);
-                                array_unshift($images, $record->cover_image);
-                            }
-                            $component->state($images);
-                        }
-                    }),
+                    ->panelLayout('grid')
+                    ->imagePreviewHeight('140')
+                    ->columnSpanFull(),
                 RichEditor::make('description')
                     ->columnSpanFull(),
                 \Filament\Forms\Components\KeyValue::make('specifications')

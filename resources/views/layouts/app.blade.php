@@ -64,15 +64,16 @@
                 </div>
 
                 {{-- Header Actions --}}
-                <div class="flex items-center gap-2 md:gap-4">
+                <div class="flex items-center gap-2">
                     {{-- Search Toggle (Mobile) --}}
                     <button class="md:hidden p-2 text-gray-600 hover:text-[var(--color-trust-blue)] transition-colors" @click="$dispatch('toggle-mobile-search')">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     </button>
 
                     {{-- Wishlist --}}
-                    <a href="{{ route('wishlist') }}" class="hidden md:flex items-center gap-1.5 text-gray-600 hover:text-[var(--color-soft-coral)] transition-colors p-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <a href="{{ route('wishlist') }}" class="hidden md:flex flex-col items-center justify-center text-gray-600 hover:text-[var(--color-soft-coral)] transition-colors p-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        <span class="text-[12px] font-medium leading-none">Wishlist</span>
                     </a>
 
                     {{-- Cart --}}
@@ -267,8 +268,13 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
             <span>Shop</span>
         </a>
-        <a href="{{ route('cart', ['v' => 2]) }}" class="mobile-nav-item {{ request()->routeIs('cart') ? 'active' : '' }} relative">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+        <a href="{{ route('cart', ['v' => 2]) }}" class="mobile-nav-item {{ request()->routeIs('cart') ? 'active' : '' }} relative" x-data="{ cartCount: {{ app(\App\Services\CartService::class)->getCount() }} }" @cart-updated-optimistic.window="cartCount += $event.detail.qty_change" @cart-updated.window="if($event.detail.count !== undefined) { cartCount = $event.detail.count; }">
+            <div class="relative inline-block animate-cart-dance">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                <span x-show="cartCount > 0" x-text="cartCount" wire:ignore class="absolute text-red-600 font-bold flex items-center justify-center" style="display: none; top: -8px; right: -10px; font-size: 22px; line-height: 1;">
+                    {{ app(\App\Services\CartService::class)->getCount() }}
+                </span>
+            </div>
             <span>Cart</span>
         </a>
         <a href="{{ route('wishlist', ['v' => 2]) }}" class="mobile-nav-item {{ request()->routeIs('wishlist') ? 'active' : '' }}">
