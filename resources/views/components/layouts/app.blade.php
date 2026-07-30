@@ -116,14 +116,14 @@
         {{-- Category Navigation (Desktop) --}}
         <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
             <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
-                <div class="flex items-center gap-6 h-11 text-sm">
+                <div class="flex items-center gap-6 h-10 text-sm py-0.5">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-center">
-                        <button class="bg-white border border-gray-200/90 rounded-full p-0.5 pr-3.5 flex items-center gap-2.5 shadow-sm hover:shadow transition-all text-gray-800 font-bold text-sm">
-                            <div class="w-7 h-7 rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm">
-                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        <button class="h-full bg-white border border-gray-200/90 rounded-full pl-1 pr-4 flex items-center gap-2.5 shadow-sm hover:shadow transition-all text-gray-800 font-bold text-sm md:text-base">
+                            <div class="h-[calc(100%-4px)] aspect-square rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
                             </div>
                             <span>All Categories</span>
-                            <svg class="w-3.5 h-3.5 text-gray-500 transition-transform" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            <svg class="w-4 h-4 text-gray-500 transition-transform ml-0.5" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </button>
 
                         {{-- Main Dropdown Wrapper --}}
