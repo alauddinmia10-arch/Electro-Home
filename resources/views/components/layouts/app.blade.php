@@ -118,10 +118,12 @@
             <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
                 <div class="flex items-center gap-6 h-9 text-sm">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-center">
-                        <button class="flex items-center gap-2 font-bold text-base text-gray-700 hover:text-[#094d82] transition-colors h-full">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                            Product Categories
-                            <svg class="w-4 h-4 transition-transform" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        <button class="bg-white border border-gray-200/80 rounded-full pl-1.5 pr-3.5 py-1 flex items-center gap-2.5 shadow-sm hover:shadow transition-all text-gray-800 font-bold text-sm md:text-base">
+                            <div class="w-7 h-7 rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            </div>
+                            <span>All Categories</span>
+                            <svg class="w-4 h-4 text-gray-500 transition-transform" :class="open && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </button>
 
                         {{-- Main Dropdown Wrapper --}}
