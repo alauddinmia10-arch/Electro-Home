@@ -67,7 +67,10 @@ class ProductAnalyticsTableWidget extends BaseWidget
                 Tables\Columns\TextColumn::make('total_views')
                     ->label('Total Views')
                     ->state(function (Product $record) use ($startDate, $endDate) {
-                        return \App\Models\PageVisit::where('url', 'LIKE', '%/product/' . $record->slug . '%')
+                        return \App\Models\PageVisit::where(function($query) use ($record) {
+                                $query->where('url', 'LIKE', '%/product/' . $record->slug)
+                                      ->orWhere('url', 'LIKE', '%/product/' . $record->slug . '/%');
+                            })
                             ->when($startDate, fn($q) => $q->where('visited_date', '>=', $startDate->format('Y-m-d')))
                             ->when($endDate, fn($q) => $q->where('visited_date', '<=', $endDate->format('Y-m-d')))
                             ->count();
@@ -75,7 +78,7 @@ class ProductAnalyticsTableWidget extends BaseWidget
                     ->sortable(query: function (Builder $query, string $direction) use ($startDate, $endDate) {
                         return $query->orderBy(
                             \App\Models\PageVisit::selectRaw('COUNT(*)')
-                                ->whereRaw("url LIKE '%/product/' || products.slug || '%'")
+                                ->whereRaw("(url LIKE '%/product/' || products.slug OR url LIKE '%/product/' || products.slug || '/%')")
                                 ->when($startDate, fn($q) => $q->where('visited_date', '>=', $startDate->format('Y-m-d')))
                                 ->when($endDate, fn($q) => $q->where('visited_date', '<=', $endDate->format('Y-m-d'))),
                             $direction

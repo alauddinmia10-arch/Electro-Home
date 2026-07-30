@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
@@ -22,6 +23,10 @@ class HomeController extends Controller
                 ->orderByDesc('products_sum_total_sold')
                 ->take(12)
                 ->get();
+        });
+
+        $brands = Cache::remember('home.brands', 3600, function () {
+            return Brand::where('is_active', true)->get();
         });
 
         $flashSaleProducts = Cache::remember('home.flash_sale', 3600, function () {
@@ -59,6 +64,7 @@ class HomeController extends Controller
         return view('home', compact(
             'banners',
             'categories',
+            'brands',
             'flashSaleProducts',
             'newArrivals',
             'bestSellers',

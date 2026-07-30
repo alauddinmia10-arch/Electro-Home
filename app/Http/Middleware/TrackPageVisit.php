@@ -16,9 +16,10 @@ class TrackPageVisit
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->is('admin*') && !$request->is('livewire*') && !$request->is('api*') && !$request->is('_debugbar*') && $request->method() === 'GET') {
-            $lastCountedTime = $request->session()->get('last_counted_view_at');
+            $sessionKey = 'last_counted_view_at_' . md5($request->url());
+            $lastCountedTime = $request->session()->get($sessionKey);
             
-            // Check if 1 hour (3600 seconds) has passed since the last counted view in this browser session
+            // Check if 1 hour (3600 seconds) has passed since the last counted view in this browser session FOR THIS URL
             if (!$lastCountedTime || (now()->timestamp - $lastCountedTime) >= 3600) {
                 $today = now()->format('Y-m-d');
                 
@@ -29,8 +30,8 @@ class TrackPageVisit
                     'user_agent' => $request->userAgent(),
                 ]);
                 
-                // Save the current timestamp to the session
-                $request->session()->put('last_counted_view_at', now()->timestamp);
+                // Save the current timestamp to the session for this URL
+                $request->session()->put($sessionKey, now()->timestamp);
             }
         }
 

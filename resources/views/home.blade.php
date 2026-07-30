@@ -50,51 +50,6 @@
         </div>
     </section>
 
-    {{-- Features / Trust Badges --}}
-    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
-        <div class="md:bg-white md:rounded-lg py-0 md:p-6 md:shadow-sm md:border md:border-gray-100 grid grid-cols-2 md:flex md:flex-wrap gap-y-1 gap-x-1 md:gap-0 justify-between md:items-center text-sm">
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Fast Delivery</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">All over Bangladesh</p>
-                </div>
-            </div>
-            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-green-50 text-[var(--color-sea-green)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Quality Products</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Verified by experts</p>
-                </div>
-            </div>
-            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-orange-50 text-[var(--color-warm-orange)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Secure Checkout</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">SSLCommerz & COD</p>
-                </div>
-            </div>
-            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-purple-50 text-[var(--color-soft-purple)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Support 24/7</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Always here for you</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
 
     {{-- Flash Sale --}}
@@ -174,6 +129,72 @@
                     <h3 class="text-xs md:text-sm font-semibold text-gray-800">{{ $category->name }}</h3>
                 </a>
             @endforeach
+        </div>
+    </section>
+
+    {{-- Top Brands --}}
+    @if(isset($brands) && $brands->count() > 0)
+    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Top Brands</h2>
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
+                @foreach($brands as $brand)
+                    <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
+                       class="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-3 md:p-4 flex items-center justify-center h-20 md:h-28 group">
+                        @if($brand->logo)
+                            <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
+                        @else
+                            <span class="font-bold text-gray-700 text-sm md:text-base group-hover:text-[var(--color-trust-blue)] transition-colors text-center">{{ $brand->name }}</span>
+                        @endif
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    {{-- Features / Trust Badges --}}
+    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
+        <div class="md:bg-white md:rounded-lg py-0 md:p-6 md:shadow-sm md:border md:border-gray-100 grid grid-cols-2 md:flex md:flex-wrap gap-y-1 gap-x-1 md:gap-0 justify-between md:items-center text-sm">
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Fast Delivery</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">All over Bangladesh</p>
+                </div>
+            </div>
+            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-green-50 text-[var(--color-sea-green)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Quality Products</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Verified by experts</p>
+                </div>
+            </div>
+            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-orange-50 text-[var(--color-warm-orange)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Secure Checkout</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">SSLCommerz & COD</p>
+                </div>
+            </div>
+            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
+                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-purple-50 text-[var(--color-soft-purple)] flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Support 24/7</h4>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Always here for you</p>
+                </div>
+            </div>
         </div>
     </section>
 
