@@ -42,6 +42,7 @@ class BrandResource extends Resource
                     ->unique(ignoreRecord: true),
                 \Filament\Forms\Components\FileUpload::make('logo')
                     ->image()
+                    ->disk('public')
                     ->directory('brands/logos'),
                 Toggle::make('is_active')
                     ->default(true)
@@ -56,7 +57,8 @@ class BrandResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                \Filament\Tables\Columns\ImageColumn::make('logo'),
+                \Filament\Tables\Columns\ImageColumn::make('logo')
+                    ->disk('public'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')

@@ -115,6 +115,27 @@
     </section>
     @endif
 
+    {{-- Top Brands --}}
+    @if(isset($brands) && $brands->count() > 0)
+    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Top Brands</h2>
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
+                @foreach($brands as $brand)
+                    <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
+                       class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-3 md:p-4 flex items-center justify-center aspect-square group">
+                        @if($brand->logo)
+                            <img src="{{ asset('storage/' . ltrim($brand->logo, '/')) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
+                        @else
+                            <span class="font-bold text-gray-700 text-xs md:text-sm group-hover:text-[var(--color-trust-blue)] transition-colors text-center uppercase tracking-wide">{{ $brand->name }}</span>
+                        @endif
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     {{-- Browse Categories --}}
     <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
         <div class="flex items-center justify-between mb-6">
@@ -131,27 +152,6 @@
             @endforeach
         </div>
     </section>
-
-    {{-- Top Brands --}}
-    @if(isset($brands) && $brands->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6">
-            <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Top Brands</h2>
-            <div class="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
-                @foreach($brands as $brand)
-                    <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
-                       class="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-3 md:p-4 flex items-center justify-center h-20 md:h-28 group">
-                        @if($brand->logo)
-                            <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
-                        @else
-                            <span class="font-bold text-gray-700 text-sm md:text-base group-hover:text-[var(--color-trust-blue)] transition-colors text-center">{{ $brand->name }}</span>
-                        @endif
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif
 
     {{-- Features / Trust Badges --}}
     <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
