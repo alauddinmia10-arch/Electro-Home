@@ -134,15 +134,11 @@
                                 <div dir="ltr">
                                     @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
                                         <div @mouseenter="activeCat = {{ $cat->id }}; activeSubcat = null; flyoutTop = $el.getBoundingClientRect().top - $refs.menuWrapper.getBoundingClientRect().top">
-                                            <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group flex items-center justify-between px-6 py-2.5 font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeCat === {{ $cat->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
+                                            <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group flex items-center justify-between px-6 py-2.5 text-lg font-bold text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeCat === {{ $cat->id }} ? 'bg-gray-50 text-[#094d82]' : ''">
                                                 <div class="flex items-center gap-3">
-                                                    @if($cat->icon)
-                                                        @if(str_starts_with($cat->icon, 'heroicon-'))
-                                                            @svg($cat->icon, 'w-5 h-5 shrink-0 text-gray-500 group-hover:text-[#094d82]')
-                                                        @else
-                                                            <span class="shrink-0 text-xl">{{ $cat->icon }}</span>
-                                                        @endif
-                                                    @endif
+                                                    <span class="flex items-center justify-center">
+                                                        <x-category-icon :category="$cat" />
+                                                    </span>
                                                     <span class="truncate">{{ $cat->name }}</span>
                                                 </div>
                                                 @if($cat->children->count() > 0)
@@ -218,7 +214,7 @@
                  class="fixed inset-y-0 left-0 w-[75%] max-w-[300px] bg-white shadow-2xl z-[70] flex flex-col">
                  
                  <div class="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50">
-                     <span class="text-sm font-extrabold text-black uppercase tracking-wider">Categories</span>
+                     <span class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#094d82] to-sky-500 uppercase tracking-widest drop-shadow-sm">Categories</span>
                      <button @click="mobileMenu = false" class="p-1 -mr-1 text-gray-500 hover:text-red-500 transition-colors">
                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                      </button>
@@ -229,8 +225,11 @@
                          @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
                              <div x-data="{ expanded: false }">
                                  <div class="flex items-center justify-between py-1.5">
-                                     <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="block text-sm text-gray-700 hover:text-[#094d82] flex-1">
-                                         {{ $cat->name }}
+                                     <a href="{{ route('shop', ['category' => $cat->slug]) }}" class="group flex items-center gap-3 text-lg font-semibold text-gray-700 hover:text-[#094d82] flex-1">
+                                         <span class="flex items-center justify-center">
+                                             <x-category-icon :category="$cat" />
+                                         </span>
+                                         <span>{{ $cat->name }}</span>
                                      </a>
                                      @if($cat->children->count() > 0)
                                          <button @click="expanded = !expanded" class="p-1 text-gray-500 rounded hover:bg-gray-100">

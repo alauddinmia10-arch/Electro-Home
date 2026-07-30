@@ -233,15 +233,32 @@ unset($__split);
                                 <div dir="ltr">
                                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = \App\Models\Category::parents()->active()->ordered()->with('children.children')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                                         <div @mouseenter="activeCat = <?php echo e($cat->id); ?>; activeSubcat = null; flyoutTop = $el.getBoundingClientRect().top - $refs.menuWrapper.getBoundingClientRect().top">
-                                            <a href="<?php echo e(route('shop', ['category' => $cat->slug])); ?>" class="group flex items-center justify-between px-6 py-2.5 font-semibold text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeCat === <?php echo e($cat->id); ?> ? 'bg-gray-50 text-[#094d82]' : ''">
+                                            <a href="<?php echo e(route('shop', ['category' => $cat->slug])); ?>" class="group flex items-center justify-between px-6 py-2.5 text-lg font-bold text-gray-700 hover:bg-gray-50 hover:text-[#094d82]" :class="activeCat === <?php echo e($cat->id); ?> ? 'bg-gray-50 text-[#094d82]' : ''">
                                                 <div class="flex items-center gap-3">
-                                                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($cat->icon): ?>
-                                                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(str_starts_with($cat->icon, 'heroicon-')): ?>
-                                                            <?php echo e(svg($cat->icon, 'w-5 h-5 shrink-0 text-gray-500 group-hover:text-[#094d82]')); ?>
-                                                        <?php else: ?>
-                                                            <span class="shrink-0 text-xl"><?php echo e($cat->icon); ?></span>
-                                                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-                                                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                                                    <span class="flex items-center justify-center">
+                                                        <?php if (isset($component)) { $__componentOriginal99e3095fe204bf0a105d1301124943c8 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal99e3095fe204bf0a105d1301124943c8 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.category-icon','data' => ['category' => $cat]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('category-icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['category' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($cat)]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal99e3095fe204bf0a105d1301124943c8)): ?>
+<?php $attributes = $__attributesOriginal99e3095fe204bf0a105d1301124943c8; ?>
+<?php unset($__attributesOriginal99e3095fe204bf0a105d1301124943c8); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal99e3095fe204bf0a105d1301124943c8)): ?>
+<?php $component = $__componentOriginal99e3095fe204bf0a105d1301124943c8; ?>
+<?php unset($__componentOriginal99e3095fe204bf0a105d1301124943c8); ?>
+<?php endif; ?>
+                                                    </span>
                                                     <span class="truncate"><?php echo e($cat->name); ?></span>
                                                 </div>
                                                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($cat->children->count() > 0): ?>
@@ -318,7 +335,7 @@ unset($__split);
                  class="fixed inset-y-0 left-0 w-[75%] max-w-[300px] bg-white shadow-2xl z-[70] flex flex-col">
                  
                  <div class="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50">
-                     <span class="text-sm font-extrabold text-black uppercase tracking-wider">Categories</span>
+                     <span class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#094d82] to-sky-500 uppercase tracking-widest drop-shadow-sm">Categories</span>
                      <button @click="mobileMenu = false" class="p-1 -mr-1 text-gray-500 hover:text-red-500 transition-colors">
                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                      </button>
@@ -329,9 +346,32 @@ unset($__split);
                          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = \App\Models\Category::parents()->active()->ordered()->with('children.children')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                              <div x-data="{ expanded: false }">
                                  <div class="flex items-center justify-between py-1.5">
-                                     <a href="<?php echo e(route('shop', ['category' => $cat->slug])); ?>" class="block text-sm text-gray-700 hover:text-[#094d82] flex-1">
-                                         <?php echo e($cat->name); ?>
+                                     <a href="<?php echo e(route('shop', ['category' => $cat->slug])); ?>" class="group flex items-center gap-3 text-lg font-semibold text-gray-700 hover:text-[#094d82] flex-1">
+                                         <span class="flex items-center justify-center">
+                                             <?php if (isset($component)) { $__componentOriginal99e3095fe204bf0a105d1301124943c8 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal99e3095fe204bf0a105d1301124943c8 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.category-icon','data' => ['category' => $cat]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('category-icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['category' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($cat)]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal99e3095fe204bf0a105d1301124943c8)): ?>
+<?php $attributes = $__attributesOriginal99e3095fe204bf0a105d1301124943c8; ?>
+<?php unset($__attributesOriginal99e3095fe204bf0a105d1301124943c8); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal99e3095fe204bf0a105d1301124943c8)): ?>
+<?php $component = $__componentOriginal99e3095fe204bf0a105d1301124943c8; ?>
+<?php unset($__componentOriginal99e3095fe204bf0a105d1301124943c8); ?>
+<?php endif; ?>
+                                         </span>
+                                         <span><?php echo e($cat->name); ?></span>
                                      </a>
                                      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($cat->children->count() > 0): ?>
                                          <button @click="expanded = !expanded" class="p-1 text-gray-500 rounded hover:bg-gray-100">
