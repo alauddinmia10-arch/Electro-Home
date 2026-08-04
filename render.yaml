@@ -14,7 +14,7 @@ services:
       - key: PORT
         value: "80"
       - key: APP_KEY
-        generateValue: true
+        value: "base64:6PfLekgegxz1GGsmJrbUcA6Is7Qlky6jgdc5Q6vJm3Y="
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
