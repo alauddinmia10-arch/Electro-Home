@@ -20,7 +20,11 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_URL
-        value: https://electrohome-app.onrender.com
+        value: https://electrohome.onrender.com
+      - key: FILESYSTEM_DISK
+        value: cloudinary
+      - key: CLOUDINARY_URL
+        value: "cloudinary://348295292825443:kJZ0kSHdVn2ZigHPOdMaUjlUaBA@cwru1emq"
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
