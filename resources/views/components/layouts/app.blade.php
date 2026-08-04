@@ -116,10 +116,10 @@
         {{-- Category Navigation (Desktop) --}}
         <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
             <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
-                <div class="flex items-stretch gap-6 h-11 text-sm">
+                <div class="flex items-stretch gap-6 h-10 text-sm">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-stretch">
                         <button class="h-full flex items-center gap-2.5 transition-all text-gray-800 font-bold text-sm md:text-base pr-4">
-                            <div class="h-[calc(100%-6px)] aspect-square rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm my-auto">
+                            <div class="w-8 h-8 rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm my-auto">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
                             </div>
                             <span>All Categories</span>
@@ -185,16 +185,16 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('shop') }}" class="text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
+                    <a href="{{ route('shop') }}" class="flex items-center text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
                         Shop
                     </a>
-                    <a href="{{ route('shop', ['featured' => true]) }}" class="text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
+                    <a href="{{ route('shop', ['featured' => true]) }}" class="flex items-center text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
                         Featured
                     </a>
-                    <a href="{{ route('shop', ['new_arrivals' => 1]) }}" class="text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
+                    <a href="{{ route('shop', ['new_arrivals' => 1]) }}" class="flex items-center text-gray-700 font-semibold hover:text-[#094d82] transition-colors">
                         New Arrivals
                     </a>
-                    <a href="{{ route('shop', ['flash_sale' => true]) }}" class="text-[var(--color-warm-orange)] font-semibold hover:text-[var(--color-warm-orange-hover)] transition-colors flex items-center gap-1">
+                    <a href="{{ route('shop', ['flash_sale' => true]) }}" class="flex items-center text-[var(--color-warm-orange)] font-semibold hover:text-[var(--color-warm-orange-hover)] transition-colors gap-1">
                         ⚡ Flash Sale
                     </a>
                 </div>
