@@ -118,7 +118,7 @@
             <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
                 <div class="flex items-stretch gap-6 h-11 text-sm">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-stretch">
-                        <button class="h-full bg-white rounded-full pl-1.5 pr-4 flex items-center gap-2.5 shadow-sm hover:shadow transition-all text-gray-800 font-bold text-sm md:text-base">
+                        <button class="h-full flex items-center gap-2.5 transition-all text-gray-800 font-bold text-sm md:text-base pr-4">
                             <div class="h-[calc(100%-6px)] aspect-square rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm my-auto">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
                             </div>
