@@ -46,8 +46,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Update Apache configuration to use port 10000 (required by Render)
-RUN sed -i 's/80/10000/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+# (Apache defaults to port 80)
 
 # Make start script executable
 RUN chmod +x start.sh
