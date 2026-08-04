@@ -116,7 +116,7 @@
         {{-- Category Navigation (Desktop) --}}
         <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
             <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
-                <div class="flex items-stretch gap-6 h-10 text-sm">
+                <div class="flex items-stretch gap-6 h-9 text-sm">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-stretch">
                         <button class="h-full flex items-center gap-2.5 transition-all text-gray-800 font-bold text-sm md:text-base pr-4">
                             <div class="w-8 h-8 rounded-full bg-[#0a9347] flex items-center justify-center text-white shrink-0 shadow-sm my-auto">
