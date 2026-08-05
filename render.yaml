@@ -23,8 +23,12 @@ services:
         value: https://electrohome.onrender.com
       - key: FILESYSTEM_DISK
         value: cloudinary
-      - key: CLOUDINARY_URL
-        value: "cloudinary://348295292825443:kJZ0kSHdVn2ZigHPOdMaUjlUaBA@cwru1emq"
+      - key: CLOUDINARY_CLOUD_NAME
+        value: "cwru1emq"
+      - key: CLOUDINARY_API_KEY
+        value: "348295292825443"
+      - key: CLOUDINARY_API_SECRET
+        value: "kJZ0kSHdVn2ZigHPOdMaUjlUaBA"
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
