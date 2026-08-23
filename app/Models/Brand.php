@@ -26,6 +26,13 @@ class Brand extends Model
 
     protected static function booted()
     {
+        $clearCache = function () {
+            \Illuminate\Support\Facades\Cache::forget('home.brands');
+        };
+
+        static::saved($clearCache);
+        static::deleted($clearCache);
+
         static::creating(function ($brand) {
             if (empty($brand->slug)) {
                 $brand->slug = Str::slug($brand->name);
