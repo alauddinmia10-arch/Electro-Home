@@ -24,11 +24,10 @@ class LowStockProductsWidget extends BaseWidget
     {
         return $table
             ->query(
-                Product::query()->where('stock_quantity', '<=', 10)->orderBy('stock_quantity', 'asc')->limit(5)
+                Product::query()->where('stock_quantity', '<=', 10)->orderBy('stock_quantity', 'asc')->limit(20)
             )
             ->extraAttributes([
-                'class' => 'h-full flex flex-col',
-                'style' => 'height: 100% !important;',
+                'class' => 'custom-low-stock-table',
             ])
             ->columns([
                 TextColumn::make('name')

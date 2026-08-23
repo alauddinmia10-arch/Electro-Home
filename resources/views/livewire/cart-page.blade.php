@@ -103,9 +103,9 @@ new class extends Component {
 };
 ?>
 <div class="bg-gray-100 py-2 md:py-6">
-    <div class="max-w-[1440px] mx-auto px-2 md:px-4 xl:px-[70px]">
+    <div class="max-w-[1600px] w-full mx-auto px-2 md:px-2 md:px-4 xl:px-[70px]">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 font-bangla mb-1 md:mb-6">আপনার শপিং কার্ট</h1>
-        <h2 class="w-fit mx-auto bg-white rounded-md shadow-sm border border-gray-200 py-2 px-6 text-center text-2xl font-bold text-gray-800 mb-2 lg:hidden">Order Summary</h2>
+        <h2 class="w-fit mx-auto bg-white rounded-md shadow-sm border border-gray-200 py-1.5 px-5 text-center text-xl font-bold text-gray-800 mb-2 lg:hidden">Order Summary</h2>
 
         <div class="flex flex-col lg:flex-row gap-2 lg:gap-8">
             {{-- Left: Cart Items --}}
@@ -143,8 +143,8 @@ new class extends Component {
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center gap-4">
                                                     <a href="{{ route('product.show', $item->product->slug) }}" class="w-16 h-16 shrink-0 bg-gray-50 rounded border border-gray-100 overflow-hidden block">
-                                                        @if($item->product->cover_image)
-                                                            <img src="{{ Storage::url($item->product->cover_image) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
+                                                        @if($item->product->cover_image_url)
+                                                            <img src="{{ $item->product->cover_image_url }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
                                                         @else
                                                             <div class="w-full h-full flex items-center justify-center text-gray-300">
                                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -172,7 +172,7 @@ new class extends Component {
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 text-right">
-                                                <span wire:ignore class="font-bold text-[var(--color-trust-blue)] text-lg" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
+                                                <span wire:ignore class="font-bold text-price text-lg" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
                                             </td>
                                             <td class="px-6 py-4 text-right">
                                                 <button wire:click="removeItem({{ $item->product_id }})" class="p-2 text-red-400 hover:bg-red-50 hover:text-red-600 rounded transition-colors" title="Remove Item">
@@ -205,8 +205,8 @@ new class extends Component {
                                     {{-- Row 1: Image (Left) + Title & SKU (Middle) + Delete X (Right) --}}
                                     <div class="flex items-start justify-between gap-2">
                                         <a href="{{ route('product.show', $item->product->slug) }}" class="shrink-0 bg-white rounded border border-gray-100 overflow-hidden block p-1" style="width: 72px; height: 72px;">
-                                            @if($item->product->cover_image)
-                                                <img src="{{ Storage::url($item->product->cover_image) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
+                                            @if($item->product->cover_image_url)
+                                                <img src="{{ $item->product->cover_image_url }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
                                             @else
                                                 <div class="w-full h-full flex items-center justify-center text-gray-300">
                                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -215,7 +215,7 @@ new class extends Component {
                                         </a>
 
                                         <div class="flex-1 min-w-0 pt-0.5">
-                                            <a href="{{ route('product.show', $item->product->slug) }}" class="font-bold text-gray-800 text-[20px] leading-snug line-clamp-2 hover:text-[var(--color-trust-blue)]">
+                                            <a href="{{ route('product.show', $item->product->slug) }}" class="font-bold text-gray-800 text-[19px] leading-snug line-clamp-2 hover:text-[var(--color-trust-blue)]">
                                                 {{ $item->product->name }}
                                             </a>
                                             @if($item->product->sku)
@@ -249,7 +249,7 @@ new class extends Component {
                                         {{-- Subtotal Row --}}
                                         <div class="flex justify-between items-center text-sm pt-1.5 border-t border-gray-100">
                                             <span class="text-gray-400 font-medium text-base">Subtotal</span>
-                                            <span wire:ignore class="font-bold text-[#00aa5b] text-[22px]" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
+                                            <span wire:ignore class="font-bold text-price text-[22px]" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@ new class extends Component {
                             </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-2">আপনার কার্ট খালি!</h3>
                             <p class="text-gray-500 mb-8">এখনও কোনো প্রোডাক্ট যুক্ত করা হয়নি।</p>
-                            <a href="{{ route('shop') }}" class="btn btn-primary px-8">শপিং শুরু করুন</a>
+                            <a href="{{ route('shop') }}" class="btn btn-primary px-8 !bg-[#1f618d] hover:!bg-[#174a6c] border-none">শপিং শুরু করুন</a>
                         </div>
                     @endif
                 </div>
@@ -274,7 +274,7 @@ new class extends Component {
                     <div class="bg-white rounded-md shadow-sm border border-gray-200 p-3 md:p-6 sticky top-24" x-data="{ orderSubtotal: {{ $subtotal }}, orderQty: {{ $items->sum('quantity') }} }" @cart-updated-optimistic.window="orderSubtotal += $event.detail.amount; orderQty += $event.detail.qty_change" @cart-updated.window="if($event.detail.subtotal !== undefined) { orderSubtotal = $event.detail.subtotal; orderQty = $event.detail.count; }">
                         <h3 class="hidden lg:block text-2xl md:text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Order Summary</h3>
                         
-                        <div class="space-y-4 text-[18px] md:text-sm text-gray-600 mb-6">
+                        <div class="space-y-3 text-[15px] md:text-sm text-gray-600 mb-5">
                             <div class="flex justify-between">
                                 <span>Subtotal (<span wire:ignore x-text="orderQty">{{ $items->sum('quantity') }}</span> items)</span>
                                 <span class="font-semibold text-gray-800" wire:ignore x-text="'৳' + new Intl.NumberFormat('en-US').format(orderSubtotal)">৳{{ number_format($subtotal, 0) }}</span>
@@ -286,23 +286,23 @@ new class extends Component {
                         </div>
                         
                         @if($freeDeliveryRemaining > 0)
-                            <div class="free-delivery-banner mb-6">
+                            <div class="free-delivery-banner mb-5 text-[15px] md:text-sm">
                                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 <span>আর মাত্র <strong>৳{{ number_format($freeDeliveryRemaining, 0) }}</strong> টাকার বাজার করলেই পাচ্ছেন <strong>ফ্রি ডেলিভারি</strong>!</span>
                             </div>
                         @else
-                            <div class="bg-green-50 border border-green-200 text-green-700 px-2 md:px-4 py-3 md:py-3 rounded text-[20px] md:text-sm flex items-center justify-center gap-2 mb-6 font-bold text-center leading-tight">
+                            <div class="bg-green-50 border border-green-200 text-green-700 px-2 md:px-4 py-2 md:py-3 rounded text-[16px] md:text-sm flex items-center justify-center gap-2 mb-5 font-bold text-center leading-tight">
                                 🎉 অভিনন্দন! আপনি ফ্রি ডেলিভারি পাচ্ছেন।
                             </div>
                         @endif
 
-                        <div class="border-t border-gray-100 pt-4 mb-6 flex justify-between items-end">
-                            <span class="font-bold text-gray-800 text-xl md:text-base">Estimated Total</span>
-                            <span class="text-3xl md:text-2xl font-bold text-price" wire:ignore x-text="'৳' + new Intl.NumberFormat('en-US').format(orderSubtotal)">৳{{ number_format($subtotal, 0) }}</span>
+                        <div class="border-t border-gray-100 pt-4 mb-5 flex justify-between items-end">
+                            <span class="font-bold text-gray-800 text-lg md:text-base">Estimated Total</span>
+                            <span class="text-[26px] md:text-2xl font-bold text-price" wire:ignore x-text="'৳' + new Intl.NumberFormat('en-US').format(orderSubtotal)">৳{{ number_format($subtotal, 0) }}</span>
                         </div>
 
-                        <a href="{{ route('checkout') }}" class="btn btn-primary w-full py-3 md:py-3 text-2xl md:text-lg flex justify-center items-center gap-2">
-                            Checkout Now <svg class="w-5 h-5 md:w-5 md:h-5 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        <a href="{{ route('checkout') }}" class="btn w-full py-2.5 md:py-3 text-[22px] md:text-lg flex justify-center items-center gap-2 bg-[#1f618d] hover:bg-[#174a6c] text-white font-bold antialiased transition-colors border-none rounded">
+                            Checkout Now <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </a>
                         
                         <a href="{{ route('shop') }}" class="block text-center text-[var(--color-trust-blue)] hover:underline mt-4 text-[18px] md:text-sm font-semibold">

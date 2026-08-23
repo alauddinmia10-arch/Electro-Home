@@ -30,12 +30,12 @@
 <body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col overflow-x-hidden">
 
     {{-- Top Bar --}}
-    <div class="bg-[var(--color-text-primary)] text-white text-[13px] py-1.5 hidden md:block">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] flex items-center justify-between">
+    <div class="bg-[var(--color-text-primary)] text-white text-[13px] py-1.5 hidden md:block print:hidden">
+        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 shrink-0" style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    {{ \App\Models\Setting::get('support_phone', '+8801XXXXXXXXX') }}
+                    {{ \App\Models\Setting::get('support_phone', '+8801880223099') }}
                 </span>
                 <span class="flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 shrink-0" style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -49,12 +49,19 @@
     </div>
 
     {{-- Main Header --}}
-    <header class="bg-white border-b border-gray-100 relative z-50" x-data="{ mobileMenu: false }">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
+    <header class="bg-white border-b border-gray-100 relative z-50 print:hidden" x-data="{ mobileMenu: false }">
+        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
             <div class="flex items-center justify-between h-14 md:h-16">
 
+                {{-- Mobile Menu Toggle (Left on mobile) --}}
+                <button class="md:hidden p-1 text-gray-600 -ml-1" @click="mobileMenu = !mobileMenu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
                 {{-- Logo --}}
-                <x-logo theme="light" />
+                <div class="flex-1 md:flex-none flex justify-center md:justify-start">
+                    <x-logo theme="light" />
+                </div>
 
                 {{-- Search Bar (Desktop) --}}
                 <div class="hidden md:flex flex-1 max-w-xl mx-8">
@@ -99,11 +106,6 @@
                             </a>
                         @endauth
                     </div>
-
-                    {{-- Mobile Menu Toggle --}}
-                    <button class="md:hidden p-2 text-gray-600" @click="mobileMenu = !mobileMenu">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    </button>
                 </div>
             </div>
 
@@ -115,7 +117,7 @@
 
         {{-- Category Navigation (Desktop) --}}
         <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
-            <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px]">
+            <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
                 <div class="flex items-stretch gap-6 h-9 text-sm">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-stretch">
                         <button class="h-full flex items-center gap-2.5 transition-all text-gray-800 font-bold text-sm md:text-base pr-4">
@@ -132,7 +134,7 @@
                              class="absolute left-0 top-full z-50 flex items-start">
                             
                             {{-- Scrolling List (Scrollbar on left using rtl) --}}
-                            <div class="w-[280px] bg-white rounded py-2 overflow-y-auto custom-scrollbar shrink-0" style="height: 550px; max-height: 80vh; border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);" dir="rtl">
+                            <div class="w-[280px] bg-white rounded py-2 overflow-y-auto custom-scrollbar shrink-0" style="height: 750px; max-height: 85vh; border: 1px solid rgba(11, 92, 154, 0.2); box-shadow: 0 0 10px rgba(11, 92, 154, 0.2);" dir="rtl">
                                 <div dir="ltr">
                                     @foreach(\App\Models\Category::parents()->active()->ordered()->with('children.children')->get() as $cat)
                                         <div @mouseenter="activeCat = {{ $cat->id }}; activeSubcat = null; flyoutTop = $el.getBoundingClientRect().top - $refs.menuWrapper.getBoundingClientRect().top">
@@ -277,7 +279,7 @@
 
     {{-- Flash Messages --}}
     @if(session('success'))
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
+        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] mt-4">
             <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ✅ {{ session('success') }}
             </div>
@@ -285,7 +287,7 @@
     @endif
 
     @if(session('error'))
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] mt-4">
+        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] mt-4">
             <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ❌ {{ session('error') }}
             </div>
@@ -298,65 +300,189 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-[var(--color-text-primary)] text-white mt-auto">
-        <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                {{-- Brand --}}
-                <div>
-                    <div class="mb-4">
-                        <x-logo theme="dark" />
+    <footer class="bg-[#eff5f2] border-t border-[#e0ebe5] text-gray-800 mt-auto print:hidden">
+        {{-- Feature Highlights --}}
+        <div class="hidden md:block bg-[#eff5f2] pt-1.5 md:pt-2.5">
+            <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+                <div class="flex flex-col lg:flex-row justify-between gap-4 md:gap-6 pb-1.5 md:pb-2.5 border-b border-gray-300">
+                    {{-- Feature 1 --}}
+                    <div class="flex items-center gap-4 group cursor-default bg-transparent hover:bg-white p-2 lg:p-3 rounded-xl transition-all duration-300 border border-transparent hover:border-[#e0ebe5] hover:shadow-sm">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#0b5c9a] group-hover:bg-[#0b5c9a] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.514"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-[16px] mb-0.5 tracking-tight group-hover:text-[#0b5c9a] transition-colors whitespace-nowrap">BEST QUALITY</h4>
+                            <p class="text-[14px] text-gray-500 whitespace-nowrap">Many years on the market</p>
+                        </div>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        বাংলাদেশের প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট স্টোর। সেরা মানের প্রোডাক্ট, দ্রুত ডেলিভারি।
+                    
+                    {{-- Feature 2 --}}
+                    <div class="flex items-center gap-4 group cursor-default bg-transparent hover:bg-white p-2 lg:p-3 rounded-xl transition-all duration-300 border border-transparent hover:border-[#e0ebe5] hover:shadow-sm">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#0b5c9a] group-hover:bg-[#0b5c9a] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-[16px] mb-0.5 tracking-tight group-hover:text-[#0b5c9a] transition-colors whitespace-nowrap">24/7 SUPPORT</h4>
+                            <p class="text-[14px] text-gray-500 whitespace-nowrap">If you have any questions</p>
+                        </div>
+                    </div>
+                    
+                    {{-- Feature 3 --}}
+                    <div class="flex items-center gap-4 group cursor-default bg-transparent hover:bg-white p-2 lg:p-3 rounded-xl transition-all duration-300 border border-transparent hover:border-[#e0ebe5] hover:shadow-sm">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#0b5c9a] group-hover:bg-[#0b5c9a] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-[16px] mb-0.5 tracking-tight group-hover:text-[#0b5c9a] transition-colors whitespace-nowrap">SECURE PAYMENT</h4>
+                            <p class="text-[14px] text-gray-500 whitespace-nowrap">100% secure payment</p>
+                        </div>
+                    </div>
+
+                    {{-- Feature 4 --}}
+                    <div class="flex items-center gap-4 group cursor-default bg-transparent hover:bg-white p-2 lg:p-3 rounded-xl transition-all duration-300 border border-transparent hover:border-[#e0ebe5] hover:shadow-sm">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#0b5c9a] group-hover:bg-[#0b5c9a] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 21.033A3 3 0 1111 18h2a3 3 0 113.89 2.89M3 13V6a1 1 0 011-1h10a1 1 0 011 1v12a1 1 0 01-1 1h-2M15 9h3l3 4v5h-2"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-[16px] mb-0.5 tracking-tight group-hover:text-[#0b5c9a] transition-colors whitespace-nowrap">FAST DELIVERY</h4>
+                            <p class="text-[14px] text-gray-500 whitespace-nowrap">Fast and reliable delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] pt-6 md:pt-8 pb-16 md:pb-12">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-8 xl:gap-12">
+                {{-- Brand --}}
+                <div class="col-span-2 lg:col-span-1 order-1 lg:order-1">
+                    <div class="mb-5 transform scale-[1.3] origin-left">
+                        <x-logo theme="light" />
+                    </div>
+                    <p class="text-gray-600 text-[15px] leading-relaxed pr-4">
+                        One of Bangladesh's premier electronic component stores. We provide high-quality electronic parts, sensors, modules, and tools at highly affordable prices with fast delivery.
                     </p>
+                    
+                    {{-- Social Icons --}}
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#0b5c9a] hover:bg-[#0b5c9a] hover:text-white transition-colors" title="Facebook">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#ff0000] hover:bg-[#ff0000] hover:text-white transition-colors" title="YouTube">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors" title="WhatsApp">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white transition-colors" title="Twitter">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#E1306C] hover:bg-[#E1306C] hover:text-white transition-colors" title="Instagram">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                    </div>
                 </div>
 
                 {{-- Quick Links --}}
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="{{ route('shop') }}" class="hover:text-white transition-colors">Shop</a></li>
-                        <li><a href="{{ route('home') }}#flash-sales" class="hover:text-white transition-colors">Flash Sale</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                <div class="col-span-1 lg:col-span-1 order-3 lg:order-2 justify-self-start lg:justify-self-center">
+                    <h4 class="font-bold text-gray-800 text-[16px] mb-4">Quick Links</h4>
+                    <ul class="space-y-3.5 text-[15px] text-gray-600">
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="{{ route('shop') }}" class="hover:text-[#0b5c9a] transition-colors">Shop</a>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="{{ route('home') }}#flash-sales" class="hover:text-[#0b5c9a] transition-colors">Flash Sale</a>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="#" class="hover:text-[#0b5c9a] transition-colors">About Us</a>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="#" class="hover:text-[#0b5c9a] transition-colors">Contact</a>
+                        </li>
                     </ul>
                 </div>
 
                 {{-- Customer Service --}}
-                <div>
-                    <h4 class="font-semibold mb-4">Customer Service</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Shipping Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Return Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms & Conditions</a></li>
+                <div class="col-span-1 lg:col-span-1 order-4 lg:order-3 justify-self-start lg:justify-self-center">
+                    <h4 class="font-bold text-gray-800 text-[16px] mb-4">Customer Service</h4>
+                    <ul class="space-y-3.5 text-[15px] text-gray-600">
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="#" class="hover:text-[#0b5c9a] transition-colors">Shipping Policy</a>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="#" class="hover:text-[#0b5c9a] transition-colors">Return Policy</a>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="#" class="hover:text-[#0b5c9a] transition-colors">Privacy Policy</a>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#0b5c9a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <a href="#" class="hover:text-[#0b5c9a] transition-colors">Terms & Conditions</a>
+                        </li>
                     </ul>
                 </div>
 
                 {{-- Contact Info --}}
-                <div>
-                    <h4 class="font-semibold mb-4">Contact Us</h4>
-                    <ul class="space-y-3 text-sm text-gray-400">
+                <div class="col-span-2 lg:col-span-1 order-2 lg:order-4 justify-self-start lg:justify-self-center w-full">
+                    <h4 class="font-bold text-gray-800 text-[16px] mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-[15px] text-gray-600">
                         <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[var(--color-trust-blue)] shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                            {{ \App\Models\Setting::get('support_phone', '+8801XXXXXXXXX') }}
+                            <svg class="w-4 h-4 text-[#0b5c9a] shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            {{ \App\Models\Setting::get('support_phone', '+8801880223099') }}
                         </li>
                         <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[var(--color-trust-blue)] shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <svg class="w-4 h-4 text-[#0b5c9a] shrink-0" style="width: 16px; height: 16px;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            {{ \App\Models\Setting::get('whatsapp_number', '8801880223099') }}
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[#0b5c9a] shrink-0" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             {{ \App\Models\Setting::get('support_email', 'support@electrohome.bd') }}
                         </li>
+                        <li class="flex items-start gap-2 pt-1.5 w-full">
+                            <svg class="w-5 h-5 text-[#0b5c9a] shrink-0 mt-0.5" style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                            <div class="leading-relaxed flex-1 w-full max-w-full pr-2">
+                                <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="hover:text-[#0b5c9a] transition-colors block">
+                                    <span class="font-bold text-gray-800 block mb-0.5">Address:</span>
+                                    Station Road, Narsingdi Sadar, Narsingdi
+                                </a>
+                            </div>
+                        </li>
+                        {{-- Get Direction Button (Desktop Only) --}}
+                        <li class="hidden md:block pt-1.5">
+                            <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md text-base font-bold transition-colors shadow-md">
+                                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                                Get Direction
+                            </a>
+                        </li>
                     </ul>
+
+                    {{-- Google Map Box & Get Direction (Mobile Only) --}}
+                    <div class="md:hidden mt-4 w-full rounded-lg overflow-hidden relative bg-gray-100 border border-gray-200 shadow-sm h-[160px] group">
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Station+Road,+Narsingdi+Sadar,+Narsingdi&t=&z=15&ie=UTF8&iwloc=&output=embed" style="border:0;" loading="lazy"></iframe>
+                        
+                        <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="absolute top-2.5 right-2.5 flex items-center gap-1.5 bg-white/90 backdrop-blur hover:bg-blue-600 hover:text-white text-blue-700 py-2 px-4 rounded-md shadow-md text-[13px] font-bold transition-all border border-gray-200 z-10">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                            Get Direction
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
+            <div class="border-t border-[#e0ebe5] mt-8 md:mt-10 pt-6 md:pt-8 text-center text-sm text-gray-500">
                 © {{ date('Y') }} Electrohome.bd — All Rights Reserved.
             </div>
         </div>
     </footer>
 
     {{-- Mobile Bottom Navigation --}}
-    <nav class="mobile-nav md:!hidden lg:!hidden">
+    <nav class="mobile-nav md:!hidden lg:!hidden print:hidden">
         <a href="{{ route('home') }}" class="mobile-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             <span>Home</span>
@@ -385,10 +511,10 @@
     </nav>
 
     {{-- Floating Action Buttons (WhatsApp, Scroll Up, Scroll Down) --}}
-    <div class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-30 flex flex-col items-center gap-2 md:gap-3">
+    <div class="fixed bottom-[90px] md:bottom-8 z-[70] flex flex-col items-center gap-2 md:gap-3 print:hidden" style="right: 40px;">
         
         {{-- WhatsApp Floating Button --}}
-        <a href="https://wa.me/{{ str_replace('+', '', \App\Models\Setting::get('whatsapp_number', '8801XXXXXXXXX')) }}"
+        <a href="https://wa.me/{{ str_replace('+', '', \App\Models\Setting::get('whatsapp_number', '8801880223099')) }}"
            target="_blank" rel="noopener"
            class="flex items-center justify-center hover:scale-110 transition-transform duration-300" title="Chat on WhatsApp">
             <svg class="w-10 h-10 md:w-12 md:h-12 text-[#25D366] hover:text-[#128C7E] drop-shadow-md transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -411,7 +537,9 @@
     </div>
 
     {{-- Floating Cart --}}
-    @livewire('floating-cart')
+    <div class="print:hidden">
+        @livewire('floating-cart')
+    </div>
 
     @livewireScripts
 </body>

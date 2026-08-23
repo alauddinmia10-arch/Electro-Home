@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
-
+Route::get('/offer/{slug}', \App\Livewire\LandingPage::class)->name('landing.page');
 // Cart
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 

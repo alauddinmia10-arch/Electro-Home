@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="max-w-[1440px] mx-auto px-4 xl:px-[70px] py-8">
+    <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] py-8">
         <div class="flex flex-col md:flex-row gap-8">
             {{-- Left Sidebar: Filters --}}
             <aside class="w-full md:w-64 shrink-0">

@@ -12,7 +12,7 @@
     $hasMaxHeight = filled($maxHeight) && $maxHeight !== '100%';
 @endphp
 
-<x-filament-widgets::widget class="fi-wi-chart relative">
+<x-filament-widgets::widget class="fi-wi-chart relative custom-analytics-chart">
     <x-filament::section
         :description="$description"
         :heading="$heading"
@@ -113,17 +113,5 @@
                 <span x-ref="textColorElement" class="fi-wi-chart-text-color"></span>
             </div>
         </div>
-        <style>
-            .fi-wi-chart,
-            .fi-wi-chart .fi-widget,
-            .fi-wi-chart .fi-section,
-            .fi-wi-chart .fi-section-content-ctn,
-            .fi-wi-chart .fi-section-content {
-                height: auto !important;
-                min-height: 0 !important;
-                padding-bottom: 0 !important;
-                flex-grow: 0 !important;
-            }
-        </style>
     </x-filament::section>
 </x-filament-widgets::widget>

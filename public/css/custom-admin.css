@@ -1,584 +1,885 @@
     flex-direction: column !important;
     height: 100% !important;
-}
+    }
 
-/* Stretch the Chart Card */
-.fi-wi-chart > .fi-section {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.fi-wi-chart .fi-section-content-ctn {
-    flex-grow: 1 !important;
-}
+    /* Stretch the Chart Card */
+    .fi-wi-chart>.fi-section {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-/* Stretch the Table Card */
-.fi-wi-table > .fi-ta {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.fi-wi-table > .fi-ta > .fi-ta-ctn {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-/* Ensure the inner main content also takes up remaining space if needed */
-.fi-wi-table .fi-ta-main {
-    flex-grow: 1 !important;
-}
-/* Make Stats Overview cards thinner / less padding */
-.fi-wi-stats-overview-stat {
-    padding: 0.75rem !important;
-}
+    .fi-wi-chart .fi-section-content-ctn {
+        flex-grow: 1 !important;
+    }
 
-/* Boxed header */
-.fi-header {
-    background-color: white;
-    padding: 1.5rem 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-.dark .fi-header {
-    background-color: rgb(24, 24, 27);
-    border-color: rgba(255, 255, 255, 0.1);
-}
+    /* Stretch the Table Card */
+    .fi-wi-table>.fi-ta {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-/* Custom sleek scrollbar for sidebar to remove visual gaps */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
+    .fi-wi-table>.fi-ta>.fi-ta-ctn {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
+    /* Ensure the inner main content also takes up remaining space if needed */
+    .fi-wi-table .fi-ta-main {
+        flex-grow: 1 !important;
+    }
 
-/* Aggressively reduce gaps and padding in the admin panel */
-.fi-main {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-}
-.fi-page-header-main-ctn,
-.fi-page-content,
-.fi-page-main,
-.grid {
-    gap: 0.75rem !important;
-    row-gap: 0.75rem !important;
-    column-gap: 0.75rem !important;
-}
-.fi-page-header-main-ctn > * {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-.fi-wi {
-    margin: 0 !important;
-}
+    /* Make Stats Overview cards thinner / less padding */
+    .fi-wi-stats-overview-stat {
+        padding: 0.75rem !important;
+    }
+
+    /* Boxed header */
+    .fi-header {
+        background-color: white;
+        padding: 1.5rem 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dark .fi-header {
+        background-color: rgb(24, 24, 27);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Custom sleek scrollbar for sidebar to remove visual gaps */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
 
 
-/* Force all large layout gaps to 0.75rem */
-.fi-main .gap-4,
-.fi-main .gap-6,
-.fi-main .gap-8,
-.fi-main .gap-x-4,
-.fi-main .gap-x-6,
-.fi-main .gap-x-8,
-.fi-main .gap-y-4,
-.fi-main .gap-y-6,
-.fi-main .gap-y-8,
-.fi-main .md\:gap-4,
-.fi-main .md\:gap-6,
-.fi-main .md\:gap-8,
-.fi-main .lg\:gap-4,
-.fi-main .lg\:gap-6,
-.fi-main .lg\:gap-8,
-.fi-main .xl\:gap-4,
-.fi-main .xl\:gap-6,
-.fi-main .xl\:gap-8 {
-    gap: 0.75rem !important;
-    row-gap: 0.75rem !important;
-    column-gap: 0.75rem !important;
-}
+    /* Aggressively reduce gaps and padding in the admin panel */
+    .fi-main {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .fi-page-header-main-ctn,
+    .fi-page-content,
+    .fi-page-main,
+    .grid {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+    .fi-page-header-main-ctn>* {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .fi-wi {
+        margin: 0 !important;
+    }
 
 
-/* Force the specific gap for the stats overview grid */
-.fi-wi-stats-overview > section > div > div,
-.fi-wi-stats-overview-stat-content {
-    gap: 0.75rem !important;
-}
-.fi-wi-stats-overview [class*="grid"] {
-    gap: 0.75rem !important;
-}
-.fi-wi-stats-overview .gap-x-6,
-.fi-wi-stats-overview .gap-y-6,
-.fi-wi-stats-overview .gap-6 {
-    gap: 0.75rem !important;
-}
+    /* Force all large layout gaps to 0.75rem */
+    .fi-main .gap-4,
+    .fi-main .gap-6,
+    .fi-main .gap-8,
+    .fi-main .gap-x-4,
+    .fi-main .gap-x-6,
+    .fi-main .gap-x-8,
+    .fi-main .gap-y-4,
+    .fi-main .gap-y-6,
+    .fi-main .gap-y-8,
+    .fi-main .md\:gap-4,
+    .fi-main .md\:gap-6,
+    .fi-main .md\:gap-8,
+    .fi-main .lg\:gap-4,
+    .fi-main .lg\:gap-6,
+    .fi-main .lg\:gap-8,
+    .fi-main .xl\:gap-4,
+    .fi-main .xl\:gap-6,
+    .fi-main .xl\:gap-8 {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
 
 
-/* Aggressive dashboard gap override */
-.fi-page-content > .grid { gap: 0.75rem !important; }
-.fi-page-content .fi-wi-widgets { gap: 0.75rem !important; }
-.fi-page-content > div > .grid { gap: 0.75rem !important; }
-    flex-direction: column !important;
-    height: 100% !important;
-}
+    /* Force the specific gap for the stats overview grid */
+    .fi-wi-stats-overview>section>div>div,
+    .fi-wi-stats-overview-stat-content {
+        gap: 0.75rem !important;
+    }
 
-/* Stretch the Chart Card */
-.fi-wi-chart > .fi-section {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.fi-wi-chart .fi-section-content-ctn {
-    flex-grow: 1 !important;
-}
+    .fi-wi-stats-overview [class*="grid"] {
+        gap: 0.75rem !important;
+    }
 
-/* Stretch the Table Card */
-.fi-wi-table > .fi-ta {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.fi-wi-table > .fi-ta > .fi-ta-ctn {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-/* Ensure the inner main content also takes up remaining space if needed */
-.fi-wi-table .fi-ta-main {
-    flex-grow: 1 !important;
-}
-/* Make Stats Overview cards thinner / less padding */
-.fi-wi-stats-overview-stat {
-    padding: 0.75rem !important;
-}
-
-/* Boxed header */
-.fi-header {
-    background-color: white;
-    padding: 1.5rem 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-.dark .fi-header {
-    background-color: rgb(24, 24, 27);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Custom sleek scrollbar for sidebar to remove visual gaps */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
+    .fi-wi-stats-overview .gap-x-6,
+    .fi-wi-stats-overview .gap-y-6,
+    .fi-wi-stats-overview .gap-6 {
+        gap: 0.75rem !important;
+    }
 
 
-/* Aggressively reduce gaps and padding in the admin panel */
-.fi-main {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-}
-.fi-page-header-main-ctn,
-.fi-page-content,
-.fi-page-main,
-.grid {
-    gap: 0.75rem !important;
-    row-gap: 0.75rem !important;
-    column-gap: 0.75rem !important;
-}
-.fi-page-header-main-ctn > * {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-.fi-wi {
-    margin: 0 !important;
-}
+    /* Aggressive dashboard gap override */
+    .fi-page-content>.grid {
+        gap: 0.75rem !important;
+    }
 
+    .fi-page-content .fi-wi-widgets {
+        gap: 0.75rem !important;
+    }
 
-/* Force all large layout gaps to 0.75rem */
-.fi-main .gap-4,
-.fi-main .gap-6,
-.fi-main .gap-8,
-.fi-main .gap-x-4,
-.fi-main .gap-x-6,
-.fi-main .gap-x-8,
-.fi-main .gap-y-4,
-.fi-main .gap-y-6,
-.fi-main .gap-y-8,
-.fi-main .md\:gap-4,
-.fi-main .md\:gap-6,
-.fi-main .md\:gap-8,
-.fi-main .lg\:gap-4,
-.fi-main .lg\:gap-6,
-.fi-main .lg\:gap-8,
-.fi-main .xl\:gap-4,
-.fi-main .xl\:gap-6,
-.fi-main .xl\:gap-8 {
-    gap: 0.75rem !important;
-    row-gap: 0.75rem !important;
-    column-gap: 0.75rem !important;
-}
+    .fi-page-content>div>.grid {
+        gap: 0.75rem !important;
+    }
 
-
-/* Force the specific gap for the stats overview grid */
-.fi-wi-stats-overview > section > div > div,
-.fi-wi-stats-overview-stat-content {
-    gap: 0.75rem !important;
-}
-.fi-wi-stats-overview [class*="grid"] {
-    gap: 0.75rem !important;
-}
-.fi-wi-stats-overview .gap-x-6,
-.fi-wi-stats-overview .gap-y-6,
-.fi-wi-stats-overview .gap-6 {
-    gap: 0.75rem !important;
-}
-
-
-/* Aggressive dashboard gap override */
-.fi-page-content > .grid { gap: 0.75rem !important; }
-.fi-page-content .fi-wi-widgets { gap: 0.75rem !important; }
-.fi-page-content > div > .grid { gap: 0.75rem !important; }
-
-/* Force widgets to fill their grid columns */
-.fi-wi-chart, .fi-wi-table, .fi-wi-widget { width: 100% !important; min-width: 100% !important; }
-.fi-page-content > div > .grid { gap: 0.75rem !important; }
-.fi-wi-widgets { gap: 0.75rem !important; }
-
-/* Grid Side-by-Side Layout for FilePond Uploads */
-.filepond--root[data-style-panel-layout~="grid"] .filepond--list {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 14px !important;
-}
-
-.filepond--root[data-style-panel-layout~="grid"] .filepond--item {
-    flex: 0 0 auto !important;
-    width: calc(25% - 11px) !important;
-    min-width: 150px !important;
-    margin: 0 !important;
-}
-
-/* Remove dark background overlays from FilePond items so image fills cleanly */
-.filepond--root .filepond--panel-root,
-.filepond--root .filepond--item-panel,
-.filepond--root [data-filepond-item-state] .filepond--item-panel,
-.filepond--root [data-filepond-item-state="processing-complete"] .filepond--panel-root,
-.filepond--root [data-filepond-item-state="processing-complete"] .filepond--item-panel {
-    background-color: #ffffff !important;
-    background-image: none !important;
-    border-radius: 8px !important;
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-}
-
-/* Make image preview expand to fill the thumbnail box */
-.filepond--root .filepond--image-preview-wrapper,
-.filepond--root .filepond--image-preview,
-.filepond--root .filepond--image-clip {
-    background-color: #ffffff !important;
-    border-radius: 6px !important;
-}
-
-.filepond--root img,
-.filepond--root canvas {
-    object-fit: cover !important;
-}
-
-/* Enable CSS flex stretching for Chart and Table widgets */
-.fi-wi-chart, .fi-wi-table {
-    display: flex !important;
     flex-direction: column !important;
     height: 100% !important;
-}
+    }
 
-/* Stretch the Chart Card */
-.fi-wi-chart > .fi-section {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.fi-wi-chart .fi-section-content-ctn {
-    flex-grow: 1 !important;
-}
+    /* Stretch the Chart Card */
+    .fi-wi-chart>.fi-section {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-/* Stretch the Table Card */
-.fi-wi-table > .fi-ta {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.fi-wi-table > .fi-ta > .fi-ta-ctn {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-/* Ensure the inner main content also takes up remaining space if needed */
-.fi-wi-table .fi-ta-main {
-    flex-grow: 1 !important;
-}
-/* Make Stats Overview cards thinner / less padding */
-.fi-wi-stats-overview-stat {
-    padding: 0.75rem !important;
-}
+    .fi-wi-chart .fi-section-content-ctn {
+        flex-grow: 1 !important;
+    }
 
-/* Boxed header */
-.fi-header {
-    background-color: white;
-    padding: 1.5rem 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-.dark .fi-header {
-    background-color: rgb(24, 24, 27);
-    border-color: rgba(255, 255, 255, 0.1);
-}
+    /* Stretch the Table Card */
+    .fi-wi-table>.fi-ta {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-/* Custom sleek scrollbar for sidebar to remove visual gaps */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
+    .fi-wi-table>.fi-ta>.fi-ta-ctn {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
+    /* Ensure the inner main content also takes up remaining space if needed */
+    .fi-wi-table .fi-ta-main {
+        flex-grow: 1 !important;
+    }
 
-/* Aggressively reduce gaps and padding in the admin panel */
-.fi-page-header-main-ctn,
-.fi-page-content,
-.fi-page-main,
-.grid {
-    gap: 0.75rem !important;
-    row-gap: 0.75rem !important;
-    column-gap: 0.75rem !important;
-}
-.fi-page-header-main-ctn > * {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-.fi-wi {
-    margin: 0 !important;
-}
+    /* Make Stats Overview cards thinner / less padding */
+    .fi-wi-stats-overview-stat {
+        padding: 0.75rem !important;
+    }
+
+    /* Boxed header */
+    .fi-header {
+        background-color: white;
+        padding: 1.5rem 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dark .fi-header {
+        background-color: rgb(24, 24, 27);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Custom sleek scrollbar for sidebar to remove visual gaps */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
 
 
-/* Force all large layout gaps to 0.75rem */
-.fi-main .gap-4,
-.fi-main .gap-6,
-.fi-main .gap-8,
-.fi-main .gap-x-4,
-.fi-main .gap-x-6,
-.fi-main .gap-x-8,
-.fi-main .gap-y-4,
-.fi-main .gap-y-6,
-.fi-main .gap-y-8,
-.fi-main .md\:gap-4,
-.fi-main .md\:gap-6,
-.fi-main .md\:gap-8,
-.fi-main .lg\:gap-4,
-.fi-main .lg\:gap-6,
-.fi-main .lg\:gap-8,
-.fi-main .xl\:gap-4,
-.fi-main .xl\:gap-6,
-.fi-main .xl\:gap-8 {
-    gap: 0.75rem !important;
-    row-gap: 0.75rem !important;
-    column-gap: 0.75rem !important;
-}
+    /* Aggressively reduce gaps and padding in the admin panel */
+    .fi-main {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .fi-page-header-main-ctn,
+    .fi-page-content,
+    .fi-page-main,
+    .grid {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+    .fi-page-header-main-ctn>* {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .fi-wi {
+        margin: 0 !important;
+    }
 
 
-/* Force the specific gap for the stats overview grid */
-.fi-wi-stats-overview > section > div > div,
-.fi-wi-stats-overview-stat-content {
-    gap: 0.75rem !important;
-}
-.fi-wi-stats-overview [class*="grid"] {
-    gap: 0.75rem !important;
-}
-.fi-wi-stats-overview .gap-x-6,
-.fi-wi-stats-overview .gap-y-6,
-.fi-wi-stats-overview .gap-6 {
-    gap: 0.75rem !important;
-}
+    /* Force all large layout gaps to 0.75rem */
+    .fi-main .gap-4,
+    .fi-main .gap-6,
+    .fi-main .gap-8,
+    .fi-main .gap-x-4,
+    .fi-main .gap-x-6,
+    .fi-main .gap-x-8,
+    .fi-main .gap-y-4,
+    .fi-main .gap-y-6,
+    .fi-main .gap-y-8,
+    .fi-main .md\:gap-4,
+    .fi-main .md\:gap-6,
+    .fi-main .md\:gap-8,
+    .fi-main .lg\:gap-4,
+    .fi-main .lg\:gap-6,
+    .fi-main .lg\:gap-8,
+    .fi-main .xl\:gap-4,
+    .fi-main .xl\:gap-6,
+    .fi-main .xl\:gap-8 {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
 
 
-/* Aggressive dashboard gap override */
-.fi-page-content > .grid { gap: 0.75rem !important; }
-.fi-page-content .fi-wi-widgets { gap: 0.75rem !important; }
-.fi-page-content > div > .grid { gap: 0.75rem !important; }
+    /* Force the specific gap for the stats overview grid */
+    .fi-wi-stats-overview>section>div>div,
+    .fi-wi-stats-overview-stat-content {
+        gap: 0.75rem !important;
+    }
 
-/* Force widgets to fill their grid columns */
-.fi-wi-chart, .fi-wi-table, .fi-wi-widget { width: 100% !important; min-width: 100% !important; }
-.fi-page-content > div > .grid { gap: 0.75rem !important; }
-.fi-wi-widgets { gap: 0.75rem !important; }
+    .fi-wi-stats-overview [class*="grid"] {
+        gap: 0.75rem !important;
+    }
 
-/* ULTIMATE GRID GAP FORCE */
-.fi-page-content div[class*='grid'], .fi-main div[class*='grid'] { gap: 0.75rem !important; row-gap: 0.75rem !important; column-gap: 0.75rem !important; }
-.fi-wi { gap: 0.75rem !important; row-gap: 0.75rem !important; column-gap: 0.75rem !important; }
-
-/* Fix top gap above page header */
-.fi-topbar { margin-bottom: 0 !important; border-bottom: none !important; }
-.fi-page { gap: 0.75rem !important; padding-top: 0 !important; margin-top: -1.25rem !important; }
-.fi-main-ctn { padding-top: 0 !important; }
-.fi-main { padding-top: 0 !important; }
-header.fi-header, .fi-page-header { margin-top: 0 !important; margin-bottom: 0 !important; }
-.fi-header-heading { margin-top: 0 !important; padding-top: 0 !important; }
-.fi-layout > main { padding-top: 0 !important; }
-
-/* Shrink Sidebar Width to remove the large white gap */
-:root { --sidebar-width: 17rem !important; }
-
-/* Active Sidebar Item Styling */
-.fi-sidebar-item-active > a.fi-sidebar-item-btn { background-color: #f0fdf4 !important; }
-.fi-sidebar-item-active .fi-sidebar-item-label { color: #000000 !important; font-weight: 700 !important; }
-
-/* Hide all default SVG icons in the sidebar to replace them with Emojis */
-a.fi-sidebar-item-btn > svg.fi-sidebar-item-icon { 
-    display: none !important; 
-}
-
-/* Base styling for Emoji icons */
-a.fi-sidebar-item-btn::before { 
-    font-size: 1.5rem; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    width: 2rem; 
-    height: 2rem; 
-}
-
-/* Emoji mappings */
-a.fi-sidebar-item-btn[href$="/admin"]::before, a.fi-sidebar-item-btn[href$="/admin/"]::before { content: "🏠"; }
-a.fi-sidebar-item-btn[href*="/brands"]::before { content: "🏷️"; }
-a.fi-sidebar-item-btn[href*="/categories"]::before { content: "🗂️"; }
-a.fi-sidebar-item-btn[href*="/products"]::before { content: "📦"; }
-a.fi-sidebar-item-btn[href*="/users"]::before { content: "👥"; }
-a.fi-sidebar-item-btn[href*="/sales-analytics"]::before { content: "📊"; }
-a.fi-sidebar-item-btn[href*="/banners"]::before { content: "🖼️"; }
-a.fi-sidebar-item-btn[href*="/coupons"]::before { content: "🎟️"; }
-a.fi-sidebar-item-btn[href$="/orders"]::before { content: "🛍️"; }
-a.fi-sidebar-item-btn[href*="/questions"]::before { content: "💬"; }
-a.fi-sidebar-item-btn[href*="/reviews"]::before { content: "⭐"; }
-a.fi-sidebar-item-btn[href*="/wholesale-requests"]::before { content: "💼"; }
-a.fi-sidebar-item-btn[href*="/incomplete-orders"]::before { content: "🛒"; }
-a.fi-sidebar-item-btn[href*="/settings"]::before { content: "⚙️"; }
-
-/* Dashboard Text Color and Size */
-a.fi-sidebar-item-btn[href$="/admin"] .fi-sidebar-item-label,
-a.fi-sidebar-item-btn[href$="/admin/"] .fi-sidebar-item-label {
-    color: #000000 !important;
-    font-weight: 700 !important;
-    font-size: 1.15rem !important;
-}
-
-/* Dashboard Background Color (Ultra high specificity to override active state) */
-li.fi-sidebar-item > a.fi-sidebar-item-btn[href$="/admin"],
-li.fi-sidebar-item > a.fi-sidebar-item-btn[href$="/admin/"],
-li.fi-sidebar-item-active > a.fi-sidebar-item-btn[href$="/admin"],
-li.fi-sidebar-item-active > a.fi-sidebar-item-btn[href$="/admin/"] { 
-    background-color: #eaf7ec !important; 
-}
+    .fi-wi-stats-overview .gap-x-6,
+    .fi-wi-stats-overview .gap-y-6,
+    .fi-wi-stats-overview .gap-6 {
+        gap: 0.75rem !important;
+    }
 
 
+    /* Aggressive dashboard gap override */
+    .fi-page-content>.grid {
+        gap: 0.75rem !important;
+    }
 
- / *   P r i m a r y   b u t t o n s   s t y l i n g   m a t c h i n g   A d d   t o   C a r t   * / 
- . f i - b t n - c o l o r - p r i m a r y , 
- . f i - b t n - c o l o r - p r i m a r y . f i - c o l o r - c u s t o m   { 
-         b a c k g r o u n d - i m a g e :   l i n e a r - g r a d i e n t ( t o   r i g h t ,   # 3 B 8 2 F 6 ,   # 2 5 6 3 E B ,   # 1 D 4 E D 8 )   ! i m p o r t a n t ; 
-         b a c k g r o u n d - c o l o r :   t r a n s p a r e n t   ! i m p o r t a n t ; 
-         c o l o r :   # 0 0 0 0 0 0   ! i m p o r t a n t ; 
-         b o r d e r :   n o n e   ! i m p o r t a n t ; 
- } 
- . f i - b t n - c o l o r - p r i m a r y   . f i - b t n - l a b e l , 
- . f i - b t n - c o l o r - p r i m a r y   . f i - b t n - i c o n , 
- . f i - b t n - c o l o r - p r i m a r y   *   { 
-         c o l o r :   # 0 0 0 0 0 0   ! i m p o r t a n t ; 
- } 
-  
- /* Sidebar Gap Fixes */
-.fi-sidebar-header-ctn, .fi-sidebar-header { 
-    margin-bottom: 0 !important; 
-    padding-bottom: 0 !important; 
-    min-height: 3rem !important; /* reduce header height if possible */
-}
-.fi-sidebar-nav { 
-    margin-top: 0.75rem !important; 
-    padding-top: 0 !important; 
-}
+    .fi-page-content .fi-wi-widgets {
+        gap: 0.75rem !important;
+    }
 
-/* Reduce gap between groups (e.g. below Customers, before Management) */
-ul.fi-sidebar-nav-groups {
-    gap: 0.75rem !important;
-}
+    .fi-page-content>div>.grid {
+        gap: 0.75rem !important;
+    }
 
-/* Reduce gap between individual lines/items slightly */
-ul.fi-sidebar-group-items { 
-    gap: 0.25rem !important; 
-}
-a.fi-sidebar-item-btn { 
-    padding-top: 0.45rem !important; 
-    padding-bottom: 0.45rem !important; 
-}
-/* Success button text color fix */
-.fi-color-success,
-.fi-color-success .fi-btn-label,
-.fi-color-success .fi-btn-icon,
-.fi-color-success svg,
-a[href*="print_all"],
-a[href*="print_all"] .fi-btn-label,
-a[href*="print_all"] .fi-btn-icon,
-a[href*="print_all"] * {
-    color: #ffffff !important;
-}
-.fi-btn.fi-color-success, 
-a[href*="print_all"] {
-    background-color: #166534 !important; /* Deeper green */
-    border-color: #14532d !important;
-}
+    /* Force widgets to fill their grid columns */
+    .fi-wi-chart,
+    .fi-wi-table,
+    .fi-wi-widget {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
 
-/* Notification Badge Fixes */
-.fi-topbar .fi-badge,
-.fi-icon-btn-badge,
-button[wire\:click="openDatabaseNotifications"] .fi-badge,
-.fi-topbar .fi-badge * {
-    background: transparent !important;
-    background-color: transparent !important;
-    color: #ef4444 !important; /* Red text */
-    border: none !important;
-    box-shadow: none !important;
-    --tw-ring-shadow: 0 0 #0000 !important;
-    --tw-ring-color: transparent !important;
-}
+    .fi-page-content>div>.grid {
+        gap: 0.75rem !important;
+    }
 
+    .fi-wi-widgets {
+        gap: 0.75rem !important;
+    }
+
+    /* Grid Side-by-Side Layout for FilePond Uploads */
+    .filepond--root[data-style-panel-layout~="grid"] .filepond--list {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 14px !important;
+    }
+
+    .filepond--root[data-style-panel-layout~="grid"] .filepond--item {
+        flex: 0 0 auto !important;
+        width: calc(25% - 11px) !important;
+        min-width: 150px !important;
+        margin: 0 !important;
+    }
+
+    /* Remove dark background overlays from FilePond items so image fills cleanly */
+    .filepond--root .filepond--panel-root,
+    .filepond--root .filepond--item-panel,
+    .filepond--root [data-filepond-item-state] .filepond--item-panel,
+    .filepond--root [data-filepond-item-state="processing-complete"] .filepond--panel-root,
+    .filepond--root [data-filepond-item-state="processing-complete"] .filepond--item-panel {
+        background-color: #ffffff !important;
+        background-image: none !important;
+        border-radius: 8px !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Make image preview expand to fill the thumbnail box */
+    .filepond--root .filepond--image-preview-wrapper,
+    .filepond--root .filepond--image-preview,
+    .filepond--root .filepond--image-clip {
+        background-color: #ffffff !important;
+        border-radius: 6px !important;
+    }
+
+    .filepond--root img,
+    .filepond--root canvas {
+        object-fit: cover !important;
+    }
+
+    /* Enable CSS flex stretching for Chart and Table widgets */
+    .fi-wi-chart,
+    .fi-wi-table {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+    }
+
+    /* Stretch the Chart Card */
+    .fi-wi-chart>.fi-section {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .fi-wi-chart .fi-section-content-ctn {
+        flex-grow: 1 !important;
+    }
+
+    /* Stretch the Table Card */
+    .fi-wi-table>.fi-ta {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .fi-wi-table>.fi-ta>.fi-ta-ctn {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Ensure the inner main content also takes up remaining space if needed */
+    .fi-wi-table .fi-ta-main {
+        flex-grow: 1 !important;
+    }
+
+    /* Force exact heights for Dashboard first row */
+    .custom-analytics-chart,
+    .custom-low-stock-table {
+        height: 510px !important;
+        min-height: 510px !important;
+        max-height: 510px !important;
+    }
+
+    /* Ensure inner contents stretch */
+    .custom-analytics-chart .fi-section,
+    .custom-low-stock-table .fi-ta {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .custom-analytics-chart .fi-section-content-ctn,
+    .custom-analytics-chart .fi-section-content,
+    .custom-analytics-chart .fi-section-content>div,
+    .custom-low-stock-table .fi-ta-ctn {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 0 !important;
+    }
+
+    .custom-analytics-chart .fi-wi-chart-canvas-ctn {
+        flex-grow: 1 !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 0 !important;
+    }
+
+    .custom-analytics-chart canvas {
+        height: 100% !important;
+        max-height: 100% !important;
+    }
+
+    /* Force Low Stock Table to show exactly 3 items and scroll */
+    .custom-low-stock-table .fi-ta-content {
+        flex-grow: 1 !important;
+        max-height: 100% !important;
+        overflow-y: auto !important;
+    }
+
+    /* Remove most of top padding to fix the gap above titles, but keep 1px */
+    .custom-low-stock-table td,
+    .custom-low-stock-table td>div,
+    .custom-low-stock-table td>div>div,
+    .custom-low-stock-table .fi-ta-text-item {
+        padding-top: 1px !important;
+        margin-top: 1px !important;
+    }
+
+    /* Keep minimal bottom padding so items don't stick to the border */
+    .custom-low-stock-table td>div {
+        padding-bottom: 3px !important;
+    }
+
+    /* Expand all pages to 1440px to reduce side margins */
+    .fi-main.fi-width-7xl {
+        max-width: 1440px !important;
+    }
+
+    /* Make sidebar text larger but not too large, and group headings even larger */
+    .fi-sidebar-item-label {
+        font-size: 1.15rem !important;
+        line-height: 1.75rem !important;
+    }
+
+    .fi-sidebar-item-icon {
+        width: 1.75rem !important;
+        height: 1.75rem !important;
+    }
+
+    .fi-sidebar-group-label {
+        font-size: 1.15rem !important;
+        line-height: 1.75rem !important;
+        font-weight: 700 !important;
+    }
+
+    /* Make Dashboard item match group heading size */
+    .fi-sidebar-nav-groups>li:first-child .fi-sidebar-item-label,
+    .fi-sidebar-item-btn[href$="/admin"] .fi-sidebar-item-label {
+        font-size: 1.15rem !important;
+        line-height: 1.75rem !important;
+        font-weight: 700 !important;
+    }
+
+
+
+    /* Make Stats Overview cards thinner / less padding */
+    .fi-wi-stats-overview-stat {
+        padding: 0.75rem !important;
+    }
+
+    /* Boxed header */
+    .fi-header {
+        background-color: white;
+        padding: 1.5rem 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dark .fi-header {
+        background-color: rgb(24, 24, 27);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Custom sleek scrollbar for sidebar to remove visual gaps */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+
+    /* Aggressively reduce gaps and padding in the admin panel */
+    .fi-page-header-main-ctn,
+    .fi-page-content,
+    .fi-page-main,
+    .grid {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+    .fi-page-header-main-ctn>* {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .fi-wi {
+        margin: 0 !important;
+    }
+
+
+    /* Force all large layout gaps to 0.75rem */
+    .fi-main .gap-4,
+    .fi-main .gap-6,
+    .fi-main .gap-8,
+    .fi-main .gap-x-4,
+    .fi-main .gap-x-6,
+    .fi-main .gap-x-8,
+    .fi-main .gap-y-4,
+    .fi-main .gap-y-6,
+    .fi-main .gap-y-8,
+    .fi-main .md\:gap-4,
+    .fi-main .md\:gap-6,
+    .fi-main .md\:gap-8,
+    .fi-main .lg\:gap-4,
+    .fi-main .lg\:gap-6,
+    .fi-main .lg\:gap-8,
+    .fi-main .xl\:gap-4,
+    .fi-main .xl\:gap-6,
+    .fi-main .xl\:gap-8 {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+
+    /* Force the specific gap for the stats overview grid */
+    .fi-wi-stats-overview>section>div>div,
+    .fi-wi-stats-overview-stat-content {
+        gap: 0.75rem !important;
+    }
+
+    .fi-wi-stats-overview [class*="grid"] {
+        gap: 0.75rem !important;
+    }
+
+    .fi-wi-stats-overview .gap-x-6,
+    .fi-wi-stats-overview .gap-y-6,
+    .fi-wi-stats-overview .gap-6 {
+        gap: 0.75rem !important;
+    }
+
+
+    /* Aggressive dashboard gap override */
+    .fi-page-content>.grid {
+        gap: 0.75rem !important;
+    }
+
+    .fi-page-content .fi-wi-widgets {
+        gap: 0.75rem !important;
+    }
+
+    .fi-page-content>div>.grid {
+        gap: 0.75rem !important;
+    }
+
+    /* Force widgets to fill their grid columns */
+    .fi-wi-chart,
+    .fi-wi-table,
+    .fi-wi-widget {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .fi-page-content>div>.grid {
+        gap: 0.75rem !important;
+    }
+
+    .fi-wi-widgets {
+        gap: 0.75rem !important;
+    }
+
+    /* ULTIMATE GRID GAP FORCE */
+    .fi-page-content div[class*='grid'],
+    .fi-main div[class*='grid'] {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+    .fi-wi {
+        gap: 0.75rem !important;
+        row-gap: 0.75rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+    /* Fix top gap above page header */
+    .fi-topbar {
+        margin-bottom: 0 !important;
+        border-bottom: none !important;
+    }
+
+    .fi-page {
+        gap: 0.75rem !important;
+        padding-top: 0 !important;
+        margin-top: -1.25rem !important;
+    }
+
+    .fi-main-ctn {
+        padding-top: 0 !important;
+    }
+
+    .fi-main {
+        padding-top: 0 !important;
+    }
+
+    header.fi-header,
+    .fi-page-header {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .fi-header-heading {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .fi-layout>main {
+        padding-top: 0 !important;
+    }
+
+    /* Shrink Sidebar Width to remove the large white gap */
+    :root {
+        --sidebar-width: 23rem !important;
+    }
+
+    /* Active Sidebar Item Styling */
+    .fi-sidebar-item-active>a.fi-sidebar-item-btn {
+        background-color: #f0fdf4 !important;
+    }
+
+    .fi-sidebar-item-active .fi-sidebar-item-label {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Hide all default SVG icons in the sidebar to replace them with Emojis */
+    a.fi-sidebar-item-btn>svg.fi-sidebar-item-icon {
+        display: none !important;
+    }
+
+    /* Base styling for Emoji icons */
+    a.fi-sidebar-item-btn::before {
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    /* Emoji mappings */
+    a.fi-sidebar-item-btn[href$="/admin"]::before,
+    a.fi-sidebar-item-btn[href$="/admin/"]::before {
+        content: "🏠";
+    }
+
+    a.fi-sidebar-item-btn[href*="/brands"]::before {
+        content: "🏷️";
+    }
+
+    a.fi-sidebar-item-btn[href*="/categories"]::before {
+        content: "🗂️";
+    }
+
+    a.fi-sidebar-item-btn[href*="/products"]::before {
+        content: "📦";
+    }
+
+    a.fi-sidebar-item-btn[href*="/users"]::before {
+        content: "👥";
+    }
+
+    a.fi-sidebar-item-btn[href*="/sales-analytics"]::before {
+        content: "📊";
+    }
+
+    a.fi-sidebar-item-btn[href*="/banners"]::before {
+        content: "🖼️";
+    }
+
+    a.fi-sidebar-item-btn[href*="/coupons"]::before {
+        content: "🎟️";
+    }
+
+    a.fi-sidebar-item-btn[href$="/orders"]::before {
+        content: "🛍️";
+    }
+
+    a.fi-sidebar-item-btn[href*="/questions"]::before {
+        content: "💬";
+    }
+
+    a.fi-sidebar-item-btn[href*="/reviews"]::before {
+        content: "⭐";
+    }
+
+    a.fi-sidebar-item-btn[href*="/wholesale-requests"]::before {
+        content: "💼";
+    }
+
+    a.fi-sidebar-item-btn[href*="/incomplete-orders"]::before {
+        content: "🛒";
+    }
+
+    a.fi-sidebar-item-btn[href*="/media"]::before {
+        content: "📸";
+    }
+
+    a.fi-sidebar-item-btn[href*="/settings"]::before {
+        content: "⚙️";
+    }
+
+    /* Dashboard Text Color and Size */
+    a.fi-sidebar-item-btn[href$="/admin"] .fi-sidebar-item-label,
+    a.fi-sidebar-item-btn[href$="/admin/"] .fi-sidebar-item-label {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        font-size: 1.15rem !important;
+        line-height: 1.75rem !important;
+    }
+
+    /* Dashboard Background Color (Ultra high specificity to override active state) */
+    li.fi-sidebar-item>a.fi-sidebar-item-btn[href$="/admin"],
+    li.fi-sidebar-item>a.fi-sidebar-item-btn[href$="/admin/"],
+    li.fi-sidebar-item-active>a.fi-sidebar-item-btn[href$="/admin"],
+    li.fi-sidebar-item-active>a.fi-sidebar-item-btn[href$="/admin/"] {
+        background-color: #eaf7ec !important;
+    }
+
+
+
+     / *   P r i m a r y   b u t t o n s   s t y l i n g   m a t c h i n g   A d d   t o   C a r t   * /   . f i - b t n - c o l o r - p r i m a r y ,
+       . f i - b t n - c o l o r - p r i m a r y . f i - c o l o r - c u s t o m    {
+                   b a c k g r o u n d - i m a g e :    l i n e a r - g r a d i e n t ( t o   r i g h t ,    # 3 B 8 2 F 6 ,    # 2 5 6 3 E B ,    # 1 D 4 E D 8 )    ! i m p o r t a n t ;
+                   b a c k g r o u n d - c o l o r :    t r a n s p a r e n t    ! i m p o r t a n t ;
+                   c o l o r :    # 0 0 0 0 0 0    ! i m p o r t a n t ;
+                   b o r d e r :    n o n e    ! i m p o r t a n t ;
+           
+    }
+
+       . f i - b t n - c o l o r - p r i m a r y   . f i - b t n - l a b e l ,
+       . f i - b t n - c o l o r - p r i m a r y   . f i - b t n - i c o n ,
+       . f i - b t n - c o l o r - p r i m a r y   *    {
+                   c o l o r :    # 0 0 0 0 0 0    ! i m p o r t a n t ;
+           
+    }
+
+           
+
+    /* Sidebar Gap Fixes */
+    .fi-sidebar-header-ctn,
+    .fi-sidebar-header {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        min-height: 3rem !important;
+        /* reduce header height if possible */
+    }
+
+    .fi-sidebar-nav {
+        margin-top: 0.75rem !important;
+        padding-top: 0 !important;
+    }
+
+    /* Reduce gap between groups (e.g. below Customers, before Management) */
+    ul.fi-sidebar-nav-groups {
+        gap: 0.75rem !important;
+    }
+
+    /* Reduce gap between individual lines/items slightly */
+    ul.fi-sidebar-group-items {
+        gap: 0.25rem !important;
+    }
+
+    a.fi-sidebar-item-btn {
+        padding-top: 0.45rem !important;
+        padding-bottom: 0.45rem !important;
+    }
+
+    /* Success button text color fix */
+    .fi-color-success,
+    .fi-color-success .fi-btn-label,
+    .fi-color-success .fi-btn-icon,
+    .fi-color-success svg,
+    a[href*="print_all"],
+    a[href*="print_all"] .fi-btn-label,
+    a[href*="print_all"] .fi-btn-icon,
+    a[href*="print_all"] * {
+        color: #ffffff !important;
+    }
+
+    .fi-btn.fi-color-success,
+    a[href*="print_all"] {
+        background-color: #166534 !important;
+        /* Deeper green */
+        border-color: #14532d !important;
+    }
+
+    /* Notification Badge Fixes */
+    .fi-topbar .fi-badge,
+    .fi-icon-btn-badge,
+    button[wire\:click="openDatabaseNotifications"] .fi-badge,
+    .fi-topbar .fi-badge * {
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #ef4444 !important;
+        /* Red text */
+        border: none !important;
+        box-shadow: none !important;
+        --tw-ring-shadow: 0 0 #0000 !important;
+        --tw-ring-color: transparent !important;
+    }
+
+
+    /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) */
+    @media (min-width: 1024px) {
+        .fi-global-search-ctn {
+            position: absolute !important;
+            left: 450px !important; /* Left gap as requested */
+            right: 620px !important; /* Adjusted to 620px to match the red circle */
+            width: auto !important;
+            max-width: none !important;
+            transform: none !important;
+        }
+    }
+    
+    .fi-global-search,
+    .fi-global-search-field,
+    .fi-global-search-input,
+    .fi-global-search-field input,
+    .fi-global-search-ctn .fi-input-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }

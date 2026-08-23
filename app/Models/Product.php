@@ -36,6 +36,7 @@ class Product extends Model
         'stock_quantity',
         'alert_stock',
         'cover_image',
+        'cover_image_id',
         'description',
         'specifications',
         'status',
@@ -55,6 +56,11 @@ class Product extends Model
     ];
 
     // ──── Relationships ────
+
+    public function coverMedia(): BelongsTo
+    {
+        return $this->belongsTo(\Awcodes\Curator\Models\Media::class, 'cover_image_id');
+    }
 
     public function category(): BelongsTo
     {
@@ -114,11 +120,18 @@ class Product extends Model
     public function toSearchableArray(): array
     {
         return [
-            'id' => $this->id,
+            'id' => (int) $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'sku' => $this->sku,
             'category_id' => $this->category_id,
+            'brand_id' => $this->brand_id,
+            'status' => $this->status,
+            'regular_price' => (float) $this->regular_price,
+            'discount_price' => $this->discount_price ? (float) $this->discount_price : null,
+            'slug' => $this->slug,
+            'cover_image' => $this->cover_image,
+            'cover_image_url' => $this->cover_image_url,
         ];
     }
 
@@ -173,6 +186,14 @@ class Product extends Model
     public function getIsInStockAttribute(): bool
     {
         return $this->status === 'in_stock' && $this->stock_quantity > 0;
+    }
+
+    public function getCoverImageUrlAttribute(): string
+    {
+        if ($this->coverMedia) {
+            return $this->coverMedia->url;
+        }
+        return $this->cover_image ? \Illuminate\Support\Facades\Storage::url($this->cover_image) : '';
     }
 
     // ──── Helpers ────

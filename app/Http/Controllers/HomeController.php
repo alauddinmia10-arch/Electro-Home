@@ -16,14 +16,11 @@ class HomeController extends Controller
             return Banner::active()->get();
         });
 
-        $categories = Cache::remember('home.categories', 3600, function () {
-            return Category::parents()
-                ->active()
-                ->withSum('products', 'total_sold')
-                ->orderByDesc('products_sum_total_sold')
-                ->take(12)
-                ->get();
-        });
+        $categories = Category::parents()
+            ->active()
+            ->withSum('products', 'total_sold')
+            ->orderByDesc('products_sum_total_sold')
+            ->get();
 
         $brands = Cache::remember('home.brands', 3600, function () {
             return Brand::where('is_active', true)->get();

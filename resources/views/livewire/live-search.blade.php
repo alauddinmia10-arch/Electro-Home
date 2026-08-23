@@ -28,7 +28,7 @@ new class extends Component {
             wire:model.live.debounce.300ms="query" 
             @focus="show = true"
             placeholder="Search for components, tools, kits..." 
-            class="form-input h-10 py-2 pl-4 pr-10 rounded w-full bg-gray-50 border-gray-200 focus:bg-white text-[14px]"
+            class="form-input h-10 py-2 pl-4 pr-10 rounded-full w-full bg-gray-50 border-gray-200 focus:bg-white text-[14px]"
         >
         <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
             <svg wire:loading.remove class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -44,8 +44,8 @@ new class extends Component {
             @foreach($results as $product)
                 <a href="/product/{{ $product['slug'] }}" class="search-dropdown-item border-b border-gray-50 last:border-b-0">
                     <div class="w-12 h-12 bg-gray-100 rounded overflow-hidden shrink-0">
-                        @if($product['cover_image'])
-                            <img src="{{ Storage::url($product['cover_image']) }}" alt="{{ $product['name'] }}" class="w-full h-full object-cover">
+                        @if(!empty($product['cover_image_url']))
+                            <img src="{{ $product['cover_image_url'] }}" alt="{{ $product['name'] }}" class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-gray-400">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>

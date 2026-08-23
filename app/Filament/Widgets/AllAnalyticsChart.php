@@ -25,7 +25,7 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
         '2xl' => 2,
     ];
     
-    protected ?string $maxHeight = '300px';
+    protected ?string $maxHeight = null;
     
     protected ?string $heading = 'All Analytics (Orders, Sales & Website Views)';
 

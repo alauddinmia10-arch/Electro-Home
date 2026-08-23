@@ -1,6 +1,6 @@
 <x-layouts.app>
     {{-- Breadcrumbs --}}
-    <div class="max-w-[1440px] mx-auto px-0 md:px-4 xl:px-[70px] mt-1">
+    <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] mt-1">
         <div class="bg-[#f0f5fa] md:rounded px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
             <a href="{{ route('home') }}" onclick="event.stopPropagation(); window.location.href = this.href; return false;" class="text-gray-700 hover:text-blue-600 transition-colors shrink-0 flex items-center" title="Home">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
@@ -20,12 +20,12 @@
         </div>
     </div>
 
-    <div class="max-w-[1440px] mx-auto px-0 md:px-4 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+    <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white md:rounded shadow-sm border-y md:border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-3 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
-            <div x-data="{ mainImage: '{{ $product->cover_image ? Storage::url($product->cover_image) : '' }}' }" class="lg:col-span-5 flex flex-col md:flex-row gap-3 md:gap-0 -ml-2 lg:-ml-6">
+            <div x-data="{ mainImage: '{{ $product->cover_image_url }}' }" class="lg:col-span-5 flex flex-col md:flex-row gap-3 md:gap-0 -ml-2 lg:-ml-6">
                 
                 {{-- Thumbnails (Vertical on left for Desktop, Horizontal below for Mobile) --}}
                 @if($product->images && $product->images->count() > 0)
@@ -41,16 +41,16 @@
                             
                             <!-- Thumbnails Container -->
                             <div x-ref="thumbSlider" class="flex md:flex-col gap-2 overflow-auto scrollbar-hide md:max-h-[432px] snap-x md:snap-y w-full">
-                                <button @click="mainImage = '{{ Storage::url($product->cover_image) }}'" 
+                                <button @click="mainImage = '{{ $product->cover_image_url }}'" 
                                         class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded border-2 overflow-hidden snap-start transition-all"
-                                        :class="mainImage === '{{ Storage::url($product->cover_image) }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
-                                    <img src="{{ Storage::url($product->cover_image) }}" class="w-full h-full object-cover mix-blend-multiply">
+                                        :class="mainImage === '{{ $product->cover_image_url }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
+                                    <img src="{{ $product->cover_image_url }}" class="w-full h-full object-cover mix-blend-multiply">
                                 </button>
                                 @foreach($product->images as $image)
-                                    <button @click="mainImage = '{{ Storage::url($image->image_path) }}'" 
+                                    <button @click="mainImage = '{{ $image->image_url }}'" 
                                             class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded border-2 overflow-hidden snap-start transition-all"
-                                            :class="mainImage === '{{ Storage::url($image->image_path) }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
-                                        <img src="{{ Storage::url($image->image_path) }}" class="w-full h-full object-cover mix-blend-multiply">
+                                            :class="mainImage === '{{ $image->image_url }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
+                                        <img src="{{ $image->image_url }}" class="w-full h-full object-cover mix-blend-multiply">
                                     </button>
                                 @endforeach
                             </div>

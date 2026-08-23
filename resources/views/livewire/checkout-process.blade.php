@@ -261,8 +261,8 @@ new class extends Component {
                         {{-- Left: Image + Title + SKU + Quantity --}}
                         <div class="flex items-center gap-3 min-w-0 flex-1">
                             <a href="{{ route('product.show', $item->product->slug) }}" class="w-14 h-14 shrink-0 bg-white rounded border border-gray-100 overflow-hidden block p-0.5">
-                                @if($item->product->cover_image)
-                                    <img src="{{ Storage::url($item->product->cover_image) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
+                                @if($item->product->cover_image_url)
+                                    <img src="{{ $item->product->cover_image_url }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain mix-blend-multiply">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-gray-300">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -461,10 +461,10 @@ new class extends Component {
 
             <div class="border-t border-gray-100 pt-4 mb-6 flex justify-between items-end">
                 <span class="font-bold text-gray-800 text-xl md:text-base">Total</span>
-                <span class="text-3xl md:text-2xl font-bold text-[var(--color-trust-blue)]">৳{{ number_format($total, 0) }}</span>
+                <span class="text-3xl md:text-2xl font-bold text-price">৳{{ number_format($total, 0) }}</span>
             </div>
 
-            <button wire:click="submit" class="btn btn-confirm w-full py-3 md:py-3 text-2xl md:text-lg flex justify-center items-center gap-2">
+            <button wire:click="submit" class="btn btn-confirm w-full py-3 md:py-3 text-2xl md:text-lg flex justify-center items-center gap-2 !bg-[#1f618d] hover:!bg-[#174a6c]">
                 Confirm Order <svg class="w-5 h-5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             </button>
             <div wire:loading wire:target="submit" class="text-center text-sm text-gray-500 mt-2">

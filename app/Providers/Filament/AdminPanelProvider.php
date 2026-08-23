@@ -27,8 +27,9 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->brandName('Electrohome.bd')
-            ->maxContentWidth(\Filament\Support\Enums\Width::SixExtraLarge)
+            ->brandLogo(asset('images/logo-header.webp'))
+            ->brandLogoHeight('2.5rem')
+            ->maxContentWidth(\Filament\Support\Enums\Width::SevenExtraLarge)
             ->login()
             ->colors([
                 'primary' => Color::Blue,
@@ -49,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 'MASTER DATA',
-                'Management',
+                'MANAGEMENT',
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('3s')
@@ -57,8 +58,16 @@ class AdminPanelProvider extends PanelProvider
                 \Filament\View\PanelsRenderHook::USER_MENU_BEFORE,
                 fn (): \Illuminate\Contracts\View\View => view('filament.hooks.user-menu'),
             )
+            ->plugins([
+                \Awcodes\Curator\CuratorPlugin::make()
+                    ->label('Media')
+                    ->pluralLabel('Gallery')
+                    ->navigationIcon('heroicon-o-photo')
+                    ->navigationGroup('MANAGEMENT')
+                    ->navigationSort(5),
+            ])
             ->assets([
-                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=40')),
+                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=83')),
             ])
             ->middleware([
                 EncryptCookies::class,

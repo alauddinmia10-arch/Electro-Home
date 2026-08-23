@@ -1,25 +1,37 @@
 <x-layouts.app>
     <div class="flex flex-col gap-2 md:gap-4 pt-2 md:pt-4 pb-8">
     {{-- Hero Banners --}}
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-96">
+    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-[420px]">
             {{-- Main Slider --}}
             <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm aspect-video md:aspect-auto md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
-                @forelse($banners as $index => $banner)
-                    <div x-show="activeSlide === {{ $index }}" x-transition.opacity.duration.500ms class="absolute inset-0">
-                        <img src="{{ Storage::url($banner->image_path) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div x-show="activeSlide === 0" x-transition.opacity.duration.500ms class="absolute inset-0">
+                    <img src="{{ asset('images/sliders/slide1.png') }}" alt="Hybrid Solar Inverter" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-8 text-center">
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla drop-shadow-lg">আপনার স্বপ্নের প্রজেক্ট<br>শুরু করুন আজই!</h1>
+                        <p class="text-lg opacity-90 mb-6 drop-shadow-md">Electrohome.bd-এ পাচ্ছেন সেরা মানের সোলার ও ইনভার্টার সলিউশন</p>
+                        <a href="{{ route('shop') }}" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:scale-105 transition-all">Shop Now</a>
                     </div>
-                @empty
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-500 flex flex-col items-center justify-center text-white p-8">
-                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla text-center">আপনার স্বপ্নের প্রজেক্ট<br>শুরু করুন আজই!</h1>
-                        <p class="text-lg opacity-90 mb-6">Electrohome.bd-এ পাচ্ছেন সেরা মানের ইলেকট্রনিক্স কম্পোনেন্ট</p>
-                        <a href="{{ route('shop') }}" class="bg-white text-blue-600 px-6 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
-                            Shop Now
-                        </a>
+                </div>
+
+                <div x-show="activeSlide === 1" x-transition.opacity.duration.500ms class="absolute inset-0">
+                    <img src="{{ asset('images/sliders/slide2.png') }}" alt="Lithium Phosphate Battery" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-8 text-center">
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla drop-shadow-lg">দীর্ঘস্থায়ী পাওয়ার সলিউশন</h1>
+                        <p class="text-lg opacity-90 mb-6 drop-shadow-md">সেরা মানের Lithium-ion Phosphate (LiFePO4) ব্যাটারি</p>
+                        <a href="{{ route('shop') }}" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-emerald-700 hover:scale-105 transition-all">Explore Batteries</a>
                     </div>
-                @endforelse
-                
+                </div>
+
+                <div x-show="activeSlide === 2" x-transition.opacity.duration.500ms class="absolute inset-0">
+                    <img src="{{ asset('images/sliders/slide3.png') }}" alt="Electronic Components" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-8 text-center">
+                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla drop-shadow-lg">প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট</h1>
+                        <p class="text-lg opacity-90 mb-6 drop-shadow-md">সার্কিট, সেন্সর, আরডুইনো এবং রোবোটিক্স এক্সেসরিজ</p>
+                        <a href="{{ route('shop') }}" class="bg-[var(--color-trust-blue)] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-500 hover:scale-105 transition-all">View Components</a>
+                    </div>
+                </div>
+
                 {{-- Indicators --}}
                 <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
                     <template x-for="slide in slides" :key="slide">
@@ -30,13 +42,48 @@
 
             {{-- Right Side Banners --}}
             <div class="hidden md:flex flex-col gap-4 h-full">
-                <div class="flex-1 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group">
+                <div class="flex-1 bg-gray-900 rounded-lg p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group"
+                     @if(isset($flashSaleProducts) && $flashSaleProducts->count() > 0)
+                     x-data="{ activeIndex: 0, total: {{ min(5, $flashSaleProducts->count()) }} }"
+                     x-init="setInterval(() => { activeIndex = (activeIndex + 1) % total }, 3000)"
+                     @endif>
+                     
+                    {{-- Background Sliding Images --}}
+                    @if(isset($flashSaleProducts) && $flashSaleProducts->count() > 0)
+                        @foreach($flashSaleProducts->take(5) as $index => $product)
+                            <div x-show="activeIndex === {{ $index }}" 
+                                 x-transition.opacity.duration.1000ms
+                                 class="absolute inset-0 w-full h-full z-0">
+                                <img src="{{ $product->cover_image_url }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    {{-- Original Text Content --}}
+                    @php
+                        $maxDiscount = 0;
+                        if(isset($flashSaleProducts) && $flashSaleProducts->count() > 0) {
+                            foreach($flashSaleProducts as $p) {
+                                if($p->regular_price > 0 && $p->discount_price > 0 && $p->discount_price < $p->regular_price) {
+                                    $discount = round((($p->regular_price - $p->discount_price) / $p->regular_price) * 100);
+                                    if($discount > $maxDiscount) {
+                                        $maxDiscount = $discount;
+                                    }
+                                }
+                            }
+                        }
+                    @endphp
                     <div class="relative z-10">
                         <h3 class="text-xl font-bold mb-1">Flash Sale</h3>
-                        <p class="text-sm opacity-90 mb-4">Up to 50% Off</p>
+                        @if($maxDiscount > 0)
+                            <p class="text-sm opacity-90 mb-4">Up to {{ $maxDiscount }}% Off</p>
+                        @else
+                            <p class="text-sm opacity-90 mb-4">Hot Deals Inside</p>
+                        @endif
                         <a href="#flash-sales" class="inline-flex items-center gap-1 text-sm font-semibold hover:gap-2 transition-all">Shop Deals &rarr;</a>
                     </div>
-                    <svg class="absolute -right-4 -bottom-4 w-32 h-32 opacity-20 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <svg class="absolute -right-4 -bottom-4 w-32 h-32 opacity-20 group-hover:scale-110 transition-transform z-0" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
                 <div class="flex-1 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 text-white shadow-sm flex flex-col justify-center relative overflow-hidden group">
                     <div class="relative z-10">
@@ -54,11 +101,27 @@
 
     {{-- Flash Sale --}}
     @if($flashSaleProducts->count() > 0)
-    <section id="flash-sales" class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-red-100 relative overflow-hidden">
+    <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+        <div class="md:bg-white md:rounded-lg md:p-3 md:shadow-sm md:border md:border-red-100 relative overflow-hidden"
+             x-data="{
+                 showLeft: false,
+                 showRight: true,
+                 init() {
+                     this.$nextTick(() => this.checkScroll());
+                     window.addEventListener('resize', () => this.checkScroll());
+                 },
+                 checkScroll() {
+                     const slider = this.$refs.slider;
+                     if (!slider) return;
+                     this.showLeft = slider.scrollLeft > 0;
+                     this.showRight = Math.ceil(slider.scrollLeft + slider.clientWidth) < slider.scrollWidth;
+                 },
+                 scrollLeft() { this.$refs.slider.scrollBy({ left: -300, behavior: 'smooth' }); },
+                 scrollRight() { this.$refs.slider.scrollBy({ left: 300, behavior: 'smooth' }); }
+             }">
             <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10"></div>
             
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b border-red-100 pb-4">
+            <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-4">
                     <h2 class="text-2xl font-bold flex items-center gap-2">
                         <span class="text-[var(--color-soft-coral)]">⚡ Flash Sale</span>
@@ -70,10 +133,33 @@
                 <a href="{{ route('shop', ['flash_sale' => 1]) }}" class="text-red-600 hover:underline text-sm font-semibold">See All Deals &rarr;</a>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4">
-                @foreach($flashSaleProducts as $product)
-                    @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
-                @endforeach
+            <div class="relative group">
+                {{-- Left Arrow --}}
+                <div class="absolute -left-5 md:-left-8 xl:-left-12 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="showLeft">
+                    <button @click="scrollLeft" 
+                            style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                            class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                        <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                </div>
+
+                {{-- Slider Container --}}
+                <div x-ref="slider" @scroll="checkScroll" class="flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+                    @foreach($flashSaleProducts as $product)
+                        <div class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full">
+                            @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Right Arrow --}}
+                <div class="absolute -right-5 md:-right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="showRight">
+                    <button @click="scrollRight" 
+                            style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                            class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                        <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -81,7 +167,7 @@
 
     {{-- Top Selling --}}
     @if($bestSellers->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
         <x-product-slider 
             title="Top Selling" 
             icon="🏆" 
@@ -93,7 +179,7 @@
 
     {{-- New Arrivals --}}
     @if($newArrivals->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
         <x-product-slider 
             title="New Arrivals" 
             icon="🆕" 
@@ -105,7 +191,7 @@
 
     {{-- Trending Now --}}
     @if($featuredProducts->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
         <x-product-slider 
             title="Trending Now" 
             icon="📈" 
@@ -117,86 +203,253 @@
 
     {{-- Top Brands --}}
     @if(isset($brands) && $brands->count() > 0)
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6">
-            <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Top Brands</h2>
-            <div class="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
-                @foreach($brands as $brand)
-                    <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
-                       class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-3 md:p-4 flex items-center justify-center aspect-square group">
-                        @if($brand->logo)
-                            <img src="{{ asset('storage/' . ltrim($brand->logo, '/')) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
-                        @else
-                            <span class="font-bold text-gray-700 text-xs md:text-sm group-hover:text-[var(--color-trust-blue)] transition-colors text-center uppercase tracking-wide">{{ $brand->name }}</span>
-                        @endif
-                    </a>
+    <style>
+        @keyframes float-pulse {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+        }
+        @keyframes float-pulse-icon {
+            0%, 100% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+    {{-- Top Brands (Mobile View) --}}
+    <section class="max-w-[1600px] w-full mx-auto px-4 block md:hidden"
+             x-data="{
+                activeSlide: 0,
+                totalSlides: {{ ceil($brands->count() / 9) }},
+                touchStartX: 0,
+                touchEndX: 0,
+                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
+                prev() { if(this.activeSlide > 0) this.activeSlide--; },
+                handleSwipe() {
+                    let swipeDistance = this.touchStartX - this.touchEndX;
+                    if (swipeDistance > 40) {
+                        this.next();
+                    } else if (swipeDistance < -40) {
+                        this.prev();
+                    }
+                }
+             }">
+        <div class="flex items-center justify-between mb-3">
+            <h2 class="text-xl font-bold text-gray-900">Top Brands</h2>
+        </div>
+        
+        <div class="relative overflow-hidden"
+             @touchstart="touchStartX = $event.touches[0].clientX"
+             @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
+            {{-- Prev Button --}}
+            <div class="absolute -left-5 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+                <button @click="prev" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+            </div>
+
+            {{-- Slider Container --}}
+            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                @foreach($brands->chunk(9) as $chunk)
+                    <div class="w-full shrink-0">
+                        <div class="grid grid-cols-3 gap-3 px-1 pb-1">
+                            @foreach($chunk as $brand)
+                                <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
+                                   class="bg-white rounded-xl border border-gray-100 shadow-sm transition-all p-2 flex items-center justify-center aspect-square group">
+                                    @if($brand->logo)
+                                        <img src="{{ asset('storage/' . ltrim($brand->logo, '/')) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
+                                    @else
+                                        <span class="font-bold text-gray-700 text-xs text-center uppercase tracking-wide">{{ $brand->name }}</span>
+                                    @endif
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
                 @endforeach
+            </div>
+
+            {{-- Next Button --}}
+            <div class="absolute -right-5 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+                <button @click="next" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    {{-- Top Brands (Desktop View) --}}
+    <section class="max-w-[1600px] w-full mx-auto px-4 xl:px-[70px] hidden md:block"
+             x-data="{
+                activeSlide: 0,
+                totalSlides: {{ ceil($brands->count() / 12) }},
+                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
+                prev() { if(this.activeSlide > 0) this.activeSlide--; }
+             }">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Top Brands</h2>
+        </div>
+        
+        <div class="relative overflow-hidden">
+            {{-- Prev Button --}}
+            <div class="absolute -left-8 xl:-left-12 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+                <button @click="prev" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+            </div>
+
+            {{-- Slider Container --}}
+            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                @foreach($brands->chunk(12) as $chunk)
+                    <div class="w-full shrink-0">
+                        <div class="grid grid-cols-6 gap-4 px-1 pb-1">
+                            @foreach($chunk as $brand)
+                                <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
+                                   class="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-3 flex items-center justify-center aspect-square group">
+                                    @if($brand->logo)
+                                        <img src="{{ asset('storage/' . ltrim($brand->logo, '/')) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
+                                    @else
+                                        <span class="font-bold text-gray-700 text-sm group-hover:text-[var(--color-trust-blue)] transition-colors text-center uppercase tracking-wide">{{ $brand->name }}</span>
+                                    @endif
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Next Button --}}
+            <div class="absolute -right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+                <button @click="next" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
             </div>
         </div>
     </section>
     @endif
 
     {{-- Browse Categories --}}
-    <section class="max-w-[1440px] w-full mx-auto px-4 xl:px-[70px]">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold">Top Categories</h2>
-            <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] hover:underline text-sm font-semibold">View All</a>
+    {{-- Browse Categories (Mobile View) --}}
+    <section class="max-w-[1600px] w-full mx-auto px-4 block md:hidden"
+             x-data="{
+                activeSlide: 0,
+                totalSlides: {{ ceil($categories->count() / 9) }},
+                touchStartX: 0,
+                touchEndX: 0,
+                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
+                prev() { if(this.activeSlide > 0) this.activeSlide--; },
+                handleSwipe() {
+                    let swipeDistance = this.touchStartX - this.touchEndX;
+                    if (swipeDistance > 40) {
+                        this.next();
+                    } else if (swipeDistance < -40) {
+                        this.prev();
+                    }
+                }
+             }">
+        <div class="flex items-center justify-between mb-3">
+            <h2 class="text-xl font-bold text-gray-900">Top Categories</h2>
+            <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] text-sm font-semibold">View All</a>
         </div>
         
-        <div class="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
-            @foreach($categories as $category)
-                <a href="{{ route('shop', ['category' => $category->slug]) }}" class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow border border-gray-100 group">
-                    <div class="text-3xl mb-2 transform group-hover:scale-110 transition-transform">{{ $category->icon }}</div>
-                    <h3 class="text-xs md:text-sm font-semibold text-gray-800">{{ $category->name }}</h3>
-                </a>
-            @endforeach
+        <div class="relative overflow-hidden"
+             @touchstart="touchStartX = $event.touches[0].clientX"
+             @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
+             
+            {{-- Prev Button --}}
+            <div class="absolute -left-5 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+                <button @click="prev" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+            </div>
+
+            {{-- Slider Container --}}
+            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                @foreach($categories->chunk(9) as $chunk)
+                    <div class="w-full shrink-0">
+                        <div class="grid grid-cols-3 gap-3 px-1 pb-1">
+                            @foreach($chunk as $category)
+                                <a href="{{ route('shop', ['category' => $category->slug]) }}" 
+                                   class="bg-white rounded-xl shadow-sm transition-all border border-gray-100 p-2 text-center group flex flex-col items-center justify-center aspect-square">
+                                    <div class="text-3xl mb-1 transform group-hover:scale-110 transition-transform">{{ $category->icon }}</div>
+                                    <h3 class="text-xs font-semibold text-gray-800 leading-tight">{{ $category->name }}</h3>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Next Button --}}
+            <div class="absolute -right-5 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+                <button @click="next" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
         </div>
     </section>
 
-    {{-- Features / Trust Badges --}}
-    <section class="max-w-[1440px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
-        <div class="md:bg-white md:rounded-lg py-0 md:p-6 md:shadow-sm md:border md:border-gray-100 grid grid-cols-2 md:flex md:flex-wrap gap-y-1 gap-x-1 md:gap-0 justify-between md:items-center text-sm">
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-blue-50 text-[var(--color-trust-blue)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Fast Delivery</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">All over Bangladesh</p>
-                </div>
+    {{-- Browse Categories (Desktop View) --}}
+    <section class="max-w-[1600px] w-full mx-auto px-4 xl:px-[70px] hidden md:block"
+             x-data="{
+                activeSlide: 0,
+                totalSlides: {{ ceil($categories->count() / 18) }},
+                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
+                prev() { if(this.activeSlide > 0) this.activeSlide--; }
+             }">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Top Categories</h2>
+            <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] hover:underline text-sm font-semibold">View All</a>
+        </div>
+        
+        <div class="relative overflow-hidden">
+             
+            {{-- Prev Button --}}
+            <div class="absolute -left-8 xl:-left-12 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+                <button @click="prev" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
             </div>
-            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-green-50 text-[var(--color-sea-green)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Quality Products</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Verified by experts</p>
-                </div>
+
+            {{-- Slider Container --}}
+            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                @foreach($categories->chunk(18) as $chunk)
+                    <div class="w-full shrink-0">
+                        <div class="grid grid-cols-9 gap-4 px-1 pb-1">
+                            @foreach($chunk as $category)
+                                <a href="{{ route('shop', ['category' => $category->slug]) }}" 
+                                   class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 p-2 md:p-3 text-center group flex flex-col items-center justify-center aspect-square">
+                                    <div class="text-2xl md:text-3xl mb-1 md:mb-2 transform group-hover:scale-110 transition-transform">{{ $category->icon }}</div>
+                                    <h3 class="text-xs font-semibold text-gray-800 leading-tight line-clamp-2">{{ $category->name }}</h3>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-orange-50 text-[var(--color-warm-orange)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Secure Checkout</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">SSLCommerz & COD</p>
-                </div>
-            </div>
-            <div class="hidden md:block w-px h-10 bg-gray-100"></div>
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white md:bg-transparent py-2.5 px-1.5 md:p-0 rounded-lg shadow-sm md:shadow-none border border-gray-100 md:border-0">
-                <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-purple-50 text-[var(--color-soft-purple)] flex items-center justify-center shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 text-[11px] md:text-sm leading-tight md:leading-normal whitespace-nowrap">Support 24/7</h4>
-                    <p class="text-gray-500 text-[9px] md:text-xs leading-tight md:leading-normal whitespace-nowrap">Always here for you</p>
-                </div>
+
+            {{-- Next Button --}}
+            <div class="absolute -right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+                <button @click="next" 
+                        style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
+                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
             </div>
         </div>
     </section>
+
+
 
     </div>
 </x-layouts.app>

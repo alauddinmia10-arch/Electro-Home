@@ -49,24 +49,15 @@ class ProductForm
                 TextInput::make('alert_stock')
                     ->numeric()
                     ->default(0),
-                FileUpload::make('cover_image')
-                    ->label('Primary Cover Image (প্রধান কভার ছবি — ওয়েবসাইট ও প্রোডাক্ট কার্ডে সবার আগে এটি দেখাবে)')
-                    ->image()
-                    ->disk('public')
-                    ->directory('products')
+                \Awcodes\Curator\Components\Forms\CuratorPicker::make('cover_image_id')
+                    ->label('Primary Cover Image (প্রধান কভার ছবি)')
+                    ->relationship('coverMedia', 'id')
                     ->required()
-                    ->imagePreviewHeight('180')
                     ->columnSpanFull(),
 
-                FileUpload::make('gallery_images')
-                    ->label('Additional Gallery Images (অতিরিক্ত অন্যান্য ছবিসমূহ — একাধিক ছবি ড্র্যাগ অ্যান্ড ড্রপ করে সাজাতে পারবেন)')
+                \Awcodes\Curator\Components\Forms\CuratorPicker::make('gallery_images')
+                    ->label('Additional Gallery Images (অতিরিক্ত অন্যান্য ছবিসমূহ)')
                     ->multiple()
-                    ->image()
-                    ->disk('public')
-                    ->directory('products')
-                    ->reorderable()
-                    ->panelLayout('grid')
-                    ->imagePreviewHeight('140')
                     ->columnSpanFull(),
                 RichEditor::make('description')
                     ->columnSpanFull(),
