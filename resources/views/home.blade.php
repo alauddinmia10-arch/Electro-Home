@@ -256,7 +256,7 @@
                                 <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
                                    class="bg-white rounded-xl border border-gray-100 shadow-sm transition-all p-2 flex items-center justify-center aspect-square group">
                                     @if($brand->logo)
-                                        <img src="{{ asset('storage/' . ltrim($brand->logo, '/')) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($brand->logo) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
                                     @else
                                         <span class="font-bold text-gray-700 text-xs text-center uppercase tracking-wide">{{ $brand->name }}</span>
                                     @endif
@@ -309,7 +309,7 @@
                                 <a href="{{ route('shop', ['brand' => $brand->slug]) }}" 
                                    class="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all p-3 flex items-center justify-center aspect-square group">
                                     @if($brand->logo)
-                                        <img src="{{ asset('storage/' . ltrim($brand->logo, '/')) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($brand->logo) }}" alt="{{ $brand->name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform">
                                     @else
                                         <span class="font-bold text-gray-700 text-sm group-hover:text-[var(--color-trust-blue)] transition-colors text-center uppercase tracking-wide">{{ $brand->name }}</span>
                                     @endif
