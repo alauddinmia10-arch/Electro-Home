@@ -1,0 +1,53 @@
+databases:
+  - name: electrohome-db
+    databaseName: electrohome
+    user: electrohome
+    plan: free
+
+services:
+  - type: web
+    name: electrohome-app
+    env: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: "80"
+      - key: APP_KEY
+        value: "base64:6PfLekgegxz1GGsmJrbUcA6Is7Qlky6jgdc5Q6vJm3Y="
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://electrohome.onrender.com
+      - key: FILESYSTEM_DISK
+        value: cloudinary
+      - key: CLOUDINARY_CLOUD_NAME
+        value: "cwru1emq"
+      - key: CLOUDINARY_API_KEY
+        value: "348295292825443"
+      - key: CLOUDINARY_API_SECRET
+        value: "kJZ0kSHdVn2ZigHPOdMaUjlUaBA"
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: electrohome-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: electrohome-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: electrohome-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: electrohome-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: electrohome-db
+          property: password
