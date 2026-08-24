@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" class="overflow-x-hidden w-full">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? 'Electrohome.bd — Premium Electronics Components Store' }}</title>
@@ -27,7 +27,7 @@
 
     @livewireStyles
 </head>
-<body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col overflow-x-hidden">
+<body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col overflow-x-hidden w-full m-0 p-0 relative">
 
     {{-- Top Bar --}}
     <div class="bg-[var(--color-text-primary)] text-white text-[13px] py-1.5 hidden md:block print:hidden">
@@ -511,7 +511,7 @@
     </nav>
 
     {{-- Floating Action Buttons (WhatsApp, Scroll Up, Scroll Down) --}}
-    <div class="fixed bottom-[90px] md:bottom-8 z-[70] flex flex-col items-center gap-2 md:gap-3 print:hidden" style="right: 40px;">
+    <div class="fixed bottom-[90px] md:bottom-8 right-4 md:right-10 z-[70] flex flex-col items-center gap-2 md:gap-3 print:hidden">
         
         {{-- WhatsApp Floating Button --}}
         <a href="https://wa.me/{{ str_replace('+', '', \App\Models\Setting::get('whatsapp_number', '8801880223099')) }}"
