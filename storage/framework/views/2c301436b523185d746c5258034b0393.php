@@ -154,53 +154,76 @@
                                 left: 50% !important;
                                 transform: translate(-50%, -50%) !important;
                                 width: 95vw !important;
-                                max-width: 380px !important;
+                                max-width: 450px !important;
                                 max-height: 90vh !important;
                                 overflow-y: auto !important;
                                 z-index: 9999 !important;
                                 margin-top: 0 !important;
                             }
-                            /* Sidebar on top, calendar below */
+                            /* Ensure sidebar is on the left (row direction) */
                             .fbrp-popover-inner {
+                                display: flex !important;
+                                flex-direction: row !important;
+                                align-items: stretch;
+                            }
+                            /* Sidebar on the left */
+                            .fbrp-sidebar {
+                                width: 8.5rem !important; /* Narrower to fit mobile */
+                                padding: 0.5rem 0 !important;
+                                border-right: 1px solid #e5e7eb !important;
+                                border-bottom: none !important;
                                 display: flex !important;
                                 flex-direction: column !important;
                             }
-                            /* Horizontal grid Sidebar on top */
-                            .fbrp-sidebar {
-                                width: 100% !important;
-                                padding: 0.5rem !important;
-                                border-right: none !important;
-                                border-bottom: 1px solid #e5e7eb !important;
-                                display: grid !important;
-                                grid-template-columns: 1fr 1fr 1fr !important;
-                                gap: 0.5rem !important;
-                            }
                             .fbrp-sidebar button {
-                                padding: 0.5rem 0.25rem !important;
+                                padding: 0.5rem 0.5rem !important;
                                 font-size: 0.75rem !important;
-                                text-align: center !important;
-                                justify-content: center !important;
                             }
                             .fbrp-sidebar button span:first-child {
-                                display: none !important; /* hide the radio circle on mobile to save space */
+                                /* Shrink radio button icon slightly */
+                                width: 0.75rem !important;
+                                height: 0.75rem !important;
+                                margin-right: 0.35rem !important;
                             }
-                            /* Calendar on bottom */
-                            .custom-flatpickr {
-                                width: 100% !important;
-                                height: auto !important;
-                            }
-                            .custom-flatpickr > div {
-                                transform: none !important;
-                                width: 100% !important;
-                                display: flex;
-                                justify-content: center;
-                                padding: 0.5rem 0 !important;
-                            }
-                            /* Adjust bottom wrapper container width */
                             .fbrp-popover-inner > div:nth-child(2) {
                                 width: 100% !important;
-                                padding: 0.5rem !important;
+                                padding: 0.25rem !important;
+                                flex: 1;
                             }
+                            
+                            /* Zoom and Vertical Stack for Flatpickr */
+                            .custom-flatpickr {
+                                zoom: 0.72 !important; /* Shrink to fit beside sidebar on small screens */
+                                width: 100% !important;
+                                transform-origin: top left;
+                            }
+                            .flatpickr-calendar {
+                                width: auto !important;
+                                padding: 0 !important;
+                            }
+                            /* Advanced Vertical Stack Hack via display: contents */
+                            .flatpickr-months,
+                            .flatpickr-innerContainer,
+                            .flatpickr-rContainer,
+                            .flatpickr-weekdays,
+                            .flatpickr-days {
+                                display: contents !important;
+                            }
+                            .flatpickr-calendar.multiMonth {
+                                display: grid !important;
+                                grid-template-columns: 1fr !important; /* 1 Column for vertical stack */
+                                gap: 5px;
+                            }
+                            
+                            /* Month 1 (Top) */
+                            .flatpickr-month:nth-child(1) { grid-row: 1; grid-column: 1; margin-top: 5px; }
+                            .flatpickr-weekdaycontainer:nth-child(1) { grid-row: 2; grid-column: 1; }
+                            .dayContainer:nth-child(1) { grid-row: 3; grid-column: 1; }
+                            
+                            /* Month 2 (Bottom) */
+                            .flatpickr-month:nth-child(2) { grid-row: 4; grid-column: 1; margin-top: 15px; }
+                            .flatpickr-weekdaycontainer:nth-child(2) { grid-row: 5; grid-column: 1; }
+                            .dayContainer:nth-child(2) { grid-row: 6; grid-column: 1; }
                         }
                     </style>
                     <div class="custom-flatpickr" wire:ignore style="width: 100%; max-width: 700px; min-height: 250px; overflow: visible;">
@@ -232,7 +255,7 @@
                                                     flatpickrInstance = fp($el, {
                                                         mode: 'range',
                                                         inline: true,
-                                                        showMonths: window.innerWidth < 1024 ? 1 : 2,
+                                                        showMonths: 2,
                                                         onChange: function(selectedDates) {
                                                             if(selectedDates.length === 2) {
                                                                 customStart = selectedDates[0];
