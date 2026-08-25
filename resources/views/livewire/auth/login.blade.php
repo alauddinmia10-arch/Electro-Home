@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\User;
+use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
@@ -40,6 +42,14 @@ new #[Layout('components.layouts.app')] #[Title('Login - Electrohome.bd')] class
         $message = "Electrohome.bd - Your login OTP is: {$otp}. It is valid for 5 minutes.";
         
         app(\App\Services\SmsService::class)->sendSms($this->otpPhone, $message);
+        
+        if ($user->email && !str_ends_with($user->email, '@electrohome.bd')) {
+            try {
+                Mail::to($user->email)->send(new OtpMail($otp));
+            } catch (\Exception $e) {
+                // Ignore email errors
+            }
+        }
 
         $this->otpStep = 'verify';
     }
@@ -120,6 +130,7 @@ new #[Layout('components.layouts.app')] #[Title('Login - Electrohome.bd')] class
                     <div class="text-center mb-4">
                         <p class="text-sm text-gray-600">We've sent a 4-digit code to</p>
                         <p class="font-bold text-gray-800">{{ $otpPhone }}</p>
+                        <p class="text-xs text-gray-500">And your registered email address</p>
                     </div>
                     
                     <div>

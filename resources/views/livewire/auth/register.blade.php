@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\User;
+use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
@@ -10,6 +12,7 @@ use Livewire\Volt\Component;
 new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] class extends Component {
     public string $name = '';
     public string $phone = '';
+    public string $email = '';
     public string $otpCode = '';
     public string $otpStep = 'request'; // 'request' or 'verify'
 
@@ -17,8 +20,10 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
     {
         $this->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
             'phone' => 'required|string|regex:/^01[3-9]\d{8}$/|unique:users,phone',
         ], [
+            'email.unique' => 'This email is already registered. Please log in.',
             'phone.regex' => 'Please enter a valid 11-digit Bangladeshi mobile number.',
             'phone.unique' => 'This phone number is already registered. Please log in.',
         ]);
@@ -27,6 +32,7 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
         
         session()->put('register_otp_data', [
             'phone' => $this->phone,
+            'email' => $this->email,
             'name' => $this->name,
             'code' => (string) $otp,
             'expires_at' => now()->addMinutes(5),
@@ -35,6 +41,12 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
         $message = "Electrohome.bd - Your registration OTP is: {$otp}. It is valid for 5 minutes.";
         
         app(\App\Services\SmsService::class)->sendSms($this->phone, $message);
+        
+        try {
+            Mail::to($this->email)->send(new OtpMail($otp));
+        } catch (\Exception $e) {
+            // Ignore email errors in free tier or local
+        }
 
         $this->otpStep = 'verify';
     }
@@ -69,7 +81,7 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
 
         $user = User::create([
             'name' => $otpData['name'],
-            'email' => $otpData['phone'] . '@electrohome.bd',
+            'email' => $otpData['email'],
             'phone' => $otpData['phone'],
             'password' => Hash::make(\Illuminate\Support\Str::random(16)),
             'role' => 'customer',
@@ -102,6 +114,12 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
                 </div>
                 
                 <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" wire:model="email" class="form-input" placeholder="your.email@example.com" required>
+                    @error('email') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                </div>
+                
+                <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                     <input type="text" wire:model="phone" class="form-input" placeholder="01XXXXXXXXX" required>
                     @error('phone') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
@@ -116,7 +134,7 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
             <form wire:submit="register" class="space-y-5">
                 <div class="text-center mb-4">
                     <p class="text-sm text-gray-600">We've sent a 4-digit code to</p>
-                    <p class="font-bold text-gray-800">{{ $phone }}</p>
+                    <p class="font-bold text-gray-800">{{ $phone }} & your email</p>
                 </div>
                 
                 <div>

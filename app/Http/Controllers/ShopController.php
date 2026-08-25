@@ -107,6 +107,10 @@ class ShopController extends Controller
 
         $brands = \App\Models\Brand::where('is_active', true)->orderBy('name')->get();
 
-        return view('shop', compact('products', 'categories', 'brands', 'currentCategory', 'pageTitle'));
+        $maxPriceLimit = Cache::remember('shop.max_price', 3600, function () {
+            return Product::max('regular_price') ?? 500000;
+        });
+
+        return view('shop', compact('products', 'categories', 'brands', 'currentCategory', 'pageTitle', 'maxPriceLimit'));
     }
 }

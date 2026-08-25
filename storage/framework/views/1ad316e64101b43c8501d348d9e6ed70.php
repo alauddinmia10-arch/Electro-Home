@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\User;
+use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
@@ -43,6 +45,7 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
                     <div class="text-center mb-4">
                         <p class="text-sm text-gray-600">We've sent a 4-digit code to</p>
                         <p class="font-bold text-gray-800"><?php echo e($otpPhone); ?></p>
+                        <p class="text-xs text-gray-500">And your registered email address</p>
                     </div>
                     
                     <div>
