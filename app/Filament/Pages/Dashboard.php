@@ -14,90 +14,61 @@ class Dashboard extends BaseDashboard
     public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
     {
         return new \Illuminate\Support\HtmlString(\Illuminate\Support\Facades\Blade::render('
-            <span class="dashboard-header-wrapper" style="display: flex; align-items: center; width: 100%;">
-                <span style="font-weight: 800; font-size: 1.25rem; color: #111827; letter-spacing: -0.025em;">Dashboard</span>
-                <span class="header-divider" style="height: 2rem; width: 1px; background-color: #d1d5db; margin-left: 1rem; margin-right: 1rem;"></span>
-                <span class="my-custom-btns" style="display: flex; align-items: center; font-size: 1rem; font-weight: 500;">
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="success" icon="heroicon-o-tag" outlined class="custom-action-btn">Add Brand</x-filament::button>
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="info" icon="heroicon-o-folder-plus" outlined class="custom-action-btn">Add Category</x-filament::button>
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="warning" icon="heroicon-o-cube" outlined class="custom-action-btn">Add Product</x-filament::button>
+            <span class="inline-flex items-center flex-wrap" style="width: 100%;">
+                <span style="font-weight: 600; font-size: 1.1rem; flex-shrink: 0;">Dashboard</span>
+                <span class="header-divider h-8 w-px bg-gray-300 dark:bg-gray-700" style="margin-left: 1rem; margin-right: 1rem;"></span>
+                <span class="my-custom-btns" style="display: flex; flex-wrap: wrap; align-items: center; font-size: 0.95rem; font-weight: 500;">
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle">Add Brand</x-filament::button>
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Category</x-filament::button>
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Product</x-filament::button>
                 </span>
             </span>
             <style>
                 .fi-header { 
-                    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%) !important;
-                    border: 1px solid #dcfce7 !important;
-                    border-radius: 1rem; 
+                    background-color: #eaf7ec !important; 
+                    border-radius: 0.75rem; 
                     padding: 0.5rem 1rem !important; 
                     min-height: 4rem !important; 
                     margin-top: -1.25rem !important; 
-                    margin-bottom: 1rem !important;
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+                    margin-bottom: 0.75rem !important;
                 }
                 .fi-main { padding: 0 0.75rem 0.75rem 0.75rem !important; } 
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
                 
-                .my-custom-btns {
-                    gap: 0.75rem;
-                }
-                
-                @media (min-width: 768px) {
-                    .my-custom-btns > * { min-width: 140px !important; justify-content: center !important; }
+                @media (min-width: 1024px) {
+                    .my-custom-btns > * { margin-right: 1rem !important; min-width: 150px !important; justify-content: center !important; }
+                    .my-custom-btns > *:last-child { margin-right: 0 !important; }
                 }
 
                 @media (max-width: 1023px) {
                     .fi-header {
-                        padding: 1.25rem 1rem !important;
-                        margin-top: 1rem !important; /* give space for absolute search bar */
+                        padding: 1rem !important;
+                        margin-top: 1rem !important; /* To give space for absolute search bar */
                         height: auto !important;
-                    }
-                    .dashboard-header-wrapper {
-                        flex-direction: column !important;
-                        align-items: flex-start !important;
                     }
                     .header-divider {
                         display: none !important;
                     }
                     .my-custom-btns {
-                        display: grid !important;
-                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                        margin-top: 0.75rem;
                         gap: 0.5rem;
                         width: 100%;
-                        margin-top: 1rem;
                     }
-                    .custom-action-btn {
+                    .my-custom-btns > * {
                         margin-right: 0 !important;
-                        padding: 0.5rem 0.25rem !important;
-                        flex-direction: column !important;
+                        flex: 1 1 calc(50% - 0.5rem);
                         justify-content: center !important;
-                        align-items: center !important;
-                        height: auto !important;
-                        border-radius: 0.75rem !important;
-                        background: #ffffff !important;
-                        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
                     }
-                    .custom-action-btn svg {
-                        width: 1.5rem !important;
-                        height: 1.5rem !important;
-                        margin-right: 0 !important;
-                        margin-bottom: 0.25rem !important;
-                    }
-                    .custom-action-btn span {
-                        font-size: 0.7rem !important;
-                        line-height: 1.1 !important;
-                        text-align: center !important;
-                        white-space: normal !important;
-                    }
-                    /* Filament Header Actions */
+                    /* Action buttons at the end of the header (Landing Page, View Website) */
                     .fi-header-actions {
-                        display: grid !important;
-                        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                        display: flex !important;
+                        flex-wrap: wrap !important;
                         gap: 0.5rem !important;
                         width: 100% !important;
                         margin-top: 0.5rem !important;
                     }
                     .fi-header-actions .fi-btn {
-                        width: 100% !important;
+                        flex: 1 1 calc(50% - 0.5rem) !important;
                         justify-content: center !important;
                     }
                 }
@@ -106,8 +77,8 @@ class Dashboard extends BaseDashboard
                 @media (min-width: 1024px) {
                     .fi-global-search-ctn {
                         position: absolute !important;
-                        left: 450px !important;
-                        right: 620px !important;
+                        left: 450px !important; /* Left gap as requested */
+                        right: 620px !important; /* Adjusted to 620px to match the red circle */
                         width: auto !important;
                         max-width: none !important;
                         transform: none !important;

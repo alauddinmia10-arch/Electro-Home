@@ -1,7 +1,6 @@
-<div class="custom-user-menu" style="display: flex; align-items: center; justify-content: flex-end; font-family: 'Inter', system-ui, sans-serif; gap: 8px;">
-    <!-- Name & Designation -->
-    <div class="user-details" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center; text-align: right;">
-        <span style="font-size: 0.9rem; font-weight: 600; color: #111827; line-height: 1.1;">{{ filament()->auth()->user()->name }}</span>
+<div style="display: flex; align-items: center; gap: 1.5rem; margin-right: 0.5rem; font-family: 'Inter', system-ui, sans-serif;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <span style="font-size: 1.25rem; font-weight: 600; color: #111827; letter-spacing: -0.01em; line-height: 1.1;">{{ filament()->auth()->user()->name }}</span>
         @php
             $role = filament()->auth()->user()->role ?? 'admin';
             $designation = match($role) {
@@ -11,146 +10,131 @@
                 default => 'Administrator'
             };
         @endphp
-        <span style="font-size: 0.55rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;">{{ $designation }}</span>
+        <span style="font-size: 0.55rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 6px;">{{ $designation }}</span>
     </div>
     
-    <!-- Avatar -->
-    <div style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background-color: #f3f4f6; overflow: hidden; border: 2px solid #e5e7eb; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 9999px; background-color: #f3f4f6; overflow: hidden; border: 2px solid #e5e7eb; flex-shrink: 0;">
         @if(filament()->auth()->user()->avatar)
             <img src="{{ Storage::url(filament()->auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
         @else
-            <svg style="width: 20px; height: 20px; color: #9ca3af;" fill="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 24px; height: 24px; color: #9ca3af;" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
         @endif
     </div>
 
-    <!-- Divider -->
-    <div style="height: 24px; width: 1px; background-color: #d1d5db; margin: 0 4px;"></div>
+    <div style="height: 38px; width: 2px; background-color: #d1d5db; border-radius: 9999px; margin-left: 0.5rem; margin-right: 0.5rem;"></div>
 
-    <!-- Sign Out -->
     <form method="POST" action="{{ filament()->getLogoutUrl() }}" style="margin: 0;">
         @csrf
-        <button type="submit" style="background-color: transparent; border: none; padding: 4px; font-size: 0.8rem; font-weight: 600; color: #ef4444; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">
-            <svg style="width: 1.2rem; height: 1.2rem; stroke-width: 2;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button type="submit" style="background-color: #ffffff; border: 1px solid #fca5a5; padding: 0.5rem 1.25rem; border-radius: 9999px; font-size: 0.9rem; font-weight: 600; color: #ef4444; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); transition: all 0.2s;">
+            <svg style="width: 1.2rem; height: 1.2rem; stroke-width: 2.5;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
-            <span class="sign-out-text">Sign out</span>
+            Sign out
         </button>
     </form>
 </div>
 
 <style>
+    /* Make the entire topbar thicker/taller */
+    .fi-topbar nav {
+        height: 5rem !important; /* Increased from default 4rem (64px) to 5rem (80px) */
+    }
+
     /* Hide the default Filament User Menu avatar */
     .fi-user-menu-trigger {
         display: none !important;
     }
+    
+    /* Center the global search box perfectly in the middle of the screen on DESKTOP */
+    @media (min-width: 1024px) {
+        .fi-global-search-ctn,
+        .fi-topbar-global-search {
+            position: absolute !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: 350px !important;
+            z-index: 10;
+        }
+        .fi-global-search-ctn > div,
+        .fi-topbar-global-search > div {
+            width: 100% !important;
+        }
+    }
 
-    /* Style the notification bell */
+    /* Move the global search box below the topbar on MOBILE */
+    @media (max-width: 1023px) {
+        /* Add margin to the topbar to make room for the search box */
+        .fi-topbar {
+            margin-bottom: 60px !important;
+        }
+        
+        .fi-global-search-ctn,
+        .fi-topbar-global-search {
+            position: absolute !important;
+            top: 60px !important; /* Move it below the topbar */
+            left: 1rem !important;
+            right: 1rem !important;
+            width: auto !important;
+            max-width: none !important;
+            z-index: 10;
+            display: flex !important;
+        }
+        
+        .fi-global-search-ctn > div,
+        .fi-topbar-global-search > div {
+            width: 100% !important;
+        }
+    }
+    .fi-global-search-ctn input,
+    .fi-topbar-global-search input {
+        border-radius: 9999px !important;
+        padding-top: 0.6rem !important;
+        padding-bottom: 0.6rem !important;
+        font-size: 1rem !important;
+        text-align: left !important;
+        padding-left: 1rem !important;
+    }
+
+    /* Style the notification bell to look modern and bigger */
     .fi-topbar-database-notifications-btn {
         background-color: #f3f4f6 !important;
         border-radius: 50% !important;
-        padding: 0.4rem !important;
-        margin-right: 0.5rem !important;
+        padding: 0.6rem !important;
+        margin-right: 1.5rem !important;
         transition: all 0.2s ease !important;
         border: 1px solid #e5e7eb !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        transform: scale(1.3) !important; /* Slightly reduced scale from 1.5 */
+        transform-origin: center !important;
     }
-    
+    .fi-topbar-database-notifications-btn:hover {
+        background-color: #e5e7eb !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
     .fi-topbar-database-notifications-btn svg {
         color: #3b82f6 !important;
         stroke-width: 2 !important;
-        width: 1.2rem !important;
-        height: 1.2rem !important;
+    }
+    .fi-topbar-database-notifications-btn .fi-badge,
+    .fi-topbar-database-notifications-btn .fi-badge *,
+    .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn {
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        --tw-ring-shadow: 0 0 #0000 !important;
+        --tw-ring-color: transparent !important;
     }
     .fi-topbar-database-notifications-btn .fi-badge {
         color: #ef4444 !important;
         font-weight: 600 !important;
-        font-size: 0.75rem !important;
-        background: transparent !important;
-        box-shadow: none !important;
-    }
-    .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn {
-        background: transparent !important;
-    }
-
-    /* --- RESPONSIVE LAYOUT RULES --- */
-    
-    /* MOBILE STYLES (Max-width 1023px) */
-    @media (max-width: 1023px) {
-        /* Keep topbar height standard but add margin below for the absolute search bar */
-        .fi-topbar {
-            margin-bottom: 70px !important;
-        }
-
-        .fi-topbar nav {
-            height: 4rem !important;
-            justify-content: space-between !important;
-        }
-
-        /* Absolutely position the search bar BELOW the top bar */
-        .fi-topbar-global-search {
-            position: absolute !important;
-            top: 4.5rem !important;
-            left: 0.75rem !important;
-            right: 0.75rem !important;
-            width: auto !important;
-            max-width: none !important;
-            margin: 0 !important;
-        }
-        
-        .fi-global-search, .fi-global-search-field, .fi-global-search-ctn {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
-        
-        .fi-global-search-input {
-            width: 100% !important;
-            border-radius: 8px !important;
-            padding: 0.75rem 1rem !important;
-            font-size: 1rem !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-            border: 1px solid #d1d5db !important;
-        }
-
-        /* Adjust user menu items to fit on small screen */
-        .custom-user-menu {
-            gap: 4px !important;
-        }
-        
-        .user-details {
-            display: none !important; /* Hide name on very small screens to fit signout */
-        }
-        
-        .sign-out-text {
-            display: none !important; /* Just show the icon to save space */
-        }
-    }
-
-    /* DESKTOP STYLES (Min-width 1024px) */
-    @media (min-width: 1024px) {
-        .fi-topbar nav {
-            height: 4.5rem !important;
-        }
-
-        .fi-topbar-global-search {
-            position: absolute !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            width: 350px !important;
-        }
-
-        .fi-global-search-input {
-            border-radius: 9999px !important;
-            padding: 0.6rem 1rem !important;
-        }
-        
-        .fi-topbar-database-notifications-btn {
-            transform: scale(1.2) !important;
-            margin-right: 1.5rem !important;
-            padding: 0.5rem !important;
-        }
+        font-size: 0.85rem !important;
     }
 </style>
