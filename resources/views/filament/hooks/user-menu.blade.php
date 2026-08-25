@@ -80,7 +80,7 @@
     }
     .fi-user-menu .fi-dropdown-header {
         justify-content: center !important;
-        padding-top: 1.25rem !important;
+        padding-top: 0.75rem !important; /* Reduced top space */
         padding-bottom: 1rem !important;
         border-bottom: 1px solid #e5e7eb !important;
     }
@@ -91,7 +91,7 @@
         line-height: 1.2 !important;
         font-weight: 600 !important;
         color: #111827 !important;
-        font-size: 1.1rem !important; /* Made name slightly bigger */
+        font-size: 1.25rem !important; /* Made name larger */
     }
     .fi-user-menu .fi-dropdown-header span::after {
         content: "{{ $designation }}";
@@ -101,6 +101,28 @@
         text-transform: uppercase !important;
         letter-spacing: 0.05em !important;
         margin-top: 6px !important;
+    }
+
+    /* Custom Style for Sign Out button box */
+    .fi-user-menu .fi-dropdown-list:last-child .fi-dropdown-list-item {
+        background-color: #eaf7ec !important; /* Light green matching Dashboard header */
+        border-radius: 0.5rem !important;
+        padding-top: 0.6rem !important;
+        padding-bottom: 0.6rem !important;
+        transition: all 0.2s ease !important;
+    }
+    .fi-user-menu .fi-dropdown-list:last-child .fi-dropdown-list-item:hover {
+        background-color: #d1eadd !important; /* Slightly darker on hover */
+    }
+    .fi-user-menu .fi-dropdown-list:last-child .fi-dropdown-list-item-label {
+        font-size: 0.95rem !important; /* Bigger text */
+        font-weight: 600 !important;
+        color: #ef4444 !important; /* Making text red for sign out */
+    }
+    .fi-user-menu .fi-dropdown-list:last-child svg {
+        color: #ef4444 !important; /* Red/Orange icon */
+        width: 1.3rem !important;
+        height: 1.3rem !important;
     }
 
     /* MOBILE SPECIFIC STYLES */
