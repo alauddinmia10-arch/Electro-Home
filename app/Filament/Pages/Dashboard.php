@@ -59,7 +59,7 @@ class Dashboard extends BaseDashboard
                     /* Dashboard title full width */
                     .fi-header-heading > div > span:first-child {
                         grid-column: span 2 !important;
-                        margin-bottom: 0.5rem !important;
+                        margin-bottom: 0 !important;
                         display: block !important;
                     }
 
@@ -126,13 +126,6 @@ class Dashboard extends BaseDashboard
                         return redirect()->to(route('landing.page', ['slug' => $product->slug]));
                     }
                 }),
-            \Filament\Actions\Action::make('go_to_home')
-                ->label('View Website')
-                ->icon('heroicon-o-globe-alt')
-                ->color('gray')
-                ->url(url('/'))
-                ->openUrlInNewTab()
-                ->extraAttributes(['class' => 'hide-on-mobile']),
         ];
     }
 }
