@@ -131,7 +131,8 @@ class Dashboard extends BaseDashboard
                 ->icon('heroicon-o-globe-alt')
                 ->color('gray')
                 ->url(route('home'))
-                ->openUrlInNewTab(),
+                ->openUrlInNewTab()
+                ->extraAttributes(['class' => 'hide-on-mobile']),
         ];
     }
 }
