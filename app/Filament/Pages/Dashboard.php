@@ -36,8 +36,10 @@ class Dashboard extends BaseDashboard
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
                 
                 @media (max-width: 1023px) {
-                    /* Hide the View Website action (2nd item in header actions) on mobile and tablet since topbar globe exists */
-                    .fi-header-actions > *:nth-child(2) { display: none !important; }
+                    /* Hide the View Website action on mobile and tablet since topbar globe exists */
+                    #view-website-btn-action { display: none !important; }
+                    /* Hide the Filament action wrapper if it exists using CSS :has() */
+                    .fi-header-actions *:has(> #view-website-btn-action) { display: none !important; }
                 }
                 
                 @media (max-width: 767px) {
@@ -137,7 +139,7 @@ class Dashboard extends BaseDashboard
                 ->color('gray')
                 ->url(route('home'))
                 ->openUrlInNewTab()
-                ->extraAttributes(['class' => 'hide-on-mobile']),
+                ->extraAttributes(['id' => 'view-website-btn-action']),
         ];
     }
 }
