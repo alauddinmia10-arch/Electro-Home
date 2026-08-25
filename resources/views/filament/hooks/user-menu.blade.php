@@ -125,6 +125,26 @@
         height: 1.3rem !important;
     }
 
+    /* Style for the new View Website globe icon in the topbar */
+    .topbar-view-website-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 36px !important;
+        height: 36px !important;
+        background-color: #f3f4f6 !important;
+        color: #4b5563 !important;
+        border-radius: 50% !important;
+        margin-left: 0.5rem !important;
+        margin-right: -0.25rem !important; /* Pull it closer to edge on mobile */
+        border: 1px solid #e5e7eb !important;
+        transition: all 0.2s ease !important;
+    }
+    .topbar-view-website-btn:hover {
+        background-color: #e5e7eb !important;
+        color: #3b82f6 !important;
+    }
+
     /* MOBILE SPECIFIC STYLES */
     @media (max-width: 1023px) {
         /* Hide our custom menu entirely on mobile, we will use default Filament menu popup */
