@@ -43,8 +43,31 @@ class Dashboard extends BaseDashboard
                 @media (max-width: 1023px) {
                     .fi-header {
                         padding: 1rem !important;
-                        margin-top: -0.25rem !important; /* Pull up to reduce extra space */
+                        margin-top: -0.25rem !important;
                         height: auto !important;
+                        display: flex !important;
+                        flex-wrap: wrap !important;
+                        gap: 0.5rem !important;
+                        justify-content: space-between !important;
+                    }
+                    /* Make the wrappers transparent to flexbox */
+                    .fi-header > .inline-flex, .my-custom-btns, .fi-header-actions {
+                        display: contents !important;
+                    }
+                    /* The Dashboard title takes full width */
+                    .fi-header > .inline-flex > span:first-child {
+                        flex: 0 0 100% !important;
+                        width: 100% !important;
+                        margin-bottom: 0.5rem !important;
+                        font-size: 1.25rem !important;
+                    }
+                    /* The 4 buttons take 50% width (2x2 grid) */
+                    .my-custom-btns > *, .fi-header-actions > .fi-btn:not(.hide-on-mobile) {
+                        flex: 0 0 calc(50% - 0.25rem) !important;
+                        width: calc(50% - 0.25rem) !important;
+                        justify-content: center !important;
+                        margin: 0 !important;
+                        min-width: 0 !important;
                     }
                     .header-divider {
                         display: none !important;
@@ -52,30 +75,14 @@ class Dashboard extends BaseDashboard
                     .hide-on-mobile {
                         display: none !important;
                     }
-                    .my-custom-btns {
-                        margin-top: 0.75rem;
-                        gap: 0.5rem;
-                        width: 100%;
-                        justify-content: space-between !important;
-                    }
-                    .my-custom-btns > * {
-                        margin-right: 0 !important;
-                        flex: 0 0 calc(50% - 0.25rem) !important;
-                        width: calc(50% - 0.25rem) !important;
-                        justify-content: center !important;
-                    }
-                    /* Action buttons container hidden if moved by JS */
-                    .fi-header-actions {
-                        margin-top: 0.5rem !important;
-                    }
                 }
 
                 /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) ON DESKTOP */
                 @media (min-width: 1024px) {
                     .fi-global-search-ctn {
                         position: absolute !important;
-                        left: 450px !important; /* Left gap as requested */
-                        right: 620px !important; /* Adjusted to 620px to match the red circle */
+                        left: 450px !important;
+                        right: 620px !important;
                         width: auto !important;
                         max-width: none !important;
                         transform: none !important;
@@ -89,28 +96,6 @@ class Dashboard extends BaseDashboard
                     max-width: 100% !important;
                 }
             </style>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    function arrangeMobileGrid() {
-                        if (window.innerWidth < 1024) {
-                            const actionsContainer = document.querySelector(".fi-header-actions");
-                            const customBtns = document.querySelector(".my-custom-btns");
-                            
-                            // Move actions into custom-btns to create a unified 2x2 grid
-                            if (actionsContainer && customBtns) {
-                                Array.from(actionsContainer.children).forEach(function(child) {
-                                    customBtns.appendChild(child);
-                                });
-                            }
-                        }
-                    }
-                    
-                    // Run once immediately if ready
-                    arrangeMobileGrid();
-                    // Also hook into Livewire navigate if needed
-                    document.addEventListener("livewire:navigated", arrangeMobileGrid);
-                });
-            </script>
         '));
     }
 
