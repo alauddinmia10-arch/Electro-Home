@@ -15,7 +15,7 @@ class Dashboard extends BaseDashboard
     {
         return new \Illuminate\Support\HtmlString(\Illuminate\Support\Facades\Blade::render('
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
-                <span style="font-weight: 600; font-size: 1.1rem; flex-shrink: 0;">Dashboard</span>
+                <span style="font-weight: 700; font-size: 1.3rem; flex-shrink: 0; color: #111827;">Dashboard</span>
                 <span class="header-divider h-8 w-px bg-gray-300 dark:bg-gray-700" style="flex-shrink: 0;"></span>
                 <div class="my-custom-btns" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 500;">
                     <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle">Add Brand</x-filament::button>
