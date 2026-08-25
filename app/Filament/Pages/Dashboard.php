@@ -35,6 +35,11 @@ class Dashboard extends BaseDashboard
                 .fi-main { padding-top: 0 !important; padding-left: 0.75rem !important; padding-right: 0.75rem !important; padding-bottom: 0.75rem !important; } 
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
                 
+                @media (max-width: 1023px) {
+                    /* Hide the View Website action (2nd item in header actions) on mobile and tablet since topbar globe exists */
+                    .fi-header-actions > *:nth-child(2) { display: none !important; }
+                }
+                
                 @media (max-width: 767px) {
                     .header-divider { display: none !important; }
                     .hide-on-mobile { display: none !important; }
