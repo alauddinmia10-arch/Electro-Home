@@ -142,7 +142,7 @@
         background-color: #f3f4f6 !important;
         border: 1px solid #e5e7eb !important;
         padding: 0 !important;
-        display: flex !important;
+        display: flex; /* DO NOT USE !important here, otherwise Alpine's x-show cannot hide the close button */
         align-items: center !important;
         justify-content: center !important;
         transform: none !important;
