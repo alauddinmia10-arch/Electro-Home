@@ -216,9 +216,9 @@
             display: none !important;
         }
 
-        /* Make the gap between Bell, Avatar, Globe extremely small (reduce space) */
+        /* Make the gap between Bell, Avatar, Globe slightly wider for breathing room */
         .fi-topbar-item-end, .fi-topbar > div:last-child {
-            gap: 0.35rem !important;
+            gap: 0.6rem !important;
         }
 
         /* The search bar after being moved by JS */
