@@ -88,6 +88,7 @@
     >
         <!-- Button -->
         <button
+            x-ref="trigger"
             type="button"
             @click="isOpen = !isOpen"
             class="<?php echo \Illuminate\Support\Arr::toCssClasses([
@@ -106,9 +107,32 @@
         <div
             class="fbrp-popover"
             x-show="isOpen"
+            x-ref="popover"
+            x-effect="
+                if (isOpen && $refs.trigger && $refs.popover) {
+                    $nextTick(() => {
+                        const btn = $refs.trigger.getBoundingClientRect();
+                        const pop = $refs.popover.getBoundingClientRect();
+                        const spaceBelow = window.innerHeight - btn.bottom;
+                        const spaceAbove = btn.top;
+                        
+                        if (spaceBelow < pop.height && spaceAbove > spaceBelow) {
+                            $refs.popover.style.top = 'auto';
+                            $refs.popover.style.bottom = '100%';
+                            $refs.popover.style.marginTop = '0';
+                            $refs.popover.style.marginBottom = '0.5rem';
+                        } else {
+                            $refs.popover.style.bottom = 'auto';
+                            $refs.popover.style.top = '100%';
+                            $refs.popover.style.marginTop = '0.5rem';
+                            $refs.popover.style.marginBottom = '0';
+                        }
+                    });
+                }
+            "
             @click.away="isOpen = false"
             x-transition
-            style="display: none; position: absolute; right: 0; z-index: 50; margin-top: 0.5rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: max-content; overflow: hidden;"
+            style="display: none; position: absolute; right: 0; z-index: 50; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: max-content; overflow: hidden;"
         >
             <div class="fbrp-popover-inner" style="display: flex;">
                 <!-- Sidebar -->
@@ -137,29 +161,16 @@
                             background: transparent !important;
                         }
                         
-                        /* Desktop Zoom - The user requested the calendars be slightly zoomed out on desktop so they aren't cut off */
+                        /* Desktop Zoom */
                         @media (min-width: 1024px) {
                             .custom-flatpickr {
-                                zoom: 0.85; /* Shrinks the calendar slightly on desktop */
+                                zoom: 0.85;
                                 width: 100% !important;
                                 transform-origin: top left;
                             }
                         }
 
                         @media (max-width: 1023px) {
-                            /* Make popover a centered modal on mobile */
-                            .fbrp-popover {
-                                position: fixed !important;
-                                top: 50% !important;
-                                left: 50% !important;
-                                transform: translate(-50%, -50%) !important;
-                                width: 95vw !important;
-                                max-width: 450px !important;
-                                max-height: 90vh !important;
-                                overflow-y: auto !important;
-                                z-index: 9999 !important;
-                                margin-top: 0 !important;
-                            }
                             /* Ensure sidebar is on the left (row direction) */
                             .fbrp-popover-inner {
                                 display: flex !important;

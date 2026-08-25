@@ -163,6 +163,11 @@
                         }
 
                         @media (max-width: 1023px) {
+                            /* Ensure popover takes full width of the parent on mobile */
+                            .fbrp-popover {
+                                width: 100% !important;
+                                max-width: 100% !important;
+                            }
                             /* Ensure sidebar is on the left (row direction) */
                             .fbrp-popover-inner {
                                 display: flex !important;
@@ -192,6 +197,7 @@
                                 width: 100% !important;
                                 padding: 0.25rem !important;
                                 flex: 1;
+                                align-items: center !important; /* Center the calendar in the remaining space */
                             }
                             
                             /* Zoom and Vertical Stack for Flatpickr */
