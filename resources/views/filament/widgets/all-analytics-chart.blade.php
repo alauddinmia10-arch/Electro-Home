@@ -22,7 +22,10 @@
         }
         .custom-analytics-chart .fi-section-header-heading {
             width: 100% !important;
-            white-space: normal !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            font-size: 0.95rem !important;
         }
         .custom-analytics-chart .fi-section-header-after-ctn {
             width: 100% !important;
