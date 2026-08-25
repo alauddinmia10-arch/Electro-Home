@@ -50,7 +50,8 @@ class Dashboard extends BaseDashboard
                     .fi-header-heading,
                     .fi-header-heading > div,
                     .my-custom-btns,
-                    .fi-header-actions {
+                    .fi-header-actions,
+                    .fi-header-actions > *:not(.hide-on-mobile) {
                         display: contents !important;
                     }
 
@@ -59,14 +60,6 @@ class Dashboard extends BaseDashboard
                         grid-column: span 2 !important;
                         margin-bottom: 0.5rem !important;
                         display: block !important;
-                    }
-
-                    /* Make wrapper divs take full width of their grid cells */
-                    .my-custom-btns > *, 
-                    .fi-header-actions > *:not(.hide-on-mobile) {
-                        display: block !important;
-                        width: 100% !important;
-                        margin: 0 !important;
                     }
 
                     /* Force actual buttons to stretch and center */
