@@ -79,25 +79,6 @@ class Dashboard extends BaseDashboard
                         display: flex !important;
                     }
                 }
-
-                /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) ON DESKTOP */
-                @media (min-width: 1024px) {
-                    .fi-global-search-ctn {
-                        position: absolute !important;
-                        left: 450px !important;
-                        right: 620px !important;
-                        width: auto !important;
-                        max-width: none !important;
-                        transform: none !important;
-                    }
-                    .fi-global-search,
-                    .fi-global-search-field,
-                    .fi-global-search-field .fi-input-wrapper,
-                    .fi-global-search-input {
-                        width: 100% !important;
-                        max-width: 100% !important;
-                    }
-                }
             </style>
         '));
     }
