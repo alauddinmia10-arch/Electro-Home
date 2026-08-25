@@ -1,4 +1,4 @@
-<div style="display: flex; align-items: center; gap: 1rem; margin-right: 0.5rem; font-family: 'Inter', system-ui, sans-serif;">
+<div class="custom-user-menu-container" style="display: flex; align-items: center; gap: 1rem; margin-right: 0.5rem; font-family: 'Inter', system-ui, sans-serif;">
     <div class="hide-on-mobile" style="display: flex; align-items: center; gap: 1.5rem;">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <span style="font-size: 1.25rem; font-weight: 600; color: #111827; letter-spacing: -0.01em; line-height: 1.1;">{{ filament()->auth()->user()->name }}</span>
@@ -77,15 +77,24 @@
         .sign-out-text {
             font-size: 0.8rem !important;
         }
-
-        /* Push the main page content down so it doesn't overlap with the absolute search bar */
-        .fi-main {
-            padding-top: 85px !important;
+        
+        /* Reduce right margins for mobile */
+        .fi-topbar-database-notifications-btn {
+            margin-right: 0.25rem !important;
+        }
+        .custom-user-menu-container {
+            margin-right: 0 !important;
+            gap: 0.5rem !important;
         }
 
-        /* Add margin to the topbar to make room for the search box */
+        /* Push the main page content down exactly enough for the search bar (approx 55px) */
+        .fi-main {
+            padding-top: 55px !important;
+        }
+
+        /* Remove the excessive bottom margin from topbar */
         .fi-topbar {
-            margin-bottom: 75px !important; /* Space for search bar + some gap */
+            margin-bottom: 0 !important;
         }
         
         .fi-global-search-ctn,
@@ -121,7 +130,7 @@
         background-color: #f3f4f6 !important;
         border-radius: 50% !important;
         padding: 0.6rem !important;
-        margin-right: 1.5rem !important;
+        margin-right: 1.5rem !important; /* Default for desktop */
         transition: all 0.2s ease !important;
         border: 1px solid #e5e7eb !important;
         display: flex !important;
