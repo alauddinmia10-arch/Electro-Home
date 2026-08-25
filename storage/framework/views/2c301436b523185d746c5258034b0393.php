@@ -216,14 +216,14 @@
                             }
                             
                             /* Month 1 (Top) */
-                            .flatpickr-month:nth-child(1) { grid-row: 1; grid-column: 1; margin-top: 5px; }
-                            .flatpickr-weekdaycontainer:nth-child(1) { grid-row: 2; grid-column: 1; }
-                            .dayContainer:nth-child(1) { grid-row: 3; grid-column: 1; }
+                            .flatpickr-month:nth-of-type(1) { grid-row: 1; grid-column: 1; margin-top: 5px; }
+                            .flatpickr-weekdaycontainer:nth-of-type(1) { grid-row: 2; grid-column: 1; }
+                            .dayContainer:nth-of-type(1) { grid-row: 3; grid-column: 1; }
                             
                             /* Month 2 (Bottom) */
-                            .flatpickr-month:nth-child(2) { grid-row: 4; grid-column: 1; margin-top: 15px; }
-                            .flatpickr-weekdaycontainer:nth-child(2) { grid-row: 5; grid-column: 1; }
-                            .dayContainer:nth-child(2) { grid-row: 6; grid-column: 1; }
+                            .flatpickr-month:nth-of-type(2) { grid-row: 4; grid-column: 1; margin-top: 15px; }
+                            .flatpickr-weekdaycontainer:nth-of-type(2) { grid-row: 5; grid-column: 1; }
+                            .dayContainer:nth-of-type(2) { grid-row: 6; grid-column: 1; }
                         }
                     </style>
                     <div class="custom-flatpickr" wire:ignore style="width: 100%; max-width: 700px; min-height: 250px; overflow: visible;">
