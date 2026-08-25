@@ -150,16 +150,19 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function moveGlobalSearchBar() {
         if (window.innerWidth < 1024) {
-            const searchBar = document.querySelector('.fi-topbar-global-search');
+            const searchBar = document.querySelector('.fi-global-search-ctn') || document.querySelector('.fi-topbar-global-search');
             const mainContent = document.querySelector('.fi-main');
             
-            if (searchBar && mainContent) {
+            if (searchBar && mainContent && searchBar.parentElement !== mainContent) {
                 // Move the search bar DOM element into the scrollable main content area
                 searchBar.classList.add('mobile-moved-search');
                 mainContent.insertBefore(searchBar, mainContent.firstChild);
             }
         }
-    });
+    }
+    
+    document.addEventListener('DOMContentLoaded', moveGlobalSearchBar);
+    document.addEventListener('livewire:navigated', moveGlobalSearchBar);
 </script>
