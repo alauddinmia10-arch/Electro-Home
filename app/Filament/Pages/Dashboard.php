@@ -51,8 +51,8 @@ class Dashboard extends BaseDashboard
                     .fi-header-heading > div,
                     .my-custom-btns,
                     .my-custom-btns div,
-                    .fi-header-actions,
-                    .fi-header-actions div {
+                    .fi-header-actions-ctn,
+                    .fi-header-actions-ctn div {
                         display: contents !important;
                     }
 
@@ -65,7 +65,7 @@ class Dashboard extends BaseDashboard
 
                     /* Force actual buttons to stretch and center */
                     .my-custom-btns button, .my-custom-btns a, .my-custom-btns .fi-btn,
-                    .fi-header-actions button, .fi-header-actions a, .fi-header-actions .fi-btn {
+                    .fi-header-actions-ctn button, .fi-header-actions-ctn a, .fi-header-actions-ctn .fi-btn {
                         width: 100% !important;
                         max-width: 100% !important;
                         justify-content: center !important;
