@@ -96,6 +96,12 @@ class Dashboard extends BaseDashboard
     protected function getHeaderActions(): array
     {
         return [
+            \Filament\Actions\Action::make('view_website')
+                ->label('View Website')
+                ->icon('heroicon-o-globe-alt')
+                ->color('gray')
+                ->url(route('home'))
+                ->openUrlInNewTab(),
             \Filament\Actions\Action::make('generate_landing_page')
                 ->label('Landing Page')
                 ->icon('heroicon-o-link')

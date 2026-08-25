@@ -50,21 +50,6 @@
         .fi-user-menu-trigger {
             display: none !important;
         }
-        
-        /* Center the global search box dynamically on DESKTOP without overlapping the user menu */
-        .fi-global-search-ctn,
-        .fi-topbar-global-search {
-            display: flex !important;
-            justify-content: center !important;
-            width: 100% !important;
-            max-width: 350px !important;
-            margin: 0 auto !important;
-            z-index: 10;
-        }
-        .fi-global-search-ctn > div,
-        .fi-topbar-global-search > div {
-            width: 100% !important;
-        }
     }
 
     /* Hide the "System" monitor icon from theme switcher */
