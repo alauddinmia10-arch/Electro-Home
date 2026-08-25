@@ -189,9 +189,23 @@
                             <option value="price" <?php echo e(request('sort_by') === 'price' ? 'selected' : ''); ?>>Price</option>
                             <option value="newest" <?php echo e(request('sort_by', 'newest') === 'newest' ? 'selected' : ''); ?>>Newest</option>
                         </select>
+                        <?php
+                            $currentSortBy = request('sort_by', 'newest');
+                            
+                            $ascLabel = 'A to Z';
+                            $descLabel = 'Z to A';
+                            
+                            if ($currentSortBy === 'price') {
+                                $ascLabel = 'Low to High';
+                                $descLabel = 'High to Low';
+                            } elseif ($currentSortBy === 'newest') {
+                                $ascLabel = 'Oldest First';
+                                $descLabel = 'Newest First';
+                            }
+                        ?>
                         <select name="sort_order" onchange="document.getElementById('sort-form').submit()" class="text-sm bg-white border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
-                            <option value="asc" <?php echo e(request('sort_order') === 'asc' ? 'selected' : ''); ?>>A to Z</option>
-                            <option value="desc" <?php echo e(request('sort_order') === 'desc' ? 'selected' : ''); ?>>Z to A</option>
+                            <option value="asc" <?php echo e(request('sort_order') === 'asc' ? 'selected' : ''); ?>><?php echo e($ascLabel); ?></option>
+                            <option value="desc" <?php echo e(request('sort_order') === 'desc' ? 'selected' : ''); ?>><?php echo e($descLabel); ?></option>
                         </select>
                     </form>
                 </div>
