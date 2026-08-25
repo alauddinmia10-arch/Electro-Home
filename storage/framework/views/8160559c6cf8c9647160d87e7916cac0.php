@@ -12,6 +12,34 @@
     $hasMaxHeight = filled($maxHeight) && $maxHeight !== '100%';
 ?>
 
+<style>
+    /* MOBILE SPECIFIC STYLES FOR ANALYTICS WIDGET HEADER */
+    @media (max-width: 1023px) {
+        .custom-analytics-chart .fi-section-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1rem !important;
+        }
+        .custom-analytics-chart .fi-section-header-heading {
+            width: 100% !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            font-size: 0.95rem !important;
+        }
+        .custom-analytics-chart .fi-section-header-after-ctn {
+            width: 100% !important;
+            margin-inline: 0 !important;
+        }
+        .custom-analytics-chart .mobile-date-picker-ctn {
+            position: relative !important;
+            inset: auto !important;
+            width: 100% !important;
+            margin-top: 0 !important;
+        }
+    }
+</style>
+
 <?php if (isset($component)) { $__componentOriginalb525200bfa976483b4eaa0b7685c6e24 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalb525200bfa976483b4eaa0b7685c6e24 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament-widgets::components.widget','data' => ['class' => 'fi-wi-chart relative custom-analytics-chart']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -39,7 +67,7 @@
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters === null || method_exists($this, 'getFiltersSchema')): ?>
              <?php $__env->slot('afterHeader', null, []); ?> 
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($filters === null): ?>
-                    <div class="absolute right-6 top-4 z-10 w-[350px]">
+                    <div class="absolute right-6 top-4 z-10 w-[350px] mobile-date-picker-ctn">
                         <?php echo e($this->form); ?>
 
                     </div>

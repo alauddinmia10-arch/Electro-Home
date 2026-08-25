@@ -104,14 +104,15 @@
 
         <!-- Popover -->
         <div
+            class="fbrp-popover"
             x-show="isOpen"
             @click.away="isOpen = false"
             x-transition
             style="display: none; position: absolute; right: 0; z-index: 50; margin-top: 0.5rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: max-content; overflow: hidden;"
         >
-            <div style="display: flex;">
+            <div class="fbrp-popover-inner" style="display: flex;">
                 <!-- Sidebar -->
-                <div style="width: 9.5rem; padding: 0.25rem 0; border-right: 1px solid #e5e7eb; background-color: #ffffff; display: flex; flex-direction: column;">
+                <div class="fbrp-sidebar" style="width: 9.5rem; padding: 0.25rem 0; border-right: 1px solid #e5e7eb; background-color: #ffffff; display: flex; flex-direction: column;">
                     <template x-for="preset in presets" :key="preset.label">
                         <button
                             type="button"
@@ -135,9 +136,75 @@
                             box-shadow: none !important;
                             background: transparent !important;
                         }
+                        
+                        /* Desktop Zoom - The user requested the calendars be slightly zoomed out on desktop so they aren't cut off */
+                        @media (min-width: 1024px) {
+                            .custom-flatpickr {
+                                zoom: 0.85; /* Shrinks the calendar slightly on desktop */
+                                width: 100% !important;
+                                transform-origin: top left;
+                            }
+                        }
+
+                        @media (max-width: 1023px) {
+                            /* Make popover a centered modal on mobile */
+                            .fbrp-popover {
+                                position: fixed !important;
+                                top: 50% !important;
+                                left: 50% !important;
+                                transform: translate(-50%, -50%) !important;
+                                width: 95vw !important;
+                                max-width: 380px !important;
+                                max-height: 90vh !important;
+                                overflow-y: auto !important;
+                                z-index: 9999 !important;
+                                margin-top: 0 !important;
+                            }
+                            /* Sidebar on top, calendar below */
+                            .fbrp-popover-inner {
+                                display: flex !important;
+                                flex-direction: column !important;
+                            }
+                            /* Horizontal grid Sidebar on top */
+                            .fbrp-sidebar {
+                                width: 100% !important;
+                                padding: 0.5rem !important;
+                                border-right: none !important;
+                                border-bottom: 1px solid #e5e7eb !important;
+                                display: grid !important;
+                                grid-template-columns: 1fr 1fr 1fr !important;
+                                gap: 0.5rem !important;
+                            }
+                            .fbrp-sidebar button {
+                                padding: 0.5rem 0.25rem !important;
+                                font-size: 0.75rem !important;
+                                text-align: center !important;
+                                justify-content: center !important;
+                            }
+                            .fbrp-sidebar button span:first-child {
+                                display: none !important; /* hide the radio circle on mobile to save space */
+                            }
+                            /* Calendar on bottom */
+                            .custom-flatpickr {
+                                width: 100% !important;
+                                height: auto !important;
+                            }
+                            .custom-flatpickr > div {
+                                transform: none !important;
+                                width: 100% !important;
+                                display: flex;
+                                justify-content: center;
+                                padding: 0.5rem 0 !important;
+                            }
+                            /* Adjust bottom wrapper container width */
+                            .fbrp-popover-inner > div:nth-child(2) {
+                                width: 100% !important;
+                                padding: 0.5rem !important;
+                            }
+                        }
                     </style>
-                    <div class="custom-flatpickr" wire:ignore style="width: 512px; height: 250px; overflow: visible;">
-                        <div style="transform: scale(0.83); transform-origin: top left;">
+                    <div class="custom-flatpickr" wire:ignore style="width: 100%; max-width: 700px; min-height: 250px; overflow: visible;">
+                        <div>
                             <div 
                                 x-init="
                                     let isInitialized = false;
@@ -165,7 +232,7 @@
                                                     flatpickrInstance = fp($el, {
                                                         mode: 'range',
                                                         inline: true,
-                                                        showMonths: 2,
+                                                        showMonths: window.innerWidth < 1024 ? 1 : 2,
                                                         onChange: function(selectedDates) {
                                                             if(selectedDates.length === 2) {
                                                                 customStart = selectedDates[0];

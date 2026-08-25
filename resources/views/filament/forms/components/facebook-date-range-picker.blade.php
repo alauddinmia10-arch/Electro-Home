@@ -128,6 +128,16 @@
                             box-shadow: none !important;
                             background: transparent !important;
                         }
+                        
+                        /* Desktop Zoom - The user requested the calendars be slightly zoomed out on desktop so they aren't cut off */
+                        @media (min-width: 1024px) {
+                            .custom-flatpickr {
+                                zoom: 0.85; /* Shrinks the calendar slightly on desktop */
+                                width: 100% !important;
+                                transform-origin: top left;
+                            }
+                        }
+
                         @media (max-width: 1023px) {
                             /* Make popover a centered modal on mobile */
                             .fbrp-popover {
@@ -142,105 +152,50 @@
                                 z-index: 9999 !important;
                                 margin-top: 0 !important;
                             }
-                            /* Keep row direction to have sidebar on left, calendar on right */
+                            /* Sidebar on top, calendar below */
                             .fbrp-popover-inner {
-                                display: flex !important;
-                                flex-direction: row !important;
-                            }
-                            /* Vertical Sidebar on the left */
-                            .fbrp-sidebar {
-                                width: 40% !important;
-                                padding: 0.5rem 0.25rem !important;
-                                border-right: 1px solid #e5e7eb !important;
-                                border-bottom: none !important;
                                 display: flex !important;
                                 flex-direction: column !important;
                             }
+                            /* Horizontal grid Sidebar on top */
+                            .fbrp-sidebar {
+                                width: 100% !important;
+                                padding: 0.5rem !important;
+                                border-right: none !important;
+                                border-bottom: 1px solid #e5e7eb !important;
+                                display: grid !important;
+                                grid-template-columns: 1fr 1fr 1fr !important;
+                                gap: 0.5rem !important;
+                            }
                             .fbrp-sidebar button {
                                 padding: 0.5rem 0.25rem !important;
-                                font-size: 0.75rem !important; /* Smaller text to fit */
+                                font-size: 0.75rem !important;
+                                text-align: center !important;
+                                justify-content: center !important;
                             }
-                              /* Calendar on the right */
-                              .custom-flatpickr {
-                                  width: 100% !important;
-                                  height: auto !important;
-                              }
-                              .custom-flatpickr > div {
-                                  zoom: 0.75 !important; /* Chrome mobile supports zoom, which fixes the empty space bug perfectly! */
-                                  width: 100% !important;
-                                  display: block;
-                              }
-                              /* Stack flatpickr calendars vertically with their headers */
-                              .custom-flatpickr .flatpickr-calendar.multiMonth {
-                                  display: flex !important;
-                                  flex-direction: column !important;
-                                  position: relative !important;
-                                  width: 100% !important;
-                              }
-                              /* Flatten wrappers so we can reorder children directly */
-                              .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-months,
-                              .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-innerContainer,
-                              .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-rContainer,
-                              .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-weekdays,
-                              .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-days {
-                                  display: contents !important;
-                              }
-                              
-                              /* Month 1 */
-                              .custom-flatpickr .flatpickr-month:nth-child(2) {
-                                  order: 1 !important;
-                                  width: 100% !important;
-                              }
-                              .custom-flatpickr .flatpickr-weekdaycontainer:nth-child(1) {
-                                  order: 2 !important;
-                                  display: flex !important;
-                                  width: 100% !important;
-                              }
-                              .custom-flatpickr .dayContainer:nth-child(1) {
-                                  order: 3 !important;
-                                  width: 100% !important;
-                                  margin-bottom: 1.5rem !important; /* Spacing between the two months */
-                              }
-                              
-                              /* Month 2 */
-                              .custom-flatpickr .flatpickr-month:nth-child(3) {
-                                  order: 4 !important;
-                                  width: 100% !important;
-                                  position: relative !important;
-                              }
-                              .custom-flatpickr .flatpickr-weekdaycontainer:nth-child(2) {
-                                  order: 5 !important;
-                                  display: flex !important;
-                                  width: 100% !important;
-                              }
-                              .custom-flatpickr .dayContainer:nth-child(2) {
-                                  order: 6 !important;
-                                  width: 100% !important;
-                              }
-                              
-                              /* Fix next/prev arrows positioning for Month 1 header */
-                              .custom-flatpickr .flatpickr-prev-month {
-                                  order: 0 !important;
-                                  position: absolute !important;
-                                  top: 0 !important;
-                                  left: 0 !important;
-                                  z-index: 10 !important;
-                              }
-                              .custom-flatpickr .flatpickr-next-month {
-                                  order: 0 !important;
-                                  position: absolute !important;
-                                  top: 0 !important;
-                                  right: 0 !important;
-                                  z-index: 10 !important;
-                              }
-                            /* Adjust right wrapper container width */
+                            .fbrp-sidebar button span:first-child {
+                                display: none !important; /* hide the radio circle on mobile to save space */
+                            }
+                            /* Calendar on bottom */
+                            .custom-flatpickr {
+                                width: 100% !important;
+                                height: auto !important;
+                            }
+                            .custom-flatpickr > div {
+                                transform: none !important;
+                                width: 100% !important;
+                                display: flex;
+                                justify-content: center;
+                                padding: 0.5rem 0 !important;
+                            }
+                            /* Adjust bottom wrapper container width */
                             .fbrp-popover-inner > div:nth-child(2) {
-                                width: 60% !important;
-                                padding: 0.5rem 0.25rem !important;
+                                width: 100% !important;
+                                padding: 0.5rem !important;
                             }
                         }
                     </style>
-                    <div class="custom-flatpickr" wire:ignore style="width: 100%; max-width: 512px; min-height: 250px; overflow: visible;">
+                    <div class="custom-flatpickr" wire:ignore style="width: 100%; max-width: 700px; min-height: 250px; overflow: visible;">
                         <div>
                             <div 
                                 x-init="
@@ -269,7 +224,7 @@
                                                     flatpickrInstance = fp($el, {
                                                         mode: 'range',
                                                         inline: true,
-                                                        showMonths: 2,
+                                                        showMonths: window.innerWidth < 1024 ? 1 : 2,
                                                         onChange: function(selectedDates) {
                                                             if(selectedDates.length === 2) {
                                                                 customStart = selectedDates[0];
