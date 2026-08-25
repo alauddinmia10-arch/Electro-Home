@@ -78,22 +78,60 @@
     .fi-user-menu .fi-dropdown-header svg {
         display: none !important;
     }
+    .fi-user-menu .fi-dropdown-header {
+        justify-content: center !important;
+        padding-top: 1.25rem !important;
+        padding-bottom: 1rem !important;
+        border-bottom: 1px solid #e5e7eb !important;
+    }
     .fi-user-menu .fi-dropdown-header span {
         display: flex !important;
         flex-direction: column !important;
+        align-items: center !important;
         line-height: 1.2 !important;
         font-weight: 600 !important;
         color: #111827 !important;
-        font-size: 0.95rem !important;
+        font-size: 1.1rem !important; /* Made name slightly bigger */
     }
     .fi-user-menu .fi-dropdown-header span::after {
         content: "{{ $designation }}";
-        font-size: 0.7rem !important;
+        font-size: 0.75rem !important;
         color: #6b7280 !important;
         font-weight: 700 !important;
         text-transform: uppercase !important;
         letter-spacing: 0.05em !important;
-        margin-top: 4px !important;
+        margin-top: 6px !important;
+    }
+
+    /* Move theme switcher inline with Sign out button */
+    .fi-dropdown-panel {
+        position: relative !important;
+    }
+    .fi-user-menu .fi-dropdown-list:has(.fi-theme-switcher) {
+        padding: 0 !important;
+        border: none !important;
+        height: 0 !important;
+        overflow: visible !important;
+        margin: 0 !important;
+    }
+    .fi-user-menu .fi-theme-switcher {
+        position: absolute !important;
+        right: 0.5rem !important;
+        bottom: 0.4rem !important;
+        width: auto !important;
+        margin: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        z-index: 10 !important;
+        gap: 0.25rem !important;
+    }
+    .fi-user-menu .fi-dropdown-list:last-child {
+        padding-right: 90px !important; /* Leave space for theme switcher */
+        min-height: 3rem !important;
+    }
+    .fi-user-menu .fi-theme-switcher-btn {
+        padding: 0.4rem !important;
     }
 
     /* MOBILE SPECIFIC STYLES */
