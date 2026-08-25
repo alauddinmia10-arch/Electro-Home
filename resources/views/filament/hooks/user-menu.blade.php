@@ -126,8 +126,8 @@
     /* ========================================= */
     /* UNIFIED 46x46 EXACT SIZING FOR ALL TOPBAR ICONS */
     /* ========================================= */
-    .fi-sidebar-mobile-overlay-btn,
-    .fi-sidebar-collapse-btn,
+    .fi-topbar-open-sidebar-btn,
+    .fi-topbar-close-sidebar-btn,
     .fi-topbar-database-notifications-btn,
     .topbar-view-website-btn,
     .fi-user-menu-btn,
@@ -151,8 +151,8 @@
     }
 
     /* Ensure SVGs inside icons are exactly 24x24 */
-    .fi-sidebar-mobile-overlay-btn svg,
-    .fi-sidebar-collapse-btn svg,
+    .fi-topbar-open-sidebar-btn svg,
+    .fi-topbar-close-sidebar-btn svg,
     .fi-topbar-database-notifications-btn svg,
     .topbar-view-website-btn svg {
         width: 24px !important;
@@ -161,11 +161,11 @@
     }
 
     /* Colors for icons */
-    .fi-sidebar-mobile-overlay-btn svg, .fi-sidebar-collapse-btn svg { color: #4b5563 !important; }
+    .fi-topbar-open-sidebar-btn svg, .fi-topbar-close-sidebar-btn svg { color: #4b5563 !important; }
     .fi-topbar-database-notifications-btn svg { color: #3b82f6 !important; stroke-width: 2 !important; }
     .topbar-view-website-btn svg { color: #4b5563 !important; }
 
-    /* Fix Avatar image to fill its 40x40 border exactly */
+    /* Fix Avatar image to fill its 46x46 border exactly */
     .fi-user-menu-btn img, .fi-avatar img {
         width: 100% !important;
         height: 100% !important;
@@ -173,8 +173,8 @@
     }
 
     /* Hover effects */
-    .fi-sidebar-mobile-overlay-btn:hover,
-    .fi-sidebar-collapse-btn:hover,
+    .fi-topbar-open-sidebar-btn:hover,
+    .fi-topbar-close-sidebar-btn:hover,
     .fi-topbar-database-notifications-btn:hover,
     .topbar-view-website-btn:hover {
         background-color: #e5e7eb !important;
