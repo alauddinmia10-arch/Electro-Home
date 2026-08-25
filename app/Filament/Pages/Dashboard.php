@@ -40,14 +40,13 @@ class Dashboard extends BaseDashboard
                     .hide-on-mobile { display: none !important; }
 
                     .fi-header {
-                        display: flex !important;
-                        flex-wrap: wrap !important;
+                        display: grid !important;
+                        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
                         gap: 0.5rem !important;
-                        justify-content: space-between !important;
                     }
 
-                    /* Strip all structural wrappers so children flow into .fi-header */
-                    .fi-header > div:has(.fi-header-heading),
+                    /* Strip structural wrappers to flatten DOM into the grid */
+                    .fi-header > div:first-child,
                     .fi-header-heading,
                     .fi-header-heading > div,
                     .my-custom-btns,
@@ -57,20 +56,27 @@ class Dashboard extends BaseDashboard
 
                     /* Dashboard title full width */
                     .fi-header-heading > div > span:first-child {
-                        flex: 0 0 100% !important;
-                        width: 100% !important;
+                        grid-column: span 2 !important;
                         margin-bottom: 0.5rem !important;
-                        text-align: left !important;
                         display: block !important;
                     }
 
-                    /* The 4 buttons (Add Brand, Add Category, Add Product, Landing Page) */
+                    /* Make wrapper divs take full width of their grid cells */
                     .my-custom-btns > *, 
                     .fi-header-actions > *:not(.hide-on-mobile) {
-                        flex: 0 0 calc(50% - 0.25rem) !important;
-                        width: calc(50% - 0.25rem) !important;
+                        display: block !important;
+                        width: 100% !important;
                         margin: 0 !important;
+                    }
+
+                    /* Force actual buttons to stretch and center */
+                    .my-custom-btns button, .my-custom-btns a, .my-custom-btns .fi-btn,
+                    .fi-header-actions button, .fi-header-actions a, .fi-header-actions .fi-btn {
+                        width: 100% !important;
+                        max-width: 100% !important;
                         justify-content: center !important;
+                        text-align: center !important;
+                        display: flex !important;
                     }
                 }
 
