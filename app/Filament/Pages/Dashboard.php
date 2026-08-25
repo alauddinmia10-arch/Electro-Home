@@ -14,15 +14,15 @@ class Dashboard extends BaseDashboard
     public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
     {
         return new \Illuminate\Support\HtmlString(\Illuminate\Support\Facades\Blade::render('
-            <span class="inline-flex items-center" style="max-width: 100%;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
                 <span style="font-weight: 600; font-size: 1.1rem; flex-shrink: 0;">Dashboard</span>
-                <span class="header-divider h-8 w-px bg-gray-300 dark:bg-gray-700" style="margin-left: 1rem; margin-right: 1rem; flex-shrink: 0;"></span>
-                <span class="my-custom-btns" style="display: flex; align-items: center; font-size: 0.95rem; font-weight: 500;">
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle" style="flex-shrink: 0; white-space: nowrap;">Add Brand</x-filament::button>
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle" style="flex-shrink: 0; white-space: nowrap;">Add Category</x-filament::button>
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle" style="flex-shrink: 0; white-space: nowrap;">Add Product</x-filament::button>
-                </span>
-            </span>
+                <span class="header-divider h-8 w-px bg-gray-300 dark:bg-gray-700" style="flex-shrink: 0;"></span>
+                <div class="my-custom-btns" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 500;">
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle">Add Brand</x-filament::button>
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Category</x-filament::button>
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Product</x-filament::button>
+                </div>
+            </div>
             <style>
                 .fi-header { 
                     background-color: #eaf7ec !important; 
@@ -35,46 +35,11 @@ class Dashboard extends BaseDashboard
                 .fi-main { padding-top: 0 !important; padding-left: 0.75rem !important; padding-right: 0.75rem !important; padding-bottom: 0.75rem !important; } 
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
                 
-                @media (min-width: 1024px) {
-                    .my-custom-btns > * { margin-right: 1rem !important; min-width: 150px !important; justify-content: center !important; }
-                    .my-custom-btns > *:last-child { margin-right: 0 !important; }
-                }
-
-                @media (max-width: 1023px) {
-                    .fi-header {
-                        padding: 1rem !important;
-                        margin-top: -0.25rem !important;
-                        height: auto !important;
-                        display: flex !important;
-                        flex-wrap: wrap !important;
-                        gap: 0.5rem !important;
-                        justify-content: space-between !important;
-                    }
-                    /* Make the wrappers transparent to flexbox */
-                    .fi-header > .inline-flex, .my-custom-btns, .fi-header-actions {
-                        display: contents !important;
-                    }
-                    /* The Dashboard title takes full width */
-                    .fi-header > .inline-flex > span:first-child {
-                        flex: 0 0 100% !important;
-                        width: 100% !important;
-                        margin-bottom: 0.5rem !important;
-                        font-size: 1.25rem !important;
-                    }
-                    /* The 4 buttons take 50% width (2x2 grid) */
-                    .my-custom-btns > *, .fi-header-actions > .fi-btn:not(.hide-on-mobile) {
-                        flex: 0 0 calc(50% - 0.25rem) !important;
-                        width: calc(50% - 0.25rem) !important;
-                        justify-content: center !important;
-                        margin: 0 !important;
-                        min-width: 0 !important;
-                    }
-                    .header-divider {
-                        display: none !important;
-                    }
-                    .hide-on-mobile {
-                        display: none !important;
-                    }
+                @media (max-width: 767px) {
+                    .header-divider { display: none !important; }
+                    .my-custom-btns { width: 100%; justify-content: space-between; }
+                    .my-custom-btns > * { flex: 1 1 calc(50% - 0.25rem); justify-content: center; min-width: 140px; }
+                    .hide-on-mobile { display: none !important; }
                 }
 
                 /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) ON DESKTOP */
