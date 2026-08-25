@@ -68,7 +68,7 @@
         }
     }
 
-    /* Move the global search box below the topbar on MOBILE */
+    /* MOBILE SPECIFIC STYLES */
     @media (max-width: 1023px) {
         .hide-on-mobile {
             display: none !important;
@@ -87,32 +87,17 @@
             gap: 0.5rem !important;
         }
 
-        /* Make the topbar wrap the search box naturally */
-        .fi-topbar nav {
-            flex-wrap: wrap !important;
-            height: auto !important;
-            padding-bottom: 0.75rem !important;
-        }
-        
-        /* Force the search container to take up the full width on the next line */
-        .fi-global-search-ctn,
-        .fi-topbar-global-search {
+        /* The search bar after being moved by JS */
+        .mobile-moved-search {
             width: 100% !important;
-            max-width: 100% !important;
-            order: 10 !important; /* Move it to the very end of the flex container */
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
             margin-top: 0.5rem !important;
-            display: flex !important;
-            justify-content: center !important;
+            margin-bottom: 0.5rem !important;
+            display: block !important;
         }
-        
-        .fi-global-search-ctn > div,
-        .fi-topbar-global-search > div {
+        .mobile-moved-search .fi-global-search-ctn {
             width: 100% !important;
-        }
-
-        /* Reset the main content padding since topbar naturally takes space now */
-        .fi-main {
-            padding-top: 1rem !important;
         }
     }
     .fi-global-search-ctn input,
@@ -163,3 +148,18 @@
         font-size: 0.85rem !important;
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.innerWidth < 1024) {
+            const searchBar = document.querySelector('.fi-topbar-global-search');
+            const mainContent = document.querySelector('.fi-main');
+            
+            if (searchBar && mainContent) {
+                // Move the search bar DOM element into the scrollable main content area
+                searchBar.classList.add('mobile-moved-search');
+                mainContent.insertBefore(searchBar, mainContent.firstChild);
+            }
+        }
+    });
+</script>
