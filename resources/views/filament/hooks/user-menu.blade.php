@@ -44,13 +44,14 @@
         height: 5rem !important; /* Increased from default 4rem (64px) to 5rem (80px) */
     }
 
-    /* Hide the default Filament User Menu avatar */
-    .fi-user-menu-trigger {
-        display: none !important;
-    }
-    
-    /* Center the global search box perfectly in the middle of the screen on DESKTOP */
+    /* DESKTOP SPECIFIC STYLES */
     @media (min-width: 1024px) {
+        /* Hide the default Filament User Menu avatar on desktop (we use custom one) */
+        .fi-user-menu-trigger {
+            display: none !important;
+        }
+        
+        /* Center the global search box perfectly in the middle of the screen on DESKTOP */
         .fi-global-search-ctn,
         .fi-topbar-global-search {
             position: absolute !important;
@@ -70,21 +71,14 @@
 
     /* MOBILE SPECIFIC STYLES */
     @media (max-width: 1023px) {
-        .hide-on-mobile {
+        /* Hide our custom menu entirely on mobile, we will use default Filament menu popup */
+        .custom-user-menu-container {
             display: none !important;
-        }
-        
-        .sign-out-text {
-            font-size: 0.8rem !important;
         }
         
         /* Reduce right margins for mobile */
         .fi-topbar-database-notifications-btn {
             margin-right: 0.25rem !important;
-        }
-        .custom-user-menu-container {
-            margin-right: 0 !important;
-            gap: 0.5rem !important;
         }
 
         /* The search bar after being moved by JS */
