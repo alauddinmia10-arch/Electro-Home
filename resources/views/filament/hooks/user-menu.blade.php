@@ -221,6 +221,12 @@
             gap: 0.6rem !important;
         }
 
+        /* Hide the search bar in the topbar on mobile to prevent a split-second glitch/flash before JS moves it */
+        .fi-topbar .fi-global-search-ctn,
+        .fi-topbar .fi-topbar-global-search {
+            display: none !important;
+        }
+
         /* The search bar after being moved by JS */
         .mobile-moved-search {
             width: 100% !important;
@@ -230,7 +236,9 @@
             margin-bottom: 0 !important;
             display: block !important;
         }
-        .mobile-moved-search .fi-global-search-ctn {
+        .mobile-moved-search .fi-global-search-ctn,
+        .mobile-moved-search .fi-topbar-global-search {
+            display: block !important;
             width: 100% !important;
         }
     }
