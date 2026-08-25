@@ -69,6 +69,16 @@
         }
     }
 
+    /* Hide the "System" monitor icon from theme switcher */
+    .fi-theme-switcher-btn:nth-child(3) {
+        display: none !important;
+    }
+
+    /* Hide the icon next to the user name in the popup */
+    .fi-user-menu .fi-dropdown-header svg {
+        display: none !important;
+    }
+
     /* MOBILE SPECIFIC STYLES */
     @media (max-width: 1023px) {
         /* Hide our custom menu entirely on mobile, we will use default Filament menu popup */
