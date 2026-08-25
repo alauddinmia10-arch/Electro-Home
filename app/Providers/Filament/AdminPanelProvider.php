@@ -54,20 +54,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('3s')
-            ->userMenuItems([
-                'profile' => \Filament\Navigation\MenuItem::make()
-                    ->label(fn () => new \Illuminate\Support\HtmlString('
-                        <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                            <span style="font-weight: 600; color: #111827; font-size: 0.95rem;">' . filament()->auth()->user()->name . '</span>
-                            <span style="font-size: 0.7rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;">' . match(filament()->auth()->user()->role ?? 'admin') {
-                                'super_admin' => 'Administrator',
-                                'admin' => 'Admin',
-                                'manager' => 'Manager',
-                                default => 'Administrator'
-                            } . '</span>
-                        </div>
-                    '))
-            ])
             ->renderHook(
                 \Filament\View\PanelsRenderHook::USER_MENU_BEFORE,
                 fn (): \Illuminate\Contracts\View\View => view('filament.hooks.user-menu'),

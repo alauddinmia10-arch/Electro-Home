@@ -74,9 +74,26 @@
         display: none !important;
     }
 
-    /* Hide the icon next to the user name in the popup */
+    /* Format the popup user header and add designation below name using CSS */
     .fi-user-menu .fi-dropdown-header svg {
         display: none !important;
+    }
+    .fi-user-menu .fi-dropdown-header span {
+        display: flex !important;
+        flex-direction: column !important;
+        line-height: 1.2 !important;
+        font-weight: 600 !important;
+        color: #111827 !important;
+        font-size: 0.95rem !important;
+    }
+    .fi-user-menu .fi-dropdown-header span::after {
+        content: "{{ $designation }}";
+        font-size: 0.7rem !important;
+        color: #6b7280 !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        margin-top: 4px !important;
     }
 
     /* MOBILE SPECIFIC STYLES */
