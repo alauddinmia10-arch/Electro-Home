@@ -96,14 +96,15 @@
 
         <!-- Popover -->
         <div
+            class="fbrp-popover"
             x-show="isOpen"
             @click.away="isOpen = false"
             x-transition
             style="display: none; position: absolute; right: 0; z-index: 50; margin-top: 0.5rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); width: max-content; overflow: hidden;"
         >
-            <div style="display: flex;">
+            <div class="fbrp-popover-inner" style="display: flex;">
                 <!-- Sidebar -->
-                <div style="width: 9.5rem; padding: 0.25rem 0; border-right: 1px solid #e5e7eb; background-color: #ffffff; display: flex; flex-direction: column;">
+                <div class="fbrp-sidebar" style="width: 9.5rem; padding: 0.25rem 0; border-right: 1px solid #e5e7eb; background-color: #ffffff; display: flex; flex-direction: column;">
                     <template x-for="preset in presets" :key="preset.label">
                         <button
                             type="button"
@@ -126,6 +127,62 @@
                             border: none !important;
                             box-shadow: none !important;
                             background: transparent !important;
+                        }
+                        @media (max-width: 1023px) {
+                            /* Make popover a centered modal on mobile so it doesn't get cut off */
+                            .fbrp-popover {
+                                position: fixed !important;
+                                top: 50% !important;
+                                left: 50% !important;
+                                transform: translate(-50%, -50%) !important;
+                                width: 90vw !important;
+                                max-width: 360px !important;
+                                max-height: 90vh !important;
+                                overflow-y: auto !important;
+                                z-index: 9999 !important;
+                                margin-top: 0 !important;
+                            }
+                            .fbrp-popover-inner {
+                                flex-direction: column !important;
+                            }
+                            /* Sidebar becomes a horizontal grid on mobile */
+                            .fbrp-sidebar {
+                                width: 100% !important;
+                                border-right: none !important;
+                                border-bottom: 1px solid #e5e7eb !important;
+                                display: grid !important;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 0.25rem;
+                                padding: 0.5rem !important;
+                            }
+                            /* Auto dimensions for flatpickr container */
+                            .custom-flatpickr {
+                                width: 100% !important;
+                                height: auto !important;
+                            }
+                            .custom-flatpickr > div {
+                                transform: scale(0.95) !important;
+                                transform-origin: top center !important;
+                                width: 100% !important;
+                                display: flex;
+                                justify-content: center;
+                                margin: 0 auto;
+                            }
+                            /* Stack flatpickr calendars vertically */
+                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-innerContainer {
+                                display: flex !important;
+                                flex-direction: column !important;
+                            }
+                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-months .flatpickr-month {
+                                width: 100% !important;
+                            }
+                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-days {
+                                display: flex !important;
+                                flex-direction: column !important;
+                            }
+                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-month {
+                                flex-basis: auto !important;
+                            }
                         }
                     </style>
                     <div class="custom-flatpickr" wire:ignore style="width: 512px; height: 250px; overflow: visible;">
