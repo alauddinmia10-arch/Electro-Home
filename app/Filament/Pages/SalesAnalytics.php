@@ -39,7 +39,7 @@ class SalesAnalytics extends Page implements HasForms
             ->components([
                 Grid::make(5)
                     ->schema([
-                        \App\Filament\Forms\Components\FacebookDateRangePicker::make('date_range')
+                        \App\Filament\Forms\Components\CustomDateRangePicker::make('date_range')
                             ->columnSpan(3)
                             ->hiddenLabel()
                             ->live(),

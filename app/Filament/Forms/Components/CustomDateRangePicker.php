@@ -4,9 +4,9 @@ namespace App\Filament\Forms\Components;
 
 use Filament\Forms\Components\Field;
 
-class FacebookDateRangePicker extends Field
+class CustomDateRangePicker extends Field
 {
-    protected string $view = 'filament.forms.components.facebook-date-range-picker';
+    protected string $view = 'filament.forms.components.custom-date-range-picker';
     
     protected bool $isBorderless = false;
 

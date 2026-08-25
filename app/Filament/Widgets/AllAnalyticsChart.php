@@ -38,7 +38,7 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
 
         return $schema
             ->components([
-                \App\Filament\Forms\Components\FacebookDateRangePicker::make('date_range')
+                \App\Filament\Forms\Components\CustomDateRangePicker::make('date_range')
                     ->borderless()
                     ->hiddenLabel()
                     ->live(),
