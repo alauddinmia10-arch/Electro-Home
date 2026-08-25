@@ -32,7 +32,7 @@ class Dashboard extends BaseDashboard
                     margin-top: -1.25rem !important; 
                     margin-bottom: 0.75rem !important;
                 }
-                .fi-main { padding: 0 0.75rem 0.75rem 0.75rem !important; } 
+                .fi-main { padding-left: 0.75rem !important; padding-right: 0.75rem !important; padding-bottom: 0.75rem !important; } 
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
                 
                 @media (min-width: 1024px) {

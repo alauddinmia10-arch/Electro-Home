@@ -78,6 +78,11 @@
             font-size: 0.8rem !important;
         }
 
+        /* Push the main page content down so it doesn't overlap with the absolute search bar */
+        .fi-main {
+            padding-top: 85px !important;
+        }
+
         /* Add margin to the topbar to make room for the search box */
         .fi-topbar {
             margin-bottom: 75px !important; /* Space for search bar + some gap */
