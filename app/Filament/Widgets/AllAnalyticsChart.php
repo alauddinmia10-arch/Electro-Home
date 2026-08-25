@@ -12,7 +12,7 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
 
     protected static ?int $sort = 2;
     protected static bool $isLazy = false;
-    protected static ?string $pollingInterval = null;
+    protected ?string $pollingInterval = null;
     protected string $view = 'filament.widgets.all-analytics-chart';
     
     public ?array $filters = null;
