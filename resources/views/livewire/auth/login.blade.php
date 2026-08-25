@@ -5,7 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app')] #[Title('Login - Electrohome.bd')] class extends Component {
+new #[Layout('components.layouts.app')] #[Title('Login - Electrohome.bd')] class extends Component {
     public string $login = '';
     public string $password = '';
     public bool $remember = false;

@@ -5,7 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.app')] #[Title('My Dashboard - Electrohome.bd')] class extends Component {
+new #[Layout('components.layouts.app')] #[Title('My Dashboard - Electrohome.bd')] class extends Component {
     public function logout()
     {
         Auth::logout();

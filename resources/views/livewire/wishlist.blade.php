@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 use App\Services\CartService;
 
-new #[Layout('layouts.app')] #[Title('My Wishlist - Electrohome.bd')] class extends Component {
+new #[Layout('components.layouts.app')] #[Title('My Wishlist - Electrohome.bd')] class extends Component {
     public Collection $wishlistItems;
 
     public function mount()
