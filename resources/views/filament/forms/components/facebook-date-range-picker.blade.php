@@ -100,6 +100,7 @@
             class="fbrp-popover"
             x-show="isOpen"
             x-ref="popover"
+            @scroll.window="isOpen = false"
             x-effect="
                 if (isOpen && $refs.trigger && $refs.popover) {
                     $nextTick(() => {
@@ -107,6 +108,9 @@
                         const pop = $refs.popover.getBoundingClientRect();
                         const spaceBelow = window.innerHeight - btn.bottom;
                         const spaceAbove = btn.top;
+                        
+                        $refs.popover.style.position = 'fixed';
+                        $refs.popover.style.margin = '0';
                         
                         if (window.innerWidth <= 1023) {
                             // Mobile: Use fixed vertical coordinates so CSS can stretch it horizontally to screen edges
@@ -118,17 +122,18 @@
                                 $refs.popover.style.top = (btn.bottom + 8) + 'px';
                             }
                         } else {
-                            // Desktop: Use relative percentages anchored to the parent container
+                            // Desktop: Anchor exactly to the right edge of the button
+                            const rightEdge = window.innerWidth - btn.right;
+                            $refs.popover.style.right = rightEdge + 'px';
+                            $refs.popover.style.left = 'auto';
+                            $refs.popover.style.width = 'max-content';
+                            
                             if (spaceBelow < pop.height && spaceAbove > spaceBelow) {
                                 $refs.popover.style.top = 'auto';
-                                $refs.popover.style.bottom = '100%';
-                                $refs.popover.style.marginTop = '0';
-                                $refs.popover.style.marginBottom = '0.5rem';
+                                $refs.popover.style.bottom = (window.innerHeight - btn.top + 8) + 'px';
                             } else {
                                 $refs.popover.style.bottom = 'auto';
-                                $refs.popover.style.top = '100%';
-                                $refs.popover.style.marginTop = '0.5rem';
-                                $refs.popover.style.marginBottom = '0';
+                                $refs.popover.style.top = (btn.bottom + 8) + 'px';
                             }
                         }
                     });
