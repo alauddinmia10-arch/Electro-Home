@@ -123,30 +123,89 @@
         height: 1.3rem !important;
     }
 
-    /* Style for the new View Website globe icon in the topbar (MOBILE ONLY) */
-    .topbar-view-website-btn {
+    /* ========================================= */
+    /* UNIFIED 40x40 EXACT SIZING FOR ALL TOPBAR ICONS */
+    /* ========================================= */
+    .fi-sidebar-mobile-overlay-btn,
+    .fi-sidebar-collapse-btn,
+    .fi-topbar-database-notifications-btn,
+    .topbar-view-website-btn,
+    .fi-user-menu-btn,
+    .fi-user-menu-trigger .fi-avatar {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        border-radius: 50% !important;
+        background-color: #f3f4f6 !important;
+        border: 1px solid #e5e7eb !important;
+        padding: 0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        width: 36px !important;
-        height: 36px !important;
-        background-color: #f3f4f6 !important;
-        color: #4b5563 !important;
-        border-radius: 50% !important;
-        margin-left: 0.5rem !important;
-        margin-right: -0.25rem !important; /* Pull it closer to edge on mobile */
-        border: 1px solid #e5e7eb !important;
-        transition: all 0.2s ease !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+        margin: 0 !important; /* Reset margins */
     }
+
+    /* Ensure SVGs inside icons are exactly 20x20 */
+    .fi-sidebar-mobile-overlay-btn svg,
+    .fi-sidebar-collapse-btn svg,
+    .fi-topbar-database-notifications-btn svg,
+    .topbar-view-website-btn svg {
+        width: 20px !important;
+        height: 20px !important;
+        margin: 0 !important;
+    }
+
+    /* Colors for icons */
+    .fi-sidebar-mobile-overlay-btn svg, .fi-sidebar-collapse-btn svg { color: #4b5563 !important; }
+    .fi-topbar-database-notifications-btn svg { color: #3b82f6 !important; stroke-width: 2 !important; }
+    .topbar-view-website-btn svg { color: #4b5563 !important; }
+
+    /* Fix Avatar image to fill its 40x40 border exactly */
+    .fi-user-menu-btn img, .fi-avatar img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* Hover effects */
+    .fi-sidebar-mobile-overlay-btn:hover,
+    .fi-sidebar-collapse-btn:hover,
+    .fi-topbar-database-notifications-btn:hover,
     .topbar-view-website-btn:hover {
         background-color: #e5e7eb !important;
-        color: #3b82f6 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Style the Notification Badge */
+    .fi-topbar-database-notifications-btn .fi-badge,
+    .fi-topbar-database-notifications-btn .fi-badge *,
+    .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn {
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        --tw-ring-shadow: 0 0 #0000 !important;
+        --tw-ring-color: transparent !important;
+    }
+    .fi-topbar-database-notifications-btn .fi-badge {
+        color: #ef4444 !important;
+        font-weight: 600 !important;
+        font-size: 0.85rem !important;
     }
 
     /* DESKTOP SPECIFIC STYLES (Overrides) */
     @media (min-width: 1024px) {
         .topbar-view-website-btn {
             display: none !important; /* Hide globe icon on desktop */
+        }
+        
+        .fi-topbar-item-end, .fi-topbar > div:last-child {
+            gap: 1rem !important;
         }
     }
 
@@ -156,10 +215,10 @@
         .custom-user-menu-container {
             display: none !important;
         }
-        
-        /* Reduce right margins for mobile */
-        .fi-topbar-database-notifications-btn {
-            margin-right: 0.25rem !important;
+
+        /* Make the gap between Bell, Avatar, Globe extremely small (reduce space) */
+        .fi-topbar-item-end, .fi-topbar > div:last-child {
+            gap: 0.35rem !important;
         }
 
         /* The search bar after being moved by JS */
@@ -175,6 +234,7 @@
             width: 100% !important;
         }
     }
+    
     .fi-global-search-ctn input,
     .fi-topbar-global-search input {
         border-radius: 9999px !important;
@@ -183,44 +243,6 @@
         font-size: 1rem !important;
         text-align: left !important;
         padding-left: 1rem !important;
-    }
-
-    /* Style the notification bell to look modern and bigger */
-    .fi-topbar-database-notifications-btn {
-        background-color: #f3f4f6 !important;
-        border-radius: 50% !important;
-        padding: 0.6rem !important;
-        margin-right: 1.5rem !important; /* Default for desktop */
-        transition: all 0.2s ease !important;
-        border: 1px solid #e5e7eb !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        transform: scale(1.3) !important; /* Slightly reduced scale from 1.5 */
-        transform-origin: center !important;
-    }
-    .fi-topbar-database-notifications-btn:hover {
-        background-color: #e5e7eb !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
-    }
-    .fi-topbar-database-notifications-btn svg {
-        color: #3b82f6 !important;
-        stroke-width: 2 !important;
-    }
-    .fi-topbar-database-notifications-btn .fi-badge,
-    .fi-topbar-database-notifications-btn .fi-badge *,
-    .fi-topbar-database-notifications-btn .fi-icon-btn-badge-ctn {
-        background: transparent !important;
-        background-color: transparent !important;
-        box-shadow: none !important;
-        border: none !important;
-        --tw-ring-shadow: 0 0 #0000 !important;
-        --tw-ring-color: transparent !important;
-    }
-    .fi-topbar-database-notifications-btn .fi-badge {
-        color: #ef4444 !important;
-        font-weight: 600 !important;
-        font-size: 0.85rem !important;
     }
 </style>
 
