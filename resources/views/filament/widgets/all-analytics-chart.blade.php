@@ -12,6 +12,31 @@
     $hasMaxHeight = filled($maxHeight) && $maxHeight !== '100%';
 @endphp
 
+<style>
+    /* MOBILE SPECIFIC STYLES FOR ANALYTICS WIDGET HEADER */
+    @media (max-width: 1023px) {
+        .custom-analytics-chart .fi-section-header {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1rem !important;
+        }
+        .custom-analytics-chart .fi-section-header-heading {
+            width: 100% !important;
+            white-space: normal !important;
+        }
+        .custom-analytics-chart .fi-section-header-after-ctn {
+            width: 100% !important;
+            margin-inline: 0 !important;
+        }
+        .custom-analytics-chart .mobile-date-picker-ctn {
+            position: relative !important;
+            inset: auto !important;
+            width: 100% !important;
+            margin-top: 0 !important;
+        }
+    }
+</style>
+
 <x-filament-widgets::widget class="fi-wi-chart relative custom-analytics-chart">
     <x-filament::section
         :description="$description"
@@ -21,7 +46,7 @@
         @if ($filters === null || method_exists($this, 'getFiltersSchema'))
             <x-slot name="afterHeader">
                 @if ($filters === null)
-                    <div class="absolute right-6 top-4 z-10 w-[350px]">
+                    <div class="absolute right-6 top-4 z-10 w-[350px] mobile-date-picker-ctn">
                         {{ $this->form }}
                     </div>
                 @endif
