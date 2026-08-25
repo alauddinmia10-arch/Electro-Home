@@ -37,9 +37,41 @@ class Dashboard extends BaseDashboard
                 
                 @media (max-width: 767px) {
                     .header-divider { display: none !important; }
-                    .my-custom-btns { width: 100%; justify-content: space-between; }
-                    .my-custom-btns > * { flex: 1 1 calc(50% - 0.25rem); justify-content: center; min-width: 140px; }
                     .hide-on-mobile { display: none !important; }
+
+                    .fi-header {
+                        display: flex !important;
+                        flex-wrap: wrap !important;
+                        gap: 0.5rem !important;
+                        justify-content: space-between !important;
+                    }
+
+                    /* Strip all structural wrappers so children flow into .fi-header */
+                    .fi-header > div:has(.fi-header-heading),
+                    .fi-header-heading,
+                    .fi-header-heading > div,
+                    .my-custom-btns,
+                    .fi-header-actions {
+                        display: contents !important;
+                    }
+
+                    /* Dashboard title full width */
+                    .fi-header-heading > div > span:first-child {
+                        flex: 0 0 100% !important;
+                        width: 100% !important;
+                        margin-bottom: 0.5rem !important;
+                        text-align: left !important;
+                        display: block !important;
+                    }
+
+                    /* The 4 buttons (Add Brand, Add Category, Add Product, Landing Page) */
+                    .my-custom-btns > *, 
+                    .fi-header-actions > *:not(.hide-on-mobile) {
+                        flex: 0 0 calc(50% - 0.25rem) !important;
+                        width: calc(50% - 0.25rem) !important;
+                        margin: 0 !important;
+                        justify-content: center !important;
+                    }
                 }
 
                 /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) ON DESKTOP */
@@ -52,13 +84,13 @@ class Dashboard extends BaseDashboard
                         max-width: none !important;
                         transform: none !important;
                     }
-                }
-                .fi-global-search,
-                .fi-global-search-field,
-                .fi-global-search-field .fi-input-wrapper,
-                .fi-global-search-input {
-                    width: 100% !important;
-                    max-width: 100% !important;
+                    .fi-global-search,
+                    .fi-global-search-field,
+                    .fi-global-search-field .fi-input-wrapper,
+                    .fi-global-search-input {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
                 }
             </style>
         '));
