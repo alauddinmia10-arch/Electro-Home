@@ -51,16 +51,14 @@
             display: none !important;
         }
         
-        /* Center the global search box perfectly in the middle of the screen on DESKTOP */
+        /* Center the global search box dynamically on DESKTOP without overlapping the user menu */
         .fi-global-search-ctn,
         .fi-topbar-global-search {
-            position: absolute !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
             max-width: 350px !important;
+            margin: 0 auto !important;
             z-index: 10;
         }
         .fi-global-search-ctn > div,
