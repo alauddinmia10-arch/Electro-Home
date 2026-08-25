@@ -142,60 +142,51 @@
                                 z-index: 9999 !important;
                                 margin-top: 0 !important;
                             }
-                            /* Keep row direction to have sidebar on left, calendar on right */
+                            /* Sidebar on top, calendar below */
                             .fbrp-popover-inner {
-                                display: flex !important;
-                                flex-direction: row !important;
-                            }
-                            /* Vertical Sidebar on the left */
-                            .fbrp-sidebar {
-                                width: 40% !important;
-                                padding: 0.5rem 0.25rem !important;
-                                border-right: 1px solid #e5e7eb !important;
-                                border-bottom: none !important;
                                 display: flex !important;
                                 flex-direction: column !important;
                             }
+                            /* Horizontal grid Sidebar on top */
+                            .fbrp-sidebar {
+                                width: 100% !important;
+                                padding: 0.5rem !important;
+                                border-right: none !important;
+                                border-bottom: 1px solid #e5e7eb !important;
+                                display: grid !important;
+                                grid-template-columns: 1fr 1fr 1fr !important;
+                                gap: 0.5rem !important;
+                            }
                             .fbrp-sidebar button {
                                 padding: 0.5rem 0.25rem !important;
-                                font-size: 0.75rem !important; /* Smaller text to fit */
+                                font-size: 0.75rem !important;
+                                text-align: center !important;
+                                justify-content: center !important;
                             }
-                            /* Calendar on the right */
+                            .fbrp-sidebar button span:first-child {
+                                display: none !important; /* hide the radio circle on mobile to save space */
+                            }
+                            /* Calendar on bottom */
                             .custom-flatpickr {
                                 width: 100% !important;
                                 height: auto !important;
                             }
                             .custom-flatpickr > div {
-                                transform: scale(0.68) !important; /* Scale it smaller to fit the right pane */
-                                transform-origin: top left !important;
+                                transform: none !important;
                                 width: 100% !important;
-                                display: block;
+                                display: flex;
+                                justify-content: center;
+                                padding: 0.5rem 0 !important;
                             }
-                            /* Stack flatpickr calendars vertically */
-                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-innerContainer {
-                                display: flex !important;
-                                flex-direction: column !important;
-                                gap: 0.5rem !important;
-                            }
-                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-months .flatpickr-month {
-                                width: 100% !important;
-                            }
-                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-days {
-                                display: flex !important;
-                                flex-direction: column !important;
-                            }
-                            .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-month {
-                                flex-basis: auto !important;
-                            }
-                            /* Adjust right wrapper container width */
+                            /* Adjust bottom wrapper container width */
                             .fbrp-popover-inner > div:nth-child(2) {
-                                width: 60% !important;
-                                padding: 0.5rem 0.25rem !important;
+                                width: 100% !important;
+                                padding: 0.5rem !important;
                             }
                         }
                     </style>
-                    <div class="custom-flatpickr" wire:ignore style="width: 512px; height: 250px; overflow: visible;">
-                        <div style="transform: scale(0.83); transform-origin: top left;">
+                    <div class="custom-flatpickr" wire:ignore style="width: 100%; max-width: 512px; min-height: 250px; overflow: visible;">
+                        <div>
                             <div 
                                 x-init="
                                     let isInitialized = false;
@@ -223,7 +214,7 @@
                                                     flatpickrInstance = fp($el, {
                                                         mode: 'range',
                                                         inline: true,
-                                                        showMonths: 2,
+                                                        showMonths: window.innerWidth < 1024 ? 1 : 2,
                                                         onChange: function(selectedDates) {
                                                             if(selectedDates.length === 2) {
                                                                 customStart = selectedDates[0];
