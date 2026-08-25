@@ -116,16 +116,28 @@
                         const spaceBelow = window.innerHeight - btn.bottom;
                         const spaceAbove = btn.top;
                         
-                        if (spaceBelow < pop.height && spaceAbove > spaceBelow) {
-                            $refs.popover.style.top = 'auto';
-                            $refs.popover.style.bottom = '100%';
-                            $refs.popover.style.marginTop = '0';
-                            $refs.popover.style.marginBottom = '0.5rem';
+                        if (window.innerWidth <= 1023) {
+                            // Mobile: Use fixed vertical coordinates so CSS can stretch it horizontally to screen edges
+                            if (spaceBelow < pop.height && spaceAbove > spaceBelow) {
+                                $refs.popover.style.top = 'auto';
+                                $refs.popover.style.bottom = (window.innerHeight - btn.top + 8) + 'px';
+                            } else {
+                                $refs.popover.style.bottom = 'auto';
+                                $refs.popover.style.top = (btn.bottom + 8) + 'px';
+                            }
                         } else {
-                            $refs.popover.style.bottom = 'auto';
-                            $refs.popover.style.top = '100%';
-                            $refs.popover.style.marginTop = '0.5rem';
-                            $refs.popover.style.marginBottom = '0';
+                            // Desktop: Use relative percentages anchored to the parent container
+                            if (spaceBelow < pop.height && spaceAbove > spaceBelow) {
+                                $refs.popover.style.top = 'auto';
+                                $refs.popover.style.bottom = '100%';
+                                $refs.popover.style.marginTop = '0';
+                                $refs.popover.style.marginBottom = '0.5rem';
+                            } else {
+                                $refs.popover.style.bottom = 'auto';
+                                $refs.popover.style.top = '100%';
+                                $refs.popover.style.marginTop = '0.5rem';
+                                $refs.popover.style.marginBottom = '0';
+                            }
                         }
                     });
                 }
@@ -171,6 +183,15 @@
                         }
 
                         @media (max-width: 1023px) {
+                            /* Ensure popover takes full width of the body on mobile using fixed positioning horizontally */
+                            .fbrp-popover {
+                                position: fixed !important;
+                                left: 0.75rem !important;
+                                right: 0.75rem !important;
+                                width: auto !important;
+                                max-width: none !important;
+                                margin-top: 0 !important;
+                            }
                             /* Ensure sidebar is on the left (row direction) */
                             .fbrp-popover-inner {
                                 display: flex !important;
