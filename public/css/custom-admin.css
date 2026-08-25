@@ -883,3 +883,13 @@
         width: 100% !important;
         max-width: 100% !important;
     }
+    @media (min-width: 1024px) {
+        .fi-topbar-open-sidebar-btn,
+        .fi-topbar-close-sidebar-btn,
+        .fi-topbar-collapse-sidebar-btn-ctn,
+        .fi-topbar-open-collapse-sidebar-btn,
+        .fi-topbar-close-collapse-sidebar-btn {
+            display: none !important;
+        }
+    }
+
