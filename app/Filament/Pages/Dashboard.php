@@ -43,7 +43,7 @@ class Dashboard extends BaseDashboard
                 @media (max-width: 1023px) {
                     .fi-header {
                         padding: 1rem !important;
-                        margin-top: 1rem !important; /* To give space for absolute search bar */
+                        margin-top: 0 !important; /* Removed extra space */
                         height: auto !important;
                     }
                     .header-divider {

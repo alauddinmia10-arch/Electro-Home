@@ -93,7 +93,7 @@
             padding-left: 0.25rem !important;
             padding-right: 0.25rem !important;
             margin-top: 0.5rem !important;
-            margin-bottom: 0.5rem !important;
+            margin-bottom: 0.75rem !important;
             display: block !important;
         }
         .mobile-moved-search .fi-global-search-ctn {
