@@ -125,7 +125,7 @@
         height: 1.3rem !important;
     }
 
-    /* Style for the new View Website globe icon in the topbar */
+    /* Style for the new View Website globe icon in the topbar (MOBILE ONLY) */
     .topbar-view-website-btn {
         display: flex !important;
         align-items: center !important;
@@ -143,6 +143,13 @@
     .topbar-view-website-btn:hover {
         background-color: #e5e7eb !important;
         color: #3b82f6 !important;
+    }
+
+    /* DESKTOP SPECIFIC STYLES (Overrides) */
+    @media (min-width: 1024px) {
+        .topbar-view-website-btn {
+            display: none !important; /* Hide globe icon on desktop */
+        }
     }
 
     /* MOBILE SPECIFIC STYLES */
