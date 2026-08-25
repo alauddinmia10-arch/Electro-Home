@@ -80,24 +80,28 @@
     
     /* MOBILE STYLES (Max-width 1023px) */
     @media (max-width: 1023px) {
-        /* Make the topbar wrap so search can go to the next line */
-        .fi-topbar nav {
-            flex-wrap: wrap !important;
-            height: auto !important;
-            padding-bottom: 10px !important;
-            padding-top: 10px !important;
+        /* Keep topbar height standard but add margin below for the absolute search bar */
+        .fi-topbar {
+            margin-bottom: 70px !important;
         }
 
-        /* The flex container that holds the search bar */
+        .fi-topbar nav {
+            height: 4rem !important;
+            justify-content: space-between !important;
+        }
+
+        /* Absolutely position the search bar BELOW the top bar */
         .fi-topbar-global-search {
-            order: 3 !important; /* Move search to the bottom row */
-            width: 100% !important;
-            max-width: 100% !important;
-            flex: 0 0 100% !important;
-            margin-top: 10px !important;
+            position: absolute !important;
+            top: 4.5rem !important;
+            left: 0.75rem !important;
+            right: 0.75rem !important;
+            width: auto !important;
+            max-width: none !important;
+            margin: 0 !important;
         }
         
-        .fi-global-search-field, .fi-global-search-ctn {
+        .fi-global-search, .fi-global-search-field, .fi-global-search-ctn {
             width: 100% !important;
             max-width: 100% !important;
         }
@@ -105,6 +109,10 @@
         .fi-global-search-input {
             width: 100% !important;
             border-radius: 8px !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 1rem !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #d1d5db !important;
         }
 
         /* Adjust user menu items to fit on small screen */
