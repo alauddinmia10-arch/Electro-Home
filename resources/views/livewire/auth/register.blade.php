@@ -10,28 +10,81 @@ use Livewire\Volt\Component;
 new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] class extends Component {
     public string $name = '';
     public string $phone = '';
-    public string $password = '';
-    public string $password_confirmation = '';
+    public string $otpCode = '';
+    public string $otpStep = 'request'; // 'request' or 'verify'
+
+    public function requestOtp()
+    {
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|regex:/^01[3-9]\d{8}$/|unique:users,phone',
+        ], [
+            'phone.regex' => 'Please enter a valid 11-digit Bangladeshi mobile number.',
+            'phone.unique' => 'This phone number is already registered. Please log in.',
+        ]);
+
+        $otp = rand(1000, 9999);
+        
+        session()->put('register_otp_data', [
+            'phone' => $this->phone,
+            'name' => $this->name,
+            'code' => (string) $otp,
+            'expires_at' => now()->addMinutes(5),
+        ]);
+
+        $message = "Electrohome.bd - Your registration OTP is: {$otp}. It is valid for 5 minutes.";
+        
+        app(\App\Services\SmsService::class)->sendSms($this->phone, $message);
+
+        $this->otpStep = 'verify';
+    }
 
     public function register()
     {
         $this->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|unique:users,phone',
-            'password' => 'required|string|min:8|confirmed',
+            'otpCode' => 'required|string|size:4',
+        ], [
+            'otpCode.required' => 'Please enter the OTP.',
+            'otpCode.size' => 'OTP must be 4 digits.',
         ]);
 
+        $otpData = session()->get('register_otp_data');
+
+        if (!$otpData || $otpData['phone'] !== $this->phone) {
+            $this->addError('otpCode', 'Session expired. Please request a new OTP.');
+            return;
+        }
+
+        if (now()->greaterThan($otpData['expires_at'])) {
+            $this->addError('otpCode', 'OTP expired. Please request a new OTP.');
+            session()->forget('register_otp_data');
+            $this->otpStep = 'request';
+            return;
+        }
+
+        if ($this->otpCode !== $otpData['code']) {
+            $this->addError('otpCode', 'Invalid OTP entered.');
+            return;
+        }
+
         $user = User::create([
-            'name' => $this->name,
-            'email' => $this->phone . '@electrohome.bd',
-            'phone' => $this->phone,
-            'password' => Hash::make($this->password),
+            'name' => $otpData['name'],
+            'email' => $otpData['phone'] . '@electrohome.bd',
+            'phone' => $otpData['phone'],
+            'password' => Hash::make(\Illuminate\Support\Str::random(16)),
             'role' => 'customer',
         ]);
 
         Auth::login($user);
+        session()->forget('register_otp_data');
 
         return redirect()->route('dashboard');
+    }
+
+    public function goBack()
+    {
+        $this->otpStep = 'request';
+        $this->otpCode = '';
     }
 } ?>
 
@@ -40,7 +93,8 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
         <div class="p-8">
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-6 font-bangla">নতুন একাউন্ট তৈরি করুন</h2>
             
-            <form wire:submit="register" class="space-y-5">
+            @if($otpStep === 'request')
+            <form wire:submit="requestOtp" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                     <input type="text" wire:model="name" class="form-input" placeholder="Your Name" required>
@@ -53,28 +107,42 @@ new #[Layout('components.layouts.app')] #[Title('Register - Electrohome.bd')] cl
                     @error('phone') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                 </div>
                 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" wire:model="password" class="form-input" placeholder="••••••••" required>
-                    @error('password') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                <button type="submit" class="btn btn-primary w-full text-lg">
+                    <span wire:loading.remove wire:target="requestOtp">Send OTP</span>
+                    <span wire:loading wire:target="requestOtp">Sending...</span>
+                </button>
+            </form>
+            @else
+            <form wire:submit="register" class="space-y-5">
+                <div class="text-center mb-4">
+                    <p class="text-sm text-gray-600">We've sent a 4-digit code to</p>
+                    <p class="font-bold text-gray-800">{{ $phone }}</p>
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                    <input type="password" wire:model="password_confirmation" class="form-input" placeholder="••••••••" required>
+                    <label class="block text-sm font-medium text-gray-700 mb-1 text-center">Enter OTP</label>
+                    <input type="text" wire:model="otpCode" class="form-input text-center text-xl tracking-[0.5em]" placeholder="••••" maxlength="4" required>
+                    @error('otpCode') <span class="block text-red-500 text-sm mt-1 text-center">{{ $message }}</span> @enderror
                 </div>
                 
                 <button type="submit" class="btn btn-primary w-full text-lg">
-                    <span wire:loading.remove wire:target="register">Register</span>
-                    <span wire:loading wire:target="register">Creating Account...</span>
+                    <span wire:loading.remove wire:target="register">Verify & Register</span>
+                    <span wire:loading wire:target="register">Registering...</span>
                 </button>
+
+                <div class="text-center mt-4">
+                    <button type="button" wire:click="goBack" class="text-sm text-trust-blue hover:underline">Change Phone Number</button>
+                </div>
             </form>
+            @endif
             
+            @if($otpStep === 'request')
             <div class="mt-6 text-center">
                 <p class="text-sm text-gray-600">Already have an account? 
                     <a href="{{ route('login') }}" class="text-trust-blue font-semibold hover:underline">Login here</a>
                 </p>
             </div>
+            @endif
         </div>
     </div>
 </div>
