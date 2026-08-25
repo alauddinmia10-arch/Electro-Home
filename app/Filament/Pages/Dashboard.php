@@ -14,10 +14,10 @@ class Dashboard extends BaseDashboard
     public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
     {
         return new \Illuminate\Support\HtmlString(\Illuminate\Support\Facades\Blade::render('
-            <span class="flex flex-col md:flex-row md:items-center">
-                <span class="font-bold text-lg mb-2 md:mb-0">Dashboard</span>
-                <span class="hidden md:block h-8 w-px bg-gray-300 dark:bg-gray-700 mx-4"></span>
-                <span class="grid grid-cols-2 sm:grid-cols-3 md:flex gap-2 md:gap-4 my-custom-btns text-base font-medium w-full md:w-auto">
+            <span class="dashboard-header-wrapper" style="display: flex; align-items: center; width: 100%;">
+                <span style="font-weight: 700; font-size: 1.125rem;">Dashboard</span>
+                <span class="header-divider" style="height: 2rem; width: 1px; background-color: #d1d5db; margin-left: 1rem; margin-right: 1rem;"></span>
+                <span class="my-custom-btns" style="display: flex; align-items: center; font-size: 1rem; font-weight: 500;">
                     <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle">Add Brand</x-filament::button>
                     <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Category</x-filament::button>
                     <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Product</x-filament::button>
@@ -27,38 +27,51 @@ class Dashboard extends BaseDashboard
                 .fi-header { 
                     background-color: #eaf7ec !important; 
                     border-radius: 0.75rem; 
-                    padding: 1rem !important; 
-                    min-height: auto !important; 
-                    margin-top: 0 !important; 
+                    padding: 0.5rem 1rem !important; 
+                    min-height: 4rem !important; 
+                    margin-top: -1.25rem !important; 
                     margin-bottom: 0.75rem !important;
                 }
-                
-                @media (min-width: 768px) {
-                    .fi-header {
-                        padding: 0.5rem 1rem !important; 
-                        min-height: 4rem !important; 
-                        margin-top: -1.25rem !important; 
-                    }
-                }
-                
                 .fi-main { padding: 0 0.75rem 0.75rem 0.75rem !important; } 
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
+                
+                .my-custom-btns {
+                    gap: 1rem;
+                }
                 
                 @media (min-width: 768px) {
                     .my-custom-btns > * { min-width: 150px !important; justify-content: center !important; }
                 }
-                
-                @media (max-width: 767px) {
+
+                @media (max-width: 1023px) {
+                    .fi-header {
+                        padding: 1rem !important;
+                        margin-top: 0 !important;
+                        height: auto !important;
+                    }
+                    .dashboard-header-wrapper {
+                        flex-direction: column !important;
+                        align-items: flex-start !important;
+                    }
+                    .header-divider {
+                        display: none !important;
+                    }
                     .my-custom-btns {
-                        width: 100% !important;
+                        display: grid !important;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 0.5rem;
+                        width: 100%;
+                        margin-top: 0.5rem;
                     }
                     .my-custom-btns > * {
+                        margin-right: 0 !important;
                         padding: 0.25rem !important;
                         font-size: 0.85rem !important;
+                        justify-content: center !important;
                     }
                 }
 
-                /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) */
+                /* FORCE GLOBAL SEARCH WIDTH AND POSITION (ABSOLUTE) ON DESKTOP */
                 @media (min-width: 1024px) {
                     .fi-global-search-ctn {
                         position: absolute !important;
