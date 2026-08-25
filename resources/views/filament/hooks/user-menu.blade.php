@@ -87,32 +87,32 @@
             gap: 0.5rem !important;
         }
 
-        /* Push the main page content down exactly enough for the search bar (approx 55px) */
-        .fi-main {
-            padding-top: 55px !important;
-        }
-
-        /* Remove the excessive bottom margin from topbar */
-        .fi-topbar {
-            margin-bottom: 0 !important;
+        /* Make the topbar wrap the search box naturally */
+        .fi-topbar nav {
+            flex-wrap: wrap !important;
+            height: auto !important;
+            padding-bottom: 0.75rem !important;
         }
         
+        /* Force the search container to take up the full width on the next line */
         .fi-global-search-ctn,
         .fi-topbar-global-search {
-            position: absolute !important;
-            top: 100% !important; /* Move it exactly below the topbar */
-            left: 0.75rem !important;
-            right: 0.75rem !important;
-            width: auto !important;
-            max-width: none !important;
-            z-index: 10;
-            display: flex !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            order: 10 !important; /* Move it to the very end of the flex container */
             margin-top: 0.5rem !important;
+            display: flex !important;
+            justify-content: center !important;
         }
         
         .fi-global-search-ctn > div,
         .fi-topbar-global-search > div {
             width: 100% !important;
+        }
+
+        /* Reset the main content padding since topbar naturally takes space now */
+        .fi-main {
+            padding-top: 1rem !important;
         }
     }
     .fi-global-search-ctn input,
