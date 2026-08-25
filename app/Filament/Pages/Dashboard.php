@@ -50,8 +50,9 @@ class Dashboard extends BaseDashboard
                     .fi-header-heading,
                     .fi-header-heading > div,
                     .my-custom-btns,
+                    .my-custom-btns div,
                     .fi-header-actions,
-                    .fi-header-actions > *:not(.hide-on-mobile) {
+                    .fi-header-actions div {
                         display: contents !important;
                     }
 
