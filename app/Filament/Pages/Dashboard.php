@@ -14,13 +14,13 @@ class Dashboard extends BaseDashboard
     public function getHeading(): string|\Illuminate\Contracts\Support\Htmlable
     {
         return new \Illuminate\Support\HtmlString(\Illuminate\Support\Facades\Blade::render('
-            <span class="inline-flex items-center flex-wrap" style="width: 100%;">
+            <span class="inline-flex items-center" style="max-width: 100%;">
                 <span style="font-weight: 600; font-size: 1.1rem; flex-shrink: 0;">Dashboard</span>
-                <span class="header-divider h-8 w-px bg-gray-300 dark:bg-gray-700" style="margin-left: 1rem; margin-right: 1rem;"></span>
-                <span class="my-custom-btns" style="display: flex; flex-wrap: wrap; align-items: center; font-size: 0.95rem; font-weight: 500;">
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle">Add Brand</x-filament::button>
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Category</x-filament::button>
-                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle">Add Product</x-filament::button>
+                <span class="header-divider h-8 w-px bg-gray-300 dark:bg-gray-700" style="margin-left: 1rem; margin-right: 1rem; flex-shrink: 0;"></span>
+                <span class="my-custom-btns" style="display: flex; align-items: center; font-size: 0.95rem; font-weight: 500;">
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Brands\BrandResource::getUrl(\'index\') }}" color="gray" icon="heroicon-o-plus-circle" style="flex-shrink: 0; white-space: nowrap;">Add Brand</x-filament::button>
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Categories\CategoryResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle" style="flex-shrink: 0; white-space: nowrap;">Add Category</x-filament::button>
+                    <x-filament::button tag="a" href="{{ \App\Filament\Resources\Products\ProductResource::getUrl(\'create\') }}" color="gray" icon="heroicon-o-plus-circle" style="flex-shrink: 0; white-space: nowrap;">Add Product</x-filament::button>
                 </span>
             </span>
             <style>
