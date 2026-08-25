@@ -129,49 +129,53 @@
                             background: transparent !important;
                         }
                         @media (max-width: 1023px) {
-                            /* Make popover a centered modal on mobile so it doesn't get cut off */
+                            /* Make popover a centered modal on mobile */
                             .fbrp-popover {
                                 position: fixed !important;
                                 top: 50% !important;
                                 left: 50% !important;
                                 transform: translate(-50%, -50%) !important;
-                                width: 90vw !important;
-                                max-width: 360px !important;
+                                width: 95vw !important;
+                                max-width: 380px !important;
                                 max-height: 90vh !important;
                                 overflow-y: auto !important;
                                 z-index: 9999 !important;
                                 margin-top: 0 !important;
                             }
+                            /* Keep row direction to have sidebar on left, calendar on right */
                             .fbrp-popover-inner {
+                                display: flex !important;
+                                flex-direction: row !important;
+                            }
+                            /* Vertical Sidebar on the left */
+                            .fbrp-sidebar {
+                                width: 40% !important;
+                                padding: 0.5rem 0.25rem !important;
+                                border-right: 1px solid #e5e7eb !important;
+                                border-bottom: none !important;
+                                display: flex !important;
                                 flex-direction: column !important;
                             }
-                            /* Sidebar becomes a horizontal grid on mobile */
-                            .fbrp-sidebar {
-                                width: 100% !important;
-                                border-right: none !important;
-                                border-bottom: 1px solid #e5e7eb !important;
-                                display: grid !important;
-                                grid-template-columns: 1fr 1fr;
-                                gap: 0.25rem;
-                                padding: 0.5rem !important;
+                            .fbrp-sidebar button {
+                                padding: 0.5rem 0.25rem !important;
+                                font-size: 0.75rem !important; /* Smaller text to fit */
                             }
-                            /* Auto dimensions for flatpickr container */
+                            /* Calendar on the right */
                             .custom-flatpickr {
                                 width: 100% !important;
                                 height: auto !important;
                             }
                             .custom-flatpickr > div {
-                                transform: scale(0.95) !important;
-                                transform-origin: top center !important;
+                                transform: scale(0.68) !important; /* Scale it smaller to fit the right pane */
+                                transform-origin: top left !important;
                                 width: 100% !important;
-                                display: flex;
-                                justify-content: center;
-                                margin: 0 auto;
+                                display: block;
                             }
                             /* Stack flatpickr calendars vertically */
                             .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-innerContainer {
                                 display: flex !important;
                                 flex-direction: column !important;
+                                gap: 0.5rem !important;
                             }
                             .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-months .flatpickr-month {
                                 width: 100% !important;
@@ -182,6 +186,11 @@
                             }
                             .custom-flatpickr .flatpickr-calendar.multiMonth .flatpickr-month {
                                 flex-basis: auto !important;
+                            }
+                            /* Adjust right wrapper container width */
+                            .fbrp-popover-inner > div:nth-child(2) {
+                                width: 60% !important;
+                                padding: 0.5rem 0.25rem !important;
                             }
                         }
                     </style>
