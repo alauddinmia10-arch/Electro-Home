@@ -32,7 +32,7 @@ class Dashboard extends BaseDashboard
                     margin-top: -1.25rem !important; 
                     margin-bottom: 0.75rem !important;
                 }
-                .fi-main { padding-left: 0.75rem !important; padding-right: 0.75rem !important; padding-bottom: 0.75rem !important; } 
+                .fi-main { padding-top: 0 !important; padding-left: 0.75rem !important; padding-right: 0.75rem !important; padding-bottom: 0.75rem !important; } 
                 .fi-header-heading { overflow: visible !important; width: 100% !important; }
                 
                 @media (min-width: 1024px) {
@@ -43,7 +43,7 @@ class Dashboard extends BaseDashboard
                 @media (max-width: 1023px) {
                     .fi-header {
                         padding: 1rem !important;
-                        margin-top: 0 !important; /* Removed extra space */
+                        margin-top: 1rem !important; /* To give space for absolute search bar */
                         height: auto !important;
                     }
                     .header-divider {
