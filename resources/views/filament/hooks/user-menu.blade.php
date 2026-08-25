@@ -124,7 +124,7 @@
     }
 
     /* ========================================= */
-    /* UNIFIED 40x40 EXACT SIZING FOR ALL TOPBAR ICONS */
+    /* UNIFIED 46x46 EXACT SIZING FOR ALL TOPBAR ICONS */
     /* ========================================= */
     .fi-sidebar-mobile-overlay-btn,
     .fi-sidebar-collapse-btn,
@@ -132,12 +132,12 @@
     .topbar-view-website-btn,
     .fi-user-menu-btn,
     .fi-user-menu-trigger .fi-avatar {
-        width: 40px !important;
-        height: 40px !important;
-        min-width: 40px !important;
-        min-height: 40px !important;
-        max-width: 40px !important;
-        max-height: 40px !important;
+        width: 46px !important;
+        height: 46px !important;
+        min-width: 46px !important;
+        min-height: 46px !important;
+        max-width: 46px !important;
+        max-height: 46px !important;
         border-radius: 50% !important;
         background-color: #f3f4f6 !important;
         border: 1px solid #e5e7eb !important;
@@ -150,13 +150,13 @@
         margin: 0 !important; /* Reset margins */
     }
 
-    /* Ensure SVGs inside icons are exactly 20x20 */
+    /* Ensure SVGs inside icons are exactly 24x24 */
     .fi-sidebar-mobile-overlay-btn svg,
     .fi-sidebar-collapse-btn svg,
     .fi-topbar-database-notifications-btn svg,
     .topbar-view-website-btn svg {
-        width: 20px !important;
-        height: 20px !important;
+        width: 24px !important;
+        height: 24px !important;
         margin: 0 !important;
     }
 
