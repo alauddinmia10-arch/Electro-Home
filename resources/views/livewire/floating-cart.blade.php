@@ -20,7 +20,7 @@ new class extends Component {
     }
 };
 ?>
-<a href="{{ route('cart') }}" class="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center justify-center bg-white w-[100px] rounded-l-xl shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.15)] transition-all group overflow-hidden border border-gray-200 border-r-0" x-data="{ floatCount: {{ $count }}, floatSubtotal: {{ $subtotal }} }" @cart-updated-optimistic.window="floatCount += $event.detail.qty_change; floatSubtotal += $event.detail.amount" @cart-updated.window="if($event.detail.subtotal !== undefined) { floatCount = $event.detail.count; floatSubtotal = $event.detail.subtotal; }">
+<a href="{{ route('cart') }}" id="desktop-floating-cart" class="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center justify-center bg-white w-[100px] rounded-l-xl shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.15)] transition-all group overflow-hidden border border-gray-200 border-r-0" x-data="{ floatCount: {{ $count }}, floatSubtotal: {{ $subtotal }} }" @cart-updated-optimistic.window="floatCount += $event.detail.qty_change; floatSubtotal += $event.detail.amount" @cart-updated.window="if($event.detail.subtotal !== undefined) { floatCount = $event.detail.count; floatSubtotal = $event.detail.subtotal; }">
     <div class="relative w-full flex justify-center pt-6 pb-2 bg-white">
         <div class="relative inline-block animate-cart-dance">
             {{-- Custom Cart Icon with Plus (Exact match from Falaq Food) --}}

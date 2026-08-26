@@ -493,7 +493,7 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
             <span>Shop</span>
         </a>
-        <a href="{{ route('cart', ['v' => 2]) }}" class="mobile-nav-item {{ request()->routeIs('cart') ? 'active' : '' }} relative" x-data="{ cartCount: {{ app(\App\Services\CartService::class)->getCount() }} }" @cart-updated-optimistic.window="cartCount += $event.detail.qty_change" @cart-updated.window="if($event.detail.count !== undefined) { cartCount = $event.detail.count; }">
+        <a href="{{ route('cart', ['v' => 2]) }}" id="mobile-bottom-cart" class="mobile-nav-item {{ request()->routeIs('cart') ? 'active' : '' }} relative" x-data="{ cartCount: {{ app(\App\Services\CartService::class)->getCount() }} }" @cart-updated-optimistic.window="cartCount += $event.detail.qty_change" @cart-updated.window="if($event.detail.count !== undefined) { cartCount = $event.detail.count; }">
             <div class="relative inline-block animate-cart-dance">
                 <svg class="w-5 h-5" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 7C12 7.55 11.55 8 11 8C10.45 8 10 7.55 10 7V5H8C7.45 5 7 4.55 7 4C7 3.45 7.45 3 8 3H10V1C10 0.45 10.45 0 11 0C11.55 0 12 0.45 12 1V3H14C14.55 3 15 3.45 15 4C15 4.55 14.55 5 14 5H12V7ZM4.01 19C4.01 17.9 4.9 17 6 17C7.1 17 8 17.9 8 19C8 20.1 7.1 21 6 21C4.9 21 4.01 20.1 4.01 19ZM16 17C14.9 17 14.01 17.9 14.01 19C14.01 20.1 14.9 21 16 21C17.1 21 18 20.1 18 19C18 17.9 17.1 17 16 17ZM14.55 12H7.1L6 14H17C17.55 14 18 14.45 18 15C18 15.55 17.55 16 17 16H6C4.48 16 3.52 14.37 4.25 13.03L5.6 10.59L2 3H1C0.45 3 0 2.55 0 2C0 1.45 0.45 1 1 1H2.64C3.02 1 3.38 1.22 3.54 1.57L7.53 10H14.55L17.94 3.87C18.2 3.39 18.81 3.22 19.29 3.48C19.77 3.75 19.95 4.36 19.68 4.84L16.3 10.97C15.96 11.59 15.3 12 14.55 12Z" fill="currentColor"/></svg>
                 <span x-show="cartCount > 0" x-text="cartCount" wire:ignore class="absolute text-red-600 font-bold flex items-center justify-center" style="display: none; top: -8px; right: -10px; font-size: 22px; line-height: 1;">
@@ -544,5 +544,100 @@
     </div>
 
     @livewireScripts
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            window.addEventListener('fly-to-cart', function(e) {
+                const button = e.detail.button;
+                if (!button) return;
+                
+                const card = button.closest('.product-card');
+                if (!card) return;
+                
+                const img = card.querySelector('img');
+                if (!img) return;
+                
+                let targetIcon = null;
+                if (window.innerWidth < 768) {
+                    targetIcon = document.getElementById('mobile-bottom-cart');
+                } else {
+                    targetIcon = document.getElementById('desktop-floating-cart'); 
+                }
+                
+                if (!targetIcon) return;
+                
+                const clone = img.cloneNode(true);
+                const imgRect = img.getBoundingClientRect();
+                const targetRect = targetIcon.getBoundingClientRect();
+                
+                const imgCenterX = imgRect.left + imgRect.width / 2;
+                const imgCenterY = imgRect.top + imgRect.height / 2;
+                
+                const targetCenterX = targetRect.left + targetRect.width / 2;
+                const targetCenterY = targetRect.top + targetRect.height / 2;
+                
+                const deltaX = targetCenterX - imgCenterX;
+                const deltaY = targetCenterY - imgCenterY;
+                
+                const isMobile = window.innerWidth < 768;
+                const cpX = deltaX * 0.5;
+                const cpY = Math.min(0, deltaY) - (isMobile ? 250 : 150); 
+                
+                const frames = [];
+                const steps = 30;
+                for (let i = 0; i <= steps; i++) {
+                    const t = i / steps;
+                    const x = (1-t)*(1-t)*0 + 2*(1-t)*t*cpX + t*t*deltaX;
+                    const y = (1-t)*(1-t)*0 + 2*(1-t)*t*cpY + t*t*deltaY;
+                    
+                    let scale;
+                    if (t < 0.2) {
+                        scale = 1 + (t / 0.2) * 0.05; // 1 to 1.05
+                    } else {
+                        const t2 = (t - 0.2) / 0.8;
+                        scale = 1.05 - (t2 * 0.95); // 1.05 to 0.1
+                    }
+                    
+                    const rotate = Math.sin(t * Math.PI) * 15; // Smooth tilt up to 15 degrees
+                    
+                    const opacity = t > 0.8 ? 1 - ((t - 0.8) / 0.2) : 1;
+                    
+                    frames.push({
+                        transform: `translate(${x}px, ${y}px) scale(${scale}) rotate(${rotate}deg)`,
+                        opacity: opacity
+                    });
+                }
+                
+                clone.style.position = 'fixed';
+                clone.style.left = imgRect.left + 'px';
+                clone.style.top = imgRect.top + 'px';
+                clone.style.width = imgRect.width + 'px';
+                clone.style.height = imgRect.height + 'px';
+                clone.style.zIndex = '99999';
+                clone.style.objectFit = 'contain';
+                clone.style.pointerEvents = 'none';
+                clone.style.transformOrigin = 'center center';
+                clone.style.filter = 'drop-shadow(0 15px 25px rgba(0,0,0,0.4))';
+                
+                document.body.appendChild(clone);
+                
+                const animation = clone.animate(frames, {
+                    duration: 1200,
+                    easing: 'ease-in-out',
+                    fill: 'forwards'
+                });
+                
+                animation.onfinish = () => {
+                    clone.remove();
+                    const iconContainer = targetIcon.querySelector('.animate-cart-dance') || targetIcon;
+                    iconContainer.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    iconContainer.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        iconContainer.style.transform = 'scale(1)';
+                    }, 300);
+                };
+            });
+        });
+    </script>
 </body>
 </html>
