@@ -3,11 +3,8 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 // ──── Public Routes ────
@@ -135,8 +132,6 @@ Route::post('/logout', function () {
 Route::middleware('auth')->group(function () {
     Volt::route('/dashboard', 'dashboard')->name('dashboard');
     Volt::route('/wishlist', 'wishlist')->name('wishlist');
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
 
 // Wishlist accessible for logged-in users; redirect guests to login
