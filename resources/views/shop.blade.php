@@ -25,23 +25,6 @@
                 <form action="{{ route('shop') }}" method="GET" id="filter-form" class="space-y-6 bg-white p-5 md:rounded md:border border-gray-100 shadow-sm">
                     <h2 class="text-lg font-bold text-gray-800 hidden md:block">Filters</h2>
 
-                    {{-- Search --}}
-                    <div>
-                        <label class="block text-sm text-gray-700 mb-2 font-medium">Search</label>
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." class="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:border-[#0b5c9a]">
-                    </div>
-                    
-                    {{-- Category --}}
-                    <div>
-                        <label class="block text-sm text-gray-700 mb-2 font-medium">Category</label>
-                        <select name="category" class="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
-                            <option value="">All Categories</option>
-                            @foreach($categories as $cat)
-                                <option value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'selected' : '' }}>{{ $cat->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     {{-- Price Range --}}
                     <div x-data="priceRangeSlider({{ request('min_price') ?: 0 }}, {{ request('max_price') ?: (isset($maxPriceLimit) ? $maxPriceLimit : 500000) }}, 0, {{ isset($maxPriceLimit) ? $maxPriceLimit : 500000 }}, 100)">
                         <label class="block text-sm text-gray-700 mb-2 font-medium">Price Range</label>
@@ -155,12 +138,26 @@
                         </select>
                     </div>
 
-                    {{-- On Sale Only --}}
+                    {{-- Category --}}
                     <div>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" name="on_sale" value="1" {{ request('on_sale') ? 'checked' : '' }} class="rounded border-gray-300 text-[#1877f2] focus:ring-[#1877f2]">
-                            <span class="text-sm text-gray-600">On Sale Only</span>
-                        </label>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Category</label>
+                        <select name="category" class="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $cat)
+                                <option value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'selected' : '' }}>{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- Availability --}}
+                    <div>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Availability</label>
+                        <select name="availability" class="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
+                            <option value="">All</option>
+                            <option value="in_stock" {{ request('availability') == 'in_stock' ? 'selected' : '' }}>In Stock</option>
+                            <option value="pre_order" {{ request('availability') == 'pre_order' ? 'selected' : '' }}>Pre-order</option>
+                            <option value="upcoming" {{ request('availability') == 'upcoming' ? 'selected' : '' }}>Upcoming</option>
+                        </select>
                     </div>
 
                     <div>

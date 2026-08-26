@@ -51,9 +51,14 @@ class ShopController extends Controller
             }
         }
 
-        // On sale filter
-        if ($request->boolean('on_sale')) {
-            $query->whereNotNull('discount_price')->where('discount_price', '>', 0);
+        // Availability filter
+        if ($request->filled('availability')) {
+            $availability = $request->availability;
+            if ($availability === 'in_stock') {
+                $query->inStock();
+            } else {
+                $query->where('status', $availability);
+            }
         }
 
         // Flash sale filter
