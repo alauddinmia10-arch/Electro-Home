@@ -132,6 +132,8 @@ Route::post('/logout', function () {
 Route::middleware('auth')->group(function () {
     Volt::route('/dashboard', 'dashboard')->name('dashboard');
     Volt::route('/wishlist', 'wishlist')->name('wishlist');
+    Route::get('/orders', function() { return redirect()->route('dashboard'); })->name('orders.index');
+    Route::get('/orders/{order}', function() { return redirect()->route('dashboard'); })->name('orders.show');
 });
 
 // Wishlist accessible for logged-in users; redirect guests to login
