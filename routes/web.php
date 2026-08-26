@@ -13,20 +13,6 @@ use Illuminate\Support\Facades\Route;
 // ──── Public Routes ────
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/run-seed', function () {
-    \App\Models\User::updateOrCreate(
-        ['email' => 'admin@electrohome.bd'],
-        [
-            'name' => 'Super Admin',
-            'phone' => '01700000000',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-        ]
-    );
-    return 'Admin user created successfully! You can now log in with admin@electrohome.bd and password';
-});
-
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/offer/{slug}', \App\Livewire\LandingPage::class)->name('landing.page');
