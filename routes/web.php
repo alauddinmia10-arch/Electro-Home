@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 // ──── Public Routes ────
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/run-seed', function () {
+    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+    return 'Database seeded successfully! You can now log in with admin@electrohome.bd and password';
+});
+
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/offer/{slug}', \App\Livewire\LandingPage::class)->name('landing.page');
