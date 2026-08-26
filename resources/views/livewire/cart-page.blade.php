@@ -105,7 +105,7 @@ new class extends Component {
 <div class="bg-gray-100 py-2 md:py-6">
     <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 font-bangla mb-1 md:mb-6">আপনার শপিং কার্ট</h1>
-        <h2 class="w-fit mx-auto bg-white rounded-md shadow-sm border border-gray-200 py-1.5 px-5 text-center text-xl font-bold text-gray-800 mb-2 lg:hidden">Order Summary</h2>
+
 
         <div class="flex flex-col lg:flex-row gap-2 lg:gap-8">
             {{-- Left: Cart Items --}}
@@ -215,11 +215,11 @@ new class extends Component {
                                         </a>
 
                                         <div class="flex-1 min-w-0 pt-0.5">
-                                            <a href="{{ route('product.show', $item->product->slug) }}" class="font-bold text-gray-800 text-[19px] leading-snug line-clamp-2 hover:text-[var(--color-trust-blue)]">
+                                            <a href="{{ route('product.show', $item->product->slug) }}" class="font-bold text-gray-800 text-[18px] leading-snug line-clamp-2 hover:text-[var(--color-trust-blue)]">
                                                 {{ $item->product->name }}
                                             </a>
                                             @if($item->product->sku)
-                                                <div class="text-[14px] text-gray-400 mt-1 font-mono">SKU: {{ $item->product->sku }}</div>
+                                                <div class="text-[13px] text-gray-400 mt-1 font-mono">SKU: {{ $item->product->sku }}</div>
                                             @endif
                                         </div>
 
@@ -232,24 +232,24 @@ new class extends Component {
                                     <div class="space-y-1.5 pt-1 pr-3" style="padding-left: 80px;">
                                         {{-- Price Row --}}
                                         <div class="flex justify-between items-center text-sm">
-                                            <span class="text-gray-400 font-medium text-base">Price</span>
-                                            <span class="font-semibold text-gray-700 text-[18px]">৳{{ number_format($item->product->effective_price, 0) }}</span>
+                                            <span class="text-gray-400 font-medium text-[15px]">Price</span>
+                                            <span class="font-semibold text-gray-700 text-[17px]">৳{{ number_format($item->product->effective_price, 0) }}</span>
                                         </div>
 
                                         {{-- Qty Row --}}
                                         <div class="flex justify-between items-center text-sm">
-                                            <span class="text-gray-400 font-medium text-base">Qty</span>
+                                            <span class="text-gray-400 font-medium text-[15px]">Qty</span>
                                             <div class="inline-flex items-center border border-gray-200 rounded-md bg-white overflow-hidden shadow-2xs px-1.5" style="width: 110px; height: 42px;">
-                                                <button type="button" @click="updateQty(-1, {{ $item->product->effective_price }})" class="w-7 h-full text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors font-bold text-base flex items-center justify-center shrink-0 rounded" :disabled="qty <= 1">−</button>
-                                                <input type="text" x-model="qty" class="flex-1 min-w-0 h-full text-center text-sm font-bold bg-transparent text-gray-800" readonly>
-                                                <button type="button" @click="updateQty(1, {{ $item->product->effective_price }})" class="w-7 h-full text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors font-bold text-base flex items-center justify-center shrink-0 rounded" :disabled="qty >= stock">+</button>
+                                                <button type="button" @click="updateQty(-1, {{ $item->product->effective_price }})" class="w-7 h-full text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors font-bold text-[15px] flex items-center justify-center shrink-0 rounded" :disabled="qty <= 1">−</button>
+                                                <input type="text" x-model="qty" class="flex-1 min-w-0 h-full text-center text-[13px] font-bold bg-transparent text-gray-800" readonly>
+                                                <button type="button" @click="updateQty(1, {{ $item->product->effective_price }})" class="w-7 h-full text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors font-bold text-[15px] flex items-center justify-center shrink-0 rounded" :disabled="qty >= stock">+</button>
                                             </div>
                                         </div>
 
                                         {{-- Subtotal Row --}}
                                         <div class="flex justify-between items-center text-sm pt-1.5 border-t border-gray-100">
-                                            <span class="text-gray-400 font-medium text-base">Subtotal</span>
-                                            <span wire:ignore class="font-bold text-price text-[22px]" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
+                                            <span class="text-gray-400 font-medium text-[15px]">Subtotal</span>
+                                            <span wire:ignore class="font-bold text-price text-[21px]" x-text="'৳' + new Intl.NumberFormat('en-US').format({{ $item->product->effective_price }} * qty)">৳{{ number_format($item->product->effective_price * $item->quantity, 0) }}</span>
                                         </div>
                                     </div>
                                 </div>
