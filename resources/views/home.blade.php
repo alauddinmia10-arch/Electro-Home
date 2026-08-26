@@ -7,10 +7,10 @@
             <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm aspect-video md:aspect-auto md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
                 <div x-show="activeSlide === 0" x-transition.opacity.duration.500ms class="absolute inset-0">
                     <img src="{{ asset('images/sliders/slide1.png') }}" alt="Hybrid Solar Inverter" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center pt-4 pb-10 md:pt-8 md:pb-16 px-4 md:px-8 text-center">
+                    <div class="absolute inset-0 bg-black/40 flex flex-col items-center pt-6 pb-5 md:pt-10 md:pb-10 px-4 md:px-8 text-center text-white">
                         <div class="flex-1 flex flex-col justify-center items-center">
-                            <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">আপনার স্বপ্নের প্রজেক্ট<br>শুরু করুন আজই!</h1>
-                            <p class="text-xs md:text-lg opacity-90 drop-shadow-md">Electrohome.bd-এ পাচ্ছেন সেরা মানের সোলার ও ইনভার্টার সলিউশন</p>
+                            <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">আপনার স্বপ্নের প্রজেক্ট শুরু করুন</h1>
+                            <p class="text-xs md:text-lg opacity-90 drop-shadow-md">সেরা সোলার ও ইনভার্টার সলিউশন</p>
                         </div>
                         <a href="{{ route('shop') }}" class="shrink-0 bg-blue-600 text-white px-5 py-2 text-sm md:text-base md:px-8 md:py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:scale-105 transition-all mt-3 md:mt-6">Shop Now</a>
                     </div>
@@ -18,10 +18,10 @@
 
                 <div x-show="activeSlide === 1" x-transition.opacity.duration.500ms class="absolute inset-0">
                     <img src="{{ asset('images/sliders/slide2.png') }}" alt="Lithium Phosphate Battery" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center pt-4 pb-10 md:pt-8 md:pb-16 px-4 md:px-8 text-center">
+                    <div class="absolute inset-0 bg-black/40 flex flex-col items-center pt-6 pb-5 md:pt-10 md:pb-10 px-4 md:px-8 text-center text-white">
                         <div class="flex-1 flex flex-col justify-center items-center">
                             <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">দীর্ঘস্থায়ী পাওয়ার সলিউশন</h1>
-                            <p class="text-xs md:text-lg opacity-90 drop-shadow-md">সেরা মানের Lithium-ion Phosphate (LiFePO4) ব্যাটারি</p>
+                            <p class="text-xs md:text-lg opacity-90 drop-shadow-md">সেরা মানের LiFePO4 ব্যাটারি</p>
                         </div>
                         <a href="{{ route('shop') }}" class="shrink-0 bg-emerald-600 text-white px-5 py-2 text-sm md:text-base md:px-8 md:py-3 rounded-full font-bold shadow-lg hover:bg-emerald-700 hover:scale-105 transition-all mt-3 md:mt-6">Explore Batteries</a>
                     </div>
@@ -29,10 +29,10 @@
 
                 <div x-show="activeSlide === 2" x-transition.opacity.duration.500ms class="absolute inset-0">
                     <img src="{{ asset('images/sliders/slide3.png') }}" alt="Electronic Components" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center pt-4 pb-10 md:pt-8 md:pb-16 px-4 md:px-8 text-center">
+                    <div class="absolute inset-0 bg-black/40 flex flex-col items-center pt-6 pb-5 md:pt-10 md:pb-10 px-4 md:px-8 text-center text-white">
                         <div class="flex-1 flex flex-col justify-center items-center">
-                            <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট</h1>
-                            <p class="text-xs md:text-lg opacity-90 drop-shadow-md">সার্কিট, সেন্সর, আরডুইনো এবং রোবোটিক্স এক্সেসরিজ</p>
+                            <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">ইলেকট্রনিক্স কম্পোনেন্ট</h1>
+                            <p class="text-xs md:text-lg opacity-90 drop-shadow-md">সার্কিট, সেন্সর ও রোবোটিক্স</p>
                         </div>
                         <a href="{{ route('shop') }}" class="shrink-0 bg-[var(--color-trust-blue)] text-white px-5 py-2 text-sm md:text-base md:px-8 md:py-3 rounded-full font-bold shadow-lg hover:bg-blue-500 hover:scale-105 transition-all mt-3 md:mt-6">View Components</a>
                     </div>
