@@ -39,7 +39,14 @@ class ShopController extends Controller
         }
 
         // Brand filter
-        if ($request->filled('brand')) {
+        if ($request->has('brand') && is_array($request->brand)) {
+            $brandIds = \App\Models\Brand::whereIn('slug', $request->brand)
+                            ->orWhereIn('id', $request->brand)
+                            ->pluck('id');
+            if ($brandIds->isNotEmpty()) {
+                $query->whereIn('brand_id', $brandIds);
+            }
+        } elseif ($request->filled('brand') && !is_array($request->brand)) {
             $brandId = $request->brand;
             if (is_numeric($brandId)) {
                 $query->where('brand_id', $brandId);

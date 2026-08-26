@@ -10,7 +10,7 @@
                  x-transition:leave-start="opacity-100"
                  x-transition:leave-end="opacity-0"
                  @click="showMobileFilters = false"
-                 class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" style="display: none;"></div>
+                 class="fixed inset-0 bg-black/50 z-40 md:hidden" style="display: none;"></div>
 
             {{-- Left Sidebar: Filters --}}
             <aside class="w-72 max-w-[85vw] shrink-0 fixed inset-y-0 left-0 z-50 bg-white md:bg-transparent md:static md:w-64 -translate-x-full md:translate-x-0 transform transition-transform duration-300 overflow-y-auto md:overflow-visible h-full md:h-auto"
@@ -125,19 +125,6 @@
                         </script>
                     </div>
 
-                    {{-- Brand --}}
-                    <div>
-                        <label class="block text-sm text-gray-700 mb-2 font-medium">Brand</label>
-                        <select name="brand" class="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
-                            <option value="">All Brands</option>
-                            @isset($brands)
-                                @foreach($brands as $brand)
-                                    <option value="{{ $brand->slug ?? $brand->id }}" {{ request('brand') == ($brand->slug ?? $brand->id) ? 'selected' : '' }}>{{ $brand->name }}</option>
-                                @endforeach
-                            @endisset
-                        </select>
-                    </div>
-
                     {{-- Category --}}
                     <div>
                         <label class="block text-sm text-gray-700 mb-2 font-medium">Category</label>
@@ -147,6 +134,21 @@
                                 <option value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'selected' : '' }}>{{ $cat->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    {{-- Brand --}}
+                    <div>
+                        <label class="block text-sm text-gray-700 mb-2 font-medium">Brand</label>
+                        <div class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                            @isset($brands)
+                                @foreach($brands as $brand)
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="brand[]" value="{{ $brand->slug ?? $brand->id }}" {{ in_array(($brand->slug ?? $brand->id), request('brand', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                        <span class="text-sm text-gray-600">{{ $brand->name }}</span>
+                                    </label>
+                                @endforeach
+                            @endisset
+                        </div>
                     </div>
 
                     {{-- Availability --}}
