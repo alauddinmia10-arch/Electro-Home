@@ -242,7 +242,7 @@
                     
                     {{-- Columns Toggle --}}
                     @if(request('view', 'grid') !== 'list')
-                    <div class="flex items-center gap-2">
+                    <div class="hidden md:flex items-center gap-2">
                         <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">Columns:</span>
                         <div class="flex items-center gap-1 border border-gray-200 rounded px-1 py-1 bg-white shadow-sm">
                             <a href="{{ request()->fullUrlWithQuery(['cols' => 4, 'view' => 'grid']) }}" class="px-2.5 py-1.5 rounded text-sm font-medium {{ request('cols', 4) == 4 && request('view', 'grid') != 'list' ? 'bg-[#0b5c9a] text-white' : 'text-gray-600 hover:bg-gray-100' }} flex items-center gap-1.5 transition-colors">
