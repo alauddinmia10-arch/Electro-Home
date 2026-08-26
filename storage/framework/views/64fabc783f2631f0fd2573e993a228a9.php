@@ -183,8 +183,7 @@
 
             
             <div class="flex-1">
-                
-                <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                     <div>
                         <h1 class="text-[28px] font-bold text-gray-800 mb-1 leading-tight">
                             <?php echo e($pageTitle); ?>
@@ -196,44 +195,13 @@
                             <span class="text-gray-600"><?php echo e($pageTitle); ?></span>
                         </div>
                     </div>
-
-                    
-                    <form id="sort-form" class="flex items-center gap-2">
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = request()->except(['sort_by', 'sort_order', 'page']); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                            <input type="hidden" name="<?php echo e($key); ?>" value="<?php echo e($value); ?>">
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
-                        
-                        <select name="sort_by" onchange="document.getElementById('sort-form').submit()" class="text-sm bg-white border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
-                            <option value="name" <?php echo e(request('sort_by') === 'name' ? 'selected' : ''); ?>>Name</option>
-                            <option value="price" <?php echo e(request('sort_by') === 'price' ? 'selected' : ''); ?>>Price</option>
-                            <option value="newest" <?php echo e(request('sort_by', 'newest') === 'newest' ? 'selected' : ''); ?>>Newest</option>
-                        </select>
-                        <?php
-                            $currentSortBy = request('sort_by', 'newest');
-                            
-                            $ascLabel = 'A to Z';
-                            $descLabel = 'Z to A';
-                            
-                            if ($currentSortBy === 'price') {
-                                $ascLabel = 'Low to High';
-                                $descLabel = 'High to Low';
-                            } elseif ($currentSortBy === 'newest') {
-                                $ascLabel = 'Oldest First';
-                                $descLabel = 'Newest First';
-                            }
-                        ?>
-                        <select name="sort_order" onchange="document.getElementById('sort-form').submit()" class="text-sm bg-white border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
-                            <option value="asc" <?php echo e(request('sort_order') === 'asc' ? 'selected' : ''); ?>><?php echo e($ascLabel); ?></option>
-                            <option value="desc" <?php echo e(request('sort_order') === 'desc' ? 'selected' : ''); ?>><?php echo e($descLabel); ?></option>
-                        </select>
-                    </form>
                 </div>
 
                 
-                <div class="flex items-center justify-between bg-white p-3 rounded border border-gray-100 shadow-sm mb-6">
-                    <div class="flex items-center gap-3">
+                <div class="flex items-center justify-between bg-white p-1.5 md:p-3 rounded border border-gray-100 shadow-sm mb-6">
+                    <div class="flex items-center gap-2 md:gap-3">
                         
-                        <button type="button" @click="showMobileFilters = true" class="md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded text-sm font-medium text-gray-700 hover:bg-gray-100">
+                        <button type="button" @click="showMobileFilters = true" class="md:hidden flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded text-[13px] font-medium text-gray-700 hover:bg-gray-100">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                             Filter
                         </button>
@@ -242,18 +210,50 @@
                         <div class="flex items-center gap-2">
                         <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">View:</span>
                         <div class="flex items-center border border-gray-200 rounded overflow-hidden bg-gray-50">
-                            <a href="<?php echo e(request()->fullUrlWithQuery(['view' => 'grid'])); ?>" class="p-2 <?php echo e(request('view', 'grid') === 'grid' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100'); ?>" title="Grid View">
-                                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            <a href="<?php echo e(request()->fullUrlWithQuery(['view' => 'grid'])); ?>" class="p-1.5 md:p-2 <?php echo e(request('view', 'grid') === 'grid' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100'); ?>" title="Grid View">
+                                <svg class="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                             </a>
-                            <a href="<?php echo e(request()->fullUrlWithQuery(['view' => 'list'])); ?>" class="p-2 <?php echo e(request('view') === 'list' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100'); ?>" title="List View">
-                                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            <a href="<?php echo e(request()->fullUrlWithQuery(['view' => 'list'])); ?>" class="p-1.5 md:p-2 <?php echo e(request('view') === 'list' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100'); ?>" title="List View">
+                                <svg class="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                             </a>
                         </div>
                     </div>
                     </div>
                     
-                    
-                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(request('view', 'grid') !== 'list'): ?>
+                    <div class="flex items-center gap-2 md:gap-4">
+                        
+                        <form id="sort-form" class="flex items-center gap-1.5 md:gap-2">
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = request()->except(['sort_by', 'sort_order', 'page']); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                                <input type="hidden" name="<?php echo e($key); ?>" value="<?php echo e($value); ?>">
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                            
+                            <select name="sort_by" onchange="document.getElementById('sort-form').submit()" class="text-[12px] md:text-sm bg-white border border-gray-200 rounded px-1.5 py-1.5 md:px-3 md:py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
+                                <option value="name" <?php echo e(request('sort_by') === 'name' ? 'selected' : ''); ?>>Name</option>
+                                <option value="price" <?php echo e(request('sort_by') === 'price' ? 'selected' : ''); ?>>Price</option>
+                                <option value="newest" <?php echo e(request('sort_by', 'newest') === 'newest' ? 'selected' : ''); ?>>Newest</option>
+                            </select>
+                            <?php
+                                $currentSortBy = request('sort_by', 'newest');
+                                
+                                $ascLabel = 'A to Z';
+                                $descLabel = 'Z to A';
+                                
+                                if ($currentSortBy === 'price') {
+                                    $ascLabel = 'Low to High';
+                                    $descLabel = 'High to Low';
+                                } elseif ($currentSortBy === 'newest') {
+                                    $ascLabel = 'Oldest First';
+                                    $descLabel = 'Newest First';
+                                }
+                            ?>
+                            <select name="sort_order" onchange="document.getElementById('sort-form').submit()" class="text-[12px] md:text-sm bg-white border border-gray-200 rounded px-1.5 py-1.5 md:px-3 md:py-2 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
+                                <option value="asc" <?php echo e(request('sort_order') === 'asc' ? 'selected' : ''); ?>><?php echo e($ascLabel); ?></option>
+                                <option value="desc" <?php echo e(request('sort_order') === 'desc' ? 'selected' : ''); ?>><?php echo e($descLabel); ?></option>
+                            </select>
+                        </form>
+
+                        
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(request('view', 'grid') !== 'list'): ?>
                     <div class="hidden md:flex items-center gap-2">
                         <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">Columns:</span>
                         <div class="flex items-center gap-1 border border-gray-200 rounded px-1 py-1 bg-white shadow-sm">
@@ -293,7 +293,8 @@
                             </a>
                         </div>
                     </div>
-                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    </div>
                 </div>
 
                 
