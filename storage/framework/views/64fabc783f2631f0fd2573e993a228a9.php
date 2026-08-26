@@ -226,6 +226,7 @@
                     </div>
                     
                     
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(request('view', 'grid') !== 'list'): ?>
                     <div class="flex items-center gap-2">
                         <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">Columns:</span>
                         <div class="flex items-center gap-1 border border-gray-200 rounded px-1 py-1 bg-white shadow-sm">
@@ -265,6 +266,7 @@
                             </a>
                         </div>
                     </div>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                 </div>
 
                 
