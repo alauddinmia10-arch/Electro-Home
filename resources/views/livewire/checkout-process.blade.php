@@ -293,18 +293,18 @@ new class extends Component {
         <form wire:submit="submit" x-data x-on:submit="window.isOrderSubmitting = true" class="bg-white rounded-md shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-5 md:p-7 border-b border-gray-100">
                 <div class="text-center mb-5">
-                    <h2 class="text-[26px] font-extrabold text-gray-800 tracking-wider font-bangla uppercase">BILLING & SHIPPING</h2>
+                    <h2 class="text-[23px] md:text-[26px] font-extrabold text-gray-800 tracking-wider font-bangla uppercase">BILLING & SHIPPING</h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5 mb-4.5">
                     <div>
-                        <label class="block text-xl font-semibold text-gray-800 mb-1.5">আপনার নাম / Full Name *</label>
-                        <input type="text" wire:model.blur="name" class="form-input text-xl" placeholder="আপনার নাম লিখুন..." required>
+                        <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">আপনার নাম / Full Name *</label>
+                        <input type="text" wire:model.blur="name" class="form-input text-lg md:text-xl" placeholder="আপনার নাম লিখুন..." required>
                         @error('name') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label class="block text-xl font-semibold text-gray-800 mb-1.5">মোবাইল নাম্বার / Phone Number *</label>
-                        <input type="tel" wire:model.blur="phone" class="form-input text-xl" placeholder="01XXXXXXXXX" required>
+                        <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">মোবাইল নাম্বার / Phone Number *</label>
+                        <input type="tel" wire:model.blur="phone" class="form-input text-lg md:text-xl" placeholder="01XXXXXXXXX" required>
                         @error('phone') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                     </div>
                 </div>
@@ -312,10 +312,10 @@ new class extends Component {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5 mb-4.5 min-w-0 max-w-full">
                     {{-- District Custom Dropdown (Strictly Bounded & Smooth Scrollable) --}}
                     <div x-data="{ open: false, search: '' }" class="relative min-w-0 max-w-full">
-                        <label class="block text-xl font-semibold text-gray-800 mb-1.5">District / জেলা *</label>
+                        <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">District / জেলা *</label>
                         
                         <div @click="open = !open" 
-                             class="form-input flex items-center justify-between cursor-pointer py-2.5 px-3 bg-white text-xl select-none">
+                             class="form-input flex items-center justify-between cursor-pointer py-2.5 px-3 bg-white text-lg md:text-xl select-none">
                             <span class="truncate text-gray-800 font-medium">
                                 @if($district)
                                     @php $selectedD = $districts->firstWhere('name', $district); @endphp
@@ -330,14 +330,14 @@ new class extends Component {
                         <div x-show="open" @click.away="open = false" x-cloak 
                              class="absolute z-50 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl w-full text-left overflow-hidden block">
                             <div class="p-2 bg-white border-b border-gray-100">
-                                <input type="text" x-model="search" placeholder="জেলা খুঁজুন..." class="w-full px-2.5 py-2 text-[18px] border border-gray-200 rounded focus:outline-none focus:border-[var(--color-trust-blue)]">
+                                <input type="text" x-model="search" placeholder="জেলা খুঁজুন..." class="w-full px-2.5 py-2 text-base md:text-[18px] border border-gray-200 rounded focus:outline-none focus:border-[var(--color-trust-blue)]">
                             </div>
                             <div class="py-1 overflow-y-auto overscroll-contain touch-pan-y block" style="max-height: 400px; -webkit-overflow-scrolling: touch;">
                                 @foreach($districts as $d)
                                     <div x-show="!search || {{ json_encode(strtolower($d->name . ' ' . $d->bn_name)) }}.includes(search.toLowerCase())"
                                          wire:click="selectDistrict({{ json_encode($d->name) }})"
                                          @click="open = false; search = '';"
-                                         class="px-3 py-3 text-xl font-medium text-gray-700 hover:bg-blue-50 hover:text-[var(--color-trust-blue)] cursor-pointer transition-colors leading-snug {{ $district === $d->name ? 'bg-blue-50 text-[var(--color-trust-blue)] font-bold' : '' }}">
+                                         class="px-3 py-3 text-lg md:text-xl font-medium text-gray-700 hover:bg-blue-50 hover:text-[var(--color-trust-blue)] cursor-pointer transition-colors leading-snug {{ $district === $d->name ? 'bg-blue-50 text-[var(--color-trust-blue)] font-bold' : '' }}">
                                         {{ $d->name }} - {{ $d->bn_name }}
                                     </div>
                                 @endforeach
@@ -348,10 +348,10 @@ new class extends Component {
 
                     {{-- Thana Custom Dropdown (Strictly Bounded & Smooth Scrollable) --}}
                     <div x-data="{ open: false, search: '' }" class="relative min-w-0 max-w-full">
-                        <label class="block text-xl font-semibold text-gray-800 mb-1.5">Thana / থানা *</label>
+                        <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">Thana / থানা *</label>
                         
                         <div @click="if({{ $thanas->isEmpty() ? 'false' : 'true' }}) open = !open" 
-                             class="form-input flex items-center justify-between cursor-pointer py-2.5 px-3 bg-white text-xl select-none @if($thanas->isEmpty()) opacity-60 cursor-not-allowed bg-gray-50 @endif">
+                             class="form-input flex items-center justify-between cursor-pointer py-2.5 px-3 bg-white text-lg md:text-xl select-none @if($thanas->isEmpty()) opacity-60 cursor-not-allowed bg-gray-50 @endif">
                             <span class="truncate text-gray-800 font-medium">
                                 @if($thana)
                                     @php $selectedT = $thanas->firstWhere('name', $thana); @endphp
@@ -367,14 +367,14 @@ new class extends Component {
                             <div x-show="open" @click.away="open = false" x-cloak 
                                  class="absolute z-50 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl w-full text-left overflow-hidden block">
                                 <div class="p-2 bg-white border-b border-gray-100">
-                                    <input type="text" x-model="search" placeholder="থানা খুঁজুন..." class="w-full px-2.5 py-2 text-[18px] border border-gray-200 rounded focus:outline-none focus:border-[var(--color-trust-blue)]">
+                                    <input type="text" x-model="search" placeholder="থানা খুঁজুন..." class="w-full px-2.5 py-2 text-base md:text-[18px] border border-gray-200 rounded focus:outline-none focus:border-[var(--color-trust-blue)]">
                                 </div>
                                 <div class="py-1 overflow-y-auto overscroll-contain touch-pan-y block" style="max-height: 400px; -webkit-overflow-scrolling: touch;">
                                     @foreach($thanas as $t)
                                         <div x-show="!search || {{ json_encode(strtolower($t->name . ' ' . $t->bn_name)) }}.includes(search.toLowerCase())"
                                              wire:click="selectThana({{ json_encode($t->name) }})"
                                              @click="open = false; search = '';"
-                                             class="px-3 py-3 text-xl font-medium text-gray-700 hover:bg-blue-50 hover:text-[var(--color-trust-blue)] cursor-pointer transition-colors leading-snug {{ $thana === $t->name ? 'bg-blue-50 text-[var(--color-trust-blue)] font-bold' : '' }}">
+                                             class="px-3 py-3 text-lg md:text-xl font-medium text-gray-700 hover:bg-blue-50 hover:text-[var(--color-trust-blue)] cursor-pointer transition-colors leading-snug {{ $thana === $t->name ? 'bg-blue-50 text-[var(--color-trust-blue)] font-bold' : '' }}">
                                             {{ $t->name }} - {{ $t->bn_name }}
                                         </div>
                                     @endforeach
@@ -386,21 +386,21 @@ new class extends Component {
                 </div>
 
                 <div class="mb-4.5">
-                    <label class="block text-xl font-semibold text-gray-800 mb-1.5">সম্পূর্ণ ঠিকানা / Full Address *</label>
-                    <textarea wire:model.blur="address" class="form-input resize-none text-xl" rows="3" placeholder="বাসা/ফ্ল্যাট নম্বর, রোড নম্বর, এলাকা লিখুন..." required></textarea>
+                    <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">সম্পূর্ণ ঠিকানা / Full Address *</label>
+                    <textarea wire:model.blur="address" class="form-input resize-none text-lg md:text-xl" rows="3" placeholder="বাসা/ফ্ল্যাট নম্বর, রোড নম্বর, এলাকা লিখুন..." required></textarea>
                     @error('address') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4.5 mb-4.5">
                     <div>
-                        <label class="block text-xl font-semibold text-gray-800 mb-1.5">Alternative Phone (Optional)</label>
-                        <input type="tel" wire:model.blur="altPhone" class="form-input text-xl" placeholder="01XXXXXXXXX">
+                        <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">Alternative Phone (Optional)</label>
+                        <input type="tel" wire:model.blur="altPhone" class="form-input text-lg md:text-xl" placeholder="01XXXXXXXXX">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xl font-semibold text-gray-800 mb-1.5">Order Note (Optional)</label>
-                    <textarea wire:model="note" class="form-input resize-none text-xl" rows="2" placeholder="ডেলিভারির বিষয়ে বিশেষ কোনো তথ্য..."></textarea>
+                    <label class="block text-lg md:text-xl font-semibold text-gray-800 mb-1.5">Order Note (Optional)</label>
+                    <textarea wire:model="note" class="form-input resize-none text-lg md:text-xl" rows="2" placeholder="ডেলিভারির বিষয়ে বিশেষ কোনো তথ্য..."></textarea>
                 </div>
             </div>
 
