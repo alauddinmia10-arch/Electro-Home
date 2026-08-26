@@ -31,10 +31,10 @@
 
     <div class="relative group">
         {{-- Left Arrow --}}
-        <div class="absolute -left-3 md:-left-4 xl:-left-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showLeft">
+        <div class="absolute -left-5 md:-left-4 xl:-left-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showLeft">
             <button @click="scrollLeft" 
                     style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                    class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                    class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
                 <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
             </button>
         </div>
@@ -49,10 +49,10 @@
         </div>
 
         {{-- Right Arrow --}}
-        <div class="absolute -right-3 md:-right-4 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
+        <div class="absolute -right-5 md:-right-4 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
             <button @click="scrollRight" 
                     style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                    class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                    class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
                 <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
             </button>
         </div>

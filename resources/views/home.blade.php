@@ -241,20 +241,21 @@
             <h2 class="text-xl font-bold text-gray-900">Top Brands</h2>
         </div>
         
-        <div class="relative overflow-hidden"
+        <div class="relative"
              @touchstart="touchStartX = $event.touches[0].clientX"
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
             {{-- Prev Button --}}
-            <div class="absolute -left-3 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-4 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
             {{-- Slider Container --}}
-            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+            <div class="overflow-hidden">
+                <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($brands->chunk(9) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-3 gap-3 px-1 pb-1">
@@ -272,12 +273,13 @@
                     </div>
                 @endforeach
             </div>
+            </div>
 
             {{-- Next Button --}}
-            <div class="absolute -right-3 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-4 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
@@ -325,12 +327,13 @@
                     </div>
                 @endforeach
             </div>
+            </div>
 
             {{-- Next Button --}}
-            <div class="absolute -right-4 md:-right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-5 md:-right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
@@ -362,21 +365,22 @@
             <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] text-sm font-semibold">View All</a>
         </div>
         
-        <div class="relative overflow-hidden"
+        <div class="relative mx-4"
              @touchstart="touchStartX = $event.touches[0].clientX"
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
              
             {{-- Prev Button --}}
-            <div class="absolute -left-3 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
             {{-- Slider Container --}}
-            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+            <div class="overflow-hidden">
+                <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($categories->chunk(9) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-3 gap-3 px-1 pb-1">
@@ -391,12 +395,13 @@
                     </div>
                 @endforeach
             </div>
+            </div>
 
             {{-- Next Button --}}
-            <div class="absolute -right-3 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
@@ -416,19 +421,20 @@
             <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] hover:underline text-sm font-semibold">View All</a>
         </div>
         
-        <div class="relative overflow-hidden">
+        <div class="relative">
              
             {{-- Prev Button --}}
-            <div class="absolute -left-4 md:-left-8 xl:-left-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-5 md:-left-8 xl:-left-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
             {{-- Slider Container --}}
-            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+            <div class="overflow-hidden">
+                <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($categories->chunk(18) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-9 gap-4 px-1 pb-1">
@@ -443,12 +449,13 @@
                     </div>
                 @endforeach
             </div>
+            </div>
 
             {{-- Next Button --}}
-            <div class="absolute -right-4 md:-right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-5 md:-right-8 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
+                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
