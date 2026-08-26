@@ -75,7 +75,7 @@ unset($__split);
 ?>
 
     
-    <a href="<?php echo e(route('product.show', $product->slug)); ?>" class="product-image block <?php echo e($view === 'list' ? 'w-24 h-24 md:w-48 md:h-48 shrink-0' : 'aspect-square'); ?> bg-white relative">
+    <a href="<?php echo e(route('product.show', $product->slug)); ?>" class="product-image block <?php echo e($view === 'list' ? 'w-28 h-28 md:w-48 md:h-48 shrink-0' : 'aspect-square'); ?> bg-white relative">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($product->cover_image_url): ?>
             <img src="<?php echo e($product->cover_image_url); ?>" alt="<?php echo e($product->name); ?>" loading="lazy" class="w-full h-full object-contain">
         <?php else: ?>

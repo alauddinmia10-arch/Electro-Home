@@ -22,7 +22,7 @@
     <livewire:wishlist-button :product-id="$product->id" wire:key="wishlist-btn-{{ $product->id }}" />
 
     {{-- Image --}}
-    <a href="{{ route('product.show', $product->slug) }}" class="product-image block {{ $view === 'list' ? 'w-24 h-24 md:w-48 md:h-48 shrink-0' : 'aspect-square' }} bg-white relative">
+    <a href="{{ route('product.show', $product->slug) }}" class="product-image block {{ $view === 'list' ? 'w-28 h-28 md:w-48 md:h-48 shrink-0' : 'aspect-square' }} bg-white relative">
         @if($product->cover_image_url)
             <img src="{{ $product->cover_image_url }}" alt="{{ $product->name }}" loading="lazy" class="w-full h-full object-contain">
         @else
