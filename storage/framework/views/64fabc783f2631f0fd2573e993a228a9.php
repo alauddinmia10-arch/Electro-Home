@@ -10,12 +10,31 @@
 <?php $component->withAttributes([]); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
-    <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] py-8">
+    <div x-data="{ showMobileFilters: false }" class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] py-8">
         <div class="flex flex-col md:flex-row gap-8">
             
-            <aside class="w-full md:w-64 shrink-0">
-                <form action="<?php echo e(route('shop')); ?>" method="GET" id="filter-form" class="space-y-6 bg-white p-5 rounded border border-gray-100 shadow-sm">
+            <div x-show="showMobileFilters" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 @click="showMobileFilters = false"
+                 class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" style="display: none;"></div>
+
+            
+            <aside class="w-72 max-w-[85vw] shrink-0 fixed inset-y-0 left-0 z-50 bg-white md:bg-transparent md:static md:w-64 md:translate-x-0 transform transition-transform duration-300 overflow-y-auto md:overflow-visible h-full md:h-auto"
+                   :class="showMobileFilters ? 'translate-x-0 shadow-2xl' : '-translate-x-full'">
+                <div class="flex items-center justify-between p-4 md:hidden border-b border-gray-100 sticky top-0 bg-white z-10">
                     <h2 class="text-lg font-bold text-gray-800">Filters</h2>
+                    <button type="button" @click="showMobileFilters = false" class="text-gray-500 hover:text-gray-800 bg-gray-100 rounded-full p-1.5">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+                <form action="<?php echo e(route('shop')); ?>" method="GET" id="filter-form" class="space-y-6 bg-white p-5 md:rounded md:border border-gray-100 shadow-sm">
+                    <h2 class="text-lg font-bold text-gray-800 hidden md:block">Filters</h2>
 
                     
                     <div>
@@ -212,8 +231,15 @@
 
                 
                 <div class="flex items-center justify-between bg-white p-3 rounded border border-gray-100 shadow-sm mb-6">
-                    
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-3">
+                        
+                        <button type="button" @click="showMobileFilters = true" class="md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded text-sm font-medium text-gray-700 hover:bg-gray-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                            Filter
+                        </button>
+
+                        
+                        <div class="flex items-center gap-2">
                         <span class="text-[13px] text-gray-600 font-medium hidden sm:inline-block">View:</span>
                         <div class="flex items-center border border-gray-200 rounded overflow-hidden bg-gray-50">
                             <a href="<?php echo e(request()->fullUrlWithQuery(['view' => 'grid'])); ?>" class="p-2 <?php echo e(request('view', 'grid') === 'grid' ? 'bg-[#0b5c9a] text-white' : 'text-gray-500 hover:bg-gray-100'); ?>" title="Grid View">
@@ -223,6 +249,7 @@
                                 <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                             </a>
                         </div>
+                    </div>
                     </div>
                     
                     

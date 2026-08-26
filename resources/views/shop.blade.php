@@ -238,6 +238,7 @@
                             </a>
                         </div>
                     </div>
+                    </div>
                     
                     {{-- Columns Toggle --}}
                     @if(request('view', 'grid') !== 'list')
