@@ -10,7 +10,7 @@
 <?php $component->withAttributes([]); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
-    <div x-data="{ showMobileFilters: false }" class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] py-4 md:py-8">
+    <div x-data="{ showMobileFilters: false }" class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] pt-2 pb-4 md:py-8">
         <div class="flex flex-col md:flex-row gap-8">
             
             <div x-show="showMobileFilters" 
@@ -247,8 +247,8 @@
                                 }
                             ?>
                             <select name="sort_order" onchange="document.getElementById('sort-form').submit()" class="text-[12px] md:text-sm bg-white border border-gray-200 rounded px-1.5 py-2 md:px-3 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">
-                                <option value="asc" <?php echo e(request('sort_order') === 'asc' ? 'selected' : ''); ?>><?php echo e($ascLabel); ?></option>
-                                <option value="desc" <?php echo e(request('sort_order') === 'desc' ? 'selected' : ''); ?>><?php echo e($descLabel); ?></option>
+                                <option value="desc" <?php echo e(request('sort_order', 'desc') === 'desc' ? 'selected' : ''); ?>><?php echo e($descLabel); ?></option>
+                                <option value="asc" <?php echo e(request('sort_order', 'desc') === 'asc' ? 'selected' : ''); ?>><?php echo e($ascLabel); ?></option>
                             </select>
                         </form>
 
