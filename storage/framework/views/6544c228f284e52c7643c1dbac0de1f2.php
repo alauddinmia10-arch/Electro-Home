@@ -184,6 +184,7 @@ unset($__split);
             </div>
 
             
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(!request()->routeIs(['cart', 'wishlist', 'dashboard', 'profile.*', 'checkout*'])): ?>
             <div class="md:hidden w-full">
                 <?php
 $__split = function ($name, $params = []) {
@@ -212,6 +213,7 @@ unset($__componentSlots);
 unset($__split);
 ?>
             </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
 
         

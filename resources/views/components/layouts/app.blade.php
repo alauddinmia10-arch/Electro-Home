@@ -110,9 +110,11 @@
             </div>
 
             {{-- Search Bar (Mobile) --}}
+            @if(!request()->routeIs(['cart', 'wishlist', 'dashboard', 'profile.*', 'checkout*']))
             <div class="md:hidden w-full">
                 @livewire('live-search')
             </div>
+            @endif
         </div>
 
         {{-- Category Navigation (Desktop) --}}
