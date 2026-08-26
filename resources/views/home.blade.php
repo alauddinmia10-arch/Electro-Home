@@ -365,7 +365,7 @@
             <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] text-sm font-semibold">View All</a>
         </div>
         
-        <div class="relative mx-4"
+        <div class="relative"
              @touchstart="touchStartX = $event.touches[0].clientX"
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
              
