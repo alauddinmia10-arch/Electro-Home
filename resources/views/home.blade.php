@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="flex flex-col gap-2 md:gap-4 pt-2 md:pt-4 pb-8">
+    <div class="flex flex-col gap-6 md:gap-8 pt-2 md:pt-4 pb-12 md:pb-20">
     {{-- Hero Banners --}}
     <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-[420px]">
@@ -326,7 +326,6 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
             </div>
 
             {{-- Next Button --}}
