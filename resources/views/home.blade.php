@@ -7,33 +7,33 @@
             <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm aspect-video md:aspect-auto md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
                 <div x-show="activeSlide === 0" x-transition.opacity.duration.500ms class="absolute inset-0">
                     <img src="{{ asset('images/sliders/slide1.png') }}" alt="Hybrid Solar Inverter" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-8 text-center">
-                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla drop-shadow-lg">আপনার স্বপ্নের প্রজেক্ট<br>শুরু করুন আজই!</h1>
-                        <p class="text-lg opacity-90 mb-6 drop-shadow-md">Electrohome.bd-এ পাচ্ছেন সেরা মানের সোলার ও ইনভার্টার সলিউশন</p>
-                        <a href="{{ route('shop') }}" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:scale-105 transition-all">Shop Now</a>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-4 md:p-8 text-center">
+                        <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">আপনার স্বপ্নের প্রজেক্ট<br>শুরু করুন আজই!</h1>
+                        <p class="text-xs md:text-lg opacity-90 mb-3 md:mb-6 drop-shadow-md">Electrohome.bd-এ পাচ্ছেন সেরা মানের সোলার ও ইনভার্টার সলিউশন</p>
+                        <a href="{{ route('shop') }}" class="bg-blue-600 text-white px-5 py-2 text-sm md:text-base md:px-8 md:py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:scale-105 transition-all">Shop Now</a>
                     </div>
                 </div>
 
                 <div x-show="activeSlide === 1" x-transition.opacity.duration.500ms class="absolute inset-0">
                     <img src="{{ asset('images/sliders/slide2.png') }}" alt="Lithium Phosphate Battery" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-8 text-center">
-                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla drop-shadow-lg">দীর্ঘস্থায়ী পাওয়ার সলিউশন</h1>
-                        <p class="text-lg opacity-90 mb-6 drop-shadow-md">সেরা মানের Lithium-ion Phosphate (LiFePO4) ব্যাটারি</p>
-                        <a href="{{ route('shop') }}" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-emerald-700 hover:scale-105 transition-all">Explore Batteries</a>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-4 md:p-8 text-center">
+                        <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">দীর্ঘস্থায়ী পাওয়ার সলিউশন</h1>
+                        <p class="text-xs md:text-lg opacity-90 mb-3 md:mb-6 drop-shadow-md">সেরা মানের Lithium-ion Phosphate (LiFePO4) ব্যাটারি</p>
+                        <a href="{{ route('shop') }}" class="bg-emerald-600 text-white px-5 py-2 text-sm md:text-base md:px-8 md:py-3 rounded-full font-bold shadow-lg hover:bg-emerald-700 hover:scale-105 transition-all">Explore Batteries</a>
                     </div>
                 </div>
 
                 <div x-show="activeSlide === 2" x-transition.opacity.duration.500ms class="absolute inset-0">
                     <img src="{{ asset('images/sliders/slide3.png') }}" alt="Electronic Components" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-8 text-center">
-                        <h1 class="text-3xl md:text-5xl font-bold mb-4 font-bangla drop-shadow-lg">প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট</h1>
-                        <p class="text-lg opacity-90 mb-6 drop-shadow-md">সার্কিট, সেন্সর, আরডুইনো এবং রোবোটিক্স এক্সেসরিজ</p>
-                        <a href="{{ route('shop') }}" class="bg-[var(--color-trust-blue)] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-500 hover:scale-105 transition-all">View Components</a>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col items-center justify-center text-white p-4 md:p-8 text-center">
+                        <h1 class="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-bangla drop-shadow-lg">প্রিমিয়াম ইলেকট্রনিক্স কম্পোনেন্ট</h1>
+                        <p class="text-xs md:text-lg opacity-90 mb-3 md:mb-6 drop-shadow-md">সার্কিট, সেন্সর, আরডুইনো এবং রোবোটিক্স এক্সেসরিজ</p>
+                        <a href="{{ route('shop') }}" class="bg-[var(--color-trust-blue)] text-white px-5 py-2 text-sm md:text-base md:px-8 md:py-3 rounded-full font-bold shadow-lg hover:bg-blue-500 hover:scale-105 transition-all">View Components</a>
                     </div>
                 </div>
 
                 {{-- Indicators --}}
-                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+                <div class="absolute bottom-1 md:bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
                     <template x-for="slide in slides" :key="slide">
                         <button @click="activeSlide = slide" class="w-2.5 h-2.5 rounded-full transition-all" :class="activeSlide === slide ? 'bg-white w-6' : 'bg-white/50'"></button>
                     </template>
