@@ -17,8 +17,8 @@ class SettingsSeeder extends Seeder
             'outside_dhaka_delivery_charge' => '130',
 
             // Contact info
-            'whatsapp_number' => '+8801XXXXXXXXX',
-            'support_phone' => '+8801XXXXXXXXX',
+            'whatsapp_number' => '+8801880223099',
+            'support_phone' => '+8801880223099',
             'support_email' => 'support@electrohome.bd',
 
             // Site settings

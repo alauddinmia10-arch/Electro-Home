@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 
 // ──── Public Routes ────
 
+Route::get('/fix-settings', function () {
+    \App\Models\Setting::where('value', '+8801XXXXXXXXX')->delete();
+    return 'Settings fixed! Please check the live site footer now.';
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
