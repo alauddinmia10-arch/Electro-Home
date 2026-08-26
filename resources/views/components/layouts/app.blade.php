@@ -31,7 +31,7 @@
 
     {{-- Top Bar --}}
     <div class="bg-[var(--color-text-primary)] text-white text-[13px] py-1.5 hidden md:block print:hidden">
-        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] flex items-center justify-between">
+        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1">
                     <svg class="w-3.5 h-3.5 shrink-0" style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -50,7 +50,7 @@
 
     {{-- Main Header --}}
     <header class="bg-white border-b border-gray-100 relative z-50 print:hidden" x-data="{ mobileMenu: false }">
-        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
             <div class="flex items-center justify-between h-14 md:h-16">
 
                 {{-- Mobile Menu Toggle (Left on mobile) --}}
@@ -119,7 +119,7 @@
 
         {{-- Category Navigation (Desktop) --}}
         <nav class="hidden md:block border-t border-[#0b5c9a]/20 bg-[#0b5c9a]/15 backdrop-blur-md sticky top-0 z-40">
-            <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+            <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
                 <div class="flex items-stretch gap-6 h-9 text-sm">
                     <div x-data="{ open: false, activeCat: null, activeSubcat: null, flyoutTop: 0 }" @mouseenter="open = true" @mouseleave="open = false; activeCat = null; activeSubcat = null" class="relative h-full flex items-stretch">
                         <button class="h-full flex items-center gap-2.5 transition-all text-gray-800 font-bold text-sm md:text-base pr-4">
@@ -281,7 +281,7 @@
 
     {{-- Flash Messages --}}
     @if(session('success'))
-        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] mt-4">
+        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-4">
             <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ✅ {{ session('success') }}
             </div>
@@ -289,7 +289,7 @@
     @endif
 
     @if(session('error'))
-        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] mt-4">
+        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-4">
             <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm flex items-center gap-2">
                 ❌ {{ session('error') }}
             </div>
@@ -305,7 +305,7 @@
     <footer class="bg-[#eff5f2] border-t border-[#e0ebe5] text-gray-800 mt-auto print:hidden">
         {{-- Feature Highlights --}}
         <div class="hidden md:block bg-[#eff5f2] pt-1.5 md:pt-2.5">
-            <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+            <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
                 <div class="flex flex-col lg:flex-row justify-between gap-4 md:gap-6 pb-1.5 md:pb-2.5 border-b border-gray-300">
                     {{-- Feature 1 --}}
                     <div class="flex items-center gap-4 group cursor-default bg-transparent hover:bg-white p-2 lg:p-3 rounded-xl transition-all duration-300 border border-transparent hover:border-[#e0ebe5] hover:shadow-sm">
@@ -354,7 +354,7 @@
             </div>
         </div>
 
-        <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] pt-6 md:pt-8 pb-16 md:pb-12">
+        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] pt-6 md:pt-8 pb-16 md:pb-12">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-8 xl:gap-12">
                 {{-- Brand --}}
                 <div class="col-span-2 lg:col-span-1 order-1 lg:order-1">

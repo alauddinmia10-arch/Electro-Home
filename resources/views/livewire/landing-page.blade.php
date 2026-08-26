@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px] pb-20 pt-0 md:pt-8">
+    <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] pb-20 pt-0 md:pt-8">
         <form id="checkout-form" wire:submit.prevent="placeOrder" class="grid grid-cols-1 lg:grid-cols-12 gap-4 bg-white p-0">
             
             {{-- Column 1: Product Image (4 cols) --}}

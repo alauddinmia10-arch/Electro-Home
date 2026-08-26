@@ -1,7 +1,7 @@
 <x-layouts.app>
     <div class="flex flex-col gap-2 md:gap-4 pt-2 md:pt-4 pb-8">
     {{-- Hero Banners --}}
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-[420px]">
             {{-- Main Slider --}}
             <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm aspect-video md:aspect-auto md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
@@ -101,7 +101,7 @@
 
     {{-- Flash Sale --}}
     @if($flashSaleProducts->count() > 0)
-    <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="md:bg-white md:rounded-lg md:p-3 md:shadow-sm md:border md:border-red-100 relative overflow-hidden"
              x-data="{
                  showLeft: false,
@@ -167,7 +167,7 @@
 
     {{-- Top Selling --}}
     @if($bestSellers->count() > 0)
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <x-product-slider 
             title="Top Selling" 
             icon="🏆" 
@@ -179,7 +179,7 @@
 
     {{-- New Arrivals --}}
     @if($newArrivals->count() > 0)
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <x-product-slider 
             title="New Arrivals" 
             icon="🆕" 
@@ -191,7 +191,7 @@
 
     {{-- Trending Now --}}
     @if($featuredProducts->count() > 0)
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <x-product-slider 
             title="Trending Now" 
             icon="📈" 
@@ -214,7 +214,7 @@
         }
     </style>
     {{-- Top Brands (Mobile View) --}}
-    <section class="max-w-[1600px] w-full mx-auto px-4 block md:hidden"
+    <section class="max-w-[1600px] w-full mx-auto px-3 block md:hidden"
              x-data="{
                 activeSlide: 0,
                 totalSlides: {{ ceil($brands->count() / 9) }},
@@ -279,7 +279,7 @@
     </section>
 
     {{-- Top Brands (Desktop View) --}}
-    <section class="max-w-[1600px] w-full mx-auto px-4 xl:px-[70px] hidden md:block"
+    <section class="max-w-[1600px] w-full mx-auto px-3 xl:px-[70px] hidden md:block"
              x-data="{
                 activeSlide: 0,
                 totalSlides: {{ ceil($brands->count() / 12) }},
@@ -334,7 +334,7 @@
 
     {{-- Browse Categories --}}
     {{-- Browse Categories (Mobile View) --}}
-    <section class="max-w-[1600px] w-full mx-auto px-4 block md:hidden"
+    <section class="max-w-[1600px] w-full mx-auto px-3 block md:hidden"
              x-data="{
                 activeSlide: 0,
                 totalSlides: {{ ceil($categories->count() / 9) }},
@@ -398,7 +398,7 @@
     </section>
 
     {{-- Browse Categories (Desktop View) --}}
-    <section class="max-w-[1600px] w-full mx-auto px-4 xl:px-[70px] hidden md:block"
+    <section class="max-w-[1600px] w-full mx-auto px-3 xl:px-[70px] hidden md:block"
              x-data="{
                 activeSlide: 0,
                 totalSlides: {{ ceil($categories->count() / 18) }},

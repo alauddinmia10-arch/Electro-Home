@@ -103,7 +103,7 @@ new class extends Component {
 };
 ?>
 <div class="bg-gray-100 py-2 md:py-6">
-    <div class="max-w-[1600px] w-full mx-auto px-2 md:px-2 md:px-4 xl:px-[70px]">
+    <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 font-bangla mb-1 md:mb-6">আপনার শপিং কার্ট</h1>
         <h2 class="w-fit mx-auto bg-white rounded-md shadow-sm border border-gray-200 py-1.5 px-5 text-center text-xl font-bold text-gray-800 mb-2 lg:hidden">Order Summary</h2>
 

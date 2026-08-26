@@ -12,7 +12,7 @@
 
     <div class="flex flex-col gap-2 md:gap-4 pt-2 md:pt-4 pb-8">
     
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-[420px]">
             
             <div class="md:col-span-3 rounded-lg overflow-hidden relative shadow-sm aspect-video md:aspect-auto md:h-full bg-gray-900 group" x-data="{ activeSlide: 0, slides: [0, 1, 2] }" x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 5000)">
@@ -112,7 +112,7 @@
 
     
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($flashSaleProducts->count() > 0): ?>
-    <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="md:bg-white md:rounded-lg md:p-3 md:shadow-sm md:border md:border-red-100 relative overflow-hidden"
              x-data="{
                  showLeft: false,
@@ -203,7 +203,7 @@ unset($__split);
 
     
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($bestSellers->count() > 0): ?>
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <?php if (isset($component)) { $__componentOriginale278e6a1b1486d2da6f18ddfbe891b79 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale278e6a1b1486d2da6f18ddfbe891b79 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.product-slider','data' => ['title' => 'Top Selling','icon' => '🏆','products' => $bestSellers,'viewAllUrl' => ''.e(route('shop', ['sort' => 'popular'])).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -231,7 +231,7 @@ unset($__split);
 
     
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($newArrivals->count() > 0): ?>
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <?php if (isset($component)) { $__componentOriginale278e6a1b1486d2da6f18ddfbe891b79 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale278e6a1b1486d2da6f18ddfbe891b79 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.product-slider','data' => ['title' => 'New Arrivals','icon' => '🆕','products' => $newArrivals,'viewAllUrl' => ''.e(route('shop')).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -259,7 +259,7 @@ unset($__split);
 
     
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($featuredProducts->count() > 0): ?>
-    <section class="max-w-[1600px] w-full mx-auto px-4 md:px-6 xl:px-[70px]">
+    <section class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <?php if (isset($component)) { $__componentOriginale278e6a1b1486d2da6f18ddfbe891b79 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale278e6a1b1486d2da6f18ddfbe891b79 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.product-slider','data' => ['title' => 'Trending Now','icon' => '📈','products' => $featuredProducts,'viewAllUrl' => ''.e(route('shop', ['featured' => 1])).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -298,7 +298,7 @@ unset($__split);
         }
     </style>
     
-    <section class="max-w-[1600px] w-full mx-auto px-4 block md:hidden"
+    <section class="max-w-[1600px] w-full mx-auto px-3 block md:hidden"
              x-data="{
                 activeSlide: 0,
                 totalSlides: <?php echo e(ceil($brands->count() / 9)); ?>,
@@ -363,7 +363,7 @@ unset($__split);
     </section>
 
     
-    <section class="max-w-[1600px] w-full mx-auto px-4 xl:px-[70px] hidden md:block"
+    <section class="max-w-[1600px] w-full mx-auto px-3 xl:px-[70px] hidden md:block"
              x-data="{
                 activeSlide: 0,
                 totalSlides: <?php echo e(ceil($brands->count() / 12)); ?>,
@@ -418,7 +418,7 @@ unset($__split);
 
     
     
-    <section class="max-w-[1600px] w-full mx-auto px-4 block md:hidden"
+    <section class="max-w-[1600px] w-full mx-auto px-3 block md:hidden"
              x-data="{
                 activeSlide: 0,
                 totalSlides: <?php echo e(ceil($categories->count() / 9)); ?>,
@@ -482,7 +482,7 @@ unset($__split);
     </section>
 
     
-    <section class="max-w-[1600px] w-full mx-auto px-4 xl:px-[70px] hidden md:block"
+    <section class="max-w-[1600px] w-full mx-auto px-3 xl:px-[70px] hidden md:block"
              x-data="{
                 activeSlide: 0,
                 totalSlides: <?php echo e(ceil($categories->count() / 18)); ?>,

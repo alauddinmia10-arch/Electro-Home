@@ -17,7 +17,7 @@ new #[Layout('components.layouts.app')] #[Title('My Dashboard - Electrohome.bd')
 } ?>
 
 <div class="bg-gray-50 py-10 min-h-[calc(100vh-200px)]">
-    <div class="max-w-[1600px] w-full mx-auto px-2 md:px-4 xl:px-[70px]">
+    <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="flex flex-col md:flex-row gap-6">
             
             {{-- Sidebar --}}
