@@ -24,7 +24,7 @@
                  class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" style="display: none;"></div>
 
             
-            <aside class="w-72 max-w-[85vw] shrink-0 fixed inset-y-0 left-0 z-50 bg-white md:bg-transparent md:static md:w-64 md:translate-x-0 transform transition-transform duration-300 overflow-y-auto md:overflow-visible h-full md:h-auto"
+            <aside class="w-72 max-w-[85vw] shrink-0 fixed inset-y-0 left-0 z-50 bg-white md:bg-transparent md:static md:w-64 -translate-x-full md:translate-x-0 transform transition-transform duration-300 overflow-y-auto md:overflow-visible h-full md:h-auto"
                    :class="showMobileFilters ? 'translate-x-0 shadow-2xl' : '-translate-x-full'">
                 <div class="flex items-center justify-between p-4 md:hidden border-b border-gray-100 sticky top-0 bg-white z-10">
                     <h2 class="text-lg font-bold text-gray-800">Filters</h2>
