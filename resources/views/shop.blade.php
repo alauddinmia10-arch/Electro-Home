@@ -152,12 +152,20 @@
                     {{-- Availability --}}
                     <div>
                         <label class="block text-sm text-gray-700 mb-2 font-medium">Availability</label>
-                        <select name="availability" class="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:border-[#0b5c9a] bg-white">
-                            <option value="">All</option>
-                            <option value="in_stock" {{ request('availability') == 'in_stock' ? 'selected' : '' }}>In Stock</option>
-                            <option value="pre_order" {{ request('availability') == 'pre_order' ? 'selected' : '' }}>Pre-order</option>
-                            <option value="upcoming" {{ request('availability') == 'upcoming' ? 'selected' : '' }}>Upcoming</option>
-                        </select>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="availability[]" value="in_stock" {{ in_array('in_stock', request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                <span class="text-sm text-gray-600">In Stock</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="availability[]" value="pre_order" {{ in_array('pre_order', request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                <span class="text-sm text-gray-600">Pre-order</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="availability[]" value="upcoming" {{ in_array('upcoming', request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                <span class="text-sm text-gray-600">Upcoming</span>
+                            </label>
+                        </div>
                     </div>
 
                     <div>
@@ -209,7 +217,13 @@
                         {{-- Sort Dropdowns --}}
                         <form id="sort-form" class="flex items-center gap-1.5 md:gap-2">
                             @foreach(request()->except(['sort_by', 'sort_order', 'page']) as $key => $value)
-                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @if(is_array($value))
+                                    @foreach($value as $v)
+                                        <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
+                                    @endforeach
+                                @else
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endif
                             @endforeach
                             
                             <select name="sort_by" onchange="document.getElementById('sort-form').submit()" class="text-[12px] md:text-sm bg-white border border-gray-200 rounded px-1.5 py-2 md:px-3 focus:outline-none focus:border-[#0b5c9a] text-gray-700 shadow-sm cursor-pointer hover:border-gray-300">

@@ -52,13 +52,20 @@ class ShopController extends Controller
         }
 
         // Availability filter
-        if ($request->filled('availability')) {
-            $availability = $request->availability;
-            if ($availability === 'in_stock') {
-                $query->inStock();
-            } else {
-                $query->where('status', $availability);
-            }
+        if ($request->has('availability') && is_array($request->availability)) {
+            $availabilities = $request->availability;
+            
+            $query->where(function ($q) use ($availabilities) {
+                foreach ($availabilities as $availability) {
+                    if ($availability === 'in_stock') {
+                        $q->orWhere(function ($subQ) {
+                            $subQ->where('status', 'in_stock')->where('stock_quantity', '>', 0);
+                        });
+                    } else {
+                        $q->orWhere('status', $availability);
+                    }
+                }
+            });
         }
 
         // Flash sale filter
