@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Route;
 // ──── Public Routes ────
 
 Route::get('/fix-settings', function () {
-    \App\Models\Setting::where('value', '+8801XXXXXXXXX')->delete();
-    return 'Settings fixed! Please check the live site footer now.';
+    \App\Models\Setting::updateOrCreate(['key' => 'support_phone'], ['value' => '+8801880223099']);
+    \App\Models\Setting::updateOrCreate(['key' => 'whatsapp_number'], ['value' => '8801880223099']);
+    return 'Settings fixed! Please check the live site footer and WhatsApp links now.';
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
