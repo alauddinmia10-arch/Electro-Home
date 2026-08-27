@@ -77,7 +77,7 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(5),
             ])
             ->assets([
-                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=83')),
+                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin.css?v=84')),
             ])
             ->middleware([
                 EncryptCookies::class,
