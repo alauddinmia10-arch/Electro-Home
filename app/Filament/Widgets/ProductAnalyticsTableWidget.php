@@ -55,9 +55,9 @@ class ProductAnalyticsTableWidget extends BaseWidget
                     ])
             )
             ->columns([
-                \Awcodes\Curator\Components\Tables\CuratorColumn::make('coverMedia')
+                Tables\Columns\ImageColumn::make('cover_image_url')
                     ->label('Image')
-                    ->size(40),
+                    ->square(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Product Name')
                     ->searchable()
