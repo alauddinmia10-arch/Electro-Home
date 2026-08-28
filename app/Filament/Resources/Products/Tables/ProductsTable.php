@@ -33,7 +33,8 @@ class ProductsTable
                 TextColumn::make('stock_quantity')
                     ->numeric()
                     ->sortable(),
-                ImageColumn::make('cover_image')->disk('public'),
+                \Awcodes\Curator\Components\Tables\CuratorColumn::make('coverMedia')
+                    ->size(40),
                 TextColumn::make('status')
                     ->searchable(),
                 IconColumn::make('is_featured')
