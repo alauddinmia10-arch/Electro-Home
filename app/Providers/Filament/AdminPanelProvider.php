@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->brandLogo('/images/logo-header.webp')
+            ->brandLogo(asset('images/logo-header.webp'))
             ->brandLogoHeight('2.5rem')
             ->maxContentWidth(\Filament\Support\Enums\Width::SevenExtraLarge)
             ->login()
@@ -77,7 +77,7 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(5),
             ])
             ->assets([
-                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', '/css/custom-admin-v2.css'),
+                \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin-v2.css')),
             ])
             ->middleware([
                 EncryptCookies::class,
