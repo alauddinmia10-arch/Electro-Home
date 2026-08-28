@@ -168,48 +168,66 @@ Route::get('/debug-error', function() {
     return 'No log';
 });
 Route::get('/import-local-db', function () {
-    $path = base_path('database/export.json');
-    if (!file_exists($path)) {
-        return 'export.json not found.';
-    }
-    
-    $data = json_decode(file_get_contents($path), true);
-    
-    // Clear existing tables in reverse order
-    $modelsToSync = array_keys($data);
-    foreach (array_reverse($modelsToSync) as $modelClass) {
-        \Illuminate\Support\Facades\DB::table((new $modelClass)->getTable())->delete();
-    }
-    
-    // Insert new data
-    $count = 0;
-    foreach ($modelsToSync as $modelClass) {
-        $records = $data[$modelClass];
-        $tableName = (new $modelClass)->getTable();
+    try {
+        $path = base_path('database/export.json');
+        if (!file_exists($path)) {
+            return 'export.json not found.';
+        }
         
-        $batch = [];
-        foreach ($records as $record) {
-            // Fix booleans for postgres
-            $instance = new $modelClass;
-            foreach ($instance->getCasts() as $key => $type) {
-                if (str_contains($type, 'boolean') || str_contains($type, 'bool')) {
-                    if (array_key_exists($key, $record)) {
-                        $record[$key] = $record[$key] ? true : false;
+        $data = json_decode(file_get_contents($path), true);
+        
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return 'JSON Error: ' . json_last_error_msg();
+        }
+
+        // Clear existing tables in reverse order
+        $modelsToSync = array_keys($data);
+        foreach (array_reverse($modelsToSync) as $modelClass) {
+            \Illuminate\Support\Facades\DB::table((new $modelClass)->getTable())->delete();
+        }
+        
+        // Insert new data
+        $count = 0;
+        foreach ($modelsToSync as $modelClass) {
+            $records = $data[$modelClass];
+            $tableName = (new $modelClass)->getTable();
+            
+            $batch = [];
+            foreach ($records as $record) {
+                // Fix booleans for postgres
+                $instance = new $modelClass;
+                foreach ($instance->getCasts() as $key => $type) {
+                    if (str_contains($type, 'boolean') || str_contains($type, 'bool')) {
+                        if (array_key_exists($key, $record)) {
+                            $record[$key] = $record[$key] ? true : false;
+                        }
                     }
                 }
+                $batch[] = $record;
+                $count++;
             }
-            $batch[] = $record;
-            $count++;
+            
+            if (count($batch) > 0) {
+                foreach (array_chunk($batch, 100) as $chunk) {
+                    \Illuminate\Support\Facades\DB::table($tableName)->insert($chunk);
+                }
+            }
+            
+            // Fix Postgres Sequence
+            try {
+                $maxId = \Illuminate\Support\Facades\DB::table($tableName)->max('id');
+                if ($maxId) {
+                    \Illuminate\Support\Facades\DB::statement("SELECT setval('{$tableName}_id_seq', {$maxId})");
+                }
+            } catch (\Exception $e) {
+                // Ignore sequence errors
+            }
         }
         
-        if (count($batch) > 0) {
-            foreach (array_chunk($batch, 100) as $chunk) {
-                \Illuminate\Support\Facades\DB::table($tableName)->insert($chunk);
-            }
-        }
+        return 'Successfully imported ' . $count . ' records into PostgreSQL!';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
     }
-    
-    return 'Successfully imported ' . $count . ' records into PostgreSQL!';
 });
 
 Route::get('/run-seed', function () { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]); return 'Seeding complete! You can now login.'; });
