@@ -163,8 +163,7 @@ Route::get('/payment/mock-gateway', [PaymentController::class, 'mockGateway'])->
 Route::get('/debug-error', function() {
     $file = storage_path('logs/laravel.log');
     if(file_exists($file)) {
-        $lines = file($file);
-        return response('<pre>'.htmlspecialchars(implode('', array_slice($lines, -100))).'</pre>');
+        return response()->file($file);
     }
     return 'No log';
 });
