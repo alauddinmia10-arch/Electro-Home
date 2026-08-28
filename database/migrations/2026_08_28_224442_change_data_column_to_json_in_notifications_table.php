@@ -12,9 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->json('data')->change();
-        });
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement('ALTER TABLE notifications ALTER COLUMN data TYPE json USING data::json');
+        } else {
+            Schema::table('notifications', function (Blueprint $table) {
+                $table->json('data')->change();
+            });
+        }
     }
 
     /**
@@ -22,8 +26,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->text('data')->change();
-        });
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement('ALTER TABLE notifications ALTER COLUMN data TYPE text USING data::text');
+        } else {
+            Schema::table('notifications', function (Blueprint $table) {
+                $table->text('data')->change();
+            });
+        }
     }
 };
