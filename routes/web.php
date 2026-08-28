@@ -224,10 +224,17 @@ Route::get('/import-local-db', function () {
             }
         }
         
+        \Illuminate\Support\Facades\Cache::flush();
+        
         return 'Successfully imported ' . $count . ' records into PostgreSQL!';
     } catch (\Exception $e) {
         return 'Error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
     }
+});
+
+Route::get('/clear-cache', function () {
+    \Illuminate\Support\Facades\Cache::flush();
+    return 'Cache cleared successfully!';
 });
 
 Route::get('/run-seed', function () { \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]); return 'Seeding complete! You can now login.'; });
