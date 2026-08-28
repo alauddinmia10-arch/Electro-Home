@@ -12,7 +12,7 @@ class AdminSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@electrohome.bd'],
             [
-                'name' => 'Super Admin',
+                'name' => 'Md Alauddin',
                 'phone' => '01700000000',
                 'password' => bcrypt('password'),
                 'role' => 'admin',

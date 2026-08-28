@@ -90,20 +90,24 @@ class DistrictSeeder extends Seeder
 
         // Seed Dhaka districts (70tk delivery)
         foreach ($dhakaDistricts as $name => $bnName) {
-            District::create([
-                'name' => $name,
-                'bn_name' => $bnName,
-                'delivery_charge' => 70.00,
-            ]);
+            District::firstOrCreate(
+                ['name' => $name],
+                [
+                    'bn_name' => $bnName,
+                    'delivery_charge' => 70.00,
+                ]
+            );
         }
 
         // Seed other districts (130tk delivery)
         foreach ($otherDistricts as $name => $bnName) {
-            District::create([
-                'name' => $name,
-                'bn_name' => $bnName,
-                'delivery_charge' => 130.00,
-            ]);
+            District::firstOrCreate(
+                ['name' => $name],
+                [
+                    'bn_name' => $bnName,
+                    'delivery_charge' => 130.00,
+                ]
+            );
         }
     }
 }
