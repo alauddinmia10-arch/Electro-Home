@@ -226,6 +226,42 @@
                 totalSlides: {{ ceil($brands->count() / 9) }},
                 touchStartX: 0,
                 touchEndX: 0,
+                autoScrollInterval: null,
+                observer: null,
+                init() {
+                    this.$nextTick(() => {
+                        this.setupIntersectionObserver();
+                    });
+                },
+                setupIntersectionObserver() {
+                    this.observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                this.startAutoScroll();
+                            } else {
+                                this.stopAutoScroll();
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    this.observer.observe(this.$el);
+                },
+                startAutoScroll() {
+                    if (!this.autoScrollInterval && this.totalSlides > 1) {
+                        this.autoScrollInterval = setInterval(() => {
+                            if (this.activeSlide < this.totalSlides - 1) {
+                                this.activeSlide++;
+                            } else {
+                                this.activeSlide = 0;
+                            }
+                        }, 3000);
+                    }
+                },
+                stopAutoScroll() {
+                    if (this.autoScrollInterval) {
+                        clearInterval(this.autoScrollInterval);
+                        this.autoScrollInterval = null;
+                    }
+                },
                 next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
                 prev() { if(this.activeSlide > 0) this.activeSlide--; },
                 handleSwipe() {
@@ -236,7 +272,7 @@
                         this.prev();
                     }
                 }
-             }">
+             }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
         <div class="flex items-center justify-between mb-3">
             <h2 class="text-xl font-bold text-gray-900">Top Brands</h2>
         </div>
@@ -291,9 +327,45 @@
              x-data="{
                 activeSlide: 0,
                 totalSlides: {{ ceil($brands->count() / 12) }},
+                autoScrollInterval: null,
+                observer: null,
+                init() {
+                    this.$nextTick(() => {
+                        this.setupIntersectionObserver();
+                    });
+                },
+                setupIntersectionObserver() {
+                    this.observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                this.startAutoScroll();
+                            } else {
+                                this.stopAutoScroll();
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    this.observer.observe(this.$el);
+                },
+                startAutoScroll() {
+                    if (!this.autoScrollInterval && this.totalSlides > 1) {
+                        this.autoScrollInterval = setInterval(() => {
+                            if (this.activeSlide < this.totalSlides - 1) {
+                                this.activeSlide++;
+                            } else {
+                                this.activeSlide = 0;
+                            }
+                        }, 3000);
+                    }
+                },
+                stopAutoScroll() {
+                    if (this.autoScrollInterval) {
+                        clearInterval(this.autoScrollInterval);
+                        this.autoScrollInterval = null;
+                    }
+                },
                 next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
                 prev() { if(this.activeSlide > 0) this.activeSlide--; }
-             }">
+             }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Top Brands</h2>
         </div>
@@ -348,6 +420,42 @@
                 totalSlides: {{ ceil($categories->count() / 9) }},
                 touchStartX: 0,
                 touchEndX: 0,
+                autoScrollInterval: null,
+                observer: null,
+                init() {
+                    this.$nextTick(() => {
+                        this.setupIntersectionObserver();
+                    });
+                },
+                setupIntersectionObserver() {
+                    this.observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                this.startAutoScroll();
+                            } else {
+                                this.stopAutoScroll();
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    this.observer.observe(this.$el);
+                },
+                startAutoScroll() {
+                    if (!this.autoScrollInterval && this.totalSlides > 1) {
+                        this.autoScrollInterval = setInterval(() => {
+                            if (this.activeSlide < this.totalSlides - 1) {
+                                this.activeSlide++;
+                            } else {
+                                this.activeSlide = 0;
+                            }
+                        }, 3000);
+                    }
+                },
+                stopAutoScroll() {
+                    if (this.autoScrollInterval) {
+                        clearInterval(this.autoScrollInterval);
+                        this.autoScrollInterval = null;
+                    }
+                },
                 next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
                 prev() { if(this.activeSlide > 0) this.activeSlide--; },
                 handleSwipe() {
@@ -358,7 +466,7 @@
                         this.prev();
                     }
                 }
-             }">
+             }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
         <div class="flex items-center justify-between mb-3">
             <h2 class="text-xl font-bold text-gray-900">Top Categories</h2>
             <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] text-sm font-semibold">View All</a>
@@ -412,9 +520,45 @@
              x-data="{
                 activeSlide: 0,
                 totalSlides: {{ ceil($categories->count() / 18) }},
+                autoScrollInterval: null,
+                observer: null,
+                init() {
+                    this.$nextTick(() => {
+                        this.setupIntersectionObserver();
+                    });
+                },
+                setupIntersectionObserver() {
+                    this.observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                this.startAutoScroll();
+                            } else {
+                                this.stopAutoScroll();
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    this.observer.observe(this.$el);
+                },
+                startAutoScroll() {
+                    if (!this.autoScrollInterval && this.totalSlides > 1) {
+                        this.autoScrollInterval = setInterval(() => {
+                            if (this.activeSlide < this.totalSlides - 1) {
+                                this.activeSlide++;
+                            } else {
+                                this.activeSlide = 0;
+                            }
+                        }, 3000);
+                    }
+                },
+                stopAutoScroll() {
+                    if (this.autoScrollInterval) {
+                        clearInterval(this.autoScrollInterval);
+                        this.autoScrollInterval = null;
+                    }
+                },
                 next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
                 prev() { if(this.activeSlide > 0) this.activeSlide--; }
-             }">
+             }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Top Categories</h2>
             <a href="{{ route('shop') }}" class="text-[var(--color-trust-blue)] hover:underline text-sm font-semibold">View All</a>

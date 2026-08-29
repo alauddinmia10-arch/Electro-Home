@@ -3,9 +3,43 @@
 <div class="md:bg-white md:rounded-lg md:shadow-sm md:border md:border-gray-100 md:px-3 md:py-2 relative" x-data="{
     showLeft: false,
     showRight: true,
+    autoScrollInterval: null,
+    observer: null,
     init() {
-        this.$nextTick(() => this.checkScroll());
+        this.$nextTick(() => {
+            this.checkScroll();
+            this.setupIntersectionObserver();
+        });
         window.addEventListener('resize', () => this.checkScroll());
+    },
+    setupIntersectionObserver() {
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.startAutoScroll();
+                } else {
+                    this.stopAutoScroll();
+                }
+            });
+        }, { threshold: 0.1 });
+        this.observer.observe(this.$el);
+    },
+    startAutoScroll() {
+        if (!this.autoScrollInterval) {
+            this.autoScrollInterval = setInterval(() => {
+                if (this.showRight) {
+                    this.scrollRight();
+                } else {
+                    this.$refs.slider.scrollTo({ left: 0, behavior: 'smooth' });
+                }
+            }, 3000);
+        }
+    },
+    stopAutoScroll() {
+        if (this.autoScrollInterval) {
+            clearInterval(this.autoScrollInterval);
+            this.autoScrollInterval = null;
+        }
     },
     checkScroll() {
         const slider = this.$refs.slider;
@@ -19,7 +53,7 @@
     scrollRight() {
         this.$refs.slider.scrollBy({ left: 300, behavior: 'smooth' });
     }
-}">
+}" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
             {{ $title }} <span>{{ $icon }}</span>

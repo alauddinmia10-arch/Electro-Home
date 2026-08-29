@@ -24,7 +24,7 @@ class SyncDatabaseCommand extends Command
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
-            'sslmode' => 'prefer',
+            'sslmode' => 'require',
         ]);
 
         $this->info("Connecting to remote PostgreSQL database...");
