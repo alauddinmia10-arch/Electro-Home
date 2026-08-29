@@ -277,16 +277,6 @@ new class extends Component {
             padding: 0 10px;
             gap: 6px;
         }
-        .text-buy-now {
-            font-size: 14px;
-        }
-        .text-add-cart {
-            font-size: 14px;
-        }
-        .premium-icon {
-            width: 18px;
-            height: 18px;
-        }
     }
     </style>
 
