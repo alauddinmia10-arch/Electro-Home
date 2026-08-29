@@ -555,10 +555,10 @@
                 const button = e.detail.button;
                 if (!button) return;
                 
-                const card = button.closest('.product-card');
+                const card = button.closest('.product-card, .product-details-container');
                 if (!card) return;
                 
-                const img = card.querySelector('img');
+                const img = card.querySelector('.fly-target-image') || card.querySelector('img');
                 if (!img) return;
                 
                 let targetIcon = null;
@@ -569,8 +569,10 @@
                 }
                 
                 if (!targetIcon) return;
+                const clone = document.createElement('img');
+                clone.src = img.src;
+                if (img.className) clone.className = img.className;
                 
-                const clone = img.cloneNode(true);
                 const imgRect = img.getBoundingClientRect();
                 const targetRect = targetIcon.getBoundingClientRect();
                 

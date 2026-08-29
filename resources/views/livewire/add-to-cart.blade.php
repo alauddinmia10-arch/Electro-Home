@@ -94,14 +94,12 @@ new class extends Component {
             </div>
 
             <!-- Right Column: Buy Now & Add to Cart -->
-            <div class="premium-actions-wrapper" x-data="{ price: {{ $price }}, qty: @entangle('quantity'), adding: false, buying: false }">
+            <div class="premium-actions-wrapper flex-1 w-full" x-data="{ price: {{ $price }}, qty: @entangle('quantity'), adding: false, buying: false }">
                 <!-- Premium Buy Now Button -->
                 <button type="button" @click="$dispatch('cart-updated-optimistic', { amount: price * qty, qty_change: qty }); $wire.buyNow(); buying = true; setTimeout(() => buying = false, 800)" x-bind:disabled="buying" class="premium-btn btn-emerald">
                     <span class="premium-shine"></span>
-                    <span class="premium-icon-circle">
-                        <svg x-show="!buying" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                        <svg x-show="buying" style="display: none;" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                    </span>
+                    <svg x-show="!buying" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <svg x-show="buying" style="display: none;" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                     <span x-show="!buying" class="premium-btn-text text-buy-now">
                         BUY NOW
                     </span>
@@ -111,12 +109,10 @@ new class extends Component {
                 </button>
 
                 <!-- Premium Add to Cart Button -->
-                <button type="button" @click="$dispatch('cart-updated-optimistic', { amount: price * qty, qty_change: qty }); $wire.addToCart(); adding = true; setTimeout(() => adding = false, 800)" x-bind:disabled="adding" class="premium-btn btn-blue">
+                <button type="button" @click="$dispatch('cart-updated-optimistic', { amount: price * qty, qty_change: qty }); $dispatch('fly-to-cart', { button: $event.currentTarget }); $wire.addToCart(); adding = true; setTimeout(() => adding = false, 800)" x-bind:disabled="adding" class="premium-btn btn-blue">
                     <span class="premium-shine"></span>
-                    <span class="premium-icon-circle">
-                        <svg x-show="!adding" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        <svg x-show="adding" style="display: none;" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                    </span>
+                    <svg x-show="!adding" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    <svg x-show="adding" style="display: none;" class="premium-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                     <span x-show="!adding" class="premium-btn-text text-add-cart">
                         ADD TO CART
                     </span>
@@ -142,17 +138,18 @@ new class extends Component {
 
     .premium-btn {
         position: relative;
-        width: 170px;
+        flex: 1;
+        width: 100%;
         max-width: 100%;
         height: 48px;
-        border-radius: 4px;
+        border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.22);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-left: 50px;
-        padding-right: 12px;
+        gap: 8px;
+        padding: 0 16px;
         cursor: pointer;
         overflow: hidden;
         transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -169,7 +166,7 @@ new class extends Component {
     }
 
     .btn-blue {
-        background-image: linear-gradient(to right, #3B82F6, #2563EB, #1D4ED8);
+        background-color: #0b5c9a;
     }
 
     .premium-btn:hover {
@@ -183,39 +180,17 @@ new class extends Component {
     }
 
     .btn-blue:hover {
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(59, 130, 246, 0.3);
-    }
-
-    .premium-icon-circle {
-        position: absolute;
-        left: -2px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 44px;
-        height: 44px;
-        border-radius: 4px;
-        border: 1px solid rgba(255, 255, 255, 0.30);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 2px 8px rgba(255, 255, 255, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2;
-    }
-
-    .btn-emerald .premium-icon-circle {
-        background: linear-gradient(to bottom right, #34d399, #10b981);
-    }
-
-    .btn-blue .premium-icon-circle {
-        background: linear-gradient(to bottom right, #60a5fa, #3b82f6);
+        background-color: #094d82;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(11, 92, 154, 0.3);
     }
 
     .premium-icon {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
         color: #ffffff;
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;
+        z-index: 1;
     }
 
     .premium-btn:hover .premium-icon {
@@ -230,14 +205,10 @@ new class extends Component {
     }
 
     .premium-btn-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         z-index: 1;
         pointer-events: none;
         color: #ffffff;
         line-height: 1.1;
-        width: 100%;
         text-shadow: 0 2px 4px rgba(0,0,0,0.15);
         white-space: nowrap;
     }
@@ -303,22 +274,18 @@ new class extends Component {
             gap: 8px;
         }
         .premium-btn {
-            padding-left: 48px;
-            padding-right: 8px;
+            padding: 0 10px;
+            gap: 6px;
         }
         .text-buy-now {
-            font-size: 15px;
+            font-size: 14px;
         }
         .text-add-cart {
-            font-size: 13px;
-        }
-        .premium-icon-circle {
-            width: 44px;
-            height: 44px;
+            font-size: 14px;
         }
         .premium-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
     }
     </style>

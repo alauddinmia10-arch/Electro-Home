@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+    <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white md:rounded shadow-sm border-y md:border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-3 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             
@@ -72,7 +72,7 @@
                     @endif
                     
                     <template x-if="mainImage">
-                        <img :src="mainImage" alt="{{ $product->name }}" class="max-w-full max-h-full object-contain mix-blend-multiply">
+                        <img :src="mainImage" alt="{{ $product->name }}" class="fly-target-image max-w-full max-h-full object-contain mix-blend-multiply">
                     </template>
                     <template x-if="!mainImage">
                         <div class="w-full h-full flex items-center justify-center text-gray-300">
