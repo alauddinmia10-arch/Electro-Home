@@ -64,9 +64,9 @@ new class extends Component {
         </div>
         <button class="btn btn-neutral w-full">Request Restock</button>
     @else
-        <div class="flex flex-col sm:flex-row gap-4 md:gap-6 mt-3 md:mt-5">
+        <div class="flex flex-col sm:flex-row gap-2.5 md:gap-6 mt-2 md:mt-5">
             <!-- Left Column: Quantity & Wishlist -->
-            <div class="flex flex-col gap-2 md:gap-4">
+            <div class="flex flex-col gap-1 md:gap-4">
                 <div class="flex items-center gap-3">
                     <div class="flex items-center border border-gray-200 rounded bg-white overflow-hidden w-32 h-11 shrink-0" x-data="{ 
                         qty: @entangle('quantity'), 
