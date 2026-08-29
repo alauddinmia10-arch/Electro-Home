@@ -68,12 +68,12 @@
                 </div>
 
                 {{-- Search Bar (Desktop) --}}
-                <div class="hidden md:flex flex-1 max-w-xl mx-8">
+                <div class="hidden md:flex flex-1 max-w-3xl mx-8">
                     @livewire('live-search')
                 </div>
 
                 {{-- Header Actions --}}
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-4 lg:gap-6">
                     {{-- Wishlist --}}
                     <a href="{{ route('wishlist') }}" class="hidden md:flex flex-col items-center justify-center text-gray-600 hover:text-[var(--color-soft-coral)] transition-colors p-1">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
