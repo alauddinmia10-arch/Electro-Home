@@ -21,7 +21,7 @@ new class extends Component {
 };
 ?>
 <a href="{{ route('cart') }}" id="desktop-floating-cart" class="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center justify-center bg-white w-[130px] rounded-l-xl shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.15)] transition-all group overflow-hidden border border-gray-200 border-r-0" x-data="{ floatCount: {{ $count }}, floatSubtotal: {{ $subtotal }} }" @cart-updated-optimistic.window="floatCount += $event.detail.qty_change; floatSubtotal += $event.detail.amount" @cart-updated.window="if($event.detail.subtotal !== undefined) { floatCount = $event.detail.count; floatSubtotal = $event.detail.subtotal; }">
-    <div class="relative w-full flex justify-center pt-6 pb-2 bg-white">
+    <div class="relative w-full flex justify-center pt-8 pb-4 bg-white">
         <div class="relative inline-block animate-cart-dance">
             {{-- Custom Cart Icon with Plus (Exact match from Falaq Food) --}}
             <svg viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-12 w-12 text-[#6c757d] group-hover:text-[#1f618d] transition-colors">
@@ -34,7 +34,7 @@ new class extends Component {
         </div>
     </div>
     
-    <div class="bg-[#1f618d] w-full text-center py-2.5 pl-2 text-[16px] font-bold text-white transition-colors">
+    <div class="bg-[#1f618d] w-full text-center py-3.5 pl-2 text-[16px] font-bold text-white transition-colors">
         <span wire:ignore x-text="'৳' + new Intl.NumberFormat('en-US').format(floatSubtotal)">৳{{ number_format($subtotal, 0) }}</span>
     </div>
 </a>
