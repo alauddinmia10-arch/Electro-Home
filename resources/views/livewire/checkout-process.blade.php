@@ -429,8 +429,8 @@ new class extends Component {
     </div>
 
     {{-- Right Column: Order Summary --}}
-    <div class="w-full lg:w-96 shrink-0">
-        <div class="bg-white rounded-md shadow-sm border border-gray-200 p-3 md:p-6 sticky top-24">
+    <div class="w-full lg:w-96 shrink-0 sticky top-24 z-10">
+        <div class="bg-white rounded-md shadow-sm border border-gray-200 p-3 md:p-6">
             <div class="space-y-4 text-[18px] md:text-sm text-gray-600 mb-6 mt-2">
                 <div class="flex justify-between">
                     <span>Subtotal ({{ $cartItems->sum('quantity') }} items)</span>
