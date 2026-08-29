@@ -22,7 +22,7 @@
 
     <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-3 md:mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white rounded md:rounded shadow-sm border md:border border-gray-100 p-0 md:p-4 md:pt-3 lg:px-6 lg:pb-3 lg:pt-4 overflow-hidden md:overflow-visible">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
             <div x-data="{ mainImage: '{{ $product->cover_image_url }}' }" class="lg:col-span-5 flex flex-col md:flex-row gap-3 md:gap-0 -ml-2 lg:-ml-6">
@@ -39,17 +39,16 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
                             </button>
                             
-                            <!-- Thumbnails Container -->
                             <div x-ref="thumbSlider" class="flex md:flex-col gap-2 overflow-auto scrollbar-hide md:max-h-[432px] snap-x md:snap-y w-full">
                                 <button @click="mainImage = '{{ $product->cover_image_url }}'" 
-                                        class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded border-2 overflow-hidden snap-start transition-all"
-                                        :class="mainImage === '{{ $product->cover_image_url }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
+                                        class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded-none md:rounded border-0 md:border-2 overflow-hidden snap-start transition-all"
+                                        :class="mainImage === '{{ $product->cover_image_url }}' ? 'border-[#1a5b82]' : 'md:border-gray-200 md:hover:border-gray-400'">
                                     <img src="{{ $product->cover_image_url }}" class="w-full h-full object-cover mix-blend-multiply">
                                 </button>
                                 @foreach($product->images as $image)
                                     <button @click="mainImage = '{{ $image->image_url }}'" 
-                                            class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded border-2 overflow-hidden snap-start transition-all"
-                                            :class="mainImage === '{{ $image->image_url }}' ? 'border-[#1a5b82]' : 'border-gray-200 hover:border-gray-400'">
+                                            class="w-16 h-16 md:w-[80px] md:h-[80px] shrink-0 bg-white rounded-none md:rounded border-0 md:border-2 overflow-hidden snap-start transition-all"
+                                            :class="mainImage === '{{ $image->image_url }}' ? 'border-[#1a5b82]' : 'md:border-gray-200 md:hover:border-gray-400'">
                                         <img src="{{ $image->image_url }}" class="w-full h-full object-cover mix-blend-multiply">
                                     </button>
                                 @endforeach
@@ -83,7 +82,7 @@
             </div>
 
             {{-- Product Info --}}
-            <div class="lg:col-span-7 flex flex-col lg:-ml-3 px-3 mt-3 md:px-0 md:mt-0">
+            <div class="lg:col-span-7 flex flex-col lg:-ml-3 px-3 md:px-0">
                 <div class="flex-grow flex flex-col">
                     <div>
                         <div class="mb-2 md:mb-5">
