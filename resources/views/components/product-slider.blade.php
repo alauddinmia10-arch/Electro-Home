@@ -74,7 +74,7 @@
         </div>
 
         {{-- Slider Container --}}
-        <div x-ref="slider" @scroll="checkScroll" class="flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+        <div x-ref="slider" @scroll="checkScroll" class="flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 pb-2 scrollbar-hide no-scrollbar">
             @foreach($products as $product)
                 <div class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full">
                     @include('partials.product-card', ['product' => $product])
