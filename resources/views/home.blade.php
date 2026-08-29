@@ -223,6 +223,7 @@
     <section class="max-w-[1600px] w-full mx-auto px-3 block md:hidden"
              x-data="{
                 activeSlide: 0,
+                isRewinding: false,
                 totalSlides: {{ ceil($brands->count() / 9) }},
                 touchStartX: 0,
                 touchEndX: 0,
@@ -249,8 +250,10 @@
                     if (!this.autoScrollInterval && this.totalSlides > 1) {
                         this.autoScrollInterval = setInterval(() => {
                             if (this.activeSlide < this.totalSlides - 1) {
+                                this.isRewinding = false;
                                 this.activeSlide++;
                             } else {
+                                this.isRewinding = true;
                                 this.activeSlide = 0;
                             }
                         }, 3000);
@@ -262,8 +265,8 @@
                         this.autoScrollInterval = null;
                     }
                 },
-                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
-                prev() { if(this.activeSlide > 0) this.activeSlide--; },
+                next() { if(this.activeSlide < this.totalSlides - 1) { this.isRewinding = false; this.activeSlide++; } },
+                prev() { if(this.activeSlide > 0) { this.isRewinding = false; this.activeSlide--; } },
                 handleSwipe() {
                     let swipeDistance = this.touchStartX - this.touchEndX;
                     if (swipeDistance > 40) {
@@ -291,7 +294,7 @@
 
             {{-- Slider Container --}}
             <div class="overflow-hidden">
-                <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                <div class="ease-in-out flex" :class="isRewinding ? 'transition-none' : 'transition-transform duration-500'" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($brands->chunk(9) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-3 gap-3 px-1 pb-1">
@@ -326,6 +329,7 @@
     <section class="max-w-[1600px] w-full mx-auto px-3 xl:px-[70px] hidden md:block"
              x-data="{
                 activeSlide: 0,
+                isRewinding: false,
                 totalSlides: {{ ceil($brands->count() / 12) }},
                 autoScrollInterval: null,
                 observer: null,
@@ -350,8 +354,10 @@
                     if (!this.autoScrollInterval && this.totalSlides > 1) {
                         this.autoScrollInterval = setInterval(() => {
                             if (this.activeSlide < this.totalSlides - 1) {
+                                this.isRewinding = false;
                                 this.activeSlide++;
                             } else {
+                                this.isRewinding = true;
                                 this.activeSlide = 0;
                             }
                         }, 3000);
@@ -363,8 +369,8 @@
                         this.autoScrollInterval = null;
                     }
                 },
-                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
-                prev() { if(this.activeSlide > 0) this.activeSlide--; }
+                next() { if(this.activeSlide < this.totalSlides - 1) { this.isRewinding = false; this.activeSlide++; } },
+                prev() { if(this.activeSlide > 0) { this.isRewinding = false; this.activeSlide--; } }
              }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Top Brands</h2>
@@ -381,7 +387,8 @@
             </div>
 
             {{-- Slider Container --}}
-            <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+            <div class="overflow-hidden">
+                <div class="ease-in-out flex" :class="isRewinding ? 'transition-none' : 'transition-transform duration-500'" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($brands->chunk(12) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-6 gap-4 px-1 pb-1">
@@ -417,6 +424,7 @@
     <section class="max-w-[1600px] w-full mx-auto px-3 block md:hidden"
              x-data="{
                 activeSlide: 0,
+                isRewinding: false,
                 totalSlides: {{ ceil($categories->count() / 9) }},
                 touchStartX: 0,
                 touchEndX: 0,
@@ -443,8 +451,10 @@
                     if (!this.autoScrollInterval && this.totalSlides > 1) {
                         this.autoScrollInterval = setInterval(() => {
                             if (this.activeSlide < this.totalSlides - 1) {
+                                this.isRewinding = false;
                                 this.activeSlide++;
                             } else {
+                                this.isRewinding = true;
                                 this.activeSlide = 0;
                             }
                         }, 3000);
@@ -456,8 +466,8 @@
                         this.autoScrollInterval = null;
                     }
                 },
-                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
-                prev() { if(this.activeSlide > 0) this.activeSlide--; },
+                next() { if(this.activeSlide < this.totalSlides - 1) { this.isRewinding = false; this.activeSlide++; } },
+                prev() { if(this.activeSlide > 0) { this.isRewinding = false; this.activeSlide--; } },
                 handleSwipe() {
                     let swipeDistance = this.touchStartX - this.touchEndX;
                     if (swipeDistance > 40) {
@@ -487,7 +497,7 @@
 
             {{-- Slider Container --}}
             <div class="overflow-hidden">
-                <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                <div class="ease-in-out flex" :class="isRewinding ? 'transition-none' : 'transition-transform duration-500'" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($categories->chunk(9) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-3 gap-3 px-1 pb-1">
@@ -519,6 +529,7 @@
     <section class="max-w-[1600px] w-full mx-auto px-3 xl:px-[70px] hidden md:block"
              x-data="{
                 activeSlide: 0,
+                isRewinding: false,
                 totalSlides: {{ ceil($categories->count() / 18) }},
                 autoScrollInterval: null,
                 observer: null,
@@ -543,8 +554,10 @@
                     if (!this.autoScrollInterval && this.totalSlides > 1) {
                         this.autoScrollInterval = setInterval(() => {
                             if (this.activeSlide < this.totalSlides - 1) {
+                                this.isRewinding = false;
                                 this.activeSlide++;
                             } else {
+                                this.isRewinding = true;
                                 this.activeSlide = 0;
                             }
                         }, 3000);
@@ -556,8 +569,8 @@
                         this.autoScrollInterval = null;
                     }
                 },
-                next() { if(this.activeSlide < this.totalSlides - 1) this.activeSlide++; },
-                prev() { if(this.activeSlide > 0) this.activeSlide--; }
+                next() { if(this.activeSlide < this.totalSlides - 1) { this.isRewinding = false; this.activeSlide++; } },
+                prev() { if(this.activeSlide > 0) { this.isRewinding = false; this.activeSlide--; } }
              }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Top Categories</h2>
@@ -577,7 +590,7 @@
 
             {{-- Slider Container --}}
             <div class="overflow-hidden">
-                <div class="transition-transform duration-500 ease-in-out flex" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
+                <div class="ease-in-out flex" :class="isRewinding ? 'transition-none' : 'transition-transform duration-500'" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($categories->chunk(18) as $chunk)
                     <div class="w-full shrink-0">
                         <div class="grid grid-cols-9 gap-4 px-1 pb-1">

@@ -30,7 +30,7 @@
                 if (this.showRight) {
                     this.scrollRight();
                 } else {
-                    this.$refs.slider.scrollTo({ left: 0, behavior: 'smooth' });
+                    this.$refs.slider.scrollTo({ left: 0, behavior: 'auto' });
                 }
             }, 3000);
         }
