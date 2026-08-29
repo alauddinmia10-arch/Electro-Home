@@ -33,7 +33,7 @@
                         scrollNext() { $refs.thumbSlider.scrollBy({ top: 100, left: 100, behavior: 'smooth' }) },
                         scrollPrev() { $refs.thumbSlider.scrollBy({ top: -100, left: -100, behavior: 'smooth' }) }
                     }">
-                        <div class="relative bg-white md:bg-transparent rounded-none md:rounded p-2 md:p-0 shadow-none border-y border-gray-100 md:border-none flex flex-col justify-start">
+                        <div class="relative bg-white md:bg-transparent rounded-none md:rounded p-0 shadow-none border-y border-gray-100 md:border-none flex flex-col justify-start">
                             <!-- Prev Arrow (Up) -->
                             <button @click="scrollPrev" class="hidden md:flex mx-auto mb-1 w-full h-5 items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
