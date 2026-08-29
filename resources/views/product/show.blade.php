@@ -22,7 +22,7 @@
 
     <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-2 md:mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white rounded md:rounded shadow-sm border md:border border-gray-100 p-0 md:p-4 md:pt-3 lg:px-6 lg:pb-3 lg:pt-4 overflow-hidden md:overflow-visible">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
             <div x-data="{ mainImage: '{{ $product->cover_image_url }}' }" class="lg:col-span-5 flex flex-col md:flex-row gap-3 md:gap-0 -ml-2 lg:-ml-6">
@@ -142,7 +142,7 @@
                         </div>
 
                         {{-- Category & Share & Wholesale --}}
-                        <div class="mt-2.5 pt-2.5 md:mt-4 md:pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="mt-2.5 pt-2.5 md:mt-4 md:pt-4 pb-3 md:pb-0 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div class="flex flex-col gap-2">
                                 <div class="flex items-center text-[15px]">
                                     <span class="w-20 text-gray-800">Category</span>
