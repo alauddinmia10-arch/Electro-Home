@@ -31,7 +31,7 @@
 
     <div class="relative group">
         {{-- Left Arrow --}}
-        <div class="absolute -left-5 md:-left-4 xl:-left-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showLeft">
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showLeft">
             <button @click="scrollLeft" 
                     style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                     class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
@@ -49,7 +49,7 @@
         </div>
 
         {{-- Right Arrow --}}
-        <div class="absolute -right-5 md:-right-4 xl:-right-12 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
             <button @click="scrollRight" 
                     style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                     class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
