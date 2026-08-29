@@ -20,9 +20,9 @@
         </div>
     </div>
 
-    <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-3 md:mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+    <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-2 md:mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white rounded md:rounded shadow-sm border md:border border-gray-100 p-0 md:p-4 md:pt-3 lg:px-6 lg:pb-3 lg:pt-4 overflow-hidden md:overflow-visible">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
             <div x-data="{ mainImage: '{{ $product->cover_image_url }}' }" class="lg:col-span-5 flex flex-col md:flex-row gap-3 md:gap-0 -ml-2 lg:-ml-6">
@@ -33,7 +33,7 @@
                         scrollNext() { $refs.thumbSlider.scrollBy({ top: 100, left: 100, behavior: 'smooth' }) },
                         scrollPrev() { $refs.thumbSlider.scrollBy({ top: -100, left: -100, behavior: 'smooth' }) }
                     }">
-                        <div class="relative bg-white md:bg-transparent rounded-none md:rounded p-0 shadow-none border-y border-gray-100 md:border-none flex flex-col justify-start">
+                        <div class="relative bg-white md:bg-transparent rounded-none md:rounded py-0 px-1.5 md:p-0 shadow-none border-y border-gray-100 md:border-none flex flex-col justify-start">
                             <!-- Prev Arrow (Up) -->
                             <button @click="scrollPrev" class="hidden md:flex mx-auto mb-1 w-full h-5 items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
