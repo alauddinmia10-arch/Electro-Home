@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn" class="overflow-x-hidden w-full">
+<html lang="bn" class="overflow-x-clip w-full">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
@@ -27,7 +27,7 @@
 
     @livewireStyles
 </head>
-<body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col overflow-x-hidden w-full m-0 p-0 relative">
+<body class="bg-[var(--color-bg-secondary)] min-h-screen flex flex-col overflow-x-clip w-full m-0 p-0 relative">
 
     {{-- Top Bar --}}
     <div class="bg-[var(--color-text-primary)] text-white text-[13px] py-1.5 hidden md:block print:hidden">
