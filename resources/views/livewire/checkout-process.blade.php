@@ -454,18 +454,18 @@ new class extends Component {
                     <span>আর মাত্র <strong>৳{{ number_format($freeDeliveryRemaining, 0) }}</strong> টাকার বাজার করলেই পাচ্ছেন <strong>ফ্রি ডেলিভারি</strong>!</span>
                 </div>
             @else
-                <div class="bg-green-50 border border-green-200 text-green-700 px-2 md:px-4 py-3 md:py-3 rounded text-[20px] md:text-sm flex items-center justify-center gap-2 mb-6 font-bold text-center leading-tight">
+                <div class="bg-green-50 border border-green-200 text-green-700 px-2 md:px-4 py-3 md:py-3 rounded text-[14px] md:text-sm flex items-center justify-center gap-1.5 mb-6 font-bold text-center leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
                     🎉 অভিনন্দন! আপনি ফ্রি ডেলিভারি পাচ্ছেন।
                 </div>
             @endif
 
             <div class="border-t border-gray-100 pt-4 mb-6 flex justify-between items-end">
                 <span class="font-bold text-gray-800 text-xl md:text-base">Total</span>
-                <span class="text-3xl md:text-2xl font-bold text-price">৳{{ number_format($total, 0) }}</span>
+                <span class="text-xl md:text-2xl font-bold text-price">৳{{ number_format($total, 0) }}</span>
             </div>
 
-            <button wire:click="submit" class="btn btn-confirm w-full py-3 md:py-3 text-2xl md:text-lg flex justify-center items-center gap-2 !bg-[#1f618d] hover:!bg-[#174a6c]">
-                Confirm Order <svg class="w-5 h-5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <button wire:click="submit" class="btn btn-confirm w-full py-3 md:py-3 text-lg flex justify-center items-center gap-2 !bg-[#1f618d] hover:!bg-[#174a6c]">
+                Confirm Order <svg class="w-6 h-6 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             </button>
             <div wire:loading wire:target="submit" class="text-center text-sm text-gray-500 mt-2">
                 Processing your order...
