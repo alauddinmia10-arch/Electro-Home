@@ -141,7 +141,7 @@
 
             <div class="relative group">
                 {{-- Left Arrow --}}
-                <div class="absolute left-0 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="showLeft">
+                <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="showLeft">
                     <button @click="scrollLeft" 
                             style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                             class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
@@ -159,7 +159,7 @@
                 </div>
 
                 {{-- Right Arrow --}}
-                <div class="absolute right-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
+                <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
                     <button @click="scrollRight" 
                             style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                             class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
@@ -245,7 +245,7 @@
              @touchstart="touchStartX = $event.touches[0].clientX"
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
             {{-- Prev Button --}}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
@@ -276,7 +276,7 @@
             </div>
 
             {{-- Next Button --}}
-            <div class="absolute right-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
@@ -300,7 +300,7 @@
         
         <div class="relative overflow-hidden">
             {{-- Prev Button --}}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
@@ -329,7 +329,7 @@
             </div>
 
             {{-- Next Button --}}
-            <div class="absolute right-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
@@ -369,7 +369,7 @@
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
              
             {{-- Prev Button --}}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
@@ -397,7 +397,7 @@
             </div>
 
             {{-- Next Button --}}
-            <div class="absolute right-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
@@ -423,7 +423,7 @@
         <div class="relative">
              
             {{-- Prev Button --}}
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
@@ -451,7 +451,7 @@
             </div>
 
             {{-- Next Button --}}
-            <div class="absolute right-0 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
