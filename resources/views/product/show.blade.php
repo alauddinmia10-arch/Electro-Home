@@ -102,22 +102,22 @@
                                     <span class="mr-2">:</span> 
                                     <a href="#" class="text-blue-600 hover:underline">{{ $product->brand->name ?? 'TOMZN' }}</a>
                                 </div>
-                                <div class="flex items-center mb-2 text-[15px] text-gray-800">
+                                <div class="flex items-center mb-1.5 md:mb-2 text-[15px] text-gray-800">
                                     <span class="w-24">Warranty</span>
                                     <span class="mr-2">:</span> 
                                     <span class="font-medium">{{ $product->warranty ?? '15 Days' }}</span>
                                 </div>
                             </div>
                             
-                            <div class="mb-3">
+                            <div class="mb-1.5 md:mb-3">
                                 @if($product->discount_price && $product->discount_price < $product->regular_price)
-                                    <div class="flex items-center gap-3 mb-1">
-                                        <span class="text-[32px] font-bold text-[#1971c2]">৳{{ number_format($product->discount_price, 0) }}</span>
-                                        <span class="text-[22px] text-gray-500 line-through">৳{{ number_format($product->regular_price, 0) }}</span>
-                                        <span class="bg-[#ffe3e3] text-[#7d1919] text-[16px] px-2.5 py-0.5 rounded ml-1">Save ৳{{ number_format($product->regular_price - $product->discount_price, 0) }}</span>
+                                    <div class="flex items-center gap-1.5 md:gap-3 mb-1">
+                                        <span class="text-[28px] md:text-[32px] font-bold text-[#1971c2]">৳{{ number_format($product->discount_price, 0) }}</span>
+                                        <span class="text-[18px] md:text-[22px] text-gray-500 line-through">৳{{ number_format($product->regular_price, 0) }}</span>
+                                        <span class="bg-[#ffe3e3] text-[#7d1919] text-[12px] md:text-[16px] px-1.5 md:px-2.5 py-0.5 rounded ml-1 whitespace-nowrap">Save ৳{{ number_format($product->regular_price - $product->discount_price, 0) }}</span>
                                     </div>
                                 @else
-                                    <div class="text-[32px] font-bold text-[#1971c2] mb-1">
+                                    <div class="text-[28px] md:text-[32px] font-bold text-[#1971c2] mb-1">
                                         ৳{{ number_format($product->regular_price, 0) }}
                                     </div>
                                 @endif

@@ -64,9 +64,9 @@ new class extends Component {
         </div>
         <button class="btn btn-neutral w-full">Request Restock</button>
     @else
-        <div class="flex flex-col sm:flex-row gap-6 mt-5">
+        <div class="flex flex-col sm:flex-row gap-4 md:gap-6 mt-3 md:mt-5">
             <!-- Left Column: Quantity & Wishlist -->
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2 md:gap-4">
                 <div class="flex items-center gap-3">
                     <div class="flex items-center border border-gray-200 rounded bg-white overflow-hidden w-32 h-11 shrink-0" x-data="{ 
                         qty: @entangle('quantity'), 
@@ -85,7 +85,7 @@ new class extends Component {
                     <span class="text-xs text-gray-500 whitespace-nowrap hidden">Only {{ $stockQuantity }} left</span>
                 </div>
                 
-                <div class="flex items-center h-11">
+                <div class="flex items-center h-8 md:h-11">
                     <button wire:click="toggleWishlist" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium transition-colors whitespace-nowrap">
                         <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                         <span>Add to Wishlist</span>
