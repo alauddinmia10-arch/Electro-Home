@@ -20,8 +20,8 @@
         </div>
     </div>
 
-    <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
-        <div class="bg-white md:rounded shadow-sm border-y md:border border-gray-100 p-4 pt-3 lg:px-6 lg:pb-3 lg:pt-4">
+    <div class="product-details-container max-w-[1600px] w-full mx-auto px-0 sm:px-3 md:px-6 xl:px-[70px] mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+        <div class="bg-white md:rounded shadow-sm border-y md:border border-gray-100 p-0 md:p-4 md:pt-3 lg:px-6 lg:pb-3 lg:pt-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
             
             {{-- Left: Image Gallery --}}
@@ -33,7 +33,7 @@
                         scrollNext() { $refs.thumbSlider.scrollBy({ top: 100, left: 100, behavior: 'smooth' }) },
                         scrollPrev() { $refs.thumbSlider.scrollBy({ top: -100, left: -100, behavior: 'smooth' }) }
                     }">
-                        <div class="relative bg-white md:bg-transparent rounded p-0 shadow-sm md:shadow-none border border-gray-100 md:border-none flex flex-col justify-start">
+                        <div class="relative bg-white md:bg-transparent rounded-none md:rounded p-0 shadow-none border-b border-gray-100 md:border-none flex flex-col justify-start">
                             <!-- Prev Arrow (Up) -->
                             <button @click="scrollPrev" class="hidden md:flex mx-auto mb-1 w-full h-5 items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
@@ -64,7 +64,7 @@
                 @endif
 
                 {{-- Main Image --}}
-                <div class="order-1 md:order-2 bg-white border border-gray-100 relative flex justify-center items-center p-0 rounded flex-grow aspect-square md:aspect-auto md:h-[480px]">
+                <div class="order-1 md:order-2 bg-white border-b border-gray-100 md:border md:border-gray-100 relative flex justify-center items-center p-0 rounded-none md:rounded flex-grow aspect-square md:aspect-auto md:h-[480px]">
                     @if($product->is_flash_sale)
                         <div class="absolute top-3 left-3 z-10">
                             <span class="badge-flash text-xs px-2 py-1 shadow-sm">⚡ Flash Deal</span>
@@ -83,7 +83,7 @@
             </div>
 
             {{-- Product Info --}}
-            <div class="lg:col-span-7 flex flex-col lg:-ml-3">
+            <div class="lg:col-span-7 flex flex-col lg:-ml-3 px-3 mt-3 md:px-0 md:mt-0">
                 <div class="flex-grow flex flex-col">
                     <div>
                         <div class="mb-2 md:mb-5">
