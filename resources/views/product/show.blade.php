@@ -86,8 +86,8 @@
             <div class="lg:col-span-7 flex flex-col lg:-ml-3">
                 <div class="flex-grow flex flex-col">
                     <div>
-                        <div class="mb-5">
-                            <div class="border-b border-gray-200 pb-3 mb-3">
+                        <div class="mb-2 md:mb-5">
+                            <div class="border-b border-gray-200 pb-1 md:pb-3 mb-1 md:mb-3">
                                 <h1 class="text-[20px] lg:text-[26px] font-semibold text-gray-800 leading-tight mb-2">
                                     {{ $product->name }}
                                 </h1>
