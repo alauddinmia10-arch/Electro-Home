@@ -301,7 +301,7 @@
     @endif
 
     {{-- Main Content --}}
-    <main class="flex-1 pb-20 md:pb-0">
+    <main class="flex-1 pb-6 md:pb-0">
         {{ $slot }}
     </main>
 
@@ -358,33 +358,42 @@
             </div>
         </div>
 
-        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] pt-6 md:pt-8 pb-16 md:pb-12">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-8 xl:gap-12">
+        <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] pt-6 md:pt-8 pb-[18px] md:pb-12">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-[18px] md:gap-y-8 lg:gap-8 xl:gap-12">
                 {{-- Brand --}}
                 <div class="col-span-2 lg:col-span-1 order-1 lg:order-1">
                     <div class="mb-5 transform scale-[1.3] origin-left">
                         <x-logo theme="light" />
                     </div>
-                    <p class="text-gray-600 text-[15px] leading-relaxed pr-4">
-                        One of Bangladesh's premier electronic component stores. We provide high-quality electronic parts, sensors, modules, and tools at highly affordable prices with fast delivery.
+                    <p class="text-[14px] md:text-[15px] text-gray-700 leading-[1.6] md:leading-[1.7] pr-4">
+                        ElectroHome provides reliable solutions for Hybrid Solar Inverters, LiFePO₄ Batteries, Electronics Components, and Easy Bike Lithium Batteries. Quality products, smart solutions, and trusted service.
                     </p>
                     
+                    {{-- Quality Products text --}}
+                    <div class="mt-[12px] flex flex-nowrap items-center justify-start gap-1 md:gap-1.5 text-[#0a6c40] font-bold text-[11px] lg:text-[10.5px] xl:text-[12px] whitespace-nowrap tracking-tight">
+                        <span>Quality Products</span>
+                        <span class="text-[#0a6c40]/50">&bull;</span>
+                        <span>Smart Solutions</span>
+                        <span class="text-[#0a6c40]/50">&bull;</span>
+                        <span>Reliable Service</span>
+                    </div>
+
                     {{-- Social Icons --}}
-                    <div class="flex gap-4 mt-6">
-                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#0b5c9a] hover:bg-[#0b5c9a] hover:text-white transition-colors" title="Facebook">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+                    <div class="flex gap-4 mt-[18px]">
+                        <a href="#" class="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#1877F2] hover:-translate-y-1 transition-all duration-300" title="Facebook">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
                         </a>
-                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#ff0000] hover:bg-[#ff0000] hover:text-white transition-colors" title="YouTube">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <a href="#" class="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#FF0000] hover:-translate-y-1 transition-all duration-300" title="YouTube">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                         </a>
-                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors" title="WhatsApp">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <a href="#" class="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#25D366] hover:-translate-y-1 transition-all duration-300" title="WhatsApp">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </a>
-                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white transition-colors" title="Twitter">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                        <a href="#" class="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#1DA1F2] hover:-translate-y-1 transition-all duration-300" title="Twitter">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                         </a>
-                        <a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#f0f9f4] text-[#E1306C] hover:bg-[#E1306C] hover:text-white transition-colors" title="Instagram">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        <a href="#" class="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 text-[#E1306C] hover:-translate-y-1 transition-all duration-300" title="Instagram">
+                            <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -437,8 +446,10 @@
 
                 {{-- Contact Info --}}
                 <div class="col-span-2 lg:col-span-1 order-2 lg:order-4 justify-self-start lg:justify-self-center w-full">
-                    <h4 class="font-bold text-gray-800 text-[16px] mb-4">Contact Us</h4>
-                    <ul class="space-y-3 text-[15px] text-gray-600">
+                    <h4 class="font-bold text-gray-800 text-[16px] mb-4 hidden md:block">Contact Us</h4>
+                    
+                    {{-- Desktop Contact List --}}
+                    <ul class="hidden md:block space-y-3 text-[15px] text-gray-600">
                         <li class="flex items-center gap-2 group">
                             <svg class="w-4 h-4 text-[#0b5c9a] shrink-0 group-hover:scale-125 transition-transform duration-300" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                             <a href="tel:{{ str_replace(' ', '', \App\Models\Setting::get('support_phone', '+8801880223099')) }}" class="group-hover:text-[#0b5c9a] group-hover:translate-x-1.5 transition-all duration-300">{{ \App\Models\Setting::get('support_phone', '+8801880223099') }}</a>
@@ -460,7 +471,6 @@
                                 </a>
                             </div>
                         </li>
-                        {{-- Get Direction Button (Desktop Only) --}}
                         <li class="hidden md:block pt-1.5">
                             <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md text-base font-bold transition-colors shadow-md">
                                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
@@ -469,21 +479,83 @@
                         </li>
                     </ul>
 
-                    {{-- Google Map Box & Get Direction (Mobile Only) --}}
-                    <div class="md:hidden mt-4 w-full rounded-lg overflow-hidden relative bg-gray-100 border border-gray-200 shadow-sm h-[160px] group">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Station+Road,+Narsingdi+Sadar,+Narsingdi&t=&z=15&ie=UTF8&iwloc=&output=embed" style="border:0;" loading="lazy"></iframe>
+                    {{-- Mobile Contact Grid --}}
+                    <div class="md:hidden mt-0 w-full grid grid-cols-3 divide-x divide-gray-200">
+                        <a href="tel:{{ str_replace(' ', '', \App\Models\Setting::get('support_phone', '+8801880223099')) }}" class="flex flex-col items-center justify-center p-2 text-center group">
+                            <div class="w-9 h-9 rounded-full bg-[#f0f9f4] text-[#0a6c40] flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <span class="font-bold text-gray-800 text-[11px] mb-0.5">Call Us</span>
+                            <span class="text-gray-500 text-[9px]">{{ \App\Models\Setting::get('support_phone', '+8801880223099') }}</span>
+                        </a>
+                        <a href="https://wa.me/{{ str_replace(['+', ' '], '', \App\Models\Setting::get('whatsapp_number', '8801880223099')) }}" target="_blank" class="flex flex-col items-center justify-center p-2 text-center group">
+                            <div class="w-9 h-9 rounded-full bg-[#f0f9f4] text-[#0a6c40] flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            </div>
+                            <span class="font-bold text-gray-800 text-[11px] mb-0.5">WhatsApp</span>
+                            <span class="text-gray-500 text-[9px]">+{{ ltrim(\App\Models\Setting::get('whatsapp_number', '8801880223099'), '+') }}</span>
+                        </a>
+                        <a href="mailto:{{ \App\Models\Setting::get('support_email', 'support@electrohome.bd') }}" class="flex flex-col items-center justify-center p-2 text-center group">
+                            <div class="w-9 h-9 rounded-full bg-[#f0f9f4] text-[#0a6c40] flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <span class="font-bold text-gray-800 text-[11px] mb-0.5">Email Us</span>
+                            <span class="text-gray-500 text-[9px]">{{ \App\Models\Setting::get('support_email', 'support@electrohome.bd') }}</span>
+                        </a>
+                    </div>
+
+                    {{-- Mobile Location Bar --}}
+                    <div class="md:hidden mt-[18px] mb-[18px] w-full bg-white shadow-sm border border-gray-100 rounded-full p-2.5 flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-full bg-[#f0f9f4] text-[#0a6c40] flex items-center justify-center shrink-0 ml-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <div class="text-[11px] text-gray-600 truncate pr-2">
+                            <span class="font-bold text-gray-800">Our Location:</span> Station Road, Narsingdi Sadar, Narsingdi
+                        </div>
+                    </div>
+
+                    {{-- Mobile Google Map Box & Get Direction --}}
+                    <div class="md:hidden w-[calc(100%+24px)] -ml-3 h-[150px] relative overflow-hidden group">
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Station+Road,+Narsingdi+Sadar,+Narsingdi&t=&z=15&ie=UTF8&iwloc=&output=embed" style="border:0; pointer-events: none; width: 100%; height: calc(100% + 120px); margin-top: -60px;" loading="lazy"></iframe>
                         
-                        <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="absolute top-2.5 right-2.5 flex items-center gap-1.5 bg-white/90 backdrop-blur hover:bg-blue-600 hover:text-white text-blue-700 py-2 px-4 rounded-md shadow-md text-[13px] font-bold transition-all border border-gray-200 z-10">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                        <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="absolute bottom-2 left-3 flex items-center gap-1.5 bg-white text-blue-700 py-1.5 px-3 rounded-md shadow-md text-[12px] font-bold z-10 hover:bg-gray-50">
+                            Maps
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+
+                        <a href="https://maps.google.com/?q=Station+Road,+Narsingdi+Sadar,+Narsingdi" target="_blank" class="absolute bottom-2 right-3 flex items-center gap-1.5 bg-white text-[#0a6c40] py-1.5 px-3 rounded-md shadow-md text-[12px] font-bold z-10 hover:bg-gray-50">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                             Get Direction
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="border-t border-[#e0ebe5] mt-8 md:mt-10 pt-6 md:pt-8 text-center text-sm text-gray-500">
-                © {{ date('Y') }} Electrohome.bd — All Rights Reserved.
+        {{-- Dark Green Features Bar --}}
+        <div class="md:hidden bg-[#094c2d] text-white py-4 sm:py-8 px-2 sm:px-4 md:px-6">
+            <div class="max-w-[1200px] w-full mx-auto grid grid-cols-3 gap-2 sm:gap-6 md:gap-4 divide-x divide-white/20">
+                <div class="flex flex-col items-center text-center">
+                    <svg class="w-6 h-6 sm:w-9 sm:h-9 mb-1 sm:mb-2 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <h5 class="font-bold text-[9px] min-[375px]:text-[10px] sm:text-[13px] md:text-[15px] mb-0.5 leading-tight">100% Original Products</h5>
+                    <p class="text-white/80 text-[8px] min-[375px]:text-[9px] sm:text-[11px] md:text-[13px] leading-tight">Quality You Can Trust</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <svg class="w-6 h-6 sm:w-9 sm:h-9 mb-1 sm:mb-2 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 21.033A3 3 0 1111 18h2a3 3 0 113.89 2.89M3 13V6a1 1 0 011-1h10a1 1 0 011 1v12a1 1 0 01-1 1h-2M15 9h3l3 4v5h-2"/></svg>
+                    <h5 class="font-bold text-[9px] min-[375px]:text-[10px] sm:text-[13px] md:text-[15px] mb-0.5 leading-tight">Fast & Reliable Delivery</h5>
+                    <p class="text-white/80 text-[8px] min-[375px]:text-[9px] sm:text-[11px] md:text-[13px] leading-tight">Across Bangladesh</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <svg class="w-6 h-6 sm:w-9 sm:h-9 mb-1 sm:mb-2 text-[#4ade80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <h5 class="font-bold text-[9px] min-[375px]:text-[10px] sm:text-[13px] md:text-[15px] mb-0.5 leading-tight">Customer Support</h5>
+                    <p class="text-white/80 text-[8px] min-[375px]:text-[9px] sm:text-[11px] md:text-[13px] leading-tight">We're Here to Help</p>
+                </div>
             </div>
+        </div>
+
+        {{-- Copyright --}}
+        <div class="bg-[#f8fbf9] pt-[18px] pb-[73px] md:py-5 text-center text-[12px] md:text-[14px] text-gray-500 font-medium border-t border-[#e0ebe5]">
+            © {{ date('Y') }} Electrohome.bd — All Rights Reserved.
         </div>
     </footer>
 
