@@ -24,7 +24,7 @@
         if (!this.autoScrollInterval) {
             this.autoScrollInterval = setInterval(() => {
                 this.doScrollRight();
-            }, 3000);
+            }, 4000);
         }
     },
     stopAutoScroll() {
@@ -37,11 +37,22 @@
         if (!this.$refs.firstOriginal || !this.$refs.firstClone) return 0;
         return this.$refs.firstClone.offsetLeft - this.$refs.firstOriginal.offsetLeft;
     },
+    getScrollStep() {
+        const slider = this.$refs.slider;
+        if (!slider) return 300;
+        const firstCard = slider.querySelector(':scope > div');
+        if (firstCard) {
+            const gap = window.innerWidth < 768 ? 8 : 10;
+            return firstCard.offsetWidth + gap;
+        }
+        return window.innerWidth < 768 ? 180 : 300;
+    },
     doScrollRight() {
         const slider = this.$refs.slider;
         if (!slider) return;
         
         const jumpDistance = this.getJumpDistance();
+        const step = this.getScrollStep();
         
         if (jumpDistance > 0 && slider.scrollLeft >= jumpDistance) {
             slider.style.scrollBehavior = 'auto';
@@ -50,12 +61,12 @@
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     slider.style.scrollBehavior = 'smooth';
-                    slider.scrollBy({ left: 300 });
+                    slider.scrollBy({ left: step });
                 });
             });
         } else {
             slider.style.scrollBehavior = 'smooth';
-            slider.scrollBy({ left: 300 });
+            slider.scrollBy({ left: step });
         }
     },
     doScrollLeft() {
@@ -63,6 +74,7 @@
         if (!slider) return;
         
         const jumpDistance = this.getJumpDistance();
+        const step = this.getScrollStep();
         
         if (jumpDistance > 0 && slider.scrollLeft <= 0) {
             slider.style.scrollBehavior = 'auto';
@@ -71,12 +83,12 @@
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     slider.style.scrollBehavior = 'smooth';
-                    slider.scrollBy({ left: -300 });
+                    slider.scrollBy({ left: -step });
                 });
             });
         } else {
             slider.style.scrollBehavior = 'smooth';
-            slider.scrollBy({ left: -300 });
+            slider.scrollBy({ left: -step });
         }
     },
     handleManualScroll() {

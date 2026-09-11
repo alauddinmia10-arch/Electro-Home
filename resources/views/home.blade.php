@@ -110,21 +110,110 @@
     <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
         <div class="w-full md:bg-white md:rounded-lg md:p-3 md:shadow-sm md:border md:border-red-100 relative md:overflow-hidden"
              x-data="{
-                 showLeft: false,
-                 showRight: true,
+                 autoScrollInterval: null,
+                 observer: null,
                  init() {
-                     this.$nextTick(() => this.checkScroll());
-                     window.addEventListener('resize', () => this.checkScroll());
+                     this.$nextTick(() => {
+                         this.setupIntersectionObserver();
+                     });
                  },
-                 checkScroll() {
+                 setupIntersectionObserver() {
+                     this.observer = new IntersectionObserver((entries) => {
+                         entries.forEach(entry => {
+                             if (entry.isIntersecting) {
+                                 this.startAutoScroll();
+                             } else {
+                                 this.stopAutoScroll();
+                             }
+                         });
+                     }, { threshold: 0.1 });
+                     this.observer.observe(this.$el);
+                 },
+                 startAutoScroll() {
+                     if (!this.autoScrollInterval) {
+                         this.autoScrollInterval = setInterval(() => {
+                             this.doScrollRight();
+                         }, 4000);
+                     }
+                 },
+                 stopAutoScroll() {
+                     if (this.autoScrollInterval) {
+                         clearInterval(this.autoScrollInterval);
+                         this.autoScrollInterval = null;
+                     }
+                 },
+                 getJumpDistance() {
+                     if (!this.$refs.firstOriginal || !this.$refs.firstClone) return 0;
+                     return this.$refs.firstClone.offsetLeft - this.$refs.firstOriginal.offsetLeft;
+                 },
+                 getScrollStep() {
+                     const slider = this.$refs.slider;
+                     if (!slider) return 300;
+                     const firstCard = slider.querySelector(':scope > div');
+                     if (firstCard) {
+                         const gap = window.innerWidth < 768 ? 8 : 10;
+                         return firstCard.offsetWidth + gap;
+                     }
+                     return window.innerWidth < 768 ? 180 : 300;
+                 },
+                 doScrollRight() {
                      const slider = this.$refs.slider;
                      if (!slider) return;
-                     this.showLeft = slider.scrollLeft > 0;
-                     this.showRight = Math.ceil(slider.scrollLeft + slider.clientWidth) < slider.scrollWidth;
+                     
+                     const jumpDistance = this.getJumpDistance();
+                     const step = this.getScrollStep();
+                     
+                     if (jumpDistance > 0 && slider.scrollLeft >= jumpDistance) {
+                         slider.style.scrollBehavior = 'auto';
+                         slider.scrollLeft -= jumpDistance;
+                         
+                         requestAnimationFrame(() => {
+                             requestAnimationFrame(() => {
+                                 slider.style.scrollBehavior = 'smooth';
+                                 slider.scrollBy({ left: step });
+                             });
+                         });
+                     } else {
+                         slider.style.scrollBehavior = 'smooth';
+                         slider.scrollBy({ left: step });
+                     }
                  },
-                 scrollLeft() { this.$refs.slider.scrollBy({ left: -300, behavior: 'smooth' }); },
-                 scrollRight() { this.$refs.slider.scrollBy({ left: 300, behavior: 'smooth' }); }
-             }">
+                 doScrollLeft() {
+                     const slider = this.$refs.slider;
+                     if (!slider) return;
+                     
+                     const jumpDistance = this.getJumpDistance();
+                     const step = this.getScrollStep();
+                     
+                     if (jumpDistance > 0 && slider.scrollLeft <= 0) {
+                         slider.style.scrollBehavior = 'auto';
+                         slider.scrollLeft += jumpDistance;
+                         
+                         requestAnimationFrame(() => {
+                             requestAnimationFrame(() => {
+                                 slider.style.scrollBehavior = 'smooth';
+                                 slider.scrollBy({ left: -step });
+                             });
+                         });
+                     } else {
+                         slider.style.scrollBehavior = 'smooth';
+                         slider.scrollBy({ left: -step });
+                     }
+                 },
+                 handleManualScroll() {
+                     const slider = this.$refs.slider;
+                     const jumpDistance = this.getJumpDistance();
+                     if (jumpDistance > 0) {
+                         if (slider.scrollLeft >= jumpDistance * 2) {
+                             slider.style.scrollBehavior = 'auto';
+                             slider.scrollLeft -= jumpDistance;
+                         } else if (slider.scrollLeft <= 0) {
+                             slider.style.scrollBehavior = 'auto';
+                             slider.scrollLeft += jumpDistance;
+                         }
+                     }
+                 }
+             }" @mouseenter="stopAutoScroll" @mouseleave="startAutoScroll" @touchstart="stopAutoScroll" @touchend="startAutoScroll">
             <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10 pointer-events-none"></div>
             
             <div class="flex items-center justify-between mb-3">
@@ -141,8 +230,8 @@
 
             <div class="relative group w-full">
                 {{-- Left Arrow --}}
-                <div class="absolute mobile-slider-arrow-left -left-[20px] md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showLeft">
-                    <button @click="scrollLeft" 
+                <div class="absolute mobile-slider-arrow-left -left-[20px] md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50">
+                    <button @click="doScrollLeft()" 
                             style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                             class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors touch-manipulation">
                         <svg class="w-[26px] h-[26px] md:w-8 md:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
@@ -150,17 +239,32 @@
                 </div>
 
                 {{-- Slider Container --}}
-                <div x-ref="slider" @scroll="checkScroll" class="w-full flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
-                    @foreach($flashSaleProducts as $product)
-                        <div class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full">
+                <div x-ref="slider" @scroll.passive="handleManualScroll" class="w-full flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 pb-2 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+                    {{-- Set 1: Original Products --}}
+                    @foreach($flashSaleProducts as $loopIndex => $product)
+                        <div {{ $loopIndex === 0 ? 'x-ref=firstOriginal' : '' }} class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full">
+                            @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
+                        </div>
+                    @endforeach
+
+                    {{-- Set 2: Cloned Products for Infinite Scroll --}}
+                    @foreach($flashSaleProducts as $loopIndex => $product)
+                        <div {{ $loopIndex === 0 ? 'x-ref=firstClone' : '' }} class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full" aria-hidden="true">
+                            @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
+                        </div>
+                    @endforeach
+
+                    {{-- Set 3: Extra Clone to buffer against fast manual scrolling --}}
+                    @foreach($flashSaleProducts as $loopIndex => $product)
+                        <div class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full" aria-hidden="true">
                             @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
                         </div>
                     @endforeach
                 </div>
 
                 {{-- Right Arrow --}}
-                <div class="absolute mobile-slider-arrow-right -right-[20px] md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
-                    <button @click="scrollRight" 
+                <div class="absolute mobile-slider-arrow-right -right-[20px] md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50">
+                    <button @click="doScrollRight()" 
                             style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                             class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors touch-manipulation">
                         <svg class="w-[26px] h-[26px] md:w-8 md:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
