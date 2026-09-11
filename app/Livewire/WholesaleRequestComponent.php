@@ -22,26 +22,35 @@ class WholesaleRequestComponent extends Component
 
     public function submit()
     {
-        $this->validate([
+        $hasRecaptcha = (bool) (config('services.recaptcha.site_key') && config('services.recaptcha.secret_key'));
+
+        $rules = [
             'productId' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'nullable|email|max:255',
-            'captcha' => 'required',
-        ], [
+        ];
+
+        if ($hasRecaptcha) {
+            $rules['captcha'] = 'required';
+        }
+
+        $this->validate($rules, [
             'captcha.required' => 'Please complete the reCAPTCHA verification.',
         ]);
 
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('services.recaptcha.secret_key'),
-            'response' => $this->captcha,
-        ]);
+        if ($hasRecaptcha) {
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => config('services.recaptcha.secret_key'),
+                'response' => $this->captcha,
+            ]);
 
-        if (! $response->json('success')) {
-            $this->addError('captcha', 'reCAPTCHA verification failed. Please try again.');
-            $this->dispatch('reset-recaptcha');
-            return;
+            if (! $response->json('success')) {
+                $this->addError('captcha', 'reCAPTCHA verification failed. Please try again.');
+                $this->dispatch('reset-recaptcha');
+                return;
+            }
         }
 
         $wholesaleRequest = WholesaleRequest::create([

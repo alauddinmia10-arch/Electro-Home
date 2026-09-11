@@ -47,6 +47,7 @@
             </div>
 
             <!-- reCAPTCHA -->
+            @if(config('services.recaptcha.site_key'))
             <div class="mb-6" x-data="{
                 init() {
                     window.handleRecaptchaCallback = (response) => {
@@ -67,6 +68,7 @@
             </div>
             
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            @endif
 
 
             <!-- Submit Button -->
