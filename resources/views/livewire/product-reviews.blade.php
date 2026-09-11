@@ -68,7 +68,7 @@
                         @auth
                             <button type="submit" class="whitespace-nowrap shrink-0 bg-blue-600 text-white px-5 sm:px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Submit Review</button>
                         @else
-                            <a href="{{ route('login') }}" class="whitespace-nowrap shrink-0 bg-blue-600 text-white px-5 sm:px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Sign in to Review</a>
+                            <a href="{{ route('login') }}" class="whitespace-nowrap shrink-0 bg-blue-600 text-white px-3.5 sm:px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Sign in to Review</a>
                         @endauth
                     </div>
                 </form>

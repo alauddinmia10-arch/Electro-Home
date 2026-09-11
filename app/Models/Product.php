@@ -187,6 +187,28 @@ class Product extends Model
         return $this->cover_image ? \Illuminate\Support\Facades\Storage::url($this->cover_image) : '';
     }
 
+    public function getDescriptionAttribute($value): ?string
+    {
+        if (!$value) {
+            return $value;
+        }
+
+        $cloudName = config('filesystems.disks.cloudinary.cloud_name') ?? env('CLOUDINARY_CLOUD_NAME', 'cwru1emq');
+        $cldBase = "https://res.cloudinary.com/{$cloudName}/image/upload/";
+
+        return preg_replace_callback(
+            '#(?:https?://[^/]+)?/storage/([^\s"\'<>]+)#i',
+            function ($matches) use ($cldBase) {
+                $filename = $matches[1];
+                if (str_contains($filename, 'res.cloudinary.com')) {
+                    return $matches[0];
+                }
+                return $cldBase . $filename;
+            },
+            $value
+        );
+    }
+
     // ──── Helpers ────
 
     public function getRouteKeyName(): string

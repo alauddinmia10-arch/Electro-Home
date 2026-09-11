@@ -179,6 +179,8 @@ class ProductForm
                         '
                     ]),
                 RichEditor::make('description')
+                    ->fileAttachmentsDisk('cloudinary')
+                    ->fileAttachmentsDirectory('products')
                     ->toolbarButtons([
                         'attachFiles',
                         'blockquote',
