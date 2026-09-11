@@ -3,12 +3,9 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 
-class AllAnalyticsChart extends ChartWidget implements HasForms
+class AllAnalyticsChart extends ChartWidget
 {
-    use InteractsWithForms;
 
     protected static ?int $sort = 2;
     protected static bool $isLazy = false;
@@ -25,8 +22,7 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
         'xl' => 2,
         '2xl' => 2,
     ];
-    
-    protected ?string $maxHeight = null;
+    protected ?string $maxHeight = '350px';
     
     protected ?string $heading = 'All Analytics (Orders, Sales & Website Views)';
 
@@ -90,20 +86,20 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
             ->$trendMode()
             ->count();
 
-        $viewsData = $viewsTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->toArray();
+        $viewsData = $viewsTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->values()->toArray();
 
         return [
             'datasets' => [
                 [
                     'label' => 'Total Sales (৳)',
-                    'data' => $salesTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->toArray(),
+                    'data' => $salesTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->values()->toArray(),
                     'borderColor' => '#10b981', // green
                     'fill' => false,
                     'yAxisID' => 'y',
                 ],
                 [
                     'label' => 'Orders',
-                    'data' => $ordersTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->toArray(),
+                    'data' => $ordersTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->aggregate)->values()->toArray(),
                     'borderColor' => '#3b82f6', // blue
                     'fill' => false,
                     'yAxisID' => 'y1',
@@ -116,7 +112,7 @@ class AllAnalyticsChart extends ChartWidget implements HasForms
                     'yAxisID' => 'y',
                 ],
             ],
-            'labels' => $salesTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->date)->toArray(),
+            'labels' => $salesTrend->map(fn (\Flowframe\Trend\TrendValue $value) => $value->date)->values()->toArray(),
         ];
     }
 

@@ -14,9 +14,9 @@ class CreateProduct extends CreateRecord
         $galleryImages = $this->data['gallery_images'] ?? [];
         
         if (is_array($galleryImages) && !empty($galleryImages)) {
-            foreach (array_values(array_filter($galleryImages)) as $index => $id) {
+            foreach (array_values(array_filter($galleryImages)) as $index => $path) {
                 $this->record->images()->create([
-                    'media_id' => $id,
+                    'image_path' => $path,
                     'sort_order' => $index,
                 ]);
             }

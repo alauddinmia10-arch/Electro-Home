@@ -99,7 +99,7 @@
             </x-slot>
         @endif
 
-        <div
+        <div class="flex flex-col flex-grow h-full min-h-0"
             @if ($pollingInterval = $this->getPollingInterval())
                 wire:poll.{{ $pollingInterval }}="updateChartData"
             @endif
@@ -120,6 +120,7 @@
                         ->class([
                             'fi-wi-chart-canvas-ctn',
                             'fi-wi-chart-canvas-ctn-no-aspect-ratio' => $hasMaxHeight,
+                            'flex-grow',
                         ])
                 }}
                 @if ($hasMaxHeight)

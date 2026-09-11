@@ -289,3 +289,16 @@
         background: #94a3b8;
     }
 }
+
+/* Mobile slider scroll arrow buttons on zero border */
+@media (max-width: 767px) {
+    .mobile-slider-arrow-left {
+        left: -20px !important;
+        z-index: 50 !important;
+    }
+    .mobile-slider-arrow-right {
+        right: -20px !important;
+        z-index: 50 !important;
+    }
+}
+

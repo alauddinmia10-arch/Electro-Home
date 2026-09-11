@@ -6,6 +6,8 @@ use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard
 {
+    public $date_range = null;
+    
     public static function getNavigationIcon(): string|null
     {
         return 'heroicon-o-home';

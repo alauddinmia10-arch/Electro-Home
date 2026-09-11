@@ -25,3 +25,18 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Temporary scratch and debug scripts
+benchmark.php
+check_*.php
+drop_cols.php
+*.ps1
+extract_out*.txt
+footer_target.txt
+original_app.*
+restore_images.php
+/scratch/
+scratch_*.php
+small.*
+test.*
+test_*.php

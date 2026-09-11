@@ -28,10 +28,6 @@ class CategoryForm
                         FileUpload::make('icon')
                             ->image()
                             ->directory('categories/icons'),
-                        FileUpload::make('image')
-                            ->image()
-                            ->directory('categories/images')
-                            ->columnSpan('full'),
                         Toggle::make('status')
                             ->label('Is active')
                             ->default(true),

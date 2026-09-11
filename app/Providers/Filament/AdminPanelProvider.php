@@ -70,14 +70,16 @@ class AdminPanelProvider extends PanelProvider
             )
             ->plugins([
                 \Awcodes\Curator\CuratorPlugin::make()
-                    ->label('Media')
+                    ->label('Gallery')
                     ->pluralLabel('Gallery')
                     ->navigationIcon('heroicon-o-photo')
-                    ->navigationGroup('MANAGEMENT')
+                    ->navigationGroup('MASTER DATA')
                     ->navigationSort(5),
             ])
             ->assets([
                 \Filament\Support\Assets\Css::make('custom-admin-stylesheet', asset('css/custom-admin-v2.css')),
+                \Filament\Support\Assets\Css::make('curator-css', asset('css/curator.css')),
+                \Filament\Support\Assets\Js::make('custom-rich-editor-integration', asset('js/custom-rich-editor-integration.js')),
             ])
             ->middleware([
                 EncryptCookies::class,

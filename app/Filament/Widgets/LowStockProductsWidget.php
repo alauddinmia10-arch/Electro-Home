@@ -18,6 +18,12 @@ class LowStockProductsWidget extends BaseWidget
         'xl' => 1,
         '2xl' => 1,
     ];
+
+    protected int | string | array $columnStart = [
+        'lg' => 3,
+        'xl' => 3,
+        '2xl' => 3,
+    ];
     protected static ?string $heading = 'Low Stock Products';
 
     public function table(Table $table): Table

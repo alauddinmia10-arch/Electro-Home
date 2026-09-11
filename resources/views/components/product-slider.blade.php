@@ -105,11 +105,11 @@
 
     <div class="relative group">
         {{-- Left Arrow --}}
-        <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50">
+        <div class="absolute mobile-slider-arrow-left -left-[20px] md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50">
             <button @click="doScrollLeft()" 
                     style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                    class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                    class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors touch-manipulation">
+                <svg class="w-[26px] h-[26px] md:w-8 md:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
             </button>
         </div>
 
@@ -138,11 +138,11 @@
         </div>
 
         {{-- Right Arrow --}}
-        <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50">
+        <div class="absolute mobile-slider-arrow-right -right-[20px] md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50">
             <button @click="doScrollRight()" 
                     style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                    class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors touch-manipulation">
+                <svg class="w-[26px] h-[26px] md:w-8 md:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
             </button>
         </div>
     </div>

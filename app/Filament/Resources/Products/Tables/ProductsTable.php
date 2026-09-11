@@ -11,11 +11,14 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class ProductsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->with(['category']))
             ->columns([
                 TextColumn::make('category.name')
                     ->searchable(),
@@ -25,10 +28,12 @@ class ProductsTable
                     ->label('SKU')
                     ->searchable(),
                 TextColumn::make('regular_price')
-                    ->money()
+                    ->prefix('৳')
+                    ->numeric(2)
                     ->sortable(),
                 TextColumn::make('discount_price')
-                    ->money()
+                    ->prefix('৳')
+                    ->numeric(2)
                     ->sortable(),
                 TextColumn::make('stock_quantity')
                     ->numeric()

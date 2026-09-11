@@ -893,3 +893,151 @@
         }
     }
 
+    /* Make Rich Editor Toolbar horizontally scrollable on mobile */
+    .fi-fo-rich-editor-toolbar {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        padding-bottom: 2px !important;
+    }
+    .fi-fo-rich-editor-toolbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+    .fi-fo-rich-editor-toolbar-group {
+        flex-shrink: 0 !important;
+    }
+
+    /* Responsive gallery grid */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+        gap: 12px;
+        padding: 4px;
+    }
+    @media (min-width: 640px) {
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        }
+    }
+
+    /* ========================================================
+       Curator Gallery - Clean 10-column Desktop Grid
+       Mobile/Tablet mode remains completely untouched
+       ======================================================== */
+    @media (min-width: 1024px) {
+        /* Grid container: 10 columns */
+        .fi-resource-media .fi-ta-content-grid,
+        .fi-resource-media .fi-ta-content.fi-grid,
+        .fi-resource-media div.fi-ta-content-grid,
+        [class*="fi-resource-media"] .fi-ta-content-grid,
+        .fi-ta-content-grid:has(.curator-grid-column) {
+            display: grid !important;
+            grid-template-columns: repeat(10, minmax(0, 1fr)) !important;
+            gap: 0.625rem !important;
+            align-items: stretch !important;
+        }
+
+        /* Each record card: full height, flex column, self-contained */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column),
+        .fi-ta-record:has(.curator-grid-column) {
+            display: flex !important;
+            flex-direction: column !important;
+            position: relative !important;
+            min-width: 0 !important;
+            width: 100% !important;
+            height: auto !important;
+            border-radius: 0.75rem !important;
+            overflow: hidden !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07) !important;
+            border: 1px solid #e2e8f0 !important;
+            background: #ffffff !important;
+        }
+        :is(.dark .fi-resource-media .fi-ta-record:has(.curator-grid-column)) {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            background: #111827 !important;
+        }
+
+        /* Bulk select checkbox: top-left corner over image */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-checkbox,
+        .fi-ta-record:has(.curator-grid-column) .fi-ta-record-checkbox {
+            position: absolute !important;
+            top: 0.375rem !important;
+            left: 0.375rem !important;
+            z-index: 10 !important;
+            margin: 0 !important;
+        }
+
+        /* Card content container */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content-ctn,
+        .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content-ctn {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            flex: 1 1 auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Image area: fixed aspect-ratio so it takes physical height */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content-ctn > div:first-child,
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content,
+        .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content {
+            position: relative !important;
+            width: 100% !important;
+            aspect-ratio: 1 / 1 !important;
+            min-height: 85px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+
+        /* Curator column image fills the aspect-ratio area */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .curator-grid-column,
+        .fi-ta-record:has(.curator-grid-column) .curator-grid-column {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0 !important;
+        }
+
+        /* Actions (Edit / Delete) at the bottom of the card */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions,
+        .fi-ta-record:has(.curator-grid-column) .fi-ta-actions {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            padding: 0.35rem 0.25rem !important;
+            gap: 0.35rem !important;
+            margin-top: auto !important;
+            background: #ffffff !important;
+            border-top: 1px solid #f1f5f9 !important;
+            box-sizing: border-box !important;
+        }
+        :is(.dark .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions) {
+            background: #111827 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+
+        /* Edit / Delete action button text and icons */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions a,
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions button {
+            font-size: 0.7rem !important;
+            padding: 0.15rem 0.3rem !important;
+        }
+
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions svg {
+            width: 0.8rem !important;
+            height: 0.8rem !important;
+        }
+
+        /* Title and file size overlay text */
+        .fi-resource-media .fi-ta-record:has(.curator-grid-column) p,
+        .fi-ta-record:has(.curator-grid-column) p {
+            font-size: 0.65rem !important;
+            line-height: 0.85rem !important;
+        }
+    }

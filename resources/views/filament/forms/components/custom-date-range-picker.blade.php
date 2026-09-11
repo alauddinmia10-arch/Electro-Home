@@ -4,7 +4,7 @@
 >
     <div
         x-data="{
-            state: $wire.entangle('{{ $getStatePath() }}').live,
+            state: $wire.entangle('{{ $getStatePath() }}'),
             isOpen: false,
             selectedPreset: 'Last 28 days',
             customStart: null,
@@ -74,6 +74,9 @@
                 if (this.flatpickrInstance) {
                     this.flatpickrInstance.setDate([start, end]);
                 }
+                
+                // Explicitly sync to server and refresh chart
+                this.$nextTick(() => { $wire.$refresh(); });
             }
         }"
         class="relative"
@@ -325,6 +328,8 @@
                                             displayDate: formatDate(customStart) + ' - ' + formatDate(customEnd)
                                         };
                                         isOpen = false;
+                                        // Explicitly sync to server and refresh chart
+                                        $nextTick(() => { $wire.$refresh(); });
                                     } else if (selectedPreset !== 'Custom') {
                                         isOpen = false;
                                     }

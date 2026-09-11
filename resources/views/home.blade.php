@@ -108,7 +108,7 @@
     {{-- Flash Sale --}}
     @if($flashSaleProducts->count() > 0)
     <section id="flash-sales" class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px]">
-        <div class="md:bg-white md:rounded-lg md:p-3 md:shadow-sm md:border md:border-red-100 relative overflow-hidden"
+        <div class="w-full md:bg-white md:rounded-lg md:p-3 md:shadow-sm md:border md:border-red-100 relative md:overflow-hidden"
              x-data="{
                  showLeft: false,
                  showRight: true,
@@ -125,7 +125,7 @@
                  scrollLeft() { this.$refs.slider.scrollBy({ left: -300, behavior: 'smooth' }); },
                  scrollRight() { this.$refs.slider.scrollBy({ left: 300, behavior: 'smooth' }); }
              }">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10 pointer-events-none"></div>
             
             <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-4">
@@ -139,18 +139,18 @@
                 <a href="{{ route('shop', ['flash_sale' => 1]) }}" class="text-red-600 hover:underline text-sm font-semibold">See All Deals &rarr;</a>
             </div>
 
-            <div class="relative group">
+            <div class="relative group w-full">
                 {{-- Left Arrow --}}
-                <div class="absolute -left-4 md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-10" x-cloak x-show="showLeft">
+                <div class="absolute mobile-slider-arrow-left -left-[20px] md:-left-5 xl:-left-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showLeft">
                     <button @click="scrollLeft" 
                             style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                            class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                        <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                            class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors touch-manipulation">
+                        <svg class="w-[26px] h-[26px] md:w-8 md:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                     </button>
                 </div>
 
                 {{-- Slider Container --}}
-                <div x-ref="slider" @scroll="checkScroll" class="flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
+                <div x-ref="slider" @scroll="checkScroll" class="w-full flex overflow-x-auto snap-x snap-mandatory gap-2 md:gap-2.5 scrollbar-hide no-scrollbar" style="scroll-behavior: smooth;">
                     @foreach($flashSaleProducts as $product)
                         <div class="shrink-0 snap-start w-[calc((100%-8px)/2)] md:w-[calc((100%-30px)/4)] lg:w-[calc((100%-40px)/5)] h-full">
                             @include('partials.product-card', ['product' => $product, 'showBadge' => 'flash'])
@@ -159,11 +159,11 @@
                 </div>
 
                 {{-- Right Arrow --}}
-                <div class="absolute -right-4 md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
+                <div class="absolute mobile-slider-arrow-right -right-[20px] md:-right-5 xl:-right-10 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="showRight">
                     <button @click="scrollRight" 
                             style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                            class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                        <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                            class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors touch-manipulation">
+                        <svg class="w-[26px] h-[26px] md:w-8 md:h-8 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                     </button>
                 </div>
             </div>
@@ -215,8 +215,18 @@
             50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 15px rgba(0,0,0,0.2); }
         }
         @keyframes float-pulse-icon {
-            0%, 100% { opacity: 0.6; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 0.6; transform: scale(0.85); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        @media (max-width: 767px) {
+            .mobile-slider-arrow-left {
+                left: -20px !important;
+                z-index: 50 !important;
+            }
+            .mobile-slider-arrow-right {
+                right: -20px !important;
+                z-index: 50 !important;
+            }
         }
     </style>
     {{-- Top Brands (Mobile View) --}}
@@ -280,20 +290,20 @@
             <h2 class="text-xl font-bold text-gray-900">Top Brands</h2>
         </div>
         
-        <div class="relative"
+        <div class="relative w-full"
              @touchstart="touchStartX = $event.touches[0].clientX"
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
             {{-- Prev Button --}}
-            <div class="absolute -left-4 md:-left-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute mobile-slider-arrow-left -left-[20px] md:-left-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                        class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 transition-colors touch-manipulation">
+                    <svg class="w-[26px] h-[26px] drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
             {{-- Slider Container --}}
-            <div class="overflow-hidden">
+            <div class="overflow-hidden w-full">
                 <div class="ease-in-out flex" :class="isRewinding ? 'transition-none' : 'transition-transform duration-500'" :style="'transform: translateX(-' + (activeSlide * 100) + '%)'">
                 @foreach($brands->chunk(9) as $chunk)
                     <div class="w-full shrink-0">
@@ -315,11 +325,11 @@
             </div>
 
             {{-- Next Button --}}
-            <div class="absolute -right-4 md:-right-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute mobile-slider-arrow-right -right-[20px] md:-right-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 transition-colors touch-manipulation">
+                    <svg class="w-[26px] h-[26px] drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
         </div>
@@ -382,7 +392,7 @@
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-1 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
@@ -412,7 +422,7 @@
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
         </div>
@@ -487,11 +497,11 @@
              @touchend="touchEndX = $event.changedTouches[0].clientX; handleSwipe()">
              
             {{-- Prev Button --}}
-            <div class="absolute -left-4 md:-left-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
+            <div class="absolute mobile-slider-arrow-left -left-[20px] md:-left-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide > 0">
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                        class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 transition-colors touch-manipulation">
+                    <svg class="w-[26px] h-[26px] drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
@@ -515,11 +525,11 @@
             </div>
 
             {{-- Next Button --}}
-            <div class="absolute -right-4 md:-right-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
+            <div class="absolute mobile-slider-arrow-right -right-[20px] md:-right-5 top-1/2 -translate-y-1/2 z-50" x-cloak x-show="totalSlides > 1 && activeSlide < totalSlides - 1">
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
-                        class="p-0 flex items-center justify-center focus:outline-none text-gray-700 transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        class="p-0 min-w-[32px] min-h-[44px] flex items-center justify-center focus:outline-none text-gray-700 transition-colors touch-manipulation">
+                    <svg class="w-[26px] h-[26px] drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
         </div>
@@ -584,7 +594,7 @@
                 <button @click="prev" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                 </button>
             </div>
 
@@ -612,7 +622,7 @@
                 <button @click="next" 
                         style="animation: float-pulse-icon 2s infinite ease-in-out; background: none !important; border: none !important; box-shadow: none !important;"
                         class="p-0 flex items-center justify-center focus:outline-none text-gray-700 hover:text-[var(--color-trust-blue)] transition-colors">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
         </div>

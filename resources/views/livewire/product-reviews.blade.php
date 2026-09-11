@@ -1,9 +1,9 @@
 <div>
     {{-- Ratings Summary --}}
-    <div class="mt-8 bg-white border border-gray-100 rounded p-6 md:p-10 shadow-sm" id="reviews">
-        <h2 class="text-xl font-bold font-bangla mb-6">Ratings & Reviews of {{ $product->name }}</h2>
+    <div class="mt-0 md:mt-8 bg-white border border-gray-100 rounded p-3 md:p-10 shadow-sm" id="reviews">
+        <h2 class="text-xl font-bold font-bangla mb-4 md:mb-6">Ratings & Reviews of {{ $product->name }}</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {{-- Left Side: Stats --}}
             <div class="md:col-span-1">
                 <div class="flex items-center gap-4 mb-6">
@@ -52,13 +52,13 @@
                     <textarea wire:model="comment" rows="4" placeholder="Write Your Review Here" class="w-full border border-gray-300 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4 resize-none"></textarea>
                     @error('comment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     
-                    <div class="flex items-center justify-between mt-2">
-                        <div class="flex items-center gap-3">
-                            <span class="text-sm text-gray-700">Your Rating:</span>
-                            <div class="flex gap-1 text-gray-300">
+                    <div class="flex items-center justify-between gap-2 mt-2">
+                        <div class="flex items-center gap-1.5 sm:gap-3 min-w-0">
+                            <span class="text-sm text-gray-700 whitespace-nowrap shrink-0 font-medium">Your Rating:</span>
+                            <div class="flex gap-0.5 sm:gap-1 text-gray-300 shrink-0">
                                 @for($i = 1; $i <= 5; $i++)
-                                    <button type="button" wire:click="setRating({{ $i }})" class="focus:outline-none">
-                                        <svg class="w-6 h-6 {{ $i <= $rating ? 'text-yellow-400' : 'hover:text-yellow-400' }} transition-colors" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <button type="button" wire:click="setRating({{ $i }})" class="focus:outline-none p-0.5">
+                                        <svg class="w-5 h-5 md:w-6 md:h-6 {{ $i <= $rating ? 'text-yellow-400' : 'hover:text-yellow-400' }} transition-colors" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                                     </button>
                                 @endfor
                             </div>
@@ -66,9 +66,9 @@
                         @error('rating') <span class="text-red-500 text-xs ml-2">{{ $message }}</span> @enderror
                         
                         @auth
-                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Submit Review</button>
+                            <button type="submit" class="whitespace-nowrap shrink-0 bg-blue-600 text-white px-5 sm:px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Submit Review</button>
                         @else
-                            <a href="{{ route('login') }}" class="bg-blue-600 text-white px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Sign in to Review</a>
+                            <a href="{{ route('login') }}" class="whitespace-nowrap shrink-0 bg-blue-600 text-white px-5 sm:px-6 py-2 rounded text-sm font-semibold hover:bg-blue-700 transition-colors">Sign in to Review</a>
                         @endauth
                     </div>
                 </form>

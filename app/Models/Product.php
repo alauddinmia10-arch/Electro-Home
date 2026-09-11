@@ -36,7 +36,6 @@ class Product extends Model
         'stock_quantity',
         'alert_stock',
         'cover_image',
-        'cover_image_id',
         'description',
         'specifications',
         'status',
@@ -56,11 +55,6 @@ class Product extends Model
     ];
 
     // ──── Relationships ────
-
-    public function coverMedia(): BelongsTo
-    {
-        return $this->belongsTo(\Awcodes\Curator\Models\Media::class, 'cover_image_id');
-    }
 
     public function category(): BelongsTo
     {
@@ -190,9 +184,6 @@ class Product extends Model
 
     public function getCoverImageUrlAttribute(): string
     {
-        if ($this->coverMedia) {
-            return $this->coverMedia->url;
-        }
         return $this->cover_image ? \Illuminate\Support\Facades\Storage::url($this->cover_image) : '';
     }
 

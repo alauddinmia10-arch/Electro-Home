@@ -1,8 +1,8 @@
 <div>
-    <div class="mt-8 bg-white border border-gray-100 rounded p-6 md:p-10 shadow-sm" id="qa">
-        <h2 class="text-xl font-bold font-bangla mb-4">Questions & Answers about {{ $product->name }}</h2>
+    <div class="mt-0 md:mt-8 bg-white border border-gray-100 rounded p-3 md:p-10 shadow-sm" id="qa">
+        <h2 class="text-lg md:text-xl font-bold font-bangla mb-3 md:mb-4">Questions & Answers about {{ $product->name }}</h2>
         
-        <div class="mb-8 bg-gray-50 p-4 rounded border border-gray-100">
+        <div class="mb-4 md:mb-8 bg-gray-50 p-3 md:p-4 rounded border border-gray-100">
             @if (session()->has('q_message'))
                 <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-4">
                     {{ session('q_message') }}

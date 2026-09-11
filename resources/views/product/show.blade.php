@@ -1,6 +1,6 @@
 <x-layouts.app>
     {{-- Breadcrumbs --}}
-    <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-1">
+    <div class="max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-3 md:mt-1">
         <div class="bg-[#f0f5fa] md:rounded px-4 py-2.5 flex items-center gap-2 overflow-hidden whitespace-nowrap text-[13px] text-gray-600">
             <a href="{{ route('home') }}" onclick="event.stopPropagation(); window.location.href = this.href; return false;" class="text-gray-700 hover:text-blue-600 transition-colors shrink-0 flex items-center" title="Home">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-2 md:mt-1 mb-6" x-data="{ wholesaleModalOpen: false }">
+    <div class="product-details-container max-w-[1600px] w-full mx-auto px-3 md:px-6 xl:px-[70px] mt-3 md:mt-1 mb-0 md:mb-6" x-data="{ wholesaleModalOpen: false }">
         <div class="bg-white rounded md:rounded shadow-sm border md:border border-gray-100 p-0 md:p-4 md:pt-3 lg:px-6 lg:pb-3 lg:pt-4 overflow-hidden md:overflow-visible">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
             
@@ -175,7 +175,7 @@
         </div> {{-- Close Product details bg-white container --}}
 
         {{-- Related Products / Suggested Posts --}}
-        <div class="mt-6 bg-white rounded shadow-sm border border-gray-100 p-2.5 md:p-3 relative" x-data="{
+        <div class="mt-3 md:mt-6 bg-white rounded shadow-sm border border-gray-100 p-2.5 md:p-3 relative" x-data="{
             scrollNext() { 
                 const itemWidth = this.$refs.slider.firstElementChild ? this.$refs.slider.firstElementChild.offsetWidth + 16 : 300;
                 this.$refs.slider.scrollBy({ left: itemWidth, behavior: 'smooth' }) 
@@ -232,14 +232,14 @@
         </div>
         
         {{-- Tabs Section --}}
-        <div id="tabs-section" x-data="{ activeTab: 'description' }" class="mt-6 bg-white rounded shadow-sm border border-gray-100 overflow-hidden mb-6">
+        <div id="tabs-section" x-data="{ activeTab: 'description' }" class="mt-3 md:mt-6 bg-white rounded shadow-sm border border-gray-100 overflow-hidden mb-0 md:mb-6">
             <div class="flex border-b border-gray-200 bg-gray-50 px-4 lg:px-6 overflow-x-auto scrollbar-hide">
                 <button @click="activeTab = 'description'" :class="{ 'border-blue-600 text-blue-600 bg-white': activeTab === 'description', 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100': activeTab !== 'description' }" class="px-6 py-4 text-sm font-medium border-t-2 border-l border-r -mb-px transition-colors whitespace-nowrap">Description</button>
                 
                 <button @click="activeTab = 'specifications'" :class="{ 'border-blue-600 text-blue-600 bg-white': activeTab === 'specifications', 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100': activeTab !== 'specifications' }" class="px-6 py-4 text-sm font-medium border-t-2 border-l border-r -mb-px transition-colors whitespace-nowrap">Specifications</button>
             </div>
 
-            <div class="p-6 md:p-10 min-h-[300px]">
+            <div class="p-3 md:p-10 min-h-[300px]">
                 {{-- Description Tab --}}
                 <div x-show="activeTab === 'description'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                     @if($product->description)
@@ -268,8 +268,8 @@
                                     <tbody>
                                         @foreach($leftSpecs as $key => $value)
                                             <tr class="border-b border-gray-100 last:border-b-0">
-                                                <th class="w-2/5 px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100 align-top">{{ $key }}</th>
-                                                <td class="px-6 py-4 text-gray-600 align-top">{{ $value }}</td>
+                                                <th class="w-2/5 px-3 py-2.5 md:px-6 md:py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100 align-top">{{ $key }}</th>
+                                                <td class="px-3 py-2.5 md:px-6 md:py-4 text-gray-600 align-top">{{ $value }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -283,8 +283,8 @@
                                     <tbody>
                                         @foreach($rightSpecs as $key => $value)
                                             <tr class="border-b border-gray-100 last:border-b-0">
-                                                <th class="w-2/5 px-6 py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100 align-top">{{ $key }}</th>
-                                                <td class="px-6 py-4 text-gray-600 align-top">{{ $value }}</td>
+                                                <th class="w-2/5 px-3 py-2.5 md:px-6 md:py-4 font-semibold text-gray-700 bg-gray-50 border-r border-gray-100 align-top">{{ $key }}</th>
+                                                <td class="px-3 py-2.5 md:px-6 md:py-4 text-gray-600 align-top">{{ $value }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -300,12 +300,12 @@
         </div>
 
         {{-- Ratings & Reviews --}}
-        <div class="mt-8 mb-8" id="reviews-section">
+        <div class="mt-3 md:mt-8 mb-0" id="reviews-section">
             <livewire:product-reviews :product="$product" />
         </div>
 
         {{-- Questions & Answers --}}
-        <div class="mt-8 mb-8" id="qa-section">
+        <div class="mt-3 md:mt-8 mb-0 md:mb-8" id="qa-section">
             <livewire:product-questions :product="$product" />
         </div>
 

@@ -21,7 +21,7 @@ class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $data['gallery_images'] = $this->record->images->pluck('media_id')->filter()->toArray();
+        $data['gallery_images'] = $this->record->images->pluck('image_path')->filter()->toArray();
         return $data;
     }
 
@@ -34,16 +34,16 @@ class EditProduct extends EditRecord
             $galleryImages = [];
         }
         
-        $existingImages = $this->record->images->pluck('media_id')->filter()->toArray();
+        $existingImages = $this->record->images->pluck('image_path')->filter()->toArray();
         
         $imagesToDelete = array_diff($existingImages, $galleryImages);
         if (!empty($imagesToDelete)) {
-            $this->record->images()->whereIn('media_id', $imagesToDelete)->delete();
+            $this->record->images()->whereIn('image_path', $imagesToDelete)->delete();
         }
         
-        foreach ($galleryImages as $index => $id) {
+        foreach ($galleryImages as $index => $path) {
             $this->record->images()->updateOrCreate(
-                ['media_id' => $id],
+                ['image_path' => $path],
                 ['sort_order' => $index]
             );
         }

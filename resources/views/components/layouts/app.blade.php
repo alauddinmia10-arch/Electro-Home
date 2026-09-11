@@ -301,7 +301,7 @@
     @endif
 
     {{-- Main Content --}}
-    <main class="flex-1 pb-6 md:pb-0">
+    <main class="flex-1 pb-3 md:pb-0">
         {{ $slot }}
     </main>
 
@@ -505,11 +505,11 @@
                     </div>
 
                     {{-- Mobile Location Bar --}}
-                    <div class="md:hidden mt-[18px] mb-[18px] w-full bg-white shadow-sm border border-gray-100 rounded-full p-2.5 flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-full bg-[#f0f9f4] text-[#0a6c40] flex items-center justify-center shrink-0 ml-1">
+                    <div class="md:hidden my-4 w-[calc(100%+24px)] -ml-3 bg-white border-y border-gray-200 px-3 py-2.5 flex items-center gap-2 shadow-xs">
+                        <div class="w-7 h-7 rounded-full bg-[#f0f9f4] text-[#0a6c40] flex items-center justify-center shrink-0">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </div>
-                        <div class="text-[11px] text-gray-600 truncate pr-2">
+                        <div class="text-[11px] text-gray-600 truncate">
                             <span class="font-bold text-gray-800">Our Location:</span> Station Road, Narsingdi Sadar, Narsingdi
                         </div>
                     </div>

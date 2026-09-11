@@ -1,0 +1,118 @@
+.curator-grid-container{--grid-layout-gap:1.5rem;--grid-column-count:1;--grid-item--min-width:75px;--gap-count:calc(var(--grid-column-count) - 1);--total-gap-width:calc(var(--gap-count)*var(--grid-layout-gap));--grid-item--max-width:calc((100% - var(--total-gap-width))/var(--grid-column-count));display:grid;grid-template-columns:repeat(auto-fill,minmax(max(var(--grid-item--min-width),var(--grid-item--max-width)),1fr));grid-gap:var(--grid-layout-gap)}@media (min-width:768px){.curator-grid-container{--grid-column-count:2}}@media (min-width:1024px){.curator-grid-container{--grid-column-count:3}}.checkered{background-color:rgba(var(--gray-200),1);background-image:repeating-linear-gradient(45deg,rgba(var(--gray-300),1) 25%,#0000 25%,#0000 75%,rgba(var(--gray-300),1) 75%,rgba(var(--gray-300),1)),repeating-linear-gradient(45deg,rgba(var(--gray-300),1) 25%,rgba(var(--gray-200),1) 25%,rgba(var(--gray-200),1) 75%,rgba(var(--gray-300),1) 75%,rgba(var(--gray-300),1));background-position:0 0,10px 10px;background-size:20px 20px}.dark .checkered{background-color:rgba(var(--gray-800),1);background-image:repeating-linear-gradient(45deg,rgba(var(--gray-700),1) 25%,#0000 25%,#0000 75%,rgba(var(--gray-700),1) 75%,rgba(var(--gray-700),1)),repeating-linear-gradient(45deg,rgba(var(--gray-700),1) 25%,rgba(var(--gray-800),1) 25%,rgba(var(--gray-800),1) 75%,rgba(var(--gray-700),1) 75%,rgba(var(--gray-700),1))}.fi-resource-media .fi-forms-tabs-component-header{--tw-bg-opacity:1;background-color:rgba(var(--gray-100),var(--tw-bg-opacity))}:is(.dark .fi-resource-media .fi-forms-tabs-component-header){--tw-bg-opacity:1;background-color:rgba(var(--gray-900),var(--tw-bg-opacity))}.fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column){display:block}.fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column)>div{flex-direction:column;padding:0}.fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column)>div>div{padding:0}.fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column) label{aspect-ratio:16/9;height:auto;width:100%;z-index:1}.fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column) input:not(:checked){--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity))}:is(.dark .fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column) input:not(:checked)){--tw-bg-opacity:1;background-color:rgba(var(--gray-800),var(--tw-bg-opacity))}.fi-resource-media .fi-ta .fi-ta-record:has(.curator-grid-column) .fi-ta-actions{padding-left:.75rem;padding-right:.75rem;padding-bottom:.75rem}.curator-panel.dragging:before{content:"";position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background-color:rgba(var(--info-500),1);opacity:.25}.curator-panel-sidebar .fi-fo-component-ctn{gap:1rem}.curator-panel-sidebar .fi-fo-component-ctn label{font-size:.875rem;line-height:1.25rem}.curator-panel-sidebar .filepond--root{min-height:300px}.curator-picker-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}@media (min-width:640px){.curator-picker-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.curator-picker-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}@media (min-width:1280px){.curator-picker-grid{grid-template-columns:repeat(8,minmax(0,1fr))}}@media (min-width:1536px){.curator-picker-grid{grid-template-columns:repeat(10,minmax(0,1fr))}}.filepond--panel{border-width:2px;border-style:dashed;border-color:rgba(var(--gray-950),.05);background-color:initial}:is(.dark .filepond--panel){border-color:#fff3}.curator-panel>.fi-modal-window,[wire\:key*=open_curation_panel]>.fi-modal-window,[wire\:key*=open_curator_picker]>.fi-modal-window{padding:0!important}.curator-panel>.fi-modal-window>.fi-modal-header,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-header,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-header{border-bottom-width:1px;--tw-border-opacity:1;border-color:rgba(var(--gray-300),var(--tw-border-opacity));padding:.5rem 1rem}:is(.dark .curator-panel>.fi-modal-window>.fi-modal-header),:is(.dark [wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-header),:is(.dark [wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-header){--tw-border-opacity:1;border-color:rgba(var(--gray-800),var(--tw-border-opacity))}.curator-panel>.fi-modal-window>.fi-modal-header .fi-modal-heading,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-header .fi-modal-heading,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-header .fi-modal-heading{font-size:1rem;line-height:1.5rem}.curator-panel>.fi-modal-window>.fi-modal-header .fi-modal-close-btn,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-header .fi-modal-close-btn,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-header .fi-modal-close-btn{margin-block-start:-.75rem}.curator-panel>.fi-modal-window>.fi-modal-header .fi-modal-close-btn:focus,.curator-panel>.fi-modal-window>.fi-modal-header .fi-modal-close-btn:hover,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-header .fi-modal-close-btn:focus,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-header .fi-modal-close-btn:hover,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-header .fi-modal-close-btn:focus,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-header .fi-modal-close-btn:hover{background-color:initial!important;--tw-text-opacity:1;color:rgba(var(--primary-500),var(--tw-text-opacity))}.curator-panel>.fi-modal-window>.fi-modal-content,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-content,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-content{position:relative}.curator-panel>.fi-modal-window>.fi-modal-footer,[wire\:key*=open_curation_panel]>.fi-modal-window>.fi-modal-footer,[wire\:key*=open_curator_picker]>.fi-modal-window>.fi-modal-footer{padding-bottom:0}
+
+@media (min-width: 1024px) {
+    /* Grid container: 10 columns */
+    .fi-resource-media .fi-ta-content-grid,
+    .fi-resource-media .fi-ta-content.fi-grid,
+    .fi-resource-media div.fi-ta-content-grid,
+    [class*="fi-resource-media"] .fi-ta-content-grid,
+    .fi-ta-content-grid:has(.curator-grid-column) {
+        display: grid !important;
+        grid-template-columns: repeat(10, minmax(0, 1fr)) !important;
+        gap: 0.625rem !important;
+        align-items: stretch !important;
+    }
+
+    /* Each record card: full height, flex column, self-contained */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column),
+    .fi-ta-record:has(.curator-grid-column) {
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 0.75rem !important;
+        overflow: hidden !important;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07) !important;
+        border: 1px solid #e2e8f0 !important;
+        background: #ffffff !important;
+    }
+    :is(.dark .fi-resource-media .fi-ta-record:has(.curator-grid-column)) {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        background: #111827 !important;
+    }
+
+    /* Bulk select checkbox: top-left corner over image */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-checkbox,
+    .fi-ta-record:has(.curator-grid-column) .fi-ta-record-checkbox {
+        position: absolute !important;
+        top: 0.375rem !important;
+        left: 0.375rem !important;
+        z-index: 10 !important;
+        margin: 0 !important;
+    }
+
+    /* Card content container */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content-ctn,
+    .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content-ctn {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        flex: 1 1 auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Image area: fixed aspect-ratio so it takes physical height */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content-ctn > div:first-child,
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content,
+    .fi-ta-record:has(.curator-grid-column) .fi-ta-record-content {
+        position: relative !important;
+        width: 100% !important;
+        aspect-ratio: 1 / 1 !important;
+        min-height: 85px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Curator column image fills the aspect-ratio area */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .curator-grid-column,
+    .fi-ta-record:has(.curator-grid-column) .curator-grid-column {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    /* Actions (Edit / Delete) at the bottom of the card */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions,
+    .fi-ta-record:has(.curator-grid-column) .fi-ta-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 0.35rem 0.25rem !important;
+        gap: 0.35rem !important;
+        margin-top: auto !important;
+        background: #ffffff !important;
+        border-top: 1px solid #f1f5f9 !important;
+        box-sizing: border-box !important;
+    }
+    :is(.dark .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions) {
+        background: #111827 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* Edit / Delete action button text and icons */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions a,
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions button {
+        font-size: 0.7rem !important;
+        padding: 0.15rem 0.3rem !important;
+    }
+
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) .fi-ta-actions svg {
+        width: 0.8rem !important;
+        height: 0.8rem !important;
+    }
+
+    /* Title and file size overlay text */
+    .fi-resource-media .fi-ta-record:has(.curator-grid-column) p,
+    .fi-ta-record:has(.curator-grid-column) p {
+        font-size: 0.65rem !important;
+        line-height: 0.85rem !important;
+    }
+}

@@ -18,8 +18,8 @@ class CategoriesTable
         return $table
             ->modifyQueryUsing(fn (\Illuminate\Database\Eloquent\Builder $query) => $query->whereNull('parent_id'))
             ->columns([
-                ImageColumn::make('image'),
-                ImageColumn::make('icon'),
+                ImageColumn::make('icon')
+                    ->getStateUsing(fn ($record) => $record->icon ? (\Illuminate\Support\Facades\Storage::disk('cloudinary')->url($record->icon)) : null),
                 TextColumn::make('name')
                     ->searchable(),
                 IconColumn::make('status')

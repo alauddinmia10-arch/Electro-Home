@@ -143,7 +143,7 @@
                             @isset($brands)
                                 @foreach($brands as $brand)
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="{{ $brand->slug ?? $brand->id }}" {{ in_array(($brand->slug ?? $brand->id), request('brand', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                        <input type="checkbox" name="brand[]" value="{{ $brand->slug ?? $brand->id }}" {{ in_array(($brand->slug ?? $brand->id), (array) request('brand', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
                                         <span class="text-sm text-gray-600">{{ $brand->name }}</span>
                                     </label>
                                 @endforeach
@@ -156,15 +156,15 @@
                         <label class="block text-sm text-gray-700 mb-2 font-medium">Availability</label>
                         <div class="space-y-2">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="availability[]" value="in_stock" {{ in_array('in_stock', request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                <input type="checkbox" name="availability[]" value="in_stock" {{ in_array('in_stock', (array) request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
                                 <span class="text-sm text-gray-600">In Stock</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="availability[]" value="pre_order" {{ in_array('pre_order', request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                <input type="checkbox" name="availability[]" value="pre_order" {{ in_array('pre_order', (array) request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
                                 <span class="text-sm text-gray-600">Pre-order</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" name="availability[]" value="upcoming" {{ in_array('upcoming', request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
+                                <input type="checkbox" name="availability[]" value="upcoming" {{ in_array('upcoming', (array) request('availability', [])) ? 'checked' : '' }} class="rounded border-gray-300 text-[#0b5c9a] focus:ring-[#0b5c9a]">
                                 <span class="text-sm text-gray-600">Upcoming</span>
                             </label>
                         </div>
