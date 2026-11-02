@@ -1,9 +1,3 @@
-databases:
-  - name: electrohome-db
-    databaseName: electrohome
-    user: electrohome
-    plan: free
-
 services:
   - type: web
     name: electrohome-app
@@ -20,7 +14,7 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_URL
-        value: https://electrohome.onrender.com
+        value: https://electrohome.bd
       - key: FILESYSTEM_DISK
         value: cloudinary
       - key: CLOUDINARY_CLOUD_NAME
@@ -32,22 +26,15 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        fromDatabase:
-          name: electrohome-db
-          property: host
+        value: ep-damp-fire-ar0cfdgz.c-4.us-west-2.aws.neon.tech
       - key: DB_PORT
-        fromDatabase:
-          name: electrohome-db
-          property: port
+        value: "5432"
       - key: DB_DATABASE
-        fromDatabase:
-          name: electrohome-db
-          property: database
+        value: neondb
       - key: DB_USERNAME
-        fromDatabase:
-          name: electrohome-db
-          property: user
+        value: neondb_owner
       - key: DB_PASSWORD
-        fromDatabase:
-          name: electrohome-db
-          property: password
+        value: npg_C6t2aMiqHeJf
+      - key: DB_SSLMODE
+        value: require
+
